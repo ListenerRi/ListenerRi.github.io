@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="最近 coding 的 pages 服务越来越没法用了，不是自动部署失败就是博客无法访问，而且访问速度很慢，估计再过段时间 coding 就不再提供免费的 pages 服务了。但是如果将域名解析到 github 上，百度又无法抓取(github 不允许)，思来想去还是放在自己的服务器上吧。 不过放在自己的服务器上有两个问题：  没有备案不能使用 dnspod 的 301 重定向把 www 的域名重">
+<meta name="keywords" content="hexo,nginx,blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在自己的服务器上搭建静态博客">
+<meta property="og:url" content="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/index.html">
+<meta property="og:site_name" content="listenerri&#39;s blog">
+<meta property="og:description" content="最近 coding 的 pages 服务越来越没法用了，不是自动部署失败就是博客无法访问，而且访问速度很慢，估计再过段时间 coding 就不再提供免费的 pages 服务了。但是如果将域名解析到 github 上，百度又无法抓取(github 不允许)，思来想去还是放在自己的服务器上吧。 不过放在自己的服务器上有两个问题：  没有备案不能使用 dnspod 的 301 重定向把 www 的域名重">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/webhooks.png">
+<meta property="og:image" content="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/add-webhooks.png">
+<meta property="og:image" content="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/recent-activity.png">
+<meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在自己的服务器上搭建静态博客">
+<meta name="twitter:description" content="最近 coding 的 pages 服务越来越没法用了，不是自动部署失败就是博客无法访问，而且访问速度很慢，估计再过段时间 coding 就不再提供免费的 pages 服务了。但是如果将域名解析到 github 上，百度又无法抓取(github 不允许)，思来想去还是放在自己的服务器上吧。 不过放在自己的服务器上有两个问题：  没有备案不能使用 dnspod 的 301 重定向把 www 的域名重">
+<meta name="twitter:image" content="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/webhooks.png">
+  <link rel="canonical" href="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>在自己的服务器上搭建静态博客 | listenerri's blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f4f2d9354392e6db69ef67305fca0a31";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-right">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">listenerri's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-in-a-few-words">
+      
+    
+
+    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2019/03/31/在自己的服务器上搭建静态博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="listenerri">
+      <meta itemprop="description" content="学的越多越发现会的越少 : )">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="listenerri's blog">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">在自己的服务器上搭建静态博客
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-31 16:05:12" itemprop="dateCreated datePublished" datetime="2019-03-31T16:05:12+08:00">2019-03-31</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/03/31/在自己的服务器上搭建静态博客/" class="post-meta-item leancloud_visitors" data-flag-title="在自己的服务器上搭建静态博客" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/03/31/在自己的服务器上搭建静态博客/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/03/31/在自己的服务器上搭建静态博客/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近 coding 的 pages 服务越来越没法用了，不是自动部署失败就是博客无法访问，而且访问速度很慢，估计再过段时间 coding 就不再提供免费的 pages 服务了。但是如果将域名解析到 github 上，百度又无法抓取(github 不允许)，思来想去还是放在自己的服务器上吧。</p>
+<p>不过放在自己的服务器上有两个问题：</p>
+<ul>
+<li>没有备案不能使用 dnspod 的 301 重定向把 www 的域名重定向到顶级域名</li>
+<li>博客更新后不能自动部署</li>
+</ul>
+<p>我的博客是个基于 hexo 的静态博客，可以使用 nginx 来提供 web 服务，同时 nginx 可以配置根据域名来重定向，这样就解决了第一个问题，博客内容就使用 git 仓库，注意这个仓库不是 markdown 的原始文件，而是经过 hexo 根据生成后的 html 站点，如果之前在 github 上部署过，在 github 上的仓库的名字应该会是 <code>&lt;UserName&gt;.github.io</code> 或者在 coding 上部署过那仓库名则是 coding 下跟用户名相同的仓库。以后更新了博客依然推送到 github 或者 coding 上，在自己的服务器上 clone 下仓库，然后使用 github 或者 coding 的 webhooks 功能更新自己服务器上的仓库，这样就解决了自己服务器上的博客不能自动部署更新的问题。</p>
+<p>下面的例子是基于 github 的，coding 的操作类似，不过鉴于 coding 提供的服务不太稳定的问题，建议博客仓库托管也不要放在 coding 上了。</p>
+<h1 id="克隆博客仓库到服务器上"><a href="#克隆博客仓库到服务器上" class="headerlink" title="克隆博客仓库到服务器上"></a>克隆博客仓库到服务器上</h1><p>这一步很简单，跟克隆普通 git 仓库一样，我把仓库放在了 <code>/opt/hexo-blog</code> 下，如果不放在这个路径下，那后面的内容中的相应路径也要修改。</p>
+<p>以我在 github 下的博客仓库为例，注意执行命令的用户权限，后面的命令都假设服务器上的账户是 root：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:listenerri/listenerri.github.io.git /opt/hexo-blog</span><br></pre></td></tr></table></figure>
+<p>这里使用了 ssh 协议的仓库地址，这需要将服务器的 ssh public key 部署在自己的 github 账户中，如果不想部署使用 https 协议的地址也可以，不过可能会需要输入用户名和密码，这会影响到后面 python 脚本中的功能，建议还是用 ssh 协议的地址，部署个 key 又不麻烦。</p>
+<h1 id="安装配置-nginx"><a href="#安装配置-nginx" class="headerlink" title="安装配置 nginx"></a>安装配置 nginx</h1><p>在服务器上安装配置 nginx，debian 系的 linux 系统中使用下面的命令就可以安装，其他系统可以在网上找找 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
+<p>安装之后不要急着启动 nginx 服务，要先配置下网站路径和域名相关的东西。</p>
+<p>编辑 <code>/etc/nginx/nginx.conf</code> 文件，在 http 块中添加两个 server 块配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        server_name  listenerri.com;</span><br><span class="line">        root         /opt/hexo-blog;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.listenerri.com;</span><br><span class="line">        return       301 http://listenerri.com$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一个 server 块定义了主域名下的网站，也就是博客使用的域名和博客在服务器上的路径(上面克隆仓库时指定的地址)，第二个 server 块则是定义了将 www 的域名 301 重定向的顶级域名的网站下，我比较喜欢不带 www 的地址 :)</p>
+<p>接下来启动 nginx 服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br><span class="line"># 或者如果系统是 systemd 的：</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+<h1 id="修改域名解析地址"><a href="#修改域名解析地址" class="headerlink" title="修改域名解析地址"></a>修改域名解析地址</h1><p>上面 nginx 服务启动后就可以使用服务器的 ip 地址(这时还不能使用域名)进行访问了，如果测试没问题就可以修改域名的解析到这个服务器 ip 上了，这一步没什么好说的，就是把自己域名的 A 记录改成服务器的 ip 地址。</p>
+<p>改完之后过一会儿使用 dig 命令查看域名是否已经解析到服务器的地址了，如果解析已经生效了就可以访问域名来测试博客是否可以正常访问了。</p>
+<p>注意把 www 的域名也解析到服务器 ip 地址上。</p>
+<h1 id="启动-github-webhooks"><a href="#启动-github-webhooks" class="headerlink" title="启动 github webhooks"></a>启动 github webhooks</h1><p>在服务器上把下面的代码保存到一个 py 文件中，假设文件路径为 <code>/opt/webhooks.py</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from http.server import BaseHTTPRequestHandler</span><br><span class="line">from http.server import HTTPServer</span><br><span class="line">import os</span><br><span class="line">import subprocess</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">class MyBaseHTTPRequestHandler(BaseHTTPRequestHandler):</span><br><span class="line"></span><br><span class="line">    def do_GET(self):</span><br><span class="line">        self.send_response(200)</span><br><span class="line">        self.send_header(&apos;Content-type&apos;, &apos;text/html&apos;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(b&apos;Only handle POST requests.\n&apos;)</span><br><span class="line">        flushLog()</span><br><span class="line"></span><br><span class="line">    def do_POST(self):</span><br><span class="line">        statusCode = 403</span><br><span class="line">        responseData = b&quot;Reject the request&quot;</span><br><span class="line">        if self.path == &quot;/pushed&quot;:</span><br><span class="line">            statusCode, responseData = self.updateBlog()</span><br><span class="line">        self.send_response(statusCode)</span><br><span class="line">        self.send_header(&apos;Content-type&apos;, &apos;text/html&apos;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(bytes(responseData, &quot;utf-8&quot;))</span><br><span class="line">        flushLog()</span><br><span class="line"></span><br><span class="line">    def updateBlog(self):</span><br><span class="line">        os.chdir(&quot;/opt/hexo-blog&quot;)</span><br><span class="line">        code, result = subprocess.getstatusoutput(&quot;git pull origin master&quot;)</span><br><span class="line">        if code == 0:</span><br><span class="line">            code = 200</span><br><span class="line">            result = &quot;blog updated :)&quot;</span><br><span class="line">        else:</span><br><span class="line">            code = 500</span><br><span class="line">            print(result)</span><br><span class="line">            result = &quot;blog update failed :(&quot;</span><br><span class="line">        return code, result</span><br><span class="line"></span><br><span class="line">def flushLog():</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    sys.stderr.flush()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    port = 2345</span><br><span class="line">    httpd = HTTPServer((&quot;&quot;, port), MyBaseHTTPRequestHandler)</span><br><span class="line">    print(&quot;Running on port: %d&quot;%(port))</span><br><span class="line">    flushLog()</span><br><span class="line">    httpd.serve_forever()</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>脚本的内容就是启动了一个监听 2345 端口的 http 服务，只接受 <code>/pushed</code> 资源路径的 POST 访问，其他资源路径的 POST 访问全都返回 403，每次接收到正确的 POST 访问后就去 <code>/opt/hexo-blog</code> 路径下更新仓库，也就是从 github 远程仓库下拉取更新，如果更新成功返回 200 状态码，否则返回 500，如果更新失败则打印下命令的输出，以便以后根据日志文件定位问题。</p>
+<p>接下来给这个脚本增加可执行权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /opt/webhooks.py</span><br></pre></td></tr></table></figure>
+<p>启动脚本同时把脚本的输出追加到 <code>/var/log/blog-github-webhooks.log</code> 文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup /opt/webhooks.py &gt;&gt; /var/log/blog-github-webhooks.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>然后配置下这个脚本开机自启动，如果是 systemd 的系统就写一个 service 文件，将上述命令稍微修改下写入 service 文件中的 <code>EXEC</code> 字段后面，具体的 service 文件怎么写和怎么用可以在网上搜索下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/webhooks.py &gt;&gt; /var/log/blog-github-webhooks.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>如果不是 systemd 的系统就把上面的命令复制到 <code>/etc/rc.local</code> 文件中的最后一行，不过 systemd 好像也兼容 <code>/etc/rc.local</code> 文件，直接用第二种方法配置开机自启估计也行。</p>
+<h1 id="设置-github-webhooks"><a href="#设置-github-webhooks" class="headerlink" title="设置 github webhooks"></a>设置 github webhooks</h1><p>去 github 网站博客对应的项目页面下，点击 <code>Settings</code> 按钮，再点击新页面左侧导航栏的 <code>Webhooks</code> 按钮：</p>
+<p><img src="webhooks.png" alt></p>
+<p>再点击上图右上角的 <code>Add Webhook</code> 按钮：</p>
+<p><img src="add-webhooks.png" alt></p>
+<p>在上图 <code>Payload URL</code> 的输入框中填入自己的服务器 ip 或者域名并加上端口 <code>2345</code> 和资源路径 <code>/pushed</code>，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://listenerri.com:2345/pushed</span><br></pre></td></tr></table></figure>
+<p>然后直接点击下面绿色的 <code>Add webhook</code> 按钮就行了。</p>
+<p>github 会发送一个测试的 POST 请求到设置的地址中，点击刚刚添加的 webhook 可以进入这个 webhook 的设置界面，这个界面最下面会后这个 webhook 的最近活动，如果没有意外会有如下图中的带有绿色对勾的一条记录：</p>
+<p><img src="recent-activity.png" alt></p>
+<p>当然可以写一遍新博客测试下。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+            
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+            
+              <a href="/tags/blog/" rel="tag"># blog</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/03/23/指定-git-使用的-ssh-秘钥/" rel="next" title="指定 git 使用的 ssh 秘钥">
+                  <i class="fa fa-chevron-left"></i> 指定 git 使用的 ssh 秘钥
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="listenerri">
+  <p class="site-author-name" itemprop="name">listenerri</p>
+  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/listenerri" title="GitHub &rarr; https://github.com/listenerri" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:listenerri@gmail.com" title="E-Mail &rarr; mailto:listenerri@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#克隆博客仓库到服务器上"><span class="nav-number">1.</span> <span class="nav-text">克隆博客仓库到服务器上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装配置-nginx"><span class="nav-number">2.</span> <span class="nav-text">安装配置 nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改域名解析地址"><span class="nav-number">3.</span> <span class="nav-text">修改域名解析地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动-github-webhooks"><span class="nav-number">4.</span> <span class="nav-text">启动 github webhooks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置-github-webhooks"><span class="nav-number">5.</span> <span class="nav-text">设置 github webhooks</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">listenerri</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+    
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
+    appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
+    placeholder: 'I have something to say',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
