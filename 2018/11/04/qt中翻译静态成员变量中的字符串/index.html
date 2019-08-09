@@ -56,7 +56,7 @@
 </script>
 
   <meta name="description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。 经过一番搜索和阅读 qt 文档，找到了解决方法，原来 qt 早已有应对之策：QT_TR_NOO">
-<meta name="keywords" content="qt,static,tr,翻译">
+<meta name="keywords" content="static,qt,tr,翻译">
 <meta property="og:type" content="article">
 <meta property="og:title" content="qt中翻译静态成员变量中的字符串">
 <meta property="og:url" content="http://listenerri.com/2018/11/04/qt中翻译静态成员变量中的字符串/index.html">
@@ -397,9 +397,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/qt/" rel="tag"># qt</a>
-            
               <a href="/tags/static/" rel="tag"># static</a>
+            
+              <a href="/tags/qt/" rel="tag"># qt</a>
             
               <a href="/tags/tr/" rel="tag"># tr</a>
             
