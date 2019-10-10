@@ -210,8 +210,8 @@
         <category>vim</category>
       </categories>
       <tags>
-        <tag>qt</tag>
         <tag>vim</tag>
+        <tag>qt</tag>
         <tag>ycm</tag>
       </tags>
   </entry>
