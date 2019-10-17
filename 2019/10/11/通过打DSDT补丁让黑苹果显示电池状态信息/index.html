@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="listenerri&#39;s blog">
 <meta property="og:description" content="翻译自：https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/  背景因为电脑中的电池硬件与苹果的 SMbus 硬件不兼容，所以在笔记本电脑上运行 OS X 时，我们使用 ACPI 来访问电池状态。一般来说，我建议你使用 ACPIBatteryManager.kex">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-15T02:16:39.426Z">
+<meta property="og:updated_time" content="2019-10-17T01:54:07.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过打DSDT补丁让黑苹果显示电池状态信息">
 <meta name="twitter:description" content="翻译自：https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/  背景因为电脑中的电池硬件与苹果的 SMbus 硬件不兼容，所以在笔记本电脑上运行 OS X 时，我们使用 ACPI 来访问电池状态。一般来说，我建议你使用 ACPIBatteryManager.kex">
@@ -320,7 +320,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-15 10:16:39" itemprop="dateModified" datetime="2019-10-15T10:16:39+08:00">2019-10-15</time>
+                <time title="修改时间：2019-10-17 09:54:07" itemprop="dateModified" datetime="2019-10-17T09:54:07+08:00">2019-10-17</time>
               </span>
             
           
@@ -440,10 +440,24 @@
 <p>假设写入 BCT0 的代码是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Store(Local0, BCT0)</span><br></pre></td></tr></table></figure></p>
 <p>在这种情况下，不能用对 RECB 的调用来代替对 BCT0 的访问。因为这是写操作，而不是读操作。必须使用上面新创建的函数 WECB。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WECB(0x30,128, Local0)</span><br></pre></td></tr></table></figure></p>
 <p>WECB 函数的前两个参数与 RECB 相同（EC字段的偏移量和大小）。第三个参数（Arg2）是应写入 EC 字段的值。在这个例子中，是从 Local0 读取数据写入到第一个参数指定的偏移量里。</p>
-<p> Store is not the only AML opcode that can write. Just as Store is not the only AML opcode that can read. Just as an example, consider Add:<br>Store 并不是唯一可以编写的 AML 操作码。就像商店不是唯一可以读取的AML操作码一样。 例如，考虑添加：</p>
-<blockquote>
-<p>未完待续</p>
-</blockquote>
+<p> Store is not the only AML opcode that can write. Just as Store is not the only AML opcode that can read. Just as an example, consider Add:<br><code>Store</code> 并不是唯一可以执行写操作的 AML 操作码。<code>Store</code> 也不是唯一可以执行读操作的 AML 操作码。 例如 <code>Add</code> 操作码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Add(X, Y, Z)</span><br></pre></td></tr></table></figure></p>
+<p>上面的示例从X读取，从Y读取，执行加法…并将结果写入Z。</p>
+<p>当不确定 AML 操作码的用途时，请阅读 ACPI 规范。在那里有完整的文档，但不在本文讨论范围之内。</p>
+<p>文字开头给出的 github 仓库是示例和学习的良好来源。仓库中的现有修补程序中有许多 WECB/RECB 示例。</p>
+<h1 id="充电-放电状态的逻辑错误-充电器检测"><a href="#充电-放电状态的逻辑错误-充电器检测" class="headerlink" title="充电/放电状态的逻辑错误(充电器检测)"></a>充电/放电状态的逻辑错误(充电器检测)</h1><p>某些 DSDT 存在逻辑错误，在这种情况下，容量达到 100％（电池充满电）时，<code>_BST</code> 返回了错误的状态。这主要影响某些华硕笔记本电脑，但也影响其他一些笔记本电脑。</p>
+<p>这是解决此问题的补丁程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">into method label FBST code_regex If\s\(CHGS\s\(Zero\)\)[\s]+\&#123;[\s]+Store\s\(0x02,\sLocal0\)[\s]+\&#125;[\s]+Else[\s]+\&#123;[\s]+Store\s\(One,\sLocal0\)[\s]+\&#125; replaceall_matched begin</span><br><span class="line">If (CHGS (Zero))\n</span><br><span class="line">&#123;\n</span><br><span class="line">     Store (0x02, Local0)\n</span><br><span class="line">&#125;\n</span><br><span class="line">Else\n</span><br><span class="line">&#123;\n</span><br><span class="line">     Store (Zero, Local0)\n</span><br><span class="line">&#125;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Problem-Reporting"><a href="#Problem-Reporting" class="headerlink" title="Problem Reporting"></a>Problem Reporting</h1><h1 id="错误报告"><a href="#错误报告" class="headerlink" title="错误报告"></a>错误报告</h1><p>下载 patchmatic: <a href="https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip" target="_blank" rel="noopener">https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip</a></p>
+<p>从 zip 中解压出 ‘patchmatic’ 二进制文件. 复制到 <code>/usr/bin</code>, 即最终的文件位置是：<code>/usr/bin/patchmatic</code>.</p>
+<p>在终端中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ -d ~/Downloads/RehabMan ]; then rm -R ~/Downloads/RehabMan; fi</span><br><span class="line">mkdir ~/Downloads/RehabMan</span><br><span class="line">cd ~/Downloads/RehabMan</span><br><span class="line">patchmatic -extract</span><br></pre></td></tr></table></figure></p>
+<p>注意：如果使用复制/粘贴而不是手动键入命令，会更容易。</p>
+<p>将 <code>~/Downloads/RehabMan</code> 目录打包成 zip 文件。</p>
+<p>另外将 <code>ioreg</code> 也打包成 zip：<a href="http://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html" target="_blank" rel="noopener">http://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html</a>. 注意要用帖子中提到的 <code>IORegistryExplorer v2.1</code>！不要使用其他版本的 <code>IORegistryExplorer.app</code>。</p>
+<p>还有以下命令的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kextstat|grep -y acpiplat</span><br><span class="line">kextstat|grep -y appleintelcpu</span><br><span class="line">kextstat|grep -y applelpc</span><br></pre></td></tr></table></figure></p>
+<p>还有打包成 zip 的 <code>EFI/Clover</code> 目录（在打包前先在 Clover 界面按一下 F4）。注意要删除 ‘themes’ 目录，尤其是如果你安装了很多主题，还有只需要提供 <code>EFI/Clover</code> 而不是整个 <code>EFI</code> 目录。</p>
+<p>还有以下命令的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /System/Library/Extensions &amp;&amp; sudo kextcache -u /</span><br></pre></td></tr></table></figure></p>
+<p>再把上面提到的所有内容打包成一个大的 zip 文件并发布到帖子里。不要使用外部链接，使用编辑帖子时的上传文件功能。</p>
+<h1 id="Contributing"><a href="#Contributing" class="headerlink" title="Contributing"></a>Contributing</h1><p>如果你确实完成了给你的电池方法打补丁，建议你将你的补丁和你的电脑信息共享出来，让其他与你是同样配置的人也能使用你的补丁，我可以将你的补丁程序添加到上面提到的 github 仓库中。请同时提供包含补丁和本机 DSDT 的文本文件（以便我能够根据本机 DSDT 查看补丁程序）。只有可以将补丁应用到本机 DSDT上时，我才会将这个补丁添加到仓库中。</p>
+<p>译者注：示例 DSDT 文件请从原文中下载。</p>
 
     </div>
 
@@ -994,7 +1008,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#已存在的补丁"><span class="nav-number">2.</span> <span class="nav-text">已存在的补丁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他相关-DSDT-补丁"><span class="nav-number">3.</span> <span class="nav-text">其他相关 DSDT 补丁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技能要求"><span class="nav-number">4.</span> <span class="nav-text">技能要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打补丁的步骤"><span class="nav-number">5.</span> <span class="nav-text">打补丁的步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大小为16位和32位的字段"><span class="nav-number">6.</span> <span class="nav-text">大小为16位和32位的字段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓冲字段（大于-32-位的字段）"><span class="nav-number">7.</span> <span class="nav-text">缓冲字段（大于 32 位的字段）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#已存在的补丁"><span class="nav-number">2.</span> <span class="nav-text">已存在的补丁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他相关-DSDT-补丁"><span class="nav-number">3.</span> <span class="nav-text">其他相关 DSDT 补丁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技能要求"><span class="nav-number">4.</span> <span class="nav-text">技能要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打补丁的步骤"><span class="nav-number">5.</span> <span class="nav-text">打补丁的步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大小为16位和32位的字段"><span class="nav-number">6.</span> <span class="nav-text">大小为16位和32位的字段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓冲字段（大于-32-位的字段）"><span class="nav-number">7.</span> <span class="nav-text">缓冲字段（大于 32 位的字段）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#充电-放电状态的逻辑错误-充电器检测"><span class="nav-number">8.</span> <span class="nav-text">充电/放电状态的逻辑错误(充电器检测)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-Reporting"><span class="nav-number">9.</span> <span class="nav-text">Problem Reporting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误报告"><span class="nav-number">10.</span> <span class="nav-text">错误报告</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contributing"><span class="nav-number">11.</span> <span class="nav-text">Contributing</span></a></li></ol></div>
             
 
           </div>
