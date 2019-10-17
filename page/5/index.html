@@ -4,19 +4,18 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.1" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
@@ -27,18 +26,18 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.3.0',
+    version: '7.4.1',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
@@ -51,7 +50,8 @@
       copy_button: '复制',
       copy_success: '复制成功',
       copy_failure: '复制失败'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
@@ -100,7 +100,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -109,9 +108,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -125,32 +123,31 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <div class="container sidebar-position-right">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">listenerri's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -160,121 +157,131 @@
   <ul id="menu" class="menu">
       
       
-      
+        
         
         <li class="menu-item menu-item-home">
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-categories">
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-tags">
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-archives">
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-in-a-few-words">
       
     
 
-    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-about">
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+      
+    
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
     
   </ul>
 
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-    </div>
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
     
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-home">
+          <div class="content">
             
-  <section id="posts" class="posts-expand">
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/eclipse中DDMS的LOGcat只有一列level/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,14 +294,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/eclipse中DDMS的LOGcat只有一列level/" class="post-title-link" itemprop="url">eclipse中DDMS的LOGcat只有一列level</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/eclipse中DDMS的LOGcat只有一列level/" class="post-title-link" itemprop="url">eclipse中DDMS的LOGcat只有一列level</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -328,7 +333,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -345,7 +354,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -362,7 +370,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -373,23 +380,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              参考此贴解决此问题。
-退出eclipse,打开下面的文件
-~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs
-粘贴下面的东西到打开的文件ddms.lo
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/05/04/eclipse中DDMS的LOGcat只有一列level/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+          <p>参考<a href="http://stackoverflow.com/questions/25010393/eclipse-logcat-shows-only-the-first-letter-from-each-message" target="_blank" rel="noopener">此贴</a>解决此问题。</p>
+<p>退出eclipse,打开下面的文件</p>
+<p>~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs</p>
+<p>粘贴下面的东西到打开的文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ddms.logcat.auotmonitor.level=error  </span><br><span class="line">ddms.logcat.automonitor=<span class="keyword">false</span>  </span><br><span class="line">ddms.logcat.automonitor.userprompt=<span class="keyword">true</span>  </span><br><span class="line">eclipse.preferences.version=<span class="number">1</span></span><br><span class="line">logcat.view.colsize.Application=<span class="number">169</span></span><br><span class="line">logcat.view.colsize.Level=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.PID=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.Tag=<span class="number">198</span></span><br><span class="line">logcat.view.colsize.Text=<span class="number">619</span></span><br><span class="line">logcat.view.colsize.Time=<span class="number">182</span></span><br></pre></td></tr></table></figure></p>
+
         
       
     </div>
@@ -398,23 +393,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -427,14 +417,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" class="post-title-link" itemprop="url">vim+ycm+eclim+javacomplete解决冲突</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" class="post-title-link" itemprop="url">vim+ycm+eclim+javacomplete解决冲突</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -468,7 +456,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vim/" itemprop="url" rel="index">
+                    <span itemprop="name">vim</span>
+                  </a>
+                </span>
 
                 
                 
@@ -485,7 +477,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -502,7 +493,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -513,15 +503,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              四个主角各自的作用:vim:编辑器一枚ycm:自动补全插件(也就是不用按ctrl+x ctrl+o来调用vim的omni全能补全)eclim:让vim可以有部分eclipse的功能,也可以管理eclipse里的项目javacomplete:一个java的补全插件(这里说的是增强版的)
-各自网址:yc
-              ...
-            </p>
+          <p>四个主角各自的作用:<br>vim:编辑器一枚<br>ycm:自动补全插件(也就是不用按ctrl+x ctrl+o来调用vim的omni全能补全)<br>eclim:让vim可以有部分eclipse的功能,也可以管理eclipse里的项目<br>javacomplete:一个java的补全插件(这里说的是增强版的)</p><p>各自网址:<br><a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="noopener">ycm:https://github.com/Valloric/YouCompleteMe</a><br><a href="http://eclim.org/" target="_blank" rel="noopener">eclim:http://eclim.org/</a><br><a href="https://github.com/artur-shaik/vim-javacomplete2" target="_blank" rel="noopener">javacomplete:https://github.com/artur-shaik/vim-javacomplete2</a></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -536,23 +521,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/java打印三角和乘法口诀/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -565,14 +545,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/java打印三角和乘法口诀/" class="post-title-link" itemprop="url">java打印三角和乘法口诀</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/java打印三角和乘法口诀/" class="post-title-link" itemprop="url">java打印三角和乘法口诀</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -606,7 +584,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
 
                 
                 
@@ -623,7 +605,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -640,7 +621,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -651,14 +631,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              //打印正三角public class helloworld &#123;    public static void main(String[] args) &#123;        String cell="*";        String space=" ";        for (in
-              ...
-            </p>
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打印正三角</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloworld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String cell=<span class="string">"*"</span>;</span><br><span class="line">        String space=<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> lines=<span class="number">1</span>; lines&lt;=<span class="number">9</span>; lines++) &#123;</span><br><span class="line">            <span class="comment">// 只有偶数时才打印</span></span><br><span class="line">            <span class="keyword">if</span> (lines%<span class="number">2</span>==<span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印三角</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> cells=<span class="number">1</span>; cells&lt;=lines; cells++) &#123;</span><br><span class="line">                    System.out.print(cell);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">""</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/java打印三角和乘法口诀/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -673,23 +649,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/自定义bash终端提示符/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,14 +673,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/自定义bash终端提示符/" class="post-title-link" itemprop="url">自定义bash终端提示符</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/自定义bash终端提示符/" class="post-title-link" itemprop="url">自定义bash终端提示符</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -743,7 +712,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -760,7 +733,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -777,7 +749,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -788,20 +759,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-新增第三种，推荐使用
-
-第一种可以提示上一条命令是否出错，如果出错，最左边绿色的笑脸就会变成红色的哭脸，可以显示当前所在路径，当切换到root用户时用户名变为红色，如图所示:
-
-使用方法，将下面的代码，复制粘贴到~/.bashrc中:
-# bash prompt by listenerriPS1=
-              ...
-            </p>
+          <blockquote>
+<p>新增第三种，推荐使用</p>
+</blockquote><h1 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h1><p>可以提示上一条命令是否出错，如果出错，最左边绿色的笑脸就会变成红色的哭脸，可以显示当前所在路径，当切换到root用户时用户名变为红色，如图所示:</p><p><img src="shell.png" alt="shell"></p><p>使用方法，将下面的代码，复制粘贴到~/.bashrc中:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash prompt by listenerri</span></span><br><span class="line">PS1=<span class="string">"\$(if [[ \$? == 0 ]]; then echo \"\[\e[1;32m\] :)\"; else echo \"\[\e[1;31m\] :(\"; fi) <span class="variable">$(if [[ $&#123;EUID&#125; == 0 ]]; then echo "\[\e[1;31m\]\u \[\e[1;32m\]\w \[\e[1;33m\]# &gt; "; else echo "\[\e[1;36m\]\u \[\e[1;32m\]\w \[\e[1;33m\]$ &gt; "; fi)</span>\[\e[0m\]"</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/自定义bash终端提示符/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -816,23 +779,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/getDuration-获取媒体总长度值为-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -845,14 +803,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/getDuration-获取媒体总长度值为-1/" class="post-title-link" itemprop="url">getDuration()获取媒体总长度值为-1</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/getDuration-获取媒体总长度值为-1/" class="post-title-link" itemprop="url">getDuration()获取媒体总长度值为-1</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -886,7 +842,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -903,7 +863,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -920,7 +879,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -931,20 +889,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              例如VideoView获取视频总长度：在视频播放前获取到的视频总长度都为-1想要在视频播放前获取到总长度的话:videoView.setOnPreparedListener(new MyOnPreparedListener());private class MyOnPreparedListener 
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/05/04/getDuration-获取媒体总长度值为-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+          <p>例如VideoView获取视频总长度：<br>在视频播放前获取到的视频总长度都为-1<br>想要在视频播放前获取到总长度的话:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">videoView.setOnPreparedListener(<span class="keyword">new</span> MyOnPreparedListener());</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyOnPreparedListener</span> <span class="keyword">implements</span> <span class="title">OnPreparedListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrepared</span><span class="params">(MediaPlayer mp)</span> </span>&#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"></span><br><span class="line">			video.getDuration();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+
         
       
     </div>
@@ -953,23 +899,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/android获取屏幕像素和密度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -982,14 +923,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/android获取屏幕像素和密度/" class="post-title-link" itemprop="url">android获取屏幕像素和密度</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/android获取屏幕像素和密度/" class="post-title-link" itemprop="url">android获取屏幕像素和密度</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1023,7 +962,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1040,7 +983,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1057,7 +999,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1068,18 +1009,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法
-
-(一)Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480)
-(二
-              ...
-            </p>
+          <blockquote>
+<p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
+</blockquote><p>(一)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure></p><p>(二)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/android获取屏幕像素和密度/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1094,23 +1029,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/ViewPager相关笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1123,14 +1053,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/ViewPager相关笔记/" class="post-title-link" itemprop="url">ViewPager相关笔记</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/ViewPager相关笔记/" class="post-title-link" itemprop="url">ViewPager相关笔记</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1164,7 +1092,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1181,7 +1113,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1198,7 +1129,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1209,15 +1139,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              只有步骤，备用
-ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，控件标记名称为：android.support.v4.view.ViewPager有两个子控件：android.support.v4.view.PagerTitleStrip（会在tab标题的
-              ...
-            </p>
+          <p>只有步骤，备用</p><h1 id="ViewPager-PagerAdapter"><a href="#ViewPager-PagerAdapter" class="headerlink" title="ViewPager-PagerAdapter"></a>ViewPager-PagerAdapter</h1><h2 id="布局控件"><a href="#布局控件" class="headerlink" title="布局控件"></a>布局控件</h2><p>在activity的布局文件中添加控件，控件标记名称为：<br>android.support.v4.view.ViewPager<br>有两个子控件：<br>android.support.v4.view.PagerTitleStrip（会在tab标题的上面，但是不知道怎么随着页面的左右滚动切换，所以暂时不知道如何使用这个控件）<br>android.support.v4.view.PagerTabStrip（每个tab页面的标题，会随着页面的左右滚动切换）</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/ViewPager相关笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1232,23 +1157,18 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/ImageSwitcher和TextSwitcher使用笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1261,14 +1181,12 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/ImageSwitcher和TextSwitcher使用笔记/" class="post-title-link" itemprop="url">ImageSwitcher和TextSwitcher使用笔记</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/ImageSwitcher和TextSwitcher使用笔记/" class="post-title-link" itemprop="url">ImageSwitcher和TextSwitcher使用笔记</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1302,7 +1220,11 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1319,7 +1241,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1336,7 +1257,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1347,15 +1267,10 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样
-1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFac
-              ...
-            </p>
+          <p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p><p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="comment">//1、new一个ImageView</span></span><br><span class="line">			<span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">			<span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/ImageSwitcher和TextSwitcher使用笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1370,23 +1285,18 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/一些关于Fragment的笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1399,14 +1309,12 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/一些关于Fragment的笔记/" class="post-title-link" itemprop="url">一些关于Fragment的笔记</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/一些关于Fragment的笔记/" class="post-title-link" itemprop="url">一些关于Fragment的笔记</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1440,7 +1348,11 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1457,7 +1369,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1474,7 +1385,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1485,15 +1395,12 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-注意:android3.0以及之后的版本支持fragment技术，低版本要想使用fragment技术需要android.support.v4.app包获取fragmentManager的方法不同：3.0以下：getSupportFragmentManager()3.0以上：getFragmentM
-              ...
-            </p>
+          <blockquote>
+<p>注意:<br>android3.0以及之后的版本支持fragment技术，低版本要想使用fragment技术需要android.support.v4.app包<br>获取fragmentManager的方法不同：<br>3.0以下：getSupportFragmentManager()<br>3.0以上：getFragmentManager()</p>
+</blockquote>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/一些关于Fragment的笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1508,23 +1415,18 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/ListView的Iterm无法点击/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1537,14 +1439,12 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/ListView的Iterm无法点击/" class="post-title-link" itemprop="url">ListView的Iterm无法点击</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/ListView的Iterm无法点击/" class="post-title-link" itemprop="url">ListView的Iterm无法点击</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1578,7 +1478,11 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1595,7 +1499,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1612,7 +1515,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1623,15 +1525,10 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              当listview中同时出现Button或者ImageButton时，只有item中的Button或ImageButton能够获取焦点(能点击)，而整个item无法获取焦点(无法点击)
-原因：因为ImageButton在初始化时把自己设置成setFocusable(true),这样，listView
-              ...
-            </p>
+          <p>当listview中同时出现Button或者ImageButton时，只有item中的Button或ImageButton能够获取焦点(能点击)，<br>而整个item无法获取焦点(无法点击)</p><p>原因：<br>因为ImageButton在初始化时把自己设置成setFocusable(true),这样，listView就获取不到焦点。<br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ImageButton</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyle);</span><br><span class="line">        setFocusable(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/ListView的Iterm无法点击/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1646,22 +1543,21 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-  </section>
+  </div>
 
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
+
 
 
           </div>
@@ -1670,28 +1566,39 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.jpg"
       alt="listenerri">
   <p class="site-author-name" itemprop="name">listenerri</p>
-  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
@@ -1709,38 +1616,6 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
             <a href="/categories/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
@@ -1754,360 +1629,13 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
             <a href="/tags/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">173</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
   </nav>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
       
@@ -2134,9 +1662,25 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子的 blog</a>
+        </li>
+      
+    </ul>
+  </div>
 
-        </div>
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
 
     </div>
   </aside>
@@ -2146,19 +1690,29 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">listenerri</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
 
         
+
+
+
+
 
 
 
@@ -2170,32 +1724,16 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
+<script src="/js/next-boot.js?v=7.4.1"></script>
 
 
 
@@ -2217,14 +1755,7 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
 
 
 
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -2245,16 +1776,13 @@ ViewPager-PagerAdapter布局控件在activity的布局文件中添加控件，�
 
   
 
-
-  
-    
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
   });
   new Valine({
     el: '#comments',
@@ -2262,13 +1790,15 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     notify: false,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
-    placeholder: 'I have something to say',
+    placeholder: "I have something to say",
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,
     visitor: true,
     lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
   });
 }, window.Valine);
 </script>

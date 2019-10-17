@@ -4,19 +4,18 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.1" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
@@ -27,18 +26,18 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.3.0',
+    version: '7.4.1',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
@@ -51,7 +50,8 @@
       copy_button: '复制',
       copy_success: '复制成功',
       copy_failure: '复制失败'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
@@ -100,7 +100,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -109,9 +108,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -125,32 +123,31 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <div class="container sidebar-position-right">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">listenerri's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -160,121 +157,131 @@
   <ul id="menu" class="menu">
       
       
-      
+        
         
         <li class="menu-item menu-item-home">
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-categories">
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-tags">
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-archives">
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-in-a-few-words">
       
     
 
-    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-about">
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+      
+    
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
     
   </ul>
 
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-    </div>
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
     
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-home">
+          <div class="content">
             
-  <section id="posts" class="posts-expand">
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/c语言中的指针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,14 +294,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/c语言中的指针/" class="post-title-link" itemprop="url">c语言中的指针</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/c语言中的指针/" class="post-title-link" itemprop="url">c语言中的指针</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -328,7 +333,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
+                  </a>
+                </span>
 
                 
                 
@@ -345,7 +354,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -362,7 +370,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -373,18 +380,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)
-
-
-2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;为地址运算符,放于正常变量之前
-              ...
-            </p>
+          <blockquote>
+<p>1、直接使用指针的表达式，表示使用指针代表的内存地址. <font color="red">(指针存放的数据为内存地址,如同int型变量存放的数据为整数)</font></p>
+</blockquote><blockquote>
+<p>2、在指针表达式前加上符号:<code>*</code>，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. <font color="red">(<code>*</code>也叫取值运算符或间接运算符,与之对应<code>&amp;</code>为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)</font></p>
+</blockquote>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/c语言中的指针/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -399,23 +402,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/c语言修饰符static-extern-define-const/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -428,14 +426,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/c语言修饰符static-extern-define-const/" class="post-title-link" itemprop="url">c语言修饰符static,extern,#define,const</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/c语言修饰符static-extern-define-const/" class="post-title-link" itemprop="url">c语言修饰符static,extern,#define,const</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -469,7 +465,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
+                  </a>
+                </span>
 
                 
                 
@@ -486,7 +486,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -503,7 +502,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -514,18 +512,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-写的比较乱，因为是刚开始学C，没有一个系统的概念，都是想到什么，测试到什么就添加什么，仅供参考而且可能会有错误的地方，如果有请指出
-
-static：静态作用域以及声明方法：1、在函数中声明则仅作用于该函数void fun()&#123;	static int i;&#125;
-2、在函数外声明则作
-              ...
-            </p>
+          <blockquote>
+<p>写的比较乱，因为是刚开始学C，没有一个系统的概念，都是想到什么，测试到什么就添加什么，仅供参考<br>而且可能会有错误的地方，如果有请指出</p>
+</blockquote><h1 id="static：静态"><a href="#static：静态" class="headerlink" title="static：静态"></a>static：静态</h1><h2 id="作用域以及声明方法："><a href="#作用域以及声明方法：" class="headerlink" title="作用域以及声明方法："></a>作用域以及声明方法：</h2><p>1、在函数中声明则仅作用于该函数<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>2、在函数外声明则作用于<font color="red">从声明开始到文件末尾</font><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/c语言修饰符static-extern-define-const/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -540,23 +532,18 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/linux创建wifi热点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -569,14 +556,12 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/linux创建wifi热点/" class="post-title-link" itemprop="url">linux创建wifi热点</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/linux创建wifi热点/" class="post-title-link" itemprop="url">linux创建wifi热点</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -610,7 +595,11 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -627,7 +616,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -644,7 +632,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -655,16 +642,10 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              本文中使用的系统是archlinux,其他系统应该只有安装方法不同
-安装yaourt -S archlinuxcn/create_ap#或者：yaourt -S aur/create_ap
-终端下创建热点首先执行ifconfig命令查看网卡端口下面是我的：ap0: flags=4163&lt;UP,
-              ...
-            </p>
+          <p><strong><font color="red">本文中使用的系统是archlinux,其他系统应该只有安装方法不同</font></strong></p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yaourt -S archlinuxcn/create_ap</span><br><span class="line"><span class="comment">#或者：</span></span><br><span class="line">yaourt -S aur/create_ap</span><br></pre></td></tr></table></figure><h1 id="终端下创建热点"><a href="#终端下创建热点" class="headerlink" title="终端下创建热点"></a>终端下创建热点</h1><p>首先执行ifconfig命令查看网卡端口<br>下面是我的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ap0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">		...................</span><br><span class="line">enp4s0f2: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu </span><br><span class="line">		...................</span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">		...................</span><br><span class="line">ppp0: flags=4305&lt;UP,POINTOPOINT,RUNNING,NOARP,MULTICAST&gt;  </span><br><span class="line">		...................</span><br><span class="line">wlp3s0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">		...................</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/linux创建wifi热点/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -679,23 +660,18 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/不通过GooglePlay下载其中的app/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -708,14 +684,12 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/不通过GooglePlay下载其中的app/" class="post-title-link" itemprop="url">不通过GooglePlay下载其中的app</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/不通过GooglePlay下载其中的app/" class="post-title-link" itemprop="url">不通过GooglePlay下载其中的app</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -749,7 +723,11 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -766,7 +744,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -783,7 +760,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -794,22 +770,9 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              非常简单的一个方法：飞机直达进入上面的网址,如果你进不去,那就想想自己为什么进不了google,里面就一个输入框,把Google play里你想下的apk的网页链接填进去点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk
-转自：大侠阿木
+          <p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/" target="_blank" rel="noopener">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
+<p>转自：<a href="http://daxiaamu.com" target="_blank" rel="noopener">大侠阿木</a></p>
 
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/05/04/不通过GooglePlay下载其中的app/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -818,23 +781,18 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/java中获取一个子字符串中出现的次数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -847,14 +805,12 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/java中获取一个子字符串中出现的次数/" class="post-title-link" itemprop="url">java中获取一个子字符串中出现的次数</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/java中获取一个子字符串中出现的次数/" class="post-title-link" itemprop="url">java中获取一个子字符串中出现的次数</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -888,7 +844,11 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
 
                 
                 
@@ -905,7 +865,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -922,7 +881,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -933,14 +891,10 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              假设要得到字符串B在字符串A中出现的次数：//假设字符串A和B已声明并赋值int count=0;int fromIndex=0;while(fromIndex!=-1)&#123;	fromIndex=A.indexOf(B,fromIndex);	if(fromIndex!=-1)&#123;	
-              ...
-            </p>
+          <p>假设要得到字符串B在字符串A中出现的次数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设字符串A和B已声明并赋值</span></span><br><span class="line"><span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> fromIndex=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(fromIndex!=-<span class="number">1</span>)&#123;</span><br><span class="line">	fromIndex=A.indexOf(B,fromIndex);</span><br><span class="line">	<span class="keyword">if</span>(fromIndex!=-<span class="number">1</span>)&#123;</span><br><span class="line">		fromIndex+=B.length();;</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(count);</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/java中获取一个子字符串中出现的次数/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -955,23 +909,18 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/从arraylist生成String-数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -984,14 +933,12 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/从arraylist生成String-数组/" class="post-title-link" itemprop="url">从arraylist生成String[]数组</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/从arraylist生成String-数组/" class="post-title-link" itemprop="url">从arraylist生成String[]数组</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1025,7 +972,11 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1042,7 +993,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1059,7 +1009,6 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1070,15 +1019,10 @@ static：静态作用域以及声明方法：1、在函数中声明则仅作用�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              在使用数组的时候要留意,一定要先完整的创建好数组,再对其操作
-String[] commands=null;commands = new String[arrayListCommand.size()];commands = (String[]) arrayListCommand.toArray(co
-              ...
-            </p>
+          <p>在使用数组的时候要留意,一定要先完整的创建好数组,再对其操作</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] commands=<span class="keyword">null</span>;</span><br><span class="line">commands = <span class="keyword">new</span> String[arrayListCommand.size()];</span><br><span class="line">commands = (String[]) arrayListCommand.toArray(commands);</span><br><span class="line"><span class="comment">//可以成功cast到String数组</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/从arraylist生成String-数组/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1093,23 +1037,18 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/通过ip地址连接virtualbox虚拟机android-x86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1122,14 +1061,12 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/通过ip地址连接virtualbox虚拟机android-x86/" class="post-title-link" itemprop="url">通过ip地址连接virtualbox虚拟机android-x86</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/通过ip地址连接virtualbox虚拟机android-x86/" class="post-title-link" itemprop="url">通过ip地址连接virtualbox虚拟机android-x86</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1163,7 +1100,11 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1180,7 +1121,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1197,7 +1137,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1208,15 +1147,10 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              只要能通过ip地址找到虚拟机中的系统，那么就可以干很多事，比如：adb调试，或者使用nc命令传输一些文件或文件夹，等等。。下面以adb连接virtualbox中的android-x86进行调试为例：
-安装android-x86首先你要安装好android-x86，这个就不多说了，网上很多教程不过值得
-              ...
-            </p>
+          <p>只要能通过ip地址找到虚拟机中的系统，那么就可以干很多事，比如：<br>adb调试，或者使用nc命令传输一些文件或文件夹，等等。。<br>下面以adb连接virtualbox中的android-x86进行调试为例：</p><h1 id="安装android-x86"><a href="#安装android-x86" class="headerlink" title="安装android-x86"></a>安装android-x86</h1><p>首先你要安装好android-x86，这个就不多说了，网上很多教程<br>不过值得一提的是，在安装好之后，进入系统时，如果没有点技巧会卡在欢迎界面，安装时没有截图，就不上图了<br>解决方法是：在欢迎界面，状态栏下面开始，依次：<br>左上-右上-右下-左下<br>用鼠标点击一遍，就会自动跳过欢迎界面了</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/通过ip地址连接virtualbox虚拟机android-x86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1231,23 +1165,18 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/使用XMLReader接口解析XML/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1260,14 +1189,12 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/使用XMLReader接口解析XML/" class="post-title-link" itemprop="url">使用XMLReader接口解析XML</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/使用XMLReader接口解析XML/" class="post-title-link" itemprop="url">使用XMLReader接口解析XML</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1301,7 +1228,11 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1318,7 +1249,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1335,7 +1265,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1346,16 +1275,10 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              如何获取XMLReader接口从JDK文档来看，有两种方法：
-使用SAXParserFactory+SAXParser[以下简称a方法]XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();
-使用XMLR
-              ...
-            </p>
+          <h1 id="如何获取XMLReader接口"><a href="#如何获取XMLReader接口" class="headerlink" title="如何获取XMLReader接口"></a>如何获取XMLReader接口</h1><p>从JDK文档来看，有两种方法：</p><h2 id="使用SAXParserFactory-SAXParser-以下简称a方法"><a href="#使用SAXParserFactory-SAXParser-以下简称a方法" class="headerlink" title="使用SAXParserFactory+SAXParser[以下简称a方法]"></a>使用SAXParserFactory+SAXParser<code>[以下简称a方法]</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();</span><br></pre></td></tr></table></figure><h2 id="使用XMLReaderFactory-以下简称b方法"><a href="#使用XMLReaderFactory-以下简称b方法" class="headerlink" title="使用XMLReaderFactory[以下简称b方法]"></a>使用XMLReaderFactory<code>[以下简称b方法]</code></h2>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/使用XMLReader接口解析XML/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1370,23 +1293,18 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/U盘-GRUB2引导PE或linux镜像/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1399,14 +1317,12 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" class="post-title-link" itemprop="url">U盘+GRUB2引导PE或linux镜像</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" class="post-title-link" itemprop="url">U盘+GRUB2引导PE或linux镜像</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1440,7 +1356,11 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1457,7 +1377,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1474,7 +1393,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1485,17 +1403,12 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              详细看原文：链接
-安装grub2到u盘：sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb
-
-注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下
-              ...
-            </p>
+          <p>详细看原文：<a href="http://blog.chinaunix.net/uid-14735472-id-4210990.html" target="_blank" rel="noopener">链接</a></p><h1 id="安装grub2到u盘："><a href="#安装grub2到u盘：" class="headerlink" title="安装grub2到u盘："></a>安装grub2到u盘：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb</span><br></pre></td></tr></table></figure><blockquote>
+<p>注意上面的参数:<br>–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值<br>–boot-directory,此参数的含义自行查看grub-install的help<br>具体看man grub-install使用方法</p>
+</blockquote>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1510,23 +1423,18 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1539,14 +1447,12 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/" class="post-title-link" itemprop="url">archlinux+xfce4+lightdm+uefi个人安装记录</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/" class="post-title-link" itemprop="url">archlinux+xfce4+lightdm+uefi个人安装记录</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1580,7 +1486,11 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1597,7 +1507,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1614,7 +1523,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1625,20 +1533,14 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中
-
-
-
-前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤
-
-              ...
-            </p>
+          <blockquote>
+<p><strong><font color="red">本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中</font></strong></p>
+</blockquote><hr><blockquote>
+<p><strong>前言：</strong><br>在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，<br>不说废话了，开始安装步骤</p>
+</blockquote><font color="red">折腾日期为:2015-4-28到2015-5-??</font>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1653,22 +1555,21 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-  </section>
+  </div>
 
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
+
 
 
           </div>
@@ -1677,28 +1578,39 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.jpg"
       alt="listenerri">
   <p class="site-author-name" itemprop="name">listenerri</p>
-  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
@@ -1716,38 +1628,6 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
             <a href="/categories/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
@@ -1761,360 +1641,13 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
             <a href="/tags/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">173</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
   </nav>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
       
@@ -2141,9 +1674,25 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子的 blog</a>
+        </li>
+      
+    </ul>
+  </div>
 
-        </div>
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
 
     </div>
   </aside>
@@ -2153,19 +1702,29 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">listenerri</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
 
         
+
+
+
+
 
 
 
@@ -2177,32 +1736,16 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
+<script src="/js/next-boot.js?v=7.4.1"></script>
 
 
 
@@ -2224,14 +1767,7 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
 
 
 
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -2252,16 +1788,13 @@ String[] commands=null;commands = new String[arrayListCommand.size()];commands =
 
   
 
-
-  
-    
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
   });
   new Valine({
     el: '#comments',
@@ -2269,13 +1802,15 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     notify: false,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
-    placeholder: 'I have something to say',
+    placeholder: "I have something to say",
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,
     visitor: true,
     lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
   });
 }, window.Valine);
 </script>

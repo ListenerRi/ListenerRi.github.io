@@ -4,19 +4,18 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.1" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
@@ -27,18 +26,18 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.3.0',
+    version: '7.4.1',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
@@ -51,7 +50,8 @@
       copy_button: '复制',
       copy_success: '复制成功',
       copy_failure: '复制失败'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
@@ -100,7 +100,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -109,9 +108,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -125,32 +123,31 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <div class="container sidebar-position-right">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">listenerri's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -160,121 +157,131 @@
   <ul id="menu" class="menu">
       
       
-      
+        
         
         <li class="menu-item menu-item-home">
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-categories">
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-tags">
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-archives">
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-in-a-few-words">
       
     
 
-    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-about">
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+      
+    
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
     
   </ul>
 
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-    </div>
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
     
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-home">
+          <div class="content">
             
-  <section id="posts" class="posts-expand">
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/11/02/chrome-adobe-flash不是最新版本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,14 +294,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/11/02/chrome-adobe-flash不是最新版本/" class="post-title-link" itemprop="url">chrome adobe flash不是最新版本</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/11/02/chrome-adobe-flash不是最新版本/" class="post-title-link" itemprop="url">chrome adobe flash不是最新版本</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -328,7 +333,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">others</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/others/" itemprop="url" rel="index">
+                    <span itemprop="name">others</span>
+                  </a>
+                </span>
 
                 
                 
@@ -345,7 +354,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -362,7 +370,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -373,15 +380,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本
-解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了
-              ...
-            </p>
+          <p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p><p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/11/02/chrome-adobe-flash不是最新版本/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -396,23 +398,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/10/24/linux映射修饰键/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,14 +422,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/10/24/linux映射修饰键/" class="post-title-link" itemprop="url">linux映射修饰键</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/10/24/linux映射修饰键/" class="post-title-link" itemprop="url">linux映射修饰键</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -466,7 +461,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -483,7 +482,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -500,7 +498,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -511,15 +508,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。
-本
-              ...
-            </p>
+          <p>首先，先说一个并不好用的方法，请看链接：<a href="https://wiki.archlinux.org/index.php/Xmodmap" target="_blank" rel="noopener">使用xmodmap命令映射按键</a><br>之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，<br>只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，<br>也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。</p><p>本方法基于X图形框架，也就是要实现按键映射必须启动X</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/10/24/linux映射修饰键/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -534,23 +526,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/08/08/抽象类与接口是否可以实例化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -563,14 +550,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/08/08/抽象类与接口是否可以实例化/" class="post-title-link" itemprop="url">抽象类与接口是否可以实例化</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/08/08/抽象类与接口是否可以实例化/" class="post-title-link" itemprop="url">抽象类与接口是否可以实例化</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -604,7 +589,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
 
                 
                 
@@ -621,7 +610,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -638,7 +626,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -649,25 +636,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别:
-相同点:
-
-都是抽象的(不能正常实例化的)
-都可以有抽象方法
-都可以有成员变量
-
-区别:
-
-抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同
-抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法
-抽象类可
-              ...
-            </p>
+          <h1 id="抽象类与接口简介"><a href="#抽象类与接口简介" class="headerlink" title="抽象类与接口简介"></a>抽象类与接口简介</h1><p>具体的就不说了,直说一下二者的重要的相同点和区别:</p><p>相同点:</p><ul>
+<li>都是抽象的(不能正常实例化的)</li>
+<li>都可以有抽象方法</li>
+<li>都可以有成员变量</li>
+</ul><p>区别:</p><ul>
+<li>抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同</li>
+<li>抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法</li>
+<li>抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化</li>
+</ul>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/08/08/抽象类与接口是否可以实例化/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -682,23 +662,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/07/25/linux下添加UEFI启动项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -711,14 +686,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/07/25/linux下添加UEFI启动项/" class="post-title-link" itemprop="url">linux下添加UEFI启动项</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/07/25/linux下添加UEFI启动项/" class="post-title-link" itemprop="url">linux下添加UEFI启动项</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -752,7 +725,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -769,7 +746,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -786,7 +762,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -797,14 +772,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              今天突然发生了一件怪事,系统重启后没有了硬盘的uefi启动项, 吓了我一跳,我以为硬盘挂了,立即进livecd查看硬盘信息,好在一切正常.我的电脑通常会自动添加应该第一分区(esp分区)里的一些启动项, 但这次重启几次之后依然不能自动添加,而我又是archlinux单系统,没得用easyuefi,所
-              ...
-            </p>
+          <p>今天突然发生了一件怪事,系统重启后没有了硬盘的uefi启动项, 吓了我一跳,我以为硬盘挂了,立即进livecd查看硬盘信息,好在一切正常.<br>我的电脑通常会自动添加应该第一分区(esp分区)里的一些启动项, 但这次重启几次之后依然不能自动添加,而我又是archlinux单系统,没得用easyuefi,<br>所以只能手动在linux下添加了,我没有在livecd中进行添加,而是进入硬盘中的archlinux后添加的.<br>有人会疑惑,没有启动项是怎么进入系统的??<br>详细的就不说了,本文主要说怎么添加uefi启动项,就只简单描述下如何在没有uefi启动项的情况下进入系统:<br><strong>进入BIOS,启动uefi的shell模式,在shell模式中找到archlinux的efi引导文件,直接回车就行了</strong></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/07/25/linux下添加UEFI启动项/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -819,23 +790,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/07/01/测试网站是否能被百度蜘蛛抓取/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -848,14 +814,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/07/01/测试网站是否能被百度蜘蛛抓取/" class="post-title-link" itemprop="url">测试网站是否能被百度蜘蛛抓取</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/07/01/测试网站是否能被百度蜘蛛抓取/" class="post-title-link" itemprop="url">测试网站是否能被百度蜘蛛抓取</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -889,7 +853,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">others</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/others/" itemprop="url" rel="index">
+                    <span itemprop="name">others</span>
+                  </a>
+                </span>
 
                 
                 
@@ -906,7 +874,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -923,7 +890,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -934,14 +900,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              只需要使用curl命令配合一些参数就可以测试了,看返回内容就知道能否抓取了# 用PC的UA来抓取curl -A "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" http://l
-              ...
-            </p>
+          <p>只需要使用curl命令配合一些参数就可以测试了,看返回内容就知道能否抓取了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用PC的UA来抓取</span></span><br><span class="line">curl -A <span class="string">"Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"</span> http://listenerri.com</span><br><span class="line"><span class="comment"># 用移动UA来抓取</span></span><br><span class="line">curl -A <span class="string">"Mozilla/5.0 (Linux;u;Android 4.2.2;zh-cn;) AppleWebKit/534.46 (KHTML,like Gecko) Version/5.1 Mobile Safari/10600.6.3 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html）"</span> http://listenerri.com</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/07/01/测试网站是否能被百度蜘蛛抓取/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -956,23 +918,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/06/30/解决安卓屏幕旋转所带来的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -985,14 +942,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/06/30/解决安卓屏幕旋转所带来的问题/" class="post-title-link" itemprop="url">解决安卓屏幕旋转所带来的问题</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/06/30/解决安卓屏幕旋转所带来的问题/" class="post-title-link" itemprop="url">解决安卓屏幕旋转所带来的问题</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1026,7 +981,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1043,7 +1002,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1060,7 +1018,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1071,15 +1028,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              为什么屏幕旋转会带来问题在屏幕旋转时,系统会销毁当前活动的activity,并在旋转后重新创建一个新的activity,那么旋转前activity中的一些数据就会丢失.所以只要找到一个方法能实现旋转前保存某些数据,并在新创建的activity中可以取出之前保存的数据,也就解决了这个问题.
-然而保存数
-              ...
-            </p>
+          <h1 id="为什么屏幕旋转会带来问题"><a href="#为什么屏幕旋转会带来问题" class="headerlink" title="为什么屏幕旋转会带来问题"></a>为什么屏幕旋转会带来问题</h1><p>在屏幕旋转时,系统会销毁当前活动的activity,并在旋转后重新创建一个新的activity,<br>那么旋转前activity中的一些数据就会丢失.所以只要找到一个方法能实现旋转前保存某些数据,<br>并在新创建的activity中可以取出之前保存的数据,也就解决了这个问题.</p><p>然而保存数据并不是万能的,有些操作是不能中断的,比如播放音乐,这就要用到另一种方法.</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/06/30/解决安卓屏幕旋转所带来的问题/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1094,23 +1046,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/linux制作可启动iso/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1123,14 +1070,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/linux制作可启动iso/" class="post-title-link" itemprop="url">linux制作可启动iso</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/linux制作可启动iso/" class="post-title-link" itemprop="url">linux制作可启动iso</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1164,7 +1109,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1181,7 +1130,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1198,7 +1146,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1209,16 +1156,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接
-使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso
-最后使用如下命令:mkisofs 
-              ...
-            </p>
+          <p>在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接</p><p>使用isolinux作为引导,需自行下载并放到iso根目录下,<br>需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso</p><p>最后使用如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table myiso</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/linux制作可启动iso/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1233,23 +1174,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/c语言打印乘法口诀和三角/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1262,14 +1198,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/c语言打印乘法口诀和三角/" class="post-title-link" itemprop="url">c语言打印乘法口诀和三角</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/c语言打印乘法口诀和三角/" class="post-title-link" itemprop="url">c语言打印乘法口诀和三角</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1303,7 +1237,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1320,7 +1258,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1337,7 +1274,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1348,15 +1284,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              打印乘法口诀和三角所用的算法跟java一样,直接上代码
-打印乘法口诀:#include &lt;stdio.h&gt;int main(void)&#123;    for (int i = 1; i &lt;= 9; ++i) &#123;        for (int j = 1; j &lt
-              ...
-            </p>
+          <p>打印乘法口诀和三角所用的算法跟java一样,直接上代码</p><h1 id="打印乘法口诀"><a href="#打印乘法口诀" class="headerlink" title="打印乘法口诀:"></a>打印乘法口诀:</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d*%d=%d\t"</span>, j, i, i*j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行结果:</span></span><br><span class="line"><span class="number">1</span>*<span class="number">1</span>=<span class="number">1</span>   </span><br><span class="line"><span class="number">1</span>*<span class="number">2</span>=<span class="number">2</span>   <span class="number">2</span>*<span class="number">2</span>=<span class="number">4</span></span><br><span class="line"><span class="number">1</span>*<span class="number">3</span>=<span class="number">3</span>   <span class="number">2</span>*<span class="number">3</span>=<span class="number">6</span>   <span class="number">3</span>*<span class="number">3</span>=<span class="number">9</span></span><br><span class="line"><span class="number">1</span>*<span class="number">4</span>=<span class="number">4</span>   <span class="number">2</span>*<span class="number">4</span>=<span class="number">8</span>   <span class="number">3</span>*<span class="number">4</span>=<span class="number">12</span>  <span class="number">4</span>*<span class="number">4</span>=<span class="number">16</span></span><br><span class="line"><span class="number">1</span>*<span class="number">5</span>=<span class="number">5</span>   <span class="number">2</span>*<span class="number">5</span>=<span class="number">10</span>  <span class="number">3</span>*<span class="number">5</span>=<span class="number">15</span>  <span class="number">4</span>*<span class="number">5</span>=<span class="number">20</span>  <span class="number">5</span>*<span class="number">5</span>=<span class="number">25</span></span><br><span class="line"><span class="number">1</span>*<span class="number">6</span>=<span class="number">6</span>   <span class="number">2</span>*<span class="number">6</span>=<span class="number">12</span>  <span class="number">3</span>*<span class="number">6</span>=<span class="number">18</span>  <span class="number">4</span>*<span class="number">6</span>=<span class="number">24</span>  <span class="number">5</span>*<span class="number">6</span>=<span class="number">30</span>  <span class="number">6</span>*<span class="number">6</span>=<span class="number">36</span></span><br><span class="line"><span class="number">1</span>*<span class="number">7</span>=<span class="number">7</span>   <span class="number">2</span>*<span class="number">7</span>=<span class="number">14</span>  <span class="number">3</span>*<span class="number">7</span>=<span class="number">21</span>  <span class="number">4</span>*<span class="number">7</span>=<span class="number">28</span>  <span class="number">5</span>*<span class="number">7</span>=<span class="number">35</span>  <span class="number">6</span>*<span class="number">7</span>=<span class="number">42</span>  <span class="number">7</span>*<span class="number">7</span>=<span class="number">49</span></span><br><span class="line"><span class="number">1</span>*<span class="number">8</span>=<span class="number">8</span>   <span class="number">2</span>*<span class="number">8</span>=<span class="number">16</span>  <span class="number">3</span>*<span class="number">8</span>=<span class="number">24</span>  <span class="number">4</span>*<span class="number">8</span>=<span class="number">32</span>  <span class="number">5</span>*<span class="number">8</span>=<span class="number">40</span>  <span class="number">6</span>*<span class="number">8</span>=<span class="number">48</span>  <span class="number">7</span>*<span class="number">8</span>=<span class="number">56</span>  <span class="number">8</span>*<span class="number">8</span>=<span class="number">64</span></span><br><span class="line"><span class="number">1</span>*<span class="number">9</span>=<span class="number">9</span>   <span class="number">2</span>*<span class="number">9</span>=<span class="number">18</span>  <span class="number">3</span>*<span class="number">9</span>=<span class="number">27</span>  <span class="number">4</span>*<span class="number">9</span>=<span class="number">36</span>  <span class="number">5</span>*<span class="number">9</span>=<span class="number">45</span>  <span class="number">6</span>*<span class="number">9</span>=<span class="number">54</span>  <span class="number">7</span>*<span class="number">9</span>=<span class="number">63</span>  <span class="number">8</span>*<span class="number">9</span>=<span class="number">72</span>  <span class="number">9</span>*<span class="number">9</span>=<span class="number">81</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/c语言打印乘法口诀和三角/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1371,23 +1302,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/c语言strlen-与sizeof/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1400,14 +1326,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/c语言strlen-与sizeof/" class="post-title-link" itemprop="url">c语言strlen()与sizeof</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/c语言strlen-与sizeof/" class="post-title-link" itemprop="url">c语言strlen()与sizeof</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1441,7 +1365,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1458,7 +1386,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1475,7 +1402,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1486,17 +1412,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&#39;\0&#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1.
-
-strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字
-              ...
-            </p>
+          <blockquote>
+<p>c语言没有string类型,字符串的处理使用的是char数组<br>c会默认在字符串的尾部增加一个<code>&#39;\0&#39;</code>,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1.</p>
+</blockquote><h1 id="strlen"><a href="#strlen" class="headerlink" title="strlen()"></a>strlen()</h1><p>我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数<br>然而获取到的这个字符数并不包含尾部被自动追加的<code>&#39;\0&#39;</code>空字符</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/c语言strlen-与sizeof/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1511,23 +1432,18 @@ strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1540,14 +1456,12 @@ strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/" class="post-title-link" itemprop="url">hybrid-sleep和sleep以及hibernate的区别</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/" class="post-title-link" itemprop="url">hybrid-sleep和sleep以及hibernate的区别</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1581,7 +1495,11 @@ strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">others</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/others/" itemprop="url" rel="index">
+                    <span itemprop="name">others</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1598,7 +1516,6 @@ strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1615,7 +1532,6 @@ strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1626,15 +1542,10 @@ strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              bybrid-sleep混合休眠模式:是指电脑sleep(睡眠模式)和hibernate(休眠模式)同时进行,即把信息保存到内存的同时也写入到系统主分区的hiberfil.sys文件中
-sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但不能断电,断电后数据丢失,恢复最
-              ...
-            </p>
+          <h1 id="bybrid-sleep"><a href="#bybrid-sleep" class="headerlink" title="bybrid-sleep"></a>bybrid-sleep</h1><p>混合休眠模式:<br>是指电脑sleep(睡眠模式)和hibernate(休眠模式)同时进行,即把信息保存到内存的同时也写入到系统主分区的hiberfil.sys文件中</p><h1 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h1><p>睡眠模式,linux下也叫挂起(suspend):<br>把信息到存到内存中,但不能断电,断电后数据丢失,恢复最快</p><h1 id="hibernate"><a href="#hibernate" class="headerlink" title="hibernate"></a>hibernate</h1>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1649,22 +1560,21 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-  </section>
+  </div>
 
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
+
 
 
           </div>
@@ -1673,28 +1583,39 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.jpg"
       alt="listenerri">
   <p class="site-author-name" itemprop="name">listenerri</p>
-  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
@@ -1712,38 +1633,6 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
             <a href="/categories/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
@@ -1757,360 +1646,13 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
             <a href="/tags/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">173</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
   </nav>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
       
@@ -2137,9 +1679,25 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子的 blog</a>
+        </li>
+      
+    </ul>
+  </div>
 
-        </div>
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
 
     </div>
   </aside>
@@ -2149,19 +1707,29 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">listenerri</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
 
         
+
+
+
+
 
 
 
@@ -2173,32 +1741,16 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
+<script src="/js/next-boot.js?v=7.4.1"></script>
 
 
 
@@ -2220,14 +1772,7 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
 
 
 
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -2248,16 +1793,13 @@ sleep睡眠模式,linux下也叫挂起(suspend):把信息到存到内存中,但�
 
   
 
-
-  
-    
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
   });
   new Valine({
     el: '#comments',
@@ -2265,13 +1807,15 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     notify: false,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
-    placeholder: 'I have something to say',
+    placeholder: "I have something to say",
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,
     visitor: true,
     lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
   });
 }, window.Valine);
 </script>

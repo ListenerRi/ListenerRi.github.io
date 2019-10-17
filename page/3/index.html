@@ -4,19 +4,18 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.1" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
@@ -27,18 +26,18 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.3.0',
+    version: '7.4.1',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
@@ -51,7 +50,8 @@
       copy_button: '复制',
       copy_success: '复制成功',
       copy_failure: '复制失败'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
@@ -100,7 +100,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -109,9 +108,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -125,32 +123,31 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <div class="container sidebar-position-right">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">listenerri's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -160,121 +157,131 @@
   <ul id="menu" class="menu">
       
       
-      
+        
         
         <li class="menu-item menu-item-home">
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-categories">
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-tags">
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-archives">
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-in-a-few-words">
       
     
 
-    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-about">
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+      
+    
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
     
   </ul>
 
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-    </div>
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
     
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-home">
+          <div class="content">
             
-  <section id="posts" class="posts-expand">
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/10/26/linux下控制风扇转速/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,14 +294,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/10/26/linux下控制风扇转速/" class="post-title-link" itemprop="url">linux下控制风扇转速</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/10/26/linux下控制风扇转速/" class="post-title-link" itemprop="url">linux下控制风扇转速</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -328,7 +333,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -345,7 +354,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -362,7 +370,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -373,16 +380,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              本文不一定适用于所有电脑，需要自己找到对应的设备文件
-我的电脑中，风扇对应到linux下的设备文件的路径是：/sys/class/hwmon/hwmon2/pwm1
-其他电脑即便不是这个文件，也在类似的目录下，这个文件的内容是”0-255“的数值，相应的数值大小对应相应的风扇转速，向这个文件中写入不
-              ...
-            </p>
+          <p>本文不一定适用于所有电脑，需要自己找到对应的设备文件</p><p>我的电脑中，风扇对应到linux下的设备文件的路径是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sys/class/hwmon/hwmon2/pwm1</span><br></pre></td></tr></table></figure></p><p>其他电脑即便不是这个文件，也在类似的目录下，这个文件的内容是”0-255“的数值，<br>相应的数值大小对应相应的风扇转速，向这个文件中写入不同的数据风扇就控制风扇的转速了。</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/10/26/linux下控制风扇转速/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -397,23 +398,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/09/15/搞明白android中layout-weight的用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -426,14 +422,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/09/15/搞明白android中layout-weight的用法/" class="post-title-link" itemprop="url">搞明白android中layout_weight的用法</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/09/15/搞明白android中layout-weight的用法/" class="post-title-link" itemprop="url">搞明白android中layout_weight的用法</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -467,7 +461,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -484,7 +482,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -501,7 +498,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -512,17 +508,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-本文是学习这篇博客所得的收获: Android：Layout_weight的深刻理解
-
-当子控件有layout_weight属性时, 系统将先按照layout_width或layout_hight属性先把子控件放到父控件中, 之后才解析layout_weight属性, 然后计算父控件中的剩余空间,
-              ...
-            </p>
+          <blockquote>
+<p>本文是学习这篇博客所得的收获:<br><a href="http://mobile.51cto.com/abased-375428.htm" target="_blank" rel="noopener"> Android：Layout_weight的深刻理解</a></p>
+</blockquote><p>当子控件有<code>layout_weight</code>属性时, 系统将先按照<code>layout_width</code>或<code>layout_hight</code>属性<br>先把子控件放到父控件中, 之后才解析<code>layout_weight</code>属性, 然后计算父控件中的剩余空间,<br>最后按比例分配剩余空间给子控件.</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/09/15/搞明白android中layout-weight的用法/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -537,23 +528,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/09/13/docker-CMD-ENTRYPOINT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -566,14 +552,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/09/13/docker-CMD-ENTRYPOINT/" class="post-title-link" itemprop="url">docker-CMD-ENTRYPOINT</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/09/13/docker-CMD-ENTRYPOINT/" class="post-title-link" itemprop="url">docker-CMD-ENTRYPOINT</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -607,7 +591,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
 
                 
                 
@@ -624,7 +612,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -641,7 +628,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -652,21 +638,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              一张图解释Dockerfile中CMD和ENTRYPOINT的关系,另外使用’docker run’新建容器时, 镜像后面跟的命令会覆盖Dockerfile中的CMD.
+          <p>一张图解释Dockerfile中CMD和ENTRYPOINT的关系,<br>另外使用’docker run’新建容器时, 镜像后面跟的命令会覆盖Dockerfile中的CMD.<br><img src="docker.png" alt="docker"></p>
 
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2017/09/13/docker-CMD-ENTRYPOINT/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -675,23 +648,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/09/12/docker运行php容器网站无法运行/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -704,14 +672,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/09/12/docker运行php容器网站无法运行/" class="post-title-link" itemprop="url">docker运行php容器网站无法运行</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/09/12/docker运行php容器网站无法运行/" class="post-title-link" itemprop="url">docker运行php容器网站无法运行</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -745,7 +711,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
 
                 
                 
@@ -762,7 +732,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -779,7 +748,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -790,15 +758,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              使用如下命令启动一个php容器, 并将php项目的目录映射到容器内的apache容器下:docker run -p 80:80 --name php_app -v "/project/directory":/var/www/html -d php
-然后访问127.0.0.1, 结果网站无法运行, 提
-              ...
-            </p>
+          <p>使用如下命令启动一个php容器, 并将php项目的目录映射到容器内的apache容器下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --name php_app -v "/project/directory":/var/www/html -d php</span><br></pre></td></tr></table></figure></p><p>然后访问<code>127.0.0.1</code>, 结果网站无法运行, 提示:<code>Permission denied</code>,</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/09/12/docker运行php容器网站无法运行/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -813,23 +776,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/07/20/python的库文件在哪儿/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -842,14 +800,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/07/20/python的库文件在哪儿/" class="post-title-link" itemprop="url">python的库文件在哪儿</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/07/20/python的库文件在哪儿/" class="post-title-link" itemprop="url">python的库文件在哪儿</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -883,7 +839,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
 
                 
                 
@@ -900,7 +860,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -917,7 +876,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -928,17 +886,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-当前操作系统: deepin基于debian
-
-模块管理器pip默认的命令pip可能是来自pip2也可能是pip3, 这取决于安装pip2和pip3的顺序,安装pip2或pip3时会覆盖原有pip可执行文件, 所以在使用pip安装python模块时,最好明确指出使用pip2还是pip3, 而不是直
-              ...
-            </p>
+          <blockquote>
+<p>当前操作系统: deepin基于debian</p>
+</blockquote><h1 id="模块管理器pip"><a href="#模块管理器pip" class="headerlink" title="模块管理器pip"></a>模块管理器pip</h1><p>默认的命令pip可能是来自pip2也可能是pip3, 这取决于安装pip2和pip3的顺序,<br>安装pip2或pip3时会覆盖原有pip可执行文件, 所以在使用pip安装python模块时,<br>最好明确指出使用pip2还是pip3, 而不是直接使用pip命令, 这样可以避免明明要安装python3的模块库, 下载安装的却是python2的模块库.</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/07/20/python的库文件在哪儿/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -953,23 +906,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -982,14 +930,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/" class="post-title-link" itemprop="url">cocos2d-x-3.15缺少libfmod.so.6</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/" class="post-title-link" itemprop="url">cocos2d-x-3.15缺少libfmod.so.6</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1023,7 +969,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/cocos2d/" itemprop="url" rel="index"><span itemprop="name">cocos2d</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cocos2d/" itemprop="url" rel="index">
+                    <span itemprop="name">cocos2d</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1040,7 +990,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1057,7 +1006,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1068,14 +1016,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object f
-              ...
-            </p>
+          <p>cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./cpp-tests </span><br><span class="line">./cpp-tests: error while loading shared libraries: libfmod.so.6:</span><br><span class="line">cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1090,23 +1034,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/02/25/miui-正在通过usb安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1119,14 +1058,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/02/25/miui-正在通过usb安装/" class="post-title-link" itemprop="url">miui 正在通过usb安装</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/02/25/miui-正在通过usb安装/" class="post-title-link" itemprop="url">miui 正在通过usb安装</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1160,7 +1097,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1177,7 +1118,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1194,7 +1134,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1205,16 +1144,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,导致每次调试应用都要手动点击同意安装, 解决方法:
-需要的东西root任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器
-位置以及修改用
-              ...
-            </p>
+          <p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p><h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p><h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/data/data/com.miui.securitycenter/shared_prefs</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/02/25/miui-正在通过usb安装/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1229,23 +1162,18 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/02/12/vim中javacomplete2与syntastic一点使用心得/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1258,14 +1186,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/02/12/vim中javacomplete2与syntastic一点使用心得/" class="post-title-link" itemprop="url">vim中javacomplete2与syntastic一点使用心得</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/02/12/vim中javacomplete2与syntastic一点使用心得/" class="post-title-link" itemprop="url">vim中javacomplete2与syntastic一点使用心得</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1299,7 +1225,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vim/" itemprop="url" rel="index">
+                    <span itemprop="name">vim</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1316,7 +1246,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1333,7 +1262,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1344,21 +1272,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              插件简介javacomplete2
-提供java语言的补全
-便捷的import,extends,implement等
-快速插入setter,getter方法,等等
-插件地址: https://github.com/artur-shaik/vim-javacomplete2
-
-syntastic
-支持
-              ...
-            </p>
+          <h1 id="插件简介"><a href="#插件简介" class="headerlink" title="插件简介"></a>插件简介</h1><h2 id="javacomplete2"><a href="#javacomplete2" class="headerlink" title="javacomplete2"></a>javacomplete2</h2><ul>
+<li>提供java语言的补全</li>
+<li>便捷的import,extends,implement等</li>
+<li>快速插入setter,getter方法,等等</li>
+<li>插件地址: <a href="https://github.com/artur-shaik/vim-javacomplete2" target="_blank" rel="noopener">https://github.com/artur-shaik/vim-javacomplete2</a></li>
+</ul><h2 id="syntastic"><a href="#syntastic" class="headerlink" title="syntastic"></a>syntastic</h2><ul>
+<li>支持大量语言的语义检测</li>
+<li>插件地址: <a href="https://github.com/vim-syntastic/syntastic" target="_blank" rel="noopener">https://github.com/vim-syntastic/syntastic</a></li>
+</ul>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/02/12/vim中javacomplete2与syntastic一点使用心得/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1373,23 +1298,18 @@ syntastic
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/12/02/linux下使用drcom登录认证/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1402,14 +1322,12 @@ syntastic
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/12/02/linux下使用drcom登录认证/" class="post-title-link" itemprop="url">linux下使用drcom登录认证</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/12/02/linux下使用drcom登录认证/" class="post-title-link" itemprop="url">linux下使用drcom登录认证</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1443,7 +1361,11 @@ syntastic
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1460,7 +1382,6 @@ syntastic
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1477,7 +1398,6 @@ syntastic
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1488,15 +1408,10 @@ syntastic
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法.
-首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整
-              ...
-            </p>
+          <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>首先感谢开发者:<br><a href="https://github.com/drcoms/drcom-generic" target="_blank" rel="noopener">https://github.com/drcoms/drcom-generic</a><br>这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,<br>项目的wiki简单介绍了各版本的使用方法.</p><p>首先下载上面的<code>drcom-generic</code>,我将其下载到了家目录<code>~/</code>下,完整目录:<code>~/drcom-generic</code></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/12/02/linux下使用drcom登录认证/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1511,23 +1426,18 @@ syntastic
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/11/06/c语言在函数中修改指针的值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1540,14 +1450,12 @@ syntastic
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2016/11/06/c语言在函数中修改指针的值/" class="post-title-link" itemprop="url">c语言在函数中修改指针的值</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2016/11/06/c语言在函数中修改指针的值/" class="post-title-link" itemprop="url">c语言在函数中修改指针的值</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1581,7 +1489,11 @@ syntastic
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1598,7 +1510,6 @@ syntastic
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1615,7 +1526,6 @@ syntastic
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1626,15 +1536,10 @@ syntastic
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              继续学习c语言中…
-引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:#include &lt;stdio.h&gt;void test(int *a)
-              ...
-            </p>
+          <p>继续学习c语言中…</p><h1 id="引入话题"><a href="#引入话题" class="headerlink" title="引入话题"></a>引入话题</h1><p>请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值<br>修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,<br>然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    *a = *a + 1; //使用取值运算符让指针a指向的值+1</span><br><span class="line">    printf(&quot;a: %d&quot;, *a);</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    test(&amp;a);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2016/11/06/c语言在函数中修改指针的值/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1649,22 +1554,21 @@ syntastic
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-  </section>
+  </div>
 
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
+
 
 
           </div>
@@ -1673,28 +1577,39 @@ syntastic
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.jpg"
       alt="listenerri">
   <p class="site-author-name" itemprop="name">listenerri</p>
-  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
@@ -1712,38 +1627,6 @@ syntastic
             <a href="/categories/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
@@ -1757,360 +1640,13 @@ syntastic
             <a href="/tags/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">173</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
   </nav>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
       
@@ -2137,9 +1673,25 @@ syntastic
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子的 blog</a>
+        </li>
+      
+    </ul>
+  </div>
 
-        </div>
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
 
     </div>
   </aside>
@@ -2149,19 +1701,29 @@ syntastic
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">listenerri</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
 
         
+
+
+
+
 
 
 
@@ -2173,32 +1735,16 @@ syntastic
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
+<script src="/js/next-boot.js?v=7.4.1"></script>
 
 
 
@@ -2220,14 +1766,7 @@ syntastic
 
 
 
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -2248,16 +1787,13 @@ syntastic
 
   
 
-
-  
-    
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
   });
   new Valine({
     el: '#comments',
@@ -2265,13 +1801,15 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     notify: false,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
-    placeholder: 'I have something to say',
+    placeholder: "I have something to say",
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,
     visitor: true,
     lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
   });
 }, window.Valine);
 </script>

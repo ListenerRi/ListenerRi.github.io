@@ -4,19 +4,18 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.1" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
@@ -27,18 +26,18 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.3.0',
+    version: '7.4.1',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
@@ -51,17 +50,18 @@
       copy_button: '复制',
       copy_success: '复制成功',
       copy_failure: '复制失败'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
-  <meta name="description" content="最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，原发在 dde-dock 项目源码中。 插件的工作原理插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(so)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成">
+  <meta name="description" content="最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，原发在 dde-dock 项目源码中。插件的工作原理插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(so)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成 d">
 <meta name="keywords" content="deepin,dde-dock,plugin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dde-dock插件开发入门">
 <meta property="og:url" content="http://listenerri.com/2019/03/16/dde-dock插件开发入门/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，原发在 dde-dock 项目源码中。 插件的工作原理插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(so)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成">
+<meta property="og:description" content="最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，原发在 dde-dock 项目源码中。插件的工作原理插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(so)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成 d">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://listenerri.com/2019/03/16/dde-dock插件开发入门/central-widget.png">
 <meta property="og:image" content="http://listenerri.com/2019/03/16/dde-dock插件开发入门/disable-plugin.png">
@@ -71,7 +71,7 @@
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dde-dock插件开发入门">
-<meta name="twitter:description" content="最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，原发在 dde-dock 项目源码中。 插件的工作原理插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(so)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成">
+<meta name="twitter:description" content="最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，原发在 dde-dock 项目源码中。插件的工作原理插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(so)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成 d">
 <meta name="twitter:image" content="http://listenerri.com/2019/03/16/dde-dock插件开发入门/central-widget.png">
   <link rel="canonical" href="http://listenerri.com/2019/03/16/dde-dock插件开发入门/">
 
@@ -108,7 +108,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -117,9 +116,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -133,32 +131,31 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <div class="container sidebar-position-right">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">listenerri's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -168,122 +165,131 @@
   <ul id="menu" class="menu">
       
       
-      
+        
         
         <li class="menu-item menu-item-home">
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-categories">
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-tags">
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-archives">
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-in-a-few-words">
       
     
 
-    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-about">
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+      
+    
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
     
   </ul>
 
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-    </div>
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
     
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-post-detail">
+          <div class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2019/03/16/dde-dock插件开发入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -296,13 +302,13 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">dde-dock插件开发入门
-
+        <h2 class="post-title" itemprop="name headline">
+          
+            dde-dock插件开发入门
             
-          </h1>
-        
+
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -336,7 +342,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -353,7 +363,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -370,7 +379,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -381,8 +389,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，<a href="https://github.com/linuxdeepin/dde-dock/blob/master/plugins/plugin-guide/plugins-developer-guide.md" target="_blank" rel="noopener">原发</a>在 dde-dock 项目源码中。</p>
-<h1 id="插件的工作原理"><a href="#插件的工作原理" class="headerlink" title="插件的工作原理"></a>插件的工作原理</h1><p>插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\<br>dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(<code>so</code>)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成 dde-dock 的功能扩展。\<br>可以通过以下链接查看关于 Qt 插件更详细的介绍：</p>
+        <p>最近公司需要补充一些项目的文档，我负责的几个项目中比较有实用价值的是这个 dde-dock 插件的开发入门教程，这里是转载，<a href="https://github.com/linuxdeepin/dde-dock/blob/master/plugins/plugin-guide/plugins-developer-guide.md" target="_blank" rel="noopener">原发</a>在 dde-dock 项目源码中。</p><h1 id="插件的工作原理"><a href="#插件的工作原理" class="headerlink" title="插件的工作原理"></a>插件的工作原理</h1><p>插件是一种在不需要改动并重新编译主程序本身的情况下去扩展主程序功能的一种机制。\<br>dde-dock 插件是根据 Qt 插件标准所开发的共享库文件(<code>so</code>)，通过实现 Qt 的插件标准和 dde-dock 提供的接口，共同完成 dde-dock 的功能扩展。\<br>可以通过以下链接查看关于 Qt 插件更详细的介绍：</p><a id="more"></a>
+
 <p><a href="https://wiki.qt.io/Plugins" target="_blank" rel="noopener">https://wiki.qt.io/Plugins</a>\<br><a href="https://doc.qt.io/qt-5/plugins-howto.html" target="_blank" rel="noopener">https://doc.qt.io/qt-5/plugins-howto.html</a></p>
 <h2 id="dde-dock-插件加载流程"><a href="#dde-dock-插件加载流程" class="headerlink" title="dde-dock 插件加载流程"></a>dde-dock 插件加载流程</h2><p>在 dde-dock 启动时会跑一个线程去检测目录<code>/usr/lib/dde-dock/plugins</code>下的所有文件，并检测是否是一个正常的动态库文件，如果是则尝试加载。尝试加载即检测库文件的元数据，插件的元数据定义在一个 JSON 文件中，这个后文会介绍，如果元数据检测通过就开始检查插件是否实现了 dde-dock 指定的接口，这一步也通过之后就会开始初始化插件，获取插件提供的控件，进而将控件显示在任务栏上。</p>
 <h2 id="接口列表"><a href="#接口列表" class="headerlink" title="接口列表"></a>接口列表</h2><p>这里先列出 dde-dock 都提供了哪些接口，可作为一个手册查看，注意，为 dde-dock 编写插件并不是要实现所有接口，这些接口提供了 dde-dock 允许各种可能的功能，插件开发者可以根据自己的需求去实现自己需要的接口。后续的插件示例也将会用到这里列出的部分接口。</p>
@@ -692,11 +700,10 @@
         
       </footer>
     
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
   </div>
 
@@ -710,37 +717,46 @@
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
+        
+        
+        
+        
       
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#插件的工作原理"><span class="nav-number">1.</span> <span class="nav-text">插件的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dde-dock-插件加载流程"><span class="nav-number">1.1.</span> <span class="nav-text">dde-dock 插件加载流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口列表"><span class="nav-number">1.2.</span> <span class="nav-text">接口列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PluginItemInterface"><span class="nav-number">1.2.1.</span> <span class="nav-text">PluginItemInterface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PluginProxyInterface"><span class="nav-number">1.2.2.</span> <span class="nav-text">PluginProxyInterface</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建一个-dde-dock-插件"><span class="nav-number">2.</span> <span class="nav-text">构建一个 dde-dock 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预期功能"><span class="nav-number">2.1.</span> <span class="nav-text">预期功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖"><span class="nav-number">2.2.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目基本结构"><span class="nav-number">2.3.</span> <span class="nav-text">项目基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmake-配置文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">cmake 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">元数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件核心类"><span class="nav-number">2.3.3.</span> <span class="nav-text">插件核心类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试插件加载"><span class="nav-number">2.4.</span> <span class="nav-text">测试插件加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从源码构建"><span class="nav-number">2.4.1.</span> <span class="nav-text">从源码构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.4.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试加载"><span class="nav-number">2.4.3.</span> <span class="nav-text">测试加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建插件主控件"><span class="nav-number">2.5.</span> <span class="nav-text">创建插件主控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加主控件到-dde-dock-面板上"><span class="nav-number">2.6.</span> <span class="nav-text">添加主控件到 dde-dock 面板上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持禁用插件"><span class="nav-number">2.7.</span> <span class="nav-text">支持禁用插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-hover-tip"><span class="nav-number">2.8.</span> <span class="nav-text">支持 hover tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-applet"><span class="nav-number">2.9.</span> <span class="nav-text">支持 applet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持右键菜单"><span class="nav-number">2.10.</span> <span class="nav-text">支持右键菜单</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.jpg"
       alt="listenerri">
   <p class="site-author-name" itemprop="name">listenerri</p>
-  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
@@ -758,38 +774,6 @@
             <a href="/categories/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
@@ -803,360 +787,13 @@
             <a href="/tags/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">173</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
   </nav>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
       
@@ -1183,25 +820,24 @@
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子的 blog</a>
+        </li>
+      
+    </ul>
+  </div>
 
-        </div>
       </div>
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#插件的工作原理"><span class="nav-number">1.</span> <span class="nav-text">插件的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dde-dock-插件加载流程"><span class="nav-number">1.1.</span> <span class="nav-text">dde-dock 插件加载流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口列表"><span class="nav-number">1.2.</span> <span class="nav-text">接口列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PluginItemInterface"><span class="nav-number">1.2.1.</span> <span class="nav-text">PluginItemInterface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PluginProxyInterface"><span class="nav-number">1.2.2.</span> <span class="nav-text">PluginProxyInterface</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建一个-dde-dock-插件"><span class="nav-number">2.</span> <span class="nav-text">构建一个 dde-dock 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预期功能"><span class="nav-number">2.1.</span> <span class="nav-text">预期功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖"><span class="nav-number">2.2.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目基本结构"><span class="nav-number">2.3.</span> <span class="nav-text">项目基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmake-配置文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">cmake 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">元数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件核心类"><span class="nav-number">2.3.3.</span> <span class="nav-text">插件核心类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试插件加载"><span class="nav-number">2.4.</span> <span class="nav-text">测试插件加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从源码构建"><span class="nav-number">2.4.1.</span> <span class="nav-text">从源码构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.4.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试加载"><span class="nav-number">2.4.3.</span> <span class="nav-text">测试加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建插件主控件"><span class="nav-number">2.5.</span> <span class="nav-text">创建插件主控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加主控件到-dde-dock-面板上"><span class="nav-number">2.6.</span> <span class="nav-text">添加主控件到 dde-dock 面板上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持禁用插件"><span class="nav-number">2.7.</span> <span class="nav-text">支持禁用插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-hover-tip"><span class="nav-number">2.8.</span> <span class="nav-text">支持 hover tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-applet"><span class="nav-number">2.9.</span> <span class="nav-text">支持 applet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持右键菜单"><span class="nav-number">2.10.</span> <span class="nav-text">支持右键菜单</span></a></li></ol></li></ol></div>
-            
-
-          </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
         </div>
-      <!--/noindex-->
       
 
     </div>
@@ -1212,19 +848,29 @@
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">listenerri</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
 
         
+
+
+
+
 
 
 
@@ -1236,32 +882,16 @@
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
+<script src="/js/next-boot.js?v=7.4.1"></script>
 
 
 
@@ -1283,14 +913,7 @@
 
 
 
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -1311,20 +934,13 @@
 
   
 
-
-  
-  <script src="/js/scrollspy.js?v=7.3.0"></script>
-<script src="/js/post-details.js?v=7.3.0"></script>
-
-
-    
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
   });
   new Valine({
     el: '#comments',
@@ -1332,13 +948,15 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     notify: false,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
-    placeholder: 'I have something to say',
+    placeholder: "I have something to say",
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,
     visitor: true,
     lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
   });
 }, window.Valine);
 </script>

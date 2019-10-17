@@ -4,19 +4,18 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.1" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
@@ -27,18 +26,18 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.3.0',
+    version: '7.4.1',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
@@ -51,7 +50,8 @@
       copy_button: '复制',
       copy_success: '复制成功',
       copy_failure: '复制失败'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
@@ -100,7 +100,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -109,9 +108,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -125,32 +123,31 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <div class="container sidebar-position-right">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">listenerri's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">学的越多越发现会的越少 : )</p>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -160,121 +157,131 @@
   <ul id="menu" class="menu">
       
       
-      
+        
         
         <li class="menu-item menu-item-home">
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-categories">
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-tags">
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-archives">
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-in-a-few-words">
       
     
 
-    <a href="/in-a-few-words/" rel="section"><i class="menu-item-icon fa fa-fw fa-list"></i> <br>句不成章</a>
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
       
+    
       
       
+        
         
         <li class="menu-item menu-item-about">
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+      
+    
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
     
   </ul>
 
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-    </div>
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
     
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-home">
+          <div class="content">
             
-  <section id="posts" class="posts-expand">
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,14 +294,12 @@
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/" class="post-title-link" itemprop="url">qt中的QPointer QSharedPointer等智能指针</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/" class="post-title-link" itemprop="url">qt中的QPointer QSharedPointer等智能指针</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -328,7 +333,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/qt/" itemprop="url" rel="index"><span itemprop="name">qt</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/qt/" itemprop="url" rel="index">
+                    <span itemprop="name">qt</span>
+                  </a>
+                </span>
 
                 
                 
@@ -345,7 +354,6 @@
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -362,7 +370,6 @@
   </span>
   
   
-          
 
         </div>
       </header>
@@ -373,15 +380,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              QPointerQPointer在用法上跟普通的指针没有什么区别, 可以将它当做是一个普通指针一样使用. 例如:
-void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;pointer = new Q
-              ...
-            </p>
+          <h1 id="QPointer"><a href="#QPointer" class="headerlink" title="QPointer"></a>QPointer</h1><p>QPointer在用法上跟普通的指针没有什么区别, 可以将它当做是一个普通指针一样使用. 例如:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">barFunc</span><span class="params">(QLabel *label)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QPointer&lt;QLabel&gt; pointer;</span><br><span class="line">pointer = <span class="keyword">new</span> QLabel;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接将pointer作为QLabel类型的指针传入barFunc函数作为参数</span></span><br><span class="line">barFunc(pointer);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -396,23 +398,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/11/04/qt中翻译静态成员变量中的字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,14 +422,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/11/04/qt中翻译静态成员变量中的字符串/" class="post-title-link" itemprop="url">qt中翻译静态成员变量中的字符串</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/11/04/qt中翻译静态成员变量中的字符串/" class="post-title-link" itemprop="url">qt中翻译静态成员变量中的字符串</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -466,7 +461,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/qt/" itemprop="url" rel="index"><span itemprop="name">qt</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/qt/" itemprop="url" rel="index">
+                    <span itemprop="name">qt</span>
+                  </a>
+                </span>
 
                 
                 
@@ -483,7 +482,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -500,7 +498,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -511,14 +508,10 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代
-              ...
-            </p>
+          <p>在 qt 中要翻译一个字符串很简单，只需要使用 <code>tr</code> 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2018/11/04/qt中翻译静态成员变量中的字符串/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -533,23 +526,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/11/04/qtcreator-fakevim-小企鹅输入法自动切换到英文/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -562,14 +550,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/11/04/qtcreator-fakevim-小企鹅输入法自动切换到英文/" class="post-title-link" itemprop="url">qtcreator-fakevim-小企鹅输入法自动切换到英文</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/11/04/qtcreator-fakevim-小企鹅输入法自动切换到英文/" class="post-title-link" itemprop="url">qtcreator-fakevim-小企鹅输入法自动切换到英文</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -603,7 +589,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
 
                 
                 
@@ -620,7 +610,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -637,7 +626,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -648,14 +636,10 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              qtcreator 的 fakevim 不支持原生 vim 的插件，所以就用不了 fcitx.vim 这个好用的插件了，所以只能自食其力喽。根据 fcitx 支持 dbus 通信的原理，实现了在 INSERT 模式下按 ESC 键回到 NORMAL 模式时自动切换到英文状态。由于 fakevim 支
-              ...
-            </p>
+          <p>qtcreator 的 fakevim 不支持原生 vim 的插件，所以就用不了 fcitx.vim 这个好用的插件了，所以只能自食其力喽。根据 fcitx 支持 dbus 通信的原理，实现了在 INSERT 模式下按 <code>ESC</code> 键回到 NORMAL 模式时自动切换到英文状态。<br>由于 fakevim 支持的特性过于简陋，目前只实现了这个，并不能像 fcitx.vim 插件一样记住 INSERT 模式下的中英文状态，等下次进入 INSERT 模式时再自动切回去，不过这样也舒服了很多了，将下面的配置放到 qtcreator fakevim 插件的配置文件中即可：</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2018/11/04/qtcreator-fakevim-小企鹅输入法自动切换到英文/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -670,23 +654,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/10/23/gdb调试qt程序时打印qt特有的类型数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -699,14 +678,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/10/23/gdb调试qt程序时打印qt特有的类型数据/" class="post-title-link" itemprop="url">gdb调试qt程序时打印qt特有的类型数据</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/10/23/gdb调试qt程序时打印qt特有的类型数据/" class="post-title-link" itemprop="url">gdb调试qt程序时打印qt特有的类型数据</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -740,7 +717,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/qt/" itemprop="url" rel="index"><span itemprop="name">qt</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/qt/" itemprop="url" rel="index">
+                    <span itemprop="name">qt</span>
+                  </a>
+                </span>
 
                 
                 
@@ -757,7 +738,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -774,7 +754,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -785,14 +764,10 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              如果没有使用 qtcreator 调试 qt 程序，而是手动或利用其他 IDE 使用 gdb 调试，会发现 qt 类型的数据如 QString QList QMap 等不能直接查看其值。其实 gdb 是提供了关于打印数据的接口的，叫做 Pretty-Printer，这是一种利用 python 代码更
-              ...
-            </p>
+          <p>如果没有使用 qtcreator 调试 qt 程序，而是手动或利用其他 IDE 使用 gdb 调试，会发现 qt 类型的数据如 QString QList QMap 等不能直接查看其值。其实 gdb 是提供了关于打印数据的接口的，叫做 <code>Pretty-Printer</code>，这是一种利用 python 代码更好的输出变量数据的机制，感兴趣的可以搜索下相关内容。qtcreator 之所以可以愉快的打印出 qt 相应的数据也是因为它使用了这种机制，下面的命令可以查看 qtcreator 的安装目录中的 python 文件，命令在 debian 系的 linux 系统上有效:</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2018/10/23/gdb调试qt程序时打印qt特有的类型数据/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -807,23 +782,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/10/04/hides-overloaded-virtual-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -836,14 +806,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/10/04/hides-overloaded-virtual-function/" class="post-title-link" itemprop="url">hides overloaded virtual function</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/10/04/hides-overloaded-virtual-function/" class="post-title-link" itemprop="url">hides overloaded virtual function</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -877,7 +845,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/cpp/" itemprop="url" rel="index"><span itemprop="name">cpp</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cpp/" itemprop="url" rel="index">
+                    <span itemprop="name">cpp</span>
+                  </a>
+                </span>
 
                 
                 
@@ -894,7 +866,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -911,7 +882,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -922,21 +892,14 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。
-三个关键点：
-
-重载
-虚函数
-隐藏
-
-这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚
-              ...
-            </p>
+          <p>在<code>重载</code>父类的同名虚函数时会出现<code>hides overloaded virtual function</code>编译警告。<br>从字面上的意思其实就可以理解：重载的虚函数被隐藏了。</p><p>三个关键点：</p><ul>
+<li>重载</li>
+<li>虚函数</li>
+<li>隐藏</li>
+</ul><p>这个编译警告之所以出现，是因为上面三个关键点，首先是发生了<code>重载</code>，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。<br>何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的函数，调用时必须指定父类命名空间，往深了说也就是编译器如果在子类中发现了要使用的函数的名字，注意，是名字不包含函数签名，只要名字匹配上，就不会再去父类中去寻找这个名字的函数，即便子类中的函数参数不匹配，也不会再去父类中寻找。</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2018/10/04/hides-overloaded-virtual-function/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -951,23 +914,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/10/04/git-找回已删除的分支/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -980,14 +938,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/10/04/git-找回已删除的分支/" class="post-title-link" itemprop="url">git-找回已删除的分支</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/10/04/git-找回已删除的分支/" class="post-title-link" itemprop="url">git-找回已删除的分支</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1021,7 +977,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1038,7 +998,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1055,7 +1014,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1066,21 +1024,9 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。
-这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/10/04/git-找回已删除的分支/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+          <p>手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。</p>
+<p>这时<code>git reflog</code>命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，<br>从<code>git reflog</code>命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，<br>执行<code>git reflog</code>命令后就可以找到分支B的痕迹: “commit id”，不管是从其他分支切换到分支B，还是分支B的一个提交记录，<br>都会看到其”commit id”，复制这个”commit id”然后切换过去，此时仓库处于分离头指针状态，其实现在已经是在分支B了，<br>只需要从当前状态创建一个分支，那么分支B也就复活了： <code>git checkout -b B-reborn</code><br>这个分支<code>B-reborn</code>就是先前删除的分支B。</p>
+
         
       
     </div>
@@ -1089,23 +1035,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/09/24/qprocess参数设置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1118,14 +1059,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/09/24/qprocess参数设置/" class="post-title-link" itemprop="url">qprocess参数设置</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/09/24/qprocess参数设置/" class="post-title-link" itemprop="url">qprocess参数设置</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1163,7 +1102,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1180,7 +1118,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1191,14 +1128,10 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              QProcess用于启动一个外部程序，并提供了与之通信的接口。使用setProgram来设置要启动的外部程序，setArguments来设置要传递给这个外部程序的参数。setArguments需要一个QStringList类型的参数，在构造这个参数的时候要注意不能把外部程序需要的参数作为一整个字符串
-              ...
-            </p>
+          <p>QProcess用于启动一个外部程序，并提供了与之通信的接口。<br>使用setProgram来设置要启动的外部程序，setArguments来设置要传递给这个外部程序的参数。<br>setArguments需要一个QStringList类型的参数，在构造这个参数的时候要注意不能把外部程序需要的参数作为一整个字符串。<br>举个例子：要用QProcess执行<code>find -name abc.txt</code></p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2018/09/24/qprocess参数设置/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1213,23 +1146,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1242,14 +1170,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/" class="post-title-link" itemprop="url">the menu is gone in qt on mac osx</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/" class="post-title-link" itemprop="url">the menu is gone in qt on mac osx</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1283,7 +1209,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/qt/" itemprop="url" rel="index"><span itemprop="name">qt</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/qt/" itemprop="url" rel="index">
+                    <span itemprop="name">qt</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1300,7 +1230,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1317,7 +1246,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1328,21 +1256,9 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.
-问题示例代码:SimpleMenu::Simple
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+          <p>在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.<br>猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.</p>
+<p>问题示例代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SimpleMenu::SimpleMenu(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent) &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// 只要菜单项的名字不是“Quit”或“quit”就可以正常显示</span></span><br><span class="line">  QAction *quit = <span class="keyword">new</span> QAction(<span class="string">"&amp;Quit"</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">// 只要菜单项的名字不是“About”或“about”就可以正常显示</span></span><br><span class="line">  QAction *about = <span class="keyword">new</span> QAction(<span class="string">"&amp;about"</span>, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  QMenu *file;</span><br><span class="line">  file = menuBar()-&gt;addMenu(<span class="string">"&amp;File"</span>);</span><br><span class="line">  file-&gt;addAction(quit);</span><br><span class="line">  file-&gt;addAction(about);</span><br><span class="line"></span><br><span class="line">  connect(quit, &amp;QAction::triggered, qApp, QApplication::quit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
         
       
     </div>
@@ -1351,23 +1267,18 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/12/21/vim-ycm-qt自动补全问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1380,14 +1291,12 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/12/21/vim-ycm-qt自动补全问题/" class="post-title-link" itemprop="url">vim-ycm-qt自动补全问题</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/12/21/vim-ycm-qt自动补全问题/" class="post-title-link" itemprop="url">vim-ycm-qt自动补全问题</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1421,7 +1330,11 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vim/" itemprop="url" rel="index">
+                    <span itemprop="name">vim</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1438,7 +1351,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1455,7 +1367,6 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1466,20 +1377,14 @@ void barFunc(QLabel *label) &#123;    ...&#125;QPointer&lt;QLabel&gt; pointer;po
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              
-更新：可以使用rdnetto/YCM-Generator插件来自动生成.ycm_extra_conf.py
-
-
-当前操作系统: osx 10.13使用brew安装的qt5
-
-qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会随着版本变动而变动, 但不管哪个版本brew都会在/usr
-              ...
-            </p>
+          <blockquote>
+<p>更新：<br>可以使用<a href="https://github.com/rdnetto/YCM-Generator" target="_blank" rel="noopener">rdnetto/YCM-Generator</a>插件来自动生成<code>.ycm_extra_conf.py</code></p>
+</blockquote><blockquote>
+<p>当前操作系统: osx 10.13<br><br>使用brew安装的qt5</p>
+</blockquote><p>qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会随着版本变动而变动, 但不管哪个版本brew都会在<code>/usr/local/opt/</code>创建一个链接指向真正的目录, 我只安装了qt5, 所以上述目录下有两个链接, qt和qt5, 这两个目录都指向qt5的安装目录, 任选一个路径用于下面的命令即可, 这里使用这个路径:<code>/usr/local/opt/qt</code>.</p>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/12/21/vim-ycm-qt自动补全问题/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1494,23 +1399,18 @@ qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2017/11/25/增大osx启动分区大小/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1523,14 +1423,12 @@ qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会�
       <meta itemprop="name" content="listenerri's blog">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2017/11/25/增大osx启动分区大小/" class="post-title-link" itemprop="url">增大osx启动分区大小</a>
+        <h2 class="post-title" itemprop="name headline">
+          
             
-          </h1>
-        
+            <a href="/2017/11/25/增大osx启动分区大小/" class="post-title-link" itemprop="url">增大osx启动分区大小</a>
+          
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1564,7 +1462,11 @@ qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会�
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/osx/" itemprop="url" rel="index"><span itemprop="name">osx</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/osx/" itemprop="url" rel="index">
+                    <span itemprop="name">osx</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1581,7 +1483,6 @@ qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会�
               <span class="leancloud-visitors-count"></span>
             </span>
           
-            
   
   <span class="post-meta-item">
     
@@ -1598,7 +1499,6 @@ qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会�
   </span>
   
   
-          
 
         </div>
       </header>
@@ -1609,19 +1509,14 @@ qt安装目录在哪里不需要管, 因为使用brew更新qt后安装目录会�
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>
-              场景：osx，deepin linux, windows三系统, 需要扩大黑苹果的分区.
-osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，要想扩容osx系统分区需要知道这些：
-
-不识别空分区，分区必要格式化，否则磁盘工具不识别
-必须是系统分区后面的分区才能合并到系统分区里
-要合到系统分区的分
-              ...
-            </p>
+          <p>场景：<br>osx，deepin linux, windows三系统, 需要扩大黑苹果的分区.</p><p>osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，要想扩容osx系统分区需要知道这些：</p><ul>
+<li>不识别空分区，分区必要格式化，否则磁盘工具不识别</li>
+<li>必须是系统分区后面的分区才能合并到系统分区里</li>
+<li>要合到系统分区的分区必须和系统分区统一格式!!</li>
+</ul>
           <!--noindex-->
           
-            <div class="post-button text-center">
+            <div class="post-button">
               <a class="btn" href="/2017/11/25/增大osx启动分区大小/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
@@ -1636,22 +1531,21 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
     
-  </section>
+  </div>
 
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
+
 
 
           </div>
@@ -1660,28 +1554,39 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.jpg"
       alt="listenerri">
   <p class="site-author-name" itemprop="name">listenerri</p>
-  <div class="site-description motion-element" itemprop="description">学的越多越发现会的越少 : )</div>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
@@ -1699,38 +1604,6 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
             <a href="/categories/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
@@ -1744,360 +1617,13 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
             <a href="/tags/">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">173</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
   </nav>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
       
@@ -2124,9 +1650,25 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子的 blog</a>
+        </li>
+      
+    </ul>
+  </div>
 
-        </div>
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
 
     </div>
   </aside>
@@ -2136,19 +1678,29 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">listenerri</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
 
         
+
+
+
+
 
 
 
@@ -2160,32 +1712,16 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
+<script src="/js/next-boot.js?v=7.4.1"></script>
 
 
 
@@ -2207,14 +1743,7 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
 
 
 
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -2235,16 +1764,13 @@ osx下的磁盘工具简直不能更难用，有下面几个坑，很重要，�
 
   
 
-
-  
-    
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
   });
   new Valine({
     el: '#comments',
@@ -2252,13 +1778,15 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     notify: false,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
-    placeholder: 'I have something to say',
+    placeholder: "I have something to say",
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,
     visitor: true,
     lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
   });
 }, window.Valine);
 </script>
