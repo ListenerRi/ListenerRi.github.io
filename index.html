@@ -312,7 +312,7 @@
                 
               
 
-              <time title="创建时间：2019-10-22 11:20:51 / 修改时间：11:49:34" itemprop="dateCreated datePublished" datetime="2019-10-22T11:20:51+08:00">2019-10-22</time>
+              <time title="创建时间：2019-10-22 11:20:51 / 修改时间：11:56:35" itemprop="dateCreated datePublished" datetime="2019-10-22T11:20:51+08:00">2019-10-22</time>
             </span>
           
             
@@ -383,7 +383,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在 c/cpp 中可以使用 <code>typedef</code> 来给一个类型搞个别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef int myint;</span><br><span class="line"></span><br><span class="line">// 下面 a 和 b 的类型都可以说是 int</span><br><span class="line">int a;</span><br><span class="line">myint b;</span><br></pre></td></tr></table></figure></p><p>而函数别名的语法有些不同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line">typedef int (* max_func_t) (int, int);</span><br><span class="line"></span><br><span class="line">max_func_t max_alias;</span><br><span class="line"></span><br><span class="line">// 下面的两个调用是等价的</span><br><span class="line">max(1, 2);</span><br><span class="line">max_alias(1, 2);</span><br></pre></td></tr></table></figure></p>
+          <p>在 c/cpp 中可以使用 <code>typedef</code> 来给一个类型搞个别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef int myint;</span><br><span class="line"></span><br><span class="line">// 下面 a 和 b 的类型都可以说是 int</span><br><span class="line">int a;</span><br><span class="line">myint b;</span><br></pre></td></tr></table></figure></p><p>而函数别名的语法有些不同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">max_func_t max_alias;</span><br><span class="line"></span><br><span class="line">// 下面的两个调用是等价的</span><br><span class="line">max(1, 2);</span><br><span class="line">max_alias(1, 2);</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
             <div class="post-button">
