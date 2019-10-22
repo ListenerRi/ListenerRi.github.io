@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[typedef 函数别名]]></title>
+    <url>%2F2019%2F10%2F22%2Ftypedef-%E5%87%BD%E6%95%B0%E5%88%AB%E5%90%8D%2F</url>
+    <content type="text"><![CDATA[在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b;而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t) (int, int);max_func_t max_alias;// 下面的两个调用是等价的max(1, 2);max_alias(1, 2); 将函数指针作为参数时，使用函数别名可以大大提高代码的可读性：123456789101112131415int max(int, int);// 不使用别名，接收一个函数指针并调用void test(int (* max_func)(int, int)) &#123; max_func(1, 2);&#125;test(max);typedef int (* max_func_t) (int, int);// 使用别名，接收一个函数指针并调用void test(max_func_t max_func) &#123; max_func(1, 2);&#125;test(max); 函数别名的语法一直让我很奇怪写着也很难受，今天又碰到要将函数作为参数传递的情况，于是谷歌了一下，其实可以这样理解：1234567// 正确语法typedef int (*max_func_t) (int, int);// ^ ^ ^// 返回类型 别名 参数// 错误语法，但有助于理解（强行理解）typedef int (*) (int, int) max_func_t;]]></content>
+      <categories>
+        <category>c</category>
+        <category>cpp</category>
+      </categories>
+      <tags>
+        <tag>typedef</tag>
+        <tag>function</tag>
+        <tag>别名</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[终于发现了素数的一种用途]]></title>
     <url>%2F2019%2F10%2F21%2F%E7%BB%88%E4%BA%8E%E5%8F%91%E7%8E%B0%E4%BA%86%E7%B4%A0%E6%95%B0%E7%9A%84%E4%B8%80%E7%A7%8D%E7%94%A8%E9%80%94%2F</url>
     <content type="text"><![CDATA[以前只知道素数的定义：质数又称素数。一个大于 1 的自然数，除了 1 和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。今天在学习《编程之法》(github) 时，第一章第二节 “字符串包含”，其提到的一种算法用到了素数，在此仅摘取原文部分内容作为记录。需要注意的是，这种算法并不是这个问题的最优解，具体请查看原文。 以下为原文摘录： 字符串包含 题目描述：给定两个分别由字母组成的字符串 A 和字符串 B，字符串 B 的长度比字符串 A 短。请问，如何最快地判断字符串 B 中所有字母是否都在字符串 A 里？ 为了简单起见，我们规定输入的字符串只包含大写英文字母，请实现函数 bool StringContains(string &amp;A, string &amp;B) 比如，如果是下面两个字符串： String 1：ABCD String 2：BAD 答案是 true，即 String2 里的字母在 String1 里也都有，或者说 String2 是 String1 的真子集。 如果是下面两个字符串： String 1：ABCD String 2：BCE 答案是 false，因为字符串 String2 里的 E 字母不在字符串 String1 里。 同时，如果 string1：ABCD，string 2：AA，同样返回 true。 ……此处省略部分内容…… 解法三 有没有比快速排序更好的方法呢？ 我们换一种角度思考本问题： 假设有一个仅由字母组成字串，让每个字母与一个素数对应，从 2 开始，往后类推，A 对应 2，B 对应 3，C 对应 5，……。遍历第一个字串，把每个字母对应素数相乘。最终会得到一个整数。 利用上面字母和素数的对应关系，对应第二个字符串中的字母，然后轮询，用每个字母对应的素数除前面得到的整数。如果结果有余数，说明结果为 false。如果整个过程中没有余数，则说明第二个字符串是第一个的子集了（判断是不是真子集，可以比较两个字符串对应的素数乘积，若相等则不是真子集）。 思路总结如下： 按照从小到大的顺序，用26个素数分别与字符’A’到’Z’一一对应。 遍历长字符串，求得每个字符对应素数的乘积。 遍历短字符串，判断乘积能否被短字符串中的字符对应的素数整除。 输出结果。 如前所述，算法的时间复杂度为 O(m+n) 的最好的情况为 O(n)（遍历短的字符串的第一个数，与长字符串素数的乘积相除，即出现余数，便可退出程序，返回 false），n 为长字串的长度，空间复杂度为O(1)。 1234567891011121314151617181920212223//此方法只有理论意义，因为整数乘积很大，有溢出风险bool StringContain(string &amp;a,string &amp;b)&#123; const int p[26] = &#123;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59,61, 67, 71, 73, 79, 83, 89, 97, 101&#125;; int f = 1; for (int i = 0; i &lt; a.length(); ++i) &#123; int x = p[a[i] - &apos;A&apos;]; if (f % x) &#123; f *= x; &#125; &#125; for (int i = 0; i &lt; b.length(); ++i) &#123; int x = p[b[i] - &apos;A&apos;]; if (f % x) &#123; return false; &#125; &#125; return true;&#125; 此种素数相乘的方法看似完美，但缺点是素数相乘的结果容易导致整数溢出。 ……此处省略部分内容……]]></content>
