@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统，所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。">
+  <meta name="description" content="目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统， 所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。">
 <meta name="keywords" content="vim,fctix,osx,vscode,im-select">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vscode vim 在 mac osx 和 linux 下输入法自动切换">
 <meta property="og:url" content="http://listenerri.com/2019/10/24/vscode-vim-在-mac-osx-和-linux-下输入法自动切换/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统，所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。">
+<meta property="og:description" content="目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统， 所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-24T02:08:59.997Z">
+<meta property="og:updated_time" content="2019-10-24T02:12:55.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vscode vim 在 mac osx 和 linux 下输入法自动切换">
-<meta name="twitter:description" content="目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统，所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。">
+<meta name="twitter:description" content="目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统， 所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。">
   <link rel="canonical" href="http://listenerri.com/2019/10/24/vscode-vim-在-mac-osx-和-linux-下输入法自动切换/">
 
 
@@ -315,7 +315,7 @@
                 
               
 
-              <time title="创建时间：2019-10-24 09:42:30 / 修改时间：10:08:59" itemprop="dateCreated datePublished" datetime="2019-10-24T09:42:30+08:00">2019-10-24</time>
+              <time title="创建时间：2019-10-24 09:42:30 / 修改时间：10:12:55" itemprop="dateCreated datePublished" datetime="2019-10-24T09:42:30+08:00">2019-10-24</time>
             </span>
           
             
@@ -386,7 +386,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统，<br>所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的<br>配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。</p><a id="more"></a>
+        <p>目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统， 所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。</p><a id="more"></a>
 <p>关于 vscode vim 插件输入法相关的配置可以到下面的链接中查看：</p>
 <p><a href="https://github.com/VSCodeVim/Vim#input-method" target="_blank" rel="noopener">https://github.com/VSCodeVim/Vim#input-method</a></p>
 <p>按照上面的链接在 mac osx 下安装 im-select 并在 vscode 中进行如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;vim.autoSwitchInputMethod.enable&quot;: true,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;com.apple.keylayout.ABC&quot;,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;/usr/local/bin/im-select&quot;,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;/usr/local/bin/im-select &#123;im&#125;&quot;</span><br></pre></td></tr></table></figure></p>
