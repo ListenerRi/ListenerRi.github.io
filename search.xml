@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vscode vim 在 mac osx 和 linux 下输入法自动切换]]></title>
+    <url>%2F2019%2F10%2F24%2Fvscode-vim-%E5%9C%A8-mac-osx-%E5%92%8C-linux-%E4%B8%8B%E8%BE%93%E5%85%A5%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%2F</url>
+    <content type="text"><![CDATA[目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统，所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。 关于 vscode vim 插件输入法相关的配置可以到下面的链接中查看： https://github.com/VSCodeVim/Vim#input-method 按照上面的链接在 mac osx 下安装 im-select 并在 vscode 中进行如下配置：1234&quot;vim.autoSwitchInputMethod.enable&quot;: true,&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;com.apple.keylayout.ABC&quot;,&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;/usr/local/bin/im-select&quot;,&quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;/usr/local/bin/im-select &#123;im&#125;&quot; 关于 vim.autoSwitchInputMethod.defaultIM，我在 mac osx 下用的英文输入法是 com.apple.keylayout.ABC，也可能是其他选项如：com.apple.keylayout.US，这个要根据具体情况来设置。 需要注意的是这个选项的值关系到下面脚本的内容，需要保持一致。 上面的配置在 linux 下会报错，因为上面在 mac osx 下安装的 im-select 没有提供对 linux 的支持，im-select 项目里建议直接使用 fcitx-remote 命令，链接如下： https://github.com/daipeihust/im-select#fcitx 鉴于不想维护两份 vscode 配置文件的原因，分析了一下 vscode 调用 im-select 的情况，在 linux 使用 shell 实现了一个仿冒 mac osx 下 im-select 的脚本，脚本内容如下：1234567891011121314151617181920212223#!/usr/bin/env bash# this script in order to fake the im-select in mac osx for fcitx in linuxIM_EN=&quot;com.apple.keylayout.ABC&quot;IM_CN=&quot;2&quot;FCITX_CMD=/usr/bin/fcitx-remote# there is no arguments that means query the current imif [[ -z $@ ]]; then if [[ &quot;1&quot; == $($FCITX_CMD) ]]; then echo &quot;$IM_EN&quot; else echo &quot;$IM_CN&quot; fielse if [[ &quot;$@&quot; == &quot;$IM_EN&quot; ]]; then $FCITX_CMD -c elif [[ &quot;$@&quot; == &quot;$IM_CN&quot; ]]; then $FCITX_CMD -o fifi 注意根据实际情况修正脚本中 IM_EN 变量的值，将脚本内容复制并保存到 /usr/local/bin/im-select 文件中即可，记得给文件增加可执行权限。]]></content>
+      <categories>
+        <category>linux</category>
+        <category>hackintosh</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+        <tag>fctix</tag>
+        <tag>osx</tag>
+        <tag>vscode</tag>
+        <tag>im-select</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[typedef 函数别名]]></title>
     <url>%2F2019%2F10%2F22%2Ftypedef-%E5%87%BD%E6%95%B0%E5%88%AB%E5%90%8D%2F</url>
     <content type="text"><![CDATA[在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b;而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个调用是等价的max(1, 2);max_alias(1, 2); 将函数指针作为参数时，使用函数别名可以大大提高代码的可读性：123456789101112131415int max(int, int);// 不使用别名，接收一个函数指针并调用void test(int (* max_func)(int, int)) &#123; max_func(1, 2);&#125;test(max);typedef int (* max_func_t)(int, int);// 使用别名，接收一个函数指针并调用void test(max_func_t max_func) &#123; max_func(1, 2);&#125;test(max); 函数别名的语法一直让我很奇怪写着也很难受，今天又碰到要将函数作为参数传递的情况，于是谷歌了一下，其实可以这样理解：1234567// 正确语法typedef int (*max_func_t)(int, int);// ^ ^ ^// 返回类型 别名 参数// 错误语法，但有助于理解（强行理解）typedef int (*) (int, int) max_func_t;]]></content>
