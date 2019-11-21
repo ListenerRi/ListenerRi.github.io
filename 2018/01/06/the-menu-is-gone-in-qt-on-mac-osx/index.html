@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-
-
-
-
-
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.2">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.2">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.2" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
@@ -26,7 +21,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.4.2',
+    version: '7.5.0',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
@@ -46,28 +41,24 @@
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
-    },
     sidebarPadding: 40
   };
 </script>
 
-  <meta name="description" content="在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系. 问题示例代码:123456789101112131415SimpleMenu::SimpleMenu(QWidget *parent)    : QM">
+  <meta name="description" content="在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.问题示例代码:123456789101112131415SimpleMenu::SimpleMenu(QWidget *parent)    : QMa">
 <meta name="keywords" content="qt,menu,disappear">
 <meta property="og:type" content="article">
 <meta property="og:title" content="the menu is gone in qt on mac osx">
 <meta property="og:url" content="http://listenerri.com/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系. 问题示例代码:123456789101112131415SimpleMenu::SimpleMenu(QWidget *parent)    : QM">
+<meta property="og:description" content="在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.问题示例代码:123456789101112131415SimpleMenu::SimpleMenu(QWidget *parent)    : QMa">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="the menu is gone in qt on mac osx">
-<meta name="twitter:description" content="在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系. 问题示例代码:123456789101112131415SimpleMenu::SimpleMenu(QWidget *parent)    : QM">
-  <link rel="canonical" href="http://listenerri.com/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/">
+<meta name="twitter:description" content="在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.问题示例代码:123456789101112131415SimpleMenu::SimpleMenu(QWidget *parent)    : QMa">
+
+<link rel="canonical" href="http://listenerri.com/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/">
 
 
 <script id="page-configurations">
@@ -94,8 +85,6 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
-
-
 
 
 
@@ -157,90 +146,40 @@
 <nav class="site-nav">
   
   <ul id="menu" class="menu">
-      
-      
-        
-        
         <li class="menu-item menu-item-home">
-      
-    
 
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-categories">
-      
-    
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-tags">
-      
-    
 
     <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-archives">
-      
-    
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-in-a-few-words">
-      
-    
 
     <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-about">
-      
-    
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
-      
-    
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger">
-          <i class="fa fa-search fa-fw"></i>搜索
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
       </li>
-    
   </ul>
 
 </nav>
@@ -274,7 +213,7 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-            
+          
 
           <div class="content">
             
@@ -287,9 +226,9 @@
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="listenerri">
       <meta itemprop="description" content="学的越多越发现会的越少 : )">
-      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -297,11 +236,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            the menu is gone in qt on mac osx
-            
-
-          
+          the menu is gone in qt on mac osx
         </h2>
 
         <div class="post-meta">
@@ -311,16 +246,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
               <time title="创建时间：2018-01-06 16:58:41" itemprop="dateCreated datePublished" datetime="2018-01-06T16:58:41+08:00">2018-01-06</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
@@ -328,25 +255,17 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/qt/" itemprop="url" rel="index">
                     <span itemprop="name">qt</span>
                   </a>
                 </span>
-
-                
-                
-              
             </span>
-          
 
           
             <span id="/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/" class="post-meta-item leancloud_visitors" data-flag-title="the menu is gone in qt on mac osx" title="阅读次数">
@@ -356,15 +275,12 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
             </span>
-          
   
   <span class="post-meta-item">
     
       <span class="post-meta-item-icon">
         <i class="fa fa-comment-o"></i>
       </span>
-        
-      
       <span class="post-meta-item-text">Valine：</span>
     
     <a title="valine" href="/2018/01/06/the-menu-is-gone-in-qt-on-mac-osx/#comments" itemprop="discussionUrl">
@@ -383,54 +299,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.<br>猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.</p>
-<p>问题示例代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SimpleMenu::SimpleMenu(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent) &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// 只要菜单项的名字不是“Quit”或“quit”就可以正常显示</span></span><br><span class="line">  QAction *quit = <span class="keyword">new</span> QAction(<span class="string">"&amp;Quit"</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">// 只要菜单项的名字不是“About”或“about”就可以正常显示</span></span><br><span class="line">  QAction *about = <span class="keyword">new</span> QAction(<span class="string">"&amp;about"</span>, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  QMenu *file;</span><br><span class="line">  file = menuBar()-&gt;addMenu(<span class="string">"&amp;File"</span>);</span><br><span class="line">  file-&gt;addAction(quit);</span><br><span class="line">  file-&gt;addAction(about);</span><br><span class="line"></span><br><span class="line">  connect(quit, &amp;QAction::triggered, qApp, QApplication::quit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+        <p>在osx系统下, qt程序菜单项的名字如果是“quit”,”about”(不区分大小写), 这个菜单项就会消失, 如果这个菜单只包含这些会消失的菜单项, 那么这个菜单也会消失.<br>猜测: 这应该是由于跟osx系统默认给程序提供了一些菜单项有冲突的关系.</p><p>问题示例代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SimpleMenu::SimpleMenu(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent) &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// 只要菜单项的名字不是“Quit”或“quit”就可以正常显示</span></span><br><span class="line">  QAction *quit = <span class="keyword">new</span> QAction(<span class="string">"&amp;Quit"</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">// 只要菜单项的名字不是“About”或“about”就可以正常显示</span></span><br><span class="line">  QAction *about = <span class="keyword">new</span> QAction(<span class="string">"&amp;about"</span>, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  QMenu *file;</span><br><span class="line">  file = menuBar()-&gt;addMenu(<span class="string">"&amp;File"</span>);</span><br><span class="line">  file-&gt;addAction(quit);</span><br><span class="line">  file-&gt;addAction(about);</span><br><span class="line"></span><br><span class="line">  connect(quit, &amp;QAction::triggered, qApp, QApplication::quit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
     </div>
 
     
     
     
-        
-      
 
       <footer class="post-footer">
-          
-            
-          
           <div class="post-tags">
-            
               <a href="/tags/qt/" rel="tag"># qt</a>
-            
               <a href="/tags/menu/" rel="tag"># menu</a>
-            
               <a href="/tags/disappear/" rel="tag"># disappear</a>
-            
           </div>
-        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-              
                 <a href="/2017/12/21/vim-ycm-qt自动补全问题/" rel="next" title="vim-ycm-qt自动补全问题">
                   <i class="fa fa-chevron-left"></i> vim-ycm-qt自动补全问题
                 </a>
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
                 <a href="/2018/09/24/qprocess参数设置/" rel="prev" title="qprocess参数设置">
                   qprocess参数设置 <i class="fa fa-chevron-right"></i>
                 </a>
-              
             </div>
           </div>
-        
       </footer>
     
   </article>
@@ -443,9 +342,7 @@
 
           </div>
           
-    
     <div class="comments" id="comments"></div>
-  
 
         </div>
           
@@ -458,11 +355,6 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
-        
-        
-        
-        
-      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -480,74 +372,41 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-      src="/images/avatar.jpg"
-      alt="listenerri">
+    <img class="site-author-image" itemprop="image" alt="listenerri"
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">listenerri</p>
   <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-categories">
-        
-          
             <a href="/categories/">
           
-        
         <span class="site-state-item-count">17</span>
-        <span class="site-state-item-name">分类</span>
-        </a>
+        <span class="site-state-item-name">分类</span></a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-tags">
-        
-          
             <a href="/tags/">
           
-        
-        <span class="site-state-item-count">184</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
+        <span class="site-state-item-count">191</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
-    
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/listenerri" title="GitHub &rarr; https://github.com/listenerri" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/listenerri" title="GitHub → https://github.com/listenerri" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
-    
       <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="mailto:listenerri@gmail.com" title="E-Mail &rarr; mailto:listenerri@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:listenerri@gmail.com" title="E-Mail → mailto:listenerri@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
-    
   </div>
 
 
@@ -560,15 +419,12 @@
         <li class="links-of-blogroll-item">
           <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子</a>
         </li>
-      
         <li class="links-of-blogroll-item">
           <a href="https://blog.csdn.net/qq_33449307" title="https://blog.csdn.net/qq_33449307" rel="noopener" target="_blank">DD</a>
         </li>
-      
         <li class="links-of-blogroll-item">
           <a href="https://blog.csdn.net/itguangit" title="https://blog.csdn.net/itguangit" rel="noopener" target="_blank">XiaoGuang</a>
         </li>
-      
     </ul>
   </div>
 
@@ -577,7 +433,6 @@
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
-      
 
     </div>
   </aside>
@@ -592,6 +447,7 @@
         
 
 <div class="copyright">
+  
   &copy; 2016 – 
   <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
@@ -602,7 +458,7 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
   </div>
 
         
@@ -624,13 +480,12 @@
   </div>
 
   
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
-<script src="/js/schemes/pisces.js?v=7.4.2"></script>
-
-<script src="/js/next-boot.js?v=7.4.2"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -648,12 +503,7 @@
 
 
 
-
-
-
-
-  <script src="/js/local-search.js?v=7.4.2"></script>
-
+  <script src="/js/local-search.js"></script>
 
 
 
@@ -666,8 +516,6 @@
 
 
 
-
-  
 
   
 

@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-
-
-
-
-
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png?v=7.4.2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png?v=7.4.2">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png?v=7.4.2">
-  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png?v=7.4.2" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
@@ -26,7 +21,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '7.4.2',
+    version: '7.5.0',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
@@ -46,11 +41,6 @@
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
-    },
     sidebarPadding: 40
   };
 </script>
@@ -69,7 +59,8 @@
 <meta name="twitter:title" content="archlinux+xfce4+lightdm+uefi个人安装记录">
 <meta name="twitter:description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中  前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤 折腾日期为:2015-4-28到2015-5-??">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20150504150348283">
-  <link rel="canonical" href="http://listenerri.com/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/">
+
+<link rel="canonical" href="http://listenerri.com/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/">
 
 
 <script id="page-configurations">
@@ -96,8 +87,6 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
-
-
 
 
 
@@ -159,90 +148,40 @@
 <nav class="site-nav">
   
   <ul id="menu" class="menu">
-      
-      
-        
-        
         <li class="menu-item menu-item-home">
-      
-    
 
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-categories">
-      
-    
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-tags">
-      
-    
 
     <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-archives">
-      
-    
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-in-a-few-words">
-      
-    
 
     <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
 
   </li>
-      
-    
-      
-      
-        
-        
         <li class="menu-item menu-item-about">
-      
-    
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
-      
-    
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger">
-          <i class="fa fa-search fa-fw"></i>搜索
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
       </li>
-    
   </ul>
 
 </nav>
@@ -276,7 +215,7 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-            
+          
 
           <div class="content">
             
@@ -289,9 +228,9 @@
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="listenerri">
       <meta itemprop="description" content="学的越多越发现会的越少 : )">
-      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -299,11 +238,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            archlinux+xfce4+lightdm+uefi个人安装记录
-            
-
-          
+          archlinux+xfce4+lightdm+uefi个人安装记录
         </h2>
 
         <div class="post-meta">
@@ -313,16 +248,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
               <time title="创建时间：2016-05-04 16:32:00" itemprop="dateCreated datePublished" datetime="2016-05-04T16:32:00+08:00">2016-05-04</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
@@ -330,25 +257,17 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/linux/" itemprop="url" rel="index">
                     <span itemprop="name">linux</span>
                   </a>
                 </span>
-
-                
-                
-              
             </span>
-          
 
           
             <span id="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/" class="post-meta-item leancloud_visitors" data-flag-title="archlinux+xfce4+lightdm+uefi个人安装记录" title="阅读次数">
@@ -358,15 +277,12 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
             </span>
-          
   
   <span class="post-meta-item">
     
       <span class="post-meta-item-icon">
         <i class="fa fa-comment-o"></i>
       </span>
-        
-      
       <span class="post-meta-item-text">Valine：</span>
     
     <a title="valine" href="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/#comments" itemprop="discussionUrl">
@@ -549,50 +465,33 @@
     
     
     
-        
-      
 
       <footer class="post-footer">
-          
-            
-          
           <div class="post-tags">
-            
               <a href="/tags/linux/" rel="tag"># linux</a>
-            
               <a href="/tags/uefi/" rel="tag"># uefi</a>
-            
               <a href="/tags/安装/" rel="tag"># 安装</a>
-            
               <a href="/tags/archlinux/" rel="tag"># archlinux</a>
-            
               <a href="/tags/xfce4/" rel="tag"># xfce4</a>
-            
           </div>
-        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-              
                 <a href="/2016/05/01/tilda开机启动不透明/" rel="next" title="tilda开机启动不透明">
                   <i class="fa fa-chevron-left"></i> tilda开机启动不透明
                 </a>
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
                 <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" rel="prev" title="U盘+GRUB2引导PE或linux镜像">
                   U盘+GRUB2引导PE或linux镜像 <i class="fa fa-chevron-right"></i>
                 </a>
-              
             </div>
           </div>
-        
       </footer>
     
   </article>
@@ -605,9 +504,7 @@
 
           </div>
           
-    
     <div class="comments" id="comments"></div>
-  
 
         </div>
           
@@ -620,11 +517,6 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
-        
-        
-        
-        
-      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -638,80 +530,46 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络配置"><span class="nav-number">1.</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用netctl"><span class="nav-number">1.1.</span> <span class="nav-text">使用netctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用networkmanager"><span class="nav-number">1.2.</span> <span class="nav-text">使用networkmanager</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看是否有多个网络管理-systemctl简单使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">查看是否有多个网络管理(systemctl简单使用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动NetworkManager："><span class="nav-number">1.2.3.</span> <span class="nav-text">启动NetworkManager：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步源："><span class="nav-number">1.2.4.</span> <span class="nav-text">同步源：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行的使用方法："><span class="nav-number">1.2.5.</span> <span class="nav-text">命令行的使用方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图形界面使用方法："><span class="nav-number">1.2.6.</span> <span class="nav-text">图形界面使用方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体的安装步骤"><span class="nav-number">2.</span> <span class="nav-text">具体的安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u盘启动"><span class="nav-number">2.1.</span> <span class="nav-text">u盘启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对硬盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">对硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化分区为linux可用分区"><span class="nav-number">2.3.</span> <span class="nav-text">格式化分区为linux可用分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载分区"><span class="nav-number">2.4.</span> <span class="nav-text">挂载分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择镜像源"><span class="nav-number">2.5.</span> <span class="nav-text">选择镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装基本系统"><span class="nav-number">2.6.</span> <span class="nav-text">安装基本系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成-fstab"><span class="nav-number">2.7.</span> <span class="nav-text">生成 fstab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chroot-并开始配置新系统"><span class="nav-number">2.8.</span> <span class="nav-text">Chroot 并开始配置新系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Locale本地"><span class="nav-number">2.9.</span> <span class="nav-text">Locale本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时区"><span class="nav-number">2.10.</span> <span class="nav-text">时区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件时间"><span class="nav-number">2.11.</span> <span class="nav-text">硬件时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hostname主机名"><span class="nav-number">2.12.</span> <span class="nav-text">Hostname主机名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为硬盘中的系统配置网络"><span class="nav-number">2.13.</span> <span class="nav-text">为硬盘中的系统配置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-Root-密码"><span class="nav-number">2.14.</span> <span class="nav-text">设置 Root 密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装并配置-GRUB"><span class="nav-number">2.15.</span> <span class="nav-text">安装并配置 GRUB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载分区并重启系统"><span class="nav-number">2.16.</span> <span class="nav-text">卸载分区并重启系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进一步配置硬盘中的新系统"><span class="nav-number">3.</span> <span class="nav-text">进一步配置硬盘中的新系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#再次安装GRUB"><span class="nav-number">3.1.</span> <span class="nav-text">再次安装GRUB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增日常使用的账户"><span class="nav-number">3.2.</span> <span class="nav-text">新增日常使用的账户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装xorg图形框架"><span class="nav-number">3.3.</span> <span class="nav-text">安装xorg图形框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记本安装触摸板驱动"><span class="nav-number">3.4.</span> <span class="nav-text">笔记本安装触摸板驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装显卡驱动"><span class="nav-number">3.5.</span> <span class="nav-text">安装显卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装intel显卡开源驱动"><span class="nav-number">3.5.1.</span> <span class="nav-text">安装intel显卡开源驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装nvidia显卡开源驱动"><span class="nav-number">3.5.2.</span> <span class="nav-text">安装nvidia显卡开源驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装nvidia显卡闭源驱动"><span class="nav-number">3.5.3.</span> <span class="nav-text">安装nvidia显卡闭源驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双显卡切换"><span class="nav-number">3.5.4.</span> <span class="nav-text">双显卡切换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装bumblebee-bbswtich等："><span class="nav-number">3.5.4.1.</span> <span class="nav-text">安装bumblebee,bbswtich等：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加相关用户到-bumblebee-组："><span class="nav-number">3.5.4.2.</span> <span class="nav-text">添加相关用户到 bumblebee 组：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动bumblebee服务-守护进程"><span class="nav-number">3.5.4.3.</span> <span class="nav-text">启动bumblebee服务(守护进程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-Bumblebee-是否支持你的-Optimus-系统"><span class="nav-number">3.5.4.4.</span> <span class="nav-text">测试 Bumblebee 是否支持你的 Optimus 系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bumblebee用法："><span class="nav-number">3.5.4.5.</span> <span class="nav-text">Bumblebee用法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bumblebee和optirun的关系"><span class="nav-number">3.5.4.6.</span> <span class="nav-text">Bumblebee和optirun的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bumblebee和bbswtich的关系和使用"><span class="nav-number">3.5.4.7.</span> <span class="nav-text">Bumblebee和bbswtich的关系和使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用独显nvidia"><span class="nav-number">3.5.5.</span> <span class="nav-text">禁用独显nvidia</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试Xorg是否正常启动"><span class="nav-number">3.6.</span> <span class="nav-text">测试Xorg是否正常启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装xfce4桌面环境"><span class="nav-number">3.7.</span> <span class="nav-text">安装xfce4桌面环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装LightDM登录管理器-显示管理器"><span class="nav-number">3.8.</span> <span class="nav-text">安装LightDM登录管理器(显示管理器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装alsa-utils配置声音"><span class="nav-number">3.9.</span> <span class="nav-text">安装alsa-utils配置声音</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装中文字体"><span class="nav-number">3.10.</span> <span class="nav-text">安装中文字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让系统使用中文"><span class="nav-number">3.11.</span> <span class="nav-text">让系统使用中文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局性的汉化"><span class="nav-number">3.11.1.</span> <span class="nav-text">全局性的汉化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单独在图形界面启用中文locale"><span class="nav-number">3.11.2.</span> <span class="nav-text">单独在图形界面启用中文locale</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装fcitx输入法"><span class="nav-number">3.12.</span> <span class="nav-text">安装fcitx输入法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果启动xfce4桌面环境后显示不正常"><span class="nav-number">3.13.</span> <span class="nav-text">如果启动xfce4桌面环境后显示不正常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装视频播放器mplayer-gnomeMplayer前端"><span class="nav-number">3.14.</span> <span class="nav-text">安装视频播放器mplayer+gnomeMplayer前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启用回收站和自动挂载"><span class="nav-number">3.15.</span> <span class="nav-text">启用回收站和自动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间同步"><span class="nav-number">3.16.</span> <span class="nav-text">时间同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装pidgin-lwqq"><span class="nav-number">3.17.</span> <span class="nav-text">安装pidgin-lwqq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash命令补全"><span class="nav-number">3.18.</span> <span class="nav-text">bash命令补全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更快的命令补全操作"><span class="nav-number">3.18.1.</span> <span class="nav-text">更快的命令补全操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级的自动命令补全-方法一"><span class="nav-number">3.18.2.</span> <span class="nav-text">高级的自动命令补全(方法一)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级的自动命令补全-方法二"><span class="nav-number">3.18.3.</span> <span class="nav-text">高级的自动命令补全(方法二)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装压缩文件管理器"><span class="nav-number">3.19.</span> <span class="nav-text">安装压缩文件管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftp"><span class="nav-number">3.20.</span> <span class="nav-text">ftp:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装办公软件libreoffice"><span class="nav-number">3.21.</span> <span class="nav-text">安装办公软件libreoffice:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装音乐播放器rhythmbox"><span class="nav-number">3.22.</span> <span class="nav-text">安装音乐播放器rhythmbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装wine-QQ"><span class="nav-number">3.23.</span> <span class="nav-text">安装wine+QQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装主程序包，q4wine是图形菜单"><span class="nav-number">3.23.1.</span> <span class="nav-text">安装主程序包，q4wine是图形菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装缺少的32位包"><span class="nav-number">3.23.2.</span> <span class="nav-text">安装缺少的32位包</span></a></li></ol></li></ol></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-      src="/images/avatar.jpg"
-      alt="listenerri">
+    <img class="site-author-image" itemprop="image" alt="listenerri"
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">listenerri</p>
   <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-categories">
-        
-          
             <a href="/categories/">
           
-        
         <span class="site-state-item-count">17</span>
-        <span class="site-state-item-name">分类</span>
-        </a>
+        <span class="site-state-item-name">分类</span></a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-tags">
-        
-          
             <a href="/tags/">
           
-        
-        <span class="site-state-item-count">184</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
+        <span class="site-state-item-count">191</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
-    
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/listenerri" title="GitHub &rarr; https://github.com/listenerri" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/listenerri" title="GitHub → https://github.com/listenerri" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
-    
       <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="mailto:listenerri@gmail.com" title="E-Mail &rarr; mailto:listenerri@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:listenerri@gmail.com" title="E-Mail → mailto:listenerri@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
-    
   </div>
 
 
@@ -724,15 +582,12 @@
         <li class="links-of-blogroll-item">
           <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子</a>
         </li>
-      
         <li class="links-of-blogroll-item">
           <a href="https://blog.csdn.net/qq_33449307" title="https://blog.csdn.net/qq_33449307" rel="noopener" target="_blank">DD</a>
         </li>
-      
         <li class="links-of-blogroll-item">
           <a href="https://blog.csdn.net/itguangit" title="https://blog.csdn.net/itguangit" rel="noopener" target="_blank">XiaoGuang</a>
         </li>
-      
     </ul>
   </div>
 
@@ -741,7 +596,6 @@
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
-      
 
     </div>
   </aside>
@@ -756,6 +610,7 @@
         
 
 <div class="copyright">
+  
   &copy; 2016 – 
   <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
@@ -766,7 +621,7 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
   </div>
 
         
@@ -788,13 +643,12 @@
   </div>
 
   
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
-<script src="/js/schemes/pisces.js?v=7.4.2"></script>
-
-<script src="/js/next-boot.js?v=7.4.2"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -812,12 +666,7 @@
 
 
 
-
-
-
-
-  <script src="/js/local-search.js?v=7.4.2"></script>
-
+  <script src="/js/local-search.js"></script>
 
 
 
@@ -830,8 +679,6 @@
 
 
 
-
-  
 
   
 
