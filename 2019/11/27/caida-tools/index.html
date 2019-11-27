@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/listenerri-favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/listenerri-favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/listenerri-favicon-16x16.png">
+  <link rel="mask-icon" href="/images/listenerri-favicon-32x32.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="翻译自：http://www.caida.org/tools/  主要翻译了工具列表中的“介绍”部分。">
+<meta name="keywords" content="caida,tools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="caida tools">
+<meta property="og:url" content="http://listenerri.com/2019/11/27/caida-tools/index.html">
+<meta property="og:site_name" content="listenerri&#39;s blog">
+<meta property="og:description" content="翻译自：http://www.caida.org/tools/  主要翻译了工具列表中的“介绍”部分。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-27T09:44:15.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="caida tools">
+<meta name="twitter:description" content="翻译自：http://www.caida.org/tools/  主要翻译了工具列表中的“介绍”部分。">
+
+<link rel="canonical" href="http://listenerri.com/2019/11/27/caida-tools/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>caida tools | listenerri's blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f4f2d9354392e6db69ef67305fca0a31";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">listenerri's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">学的越多越发现会的越少 : )</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-in-a-few-words">
+
+    <a href="/in-a-few-words/" rel="section"><i class="fa fa-fw fa-list"></i>句不成章</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2019/11/27/caida-tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="listenerri">
+      <meta itemprop="description" content="学的越多越发现会的越少 : )">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="listenerri's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          caida tools
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-27 15:57:46 / 修改时间：17:44:15" itemprop="dateCreated datePublished" datetime="2019-11-27T15:57:46+08:00">2019-11-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/translation/" itemprop="url" rel="index">
+                    <span itemprop="name">translation</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/27/caida-tools/" class="post-meta-item leancloud_visitors" data-flag-title="caida tools" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/27/caida-tools/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/27/caida-tools/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>翻译自：<a href="http://www.caida.org/tools/" target="_blank" rel="noopener">http://www.caida.org/tools/</a></p>
+</blockquote>
+<p>主要翻译了工具列表中的“介绍”部分。<br><a id="more"></a></p>
+<h1 id="支持中的工具"><a href="#支持中的工具" class="headerlink" title="支持中的工具"></a>支持中的工具</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">主要作者</th>
+<th style="text-align:center">英文描述</th>
+<th style="text-align:center">中文描述</th>
+<th style="text-align:center">发布日期</th>
+<th style="text-align:center">最近更新</th>
+<th style="text-align:center">分类</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">输出</th>
+<th style="text-align:center">许可证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/arkutil/" target="_blank" rel="noopener">arkutil</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">RubyGem containing utility classes used by the Archipelago measurement infrastructure and the MIDAR alias-resolution system.</td>
+<td style="text-align:center">一个被 Archipelago 测量基础框架和 MIDAR 别名分析系统使用的 RubyGem 工具</td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">库:拓扑</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.inspire.edu.gr/artemis/" target="_blank" rel="noopener">ARTEMIS</a></td>
+<td style="text-align:center">Vasileios Kotronis</td>
+<td style="text-align:center">Defense approach versus BGP prefix hijacking attacks</td>
+<td style="text-align:center">BGP前缀劫持攻击与防御方法</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">安全</td>
+<td style="text-align:center">包含 AS 通告的 BGP 前缀的配置文件</td>
+<td style="text-align:center">警报和 web 接口</td>
+<td style="text-align:center">BSD 3-Clause</td>
+</tr>
+<tr>
+<td style="text-align:center">AStraceroute (正在开发中)</td>
+<td style="text-align:center">Chiara Orsini</td>
+<td style="text-align:center">A Python tool that translates traceroutes into AS paths</td>
+<td style="text-align:center">一个将 traceroute 结果转换到 aspath 的 python 工具</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">拓扑</td>
+<td style="text-align:center">JSON 编码的 traceroute 数据</td>
+<td style="text-align:center">JSON(aspath)</td>
+<td style="text-align:center">GNU GPL v3</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/autofocus/" target="_blank" rel="noopener">Autofocus</a></td>
+<td style="text-align:center">Cristian Estan</td>
+<td style="text-align:center">Internet traffic reports and time-series graphs</td>
+<td style="text-align:center">网络流量报告和时序图</td>
+<td style="text-align:center">2003</td>
+<td style="text-align:center">2003</td>
+<td style="text-align:center">工作量:可视化</td>
+<td style="text-align:center">NetFlow data, pcap</td>
+<td style="text-align:center">文字报告和时序图</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/beluga/" target="_blank" rel="noopener">Beluga</a></td>
+<td style="text-align:center">Ryan Koga</td>
+<td style="text-align:center">Interactive frontend to traceroute data</td>
+<td style="text-align:center">traceroute 数据的交互式前端</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">性能:可视化</td>
+<td style="text-align:center">IP 地址</td>
+<td style="text-align:center">交互式 traceroute</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://bgpstream.caida.org/" target="_blank" rel="noopener">BGPstream</a></td>
+<td style="text-align:center">Alistair King</td>
+<td style="text-align:center">Open-source software framework for live and historical BGP data analysis, supporting scientific research, operational monitoring, and post-event analysis.</td>
+<td style="text-align:center">用于实时和历史 BGP 数据分析的开源软件框架 支持科学研究 运营监控和事件后分析</td>
+<td style="text-align:center">2015</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">拓扑:数据分析</td>
+<td style="text-align:center">BGP 数据(如 MRT)</td>
+<td style="text-align:center">ASCII, C API, Python API</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/graphing/" target="_blank" rel="noopener">Chart:Graph</a></td>
+<td style="text-align:center">David Moore</td>
+<td style="text-align:center">Perl front-end to GNU plot and Xmgrace</td>
+<td style="text-align:center">GNU plot 和 Xmgrace 的 perl 前端</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">库:绘图</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">2D 图</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/coralreef/" target="_blank" rel="noopener">CoralReef</a></td>
+<td style="text-align:center">Ken Keys</td>
+<td style="text-align:center">Measures and analyzes passive Internet traffic monitor data</td>
+<td style="text-align:center">测量和分析被动网络流量监控器数据</td>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">工作量:测量与分析</td>
+<td style="text-align:center">网络接口; DAG 采集卡; DAG, libpcap, 和 CoralReef 数据包</td>
+<td style="text-align:center">文字报告, 流量报告, CoralReef 数据文件</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/corsaro/" target="_blank" rel="noopener">Corsaro</a></td>
+<td style="text-align:center">Alistair King</td>
+<td style="text-align:center">Extensible framework for large-scale analysis of passive trace data</td>
+<td style="text-align:center">大规模分析被动跟踪数据的可扩展框架</td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">工作量:测量与分析</td>
+<td style="text-align:center">被动追踪数据(pcap, 接口, 等)</td>
+<td style="text-align:center">机器可解析文本, Corsaro 二进制数据文件</td>
+<td style="text-align:center">GNU GPL v3+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/visualization/cuttlefish/" target="_blank" rel="noopener">Cuttlefish</a></td>
+<td style="text-align:center">Bradley Huffaker</td>
+<td style="text-align:center">Produces animated graphs showing diurnal and geographical patterns</td>
+<td style="text-align:center">生成显示日间和地理模式的动画图形</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">地理:可视化</td>
+<td style="text-align:center">Cuttlefish 输入文件时序图 (GIF)</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/dbats/" target="_blank" rel="noopener">DBATS</a></td>
+<td style="text-align:center">Ken Keys</td>
+<td style="text-align:center">High performance time series database engine optimized for inserting/updating values for many series simultaneously</td>
+<td style="text-align:center">高性能时间序列数据库引擎针对同时插入/更新多个序列的值进行了优化</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">库:数据库</td>
+<td style="text-align:center">时序数据</td>
+<td style="text-align:center">时序数据</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/dnsstat/" target="_blank" rel="noopener">dnsstat</a></td>
+<td style="text-align:center">Ken Keys</td>
+<td style="text-align:center">DNS traffic measurement utility</td>
+<td style="text-align:center">DNS 流量测量工具</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">工作量:DNS 分析</td>
+<td style="text-align:center">pcap, 监控在 UDP 端口 53 上的 DNS 查询数据</td>
+<td style="text-align:center">文字报告</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/henya/" target="_blank" rel="noopener">Henya</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">Large-scale Internet topology query system which provides remote search of traceroute data without requiring data downloads</td>
+<td style="text-align:center">大规模互联网拓扑查询系统，无需下载数据即可远程搜索 traceroute 数据</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">拓扑</td>
+<td style="text-align:center">IP</td>
+<td style="text-align:center">web 界面, JSON 数据</td>
+<td style="text-align:center">GNU GPL v3</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/hyperbolic-graph-generator/" target="_blank" rel="noopener">Hyperbolic Graph Generator</a></td>
+<td style="text-align:center">Chiara Orsini</td>
+<td style="text-align:center">A set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the greedy routing</td>
+<td style="text-align:center">一组工具，用于生成嵌入双曲线空间的合成图并测试贪婪路由</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">拓扑和性能测量</td>
+<td style="text-align:center">双曲图参数</td>
+<td style="text-align:center">hyperbolic in a text file</td>
+<td style="text-align:center">GNU GPL v3</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/iatmon/" target="_blank" rel="noopener">iatmon</a></td>
+<td style="text-align:center">Nevil Brownlee</td>
+<td style="text-align:center">Ruby+C+libtrace analysis module that separates one-way traffic into clearly-defined subsets</td>
+<td style="text-align:center">Ruby + C + libtrace分析模块，可将单向流量分为明确定义的子集</td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">工作量:测量与分析</td>
+<td style="text-align:center">Network trace files, or a live network interface</td>
+<td style="text-align:center">text report (matrices, distributions and vectors as statistics of the one-way traffic)</td>
+<td style="text-align:center">GNU GPL v3</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/iffinder/" target="_blank" rel="noopener">iffinder</a></td>
+<td style="text-align:center">Ken Keys</td>
+<td style="text-align:center">Discovers IPv4 addresses belonging to the same router (aliases) using the common source technique</td>
+<td style="text-align:center">使用通用源技术发现属于同一路由器（别名）的IPv4地址</td>
+<td style="text-align:center">2001</td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">拓扑:别名分析</td>
+<td style="text-align:center">IP</td>
+<td style="text-align:center">文本文件</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/kapar/" target="_blank" rel="noopener">kapar</a></td>
+<td style="text-align:center">Ken Keys</td>
+<td style="text-align:center">Graph-based IP alias resolution</td>
+<td style="text-align:center">基于图的 IP 别名解析</td>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">拓扑:别名分析</td>
+<td style="text-align:center">scamper “warts” traces, iPlane traces, text files</td>
+<td style="text-align:center">alias and link text files</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/visualization/libsea/" target="_blank" rel="noopener">LibSea</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">Scalable graph file format and graph library</td>
+<td style="text-align:center">可扩展的图形文件格式和图形库</td>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">库:拓扑</td>
+<td style="text-align:center">LibSea graph format files</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">GNU Lesser GPL</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/libtimeseries/" target="_blank" rel="noopener">libtimeseries</a></td>
+<td style="text-align:center">Alistair King</td>
+<td style="text-align:center">C library that provides a high-performance abstraction layer for efficiently writing to time series databases</td>
+<td style="text-align:center">提供高性能抽象层的C库，可有效地写入时间序列数据库</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">2019</td>
+<td style="text-align:center">库:数据库</td>
+<td style="text-align:center">time series data</td>
+<td style="text-align:center">time series data</td>
+<td style="text-align:center">BSD 2-Clause</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/marinda/" target="_blank" rel="noopener">Marinda</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">A distributed tuple space implementation</td>
+<td style="text-align:center">分布式元组空间实现</td>
+<td style="text-align:center">2015</td>
+<td style="text-align:center">2015</td>
+<td style="text-align:center">Library: Middleware</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">GNU GPL v3</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/midar/" target="_blank" rel="noopener">MIDAR</a></td>
+<td style="text-align:center">Ken Keys and Young Hyun</td>
+<td style="text-align:center">Identifies IPv4 addresses belonging to the same router (aliases) using shared monotonic IP ID counters</td>
+<td style="text-align:center">使用共享的单调 IP ID 计数器标识属于同一路由器（别名）的 IPv4 地址</td>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">Topology: Alias Resolution</td>
+<td style="text-align:center">traceroute data or list of addresses</td>
+<td style="text-align:center">alias sets (router addresses)</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/motu/" target="_blank" rel="noopener">Motu</a></td>
+<td style="text-align:center">Alistair King</td>
+<td style="text-align:center">Dealiases pairs of IPv4 addresses</td>
+<td style="text-align:center">Dealiases pairs of IPv4 addresses</td>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">Topology: Alias Resolution</td>
+<td style="text-align:center">text input (candidate alias pairs)</td>
+<td style="text-align:center">text report and machine-parseable results</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/mper/" target="_blank" rel="noopener">mper</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">Probing engine for conducting network measurements with ICMP, UDP, and TCP probes</td>
+<td style="text-align:center">使用 ICMP，UDP 和 TCP 探针进行网络测量的探测引擎</td>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">Topology and Performance Measurement</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/visualization/otter/" target="_blank" rel="noopener">Otter</a></td>
+<td style="text-align:center">Bradley Huffaker</td>
+<td style="text-align:center">Visualizes arbitrary network data</td>
+<td style="text-align:center">可视化任意网络数据</td>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">2003</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">Otter data file</td>
+<td style="text-align:center">interactive 2D graph, PDF</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/looking-glass-api/" target="_blank" rel="noopener">Periscope Looking Glass API</a></td>
+<td style="text-align:center">Vasileios Giotsas</td>
+<td style="text-align:center">API to unify Looking Glass server queries and standardize output</td>
+<td style="text-align:center">统一 Looking Glass 服务器查询并标准化输出的 API</td>
+<td style="text-align:center">2015</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">库:中间件</td>
+<td style="text-align:center">JSON-encoded API request</td>
+<td style="text-align:center">JSON, iplane format, raw text format</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/visualization/plot-latlong/" target="_blank" rel="noopener">plot-latlong</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">Plots points on geographic maps</td>
+<td style="text-align:center">在地理地图上绘制点</td>
+<td style="text-align:center">2003</td>
+<td style="text-align:center">2005</td>
+<td style="text-align:center">Geographic</td>
+<td style="text-align:center">text input (latitude/longitude pair)</td>
+<td style="text-align:center">geographical plot</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/visualization/plotpaths/" target="_blank" rel="noopener">PlotPaths</a></td>
+<td style="text-align:center">Bradley Huffaker</td>
+<td style="text-align:center">Displays forward traceroute path data</td>
+<td style="text-align:center">显示正向跟踪路由路径数据</td>
+<td style="text-align:center">2001</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">text input files (paths file, nodes file)</td>
+<td style="text-align:center">Otter data file</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/rb-mperio/" target="_blank" rel="noopener">rb-mperio</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">RubyGem for writing network measurement scripts in Ruby that use the mper probing engine</td>
+<td style="text-align:center">用Ruby编写使用mper探测引擎的网络测量脚本</td>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">Library: Topology Measurement</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">GNU GPL v2+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/router-to-as-assignment/" target="_blank" rel="noopener">RouterToAsAssignment</a></td>
+<td style="text-align:center">Ken Keys</td>
+<td style="text-align:center">Assigns each router from a router-level graph of the Internet to its Autonomous System (AS)</td>
+<td style="text-align:center">将每个路由器从 Internet 的路由器级别图分配给其自治系统（AS）</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">Topology</td>
+<td style="text-align:center">output from ITDK</td>
+<td style="text-align:center">text report (router to AS report)</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/measurement/scamper/" target="_blank" rel="noopener">scamper</a></td>
+<td style="text-align:center">Matthew Luckie</td>
+<td style="text-align:center">IPv6 and IPv4 active traceroute probing and ping</td>
+<td style="text-align:center">IPv6 和 IPv4 主动 traceroute 探测 和 ping</td>
+<td style="text-align:center">2004</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">Topology and Performance Measurement</td>
+<td style="text-align:center">IP destinations</td>
+<td style="text-align:center">text reports, “warts” binary file</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/projects/spoofer/" target="_blank" rel="noopener">Spoofer</a></td>
+<td style="text-align:center">Ken Keys, Ryan Koga, and Robert Beverly</td>
+<td style="text-align:center">Source address validation measurement program that measures susceptibility to spoofed source address IP packets</td>
+<td style="text-align:center">源地址验证测量程序，用于测量对欺骗性源地址 IP 数据包的敏感性</td>
+<td style="text-align:center">2005</td>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">Security</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">text report, HTML report</td>
+<td style="text-align:center">GNU GPL v3+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/funding/atomized_routing/download/" target="_blank" rel="noopener">straightenRV</a></td>
+<td style="text-align:center">Patrick Verkaik</td>
+<td style="text-align:center">Parses and processes Route Views tables for ease of analysis</td>
+<td style="text-align:center">解析并处理 Route Views 表以简化分析</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">2009</td>
+<td style="text-align:center">Topology: Data Analysis</td>
+<td style="text-align:center">statistics</td>
+<td style="text-align:center">text report (e.g., prefix to AS maps, AS paths, etc), machine-parseable data file</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/utilities/topostats/" target="_blank" rel="noopener">topostats</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">Computes various statistics on network topologies</td>
+<td style="text-align:center">计算有关网络拓扑的各种统计信息</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">Topology</td>
+<td style="text-align:center">text input (e.g., AS link pairs)</td>
+<td style="text-align:center">text report, no graphs</td>
+<td style="text-align:center">GNU GPL v3</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/projects/ark/vela/" target="_blank" rel="noopener">Vela</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">On-demand topology measurement service of CAIDA’s Archipelago Measurement Infrastructure</td>
+<td style="text-align:center">CAIDA Archipelago Measurement Infrastructure 的拓扑测量服务</td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">2017</td>
+<td style="text-align:center">Topology</td>
+<td style="text-align:center">web interface</td>
+<td style="text-align:center">HTML and graph reports</td>
+<td style="text-align:center">GNU GPL v3+</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.caida.org/tools/visualization/walrus/" target="_blank" rel="noopener">Walrus</a></td>
+<td style="text-align:center">Young Hyun</td>
+<td style="text-align:center">Visualizes large graphs in three-dimensional space</td>
+<td style="text-align:center">在三维空间中可视化大型图形</td>
+<td style="text-align:center">2001</td>
+<td style="text-align:center">2005</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">LibSea graph format files</td>
+<td style="text-align:center">interactive 3D graph</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+</tbody>
+</table>
+<h1 id="不受支持的工具"><a href="#不受支持的工具" class="headerlink" title="不受支持的工具"></a>不受支持的工具</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">主要作者</th>
+<th style="text-align:center">英文描述</th>
+<th style="text-align:center">中文描述</th>
+<th style="text-align:center">状态</th>
+<th style="text-align:center">发布日期</th>
+<th style="text-align:center">最近更新</th>
+<th style="text-align:center">分类</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">输出</th>
+<th style="text-align:center">许可证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/measurement/skitter/" target="_blank" rel="noopener">skitter</a></td>
+<td style="text-align:center">Daniel McRobb</td>
+<td style="text-align:center">Reads in destinations and outputs traceroute paths</td>
+<td style="text-align:center">读入目的地并输出traceroute路径</td>
+<td style="text-align:center">Deprecated by Archipelago</td>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">2008</td>
+<td style="text-align:center">Topology: Measurement</td>
+<td style="text-align:center">skitter data files</td>
+<td style="text-align:center">geographical plot, graph</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/measurement/rtg/" target="_blank" rel="noopener">RTG</a></td>
+<td style="text-align:center">Robert Beverly</td>
+<td style="text-align:center">SNMP statistics monitoring system</td>
+<td style="text-align:center">SNMP统计监控系统</td>
+<td style="text-align:center">In use but not supported by CAIDA</td>
+<td style="text-align:center">2005</td>
+<td style="text-align:center">2009</td>
+<td style="text-align:center">Workload: Visualization</td>
+<td style="text-align:center">SNMP data</td>
+<td style="text-align:center">time series graphs, text traffic reports</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/utilities/rrdtool/" target="_blank" rel="noopener">RRDtool</a></td>
+<td style="text-align:center">Tobi Oetiker</td>
+<td style="text-align:center">Stores and displays time-series data, configurable graphs</td>
+<td style="text-align:center">存储和显示时间序列数据，可配置图形</td>
+<td style="text-align:center">In use but not supported by CAIDA</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">Plotting and Data Curation</td>
+<td style="text-align:center">time series data</td>
+<td style="text-align:center">time series graphs</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/visualization/plankton/" target="_blank" rel="noopener">Plankton</a></td>
+<td style="text-align:center">Bradley Huffaker</td>
+<td style="text-align:center">Historical visualization of international cache topology</td>
+<td style="text-align:center">国际缓存拓扑的历史可视化</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">text input</td>
+<td style="text-align:center">graph</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/measurement/netramet/" target="_blank" rel="noopener">NeTraMet</a></td>
+<td style="text-align:center">Nevil Brownlee</td>
+<td style="text-align:center">Realtime traffic flow measurement.</td>
+<td style="text-align:center">实时流量监测</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">2003</td>
+<td style="text-align:center">2007</td>
+<td style="text-align:center">Workload: Measurement Analysis</td>
+<td style="text-align:center">pcap</td>
+<td style="text-align:center">time series graphs</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/utilities/netgeo/" target="_blank" rel="noopener">NetGeo</a></td>
+<td style="text-align:center">Bradley Huffaker</td>
+<td style="text-align:center">Maps IPs and AS numbers to geographical locations</td>
+<td style="text-align:center">将IP和AS号映射到地理位置</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">Geographic: Data</td>
+<td style="text-align:center">IP address / URL</td>
+<td style="text-align:center">text report</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/visualization/mapnet/" target="_blank" rel="noopener">MapNet</a></td>
+<td style="text-align:center">Bradley Huffaker</td>
+<td style="text-align:center">Historical visualization of international backbone providers</td>
+<td style="text-align:center">国际骨干提供商的历史可视化</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">1997</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">geographical plot</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/visualization/gtrace/" target="_blank" rel="noopener">GTrace</a></td>
+<td style="text-align:center">Ram Periakaruppan</td>
+<td style="text-align:center">Geographical front-end to traceroute</td>
+<td style="text-align:center">地理前端到 Traceroute</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">URL to trace</td>
+<td style="text-align:center">geographical plot</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/visualization/geoplot/" target="_blank" rel="noopener">GeoPlot</a></td>
+<td style="text-align:center">Ram Periakaruppan</td>
+<td style="text-align:center">Geographically plots nodes and links</td>
+<td style="text-align:center">地理绘制节点和链接</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">Topology: Visualization</td>
+<td style="text-align:center">text input (latitude/longitude pair)</td>
+<td style="text-align:center">geographical plot</td>
+<td style="text-align:center">Research-use License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/utilities/flowscan/" target="_blank" rel="noopener">FlowScan</a></td>
+<td style="text-align:center">Dave Plonka</td>
+<td style="text-align:center">Graphs IP flow data for a view of network border traffic</td>
+<td style="text-align:center">绘制 IP 流数据以查看网络边界流量</td>
+<td style="text-align:center">In use but not supported by CAIDA</td>
+<td style="text-align:center">2001</td>
+<td style="text-align:center">2004</td>
+<td style="text-align:center">Workload: Analysis   Visualization</td>
+<td style="text-align:center">NetFlow data</td>
+<td style="text-align:center">graph (example available)</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/utilities/dsc/" target="_blank" rel="noopener">dsc</a></td>
+<td style="text-align:center">Duane Wessels</td>
+<td style="text-align:center">Collects and displays statistics from DNS servers</td>
+<td style="text-align:center">从 DNS 服务器收集并显示统计信息</td>
+<td style="text-align:center">In use but not supported by CAIDA</td>
+<td style="text-align:center">2007</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">Workload: DNS Statistics</td>
+<td style="text-align:center">pcap, monitors DNS queries on UDP Port 53</td>
+<td style="text-align:center">XML intermediate file, graph report (example available)</td>
+<td style="text-align:center">New BSD License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/utilities/dnstop/" target="_blank" rel="noopener">dnstop</a></td>
+<td style="text-align:center">Duane Wessels</td>
+<td style="text-align:center">Measures and displays tables of DNS network traffic</td>
+<td style="text-align:center">测量并显示 DNS 网络流量表</td>
+<td style="text-align:center">In use but not supported by CAIDA</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">Workload: DNS Statistics</td>
+<td style="text-align:center">pcap, monitors DNS queries on UDP Port 53</td>
+<td style="text-align:center">text report (example available)</td>
+<td style="text-align:center">New BSD License</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.caida.org/tools/measurement/cflowd/" target="_blank" rel="noopener">cflowd</a></td>
+<td style="text-align:center">Daniel McRobb</td>
+<td style="text-align:center">Former NetFlow analysis tool</td>
+<td style="text-align:center">前 NetFlow 分析工具</td>
+<td style="text-align:center">Deprecated</td>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">Topology and Performance Measurement</td>
+<td style="text-align:center">Netflow data in arts format</td>
+<td style="text-align:center">text reports</td>
+<td style="text-align:center">GNU GPL v2</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/caida/" rel="tag"># caida</a>
+              <a href="/tags/tools/" rel="tag"># tools</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/26/linux下为两个网卡调整路由规则/" rel="next" title="linux下为两个网卡调整路由规则">
+                  <i class="fa fa-chevron-left"></i> linux下为两个网卡调整路由规则
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#支持中的工具"><span class="nav-number">1.</span> <span class="nav-text">支持中的工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不受支持的工具"><span class="nav-number">2.</span> <span class="nav-text">不受支持的工具</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="listenerri"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">listenerri</p>
+  <div class="site-description" itemprop="description">学的越多越发现会的越少 : )</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">195</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/listenerri" title="GitHub → https://github.com/listenerri" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:listenerri@gmail.com" title="E-Mail → mailto:listenerri@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.justforlxz.com" title="http://blog.justforlxz.com" rel="noopener" target="_blank">竹子</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/qq_33449307" title="https://blog.csdn.net/qq_33449307" rel="noopener" target="_blank">DD</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/itguangit" title="https://blog.csdn.net/itguangit" rel="noopener" target="_blank">XiaoGuang</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">listenerri</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
+    appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
+    placeholder: "I have something to say",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
