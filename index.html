@@ -221,6 +221,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2019/12/04/zookeeper-小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="listenerri">
+      <meta itemprop="description" content="学的越多越发现会的越少 : )">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="listenerri's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/zookeeper-小记/" class="post-title-link" itemprop="url">zookeeper 小记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-04 09:13:22 / 修改时间：09:16:02" itemprop="dateCreated datePublished" datetime="2019-12-04T09:13:22+08:00">2019-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/04/zookeeper-小记/" class="post-meta-item leancloud_visitors" data-flag-title="zookeeper 小记" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/04/zookeeper-小记/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/04/zookeeper-小记/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="zookeeper-崩溃恢复过程中两个关键性问题"><a href="#zookeeper-崩溃恢复过程中两个关键性问题" class="headerlink" title="zookeeper 崩溃恢复过程中两个关键性问题"></a>zookeeper 崩溃恢复过程中两个关键性问题</h1><p>Q1：leader 提交事务 A 后崩溃，follower 没有收到提交事务 A 的消息，再次选举 leader 时如何确保事务 A 被应用？</p><p>A1：既然 leader 已经在本地提交了事务 A，那么说明事务 A 肯定已经经过了多数 follower 的确认，即多数 follower 上都有事务 A 的记录，leader 崩溃后，重新选举出的新 leader 肯定包含未提交的事务 A，因为事务 A 的事务 ID 最大，新 leader 会继续提交事务 A。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/04/zookeeper-小记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2019/11/27/caida-tools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1148,114 +1246,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2019/10/11/通过打DSDT补丁让黑苹果显示电池状态信息/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="listenerri">
-      <meta itemprop="description" content="学的越多越发现会的越少 : )">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="listenerri's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/11/通过打DSDT补丁让黑苹果显示电池状态信息/" class="post-title-link" itemprop="url">通过打DSDT补丁让黑苹果显示电池状态信息</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-11 16:03:22" itemprop="dateCreated datePublished" datetime="2019-10-11T16:03:22+08:00">2019-10-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-17 10:31:49" itemprop="dateModified" datetime="2019-10-17T10:31:49+08:00">2019-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/translation/" itemprop="url" rel="index">
-                    <span itemprop="name">translation</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/10/11/通过打DSDT补丁让黑苹果显示电池状态信息/" class="post-meta-item leancloud_visitors" data-flag-title="通过打DSDT补丁让黑苹果显示电池状态信息" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/11/通过打DSDT补丁让黑苹果显示电池状态信息/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/11/通过打DSDT补丁让黑苹果显示电池状态信息/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>翻译自：<a href="https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/" target="_blank" rel="noopener">https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/</a></p>
-</blockquote><blockquote>
-<p>转载请注明出处</p>
-</blockquote><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>因为电脑中的电池硬件与苹果的 SMbus 硬件不兼容，所以在笔记本电脑上运行 OS X 时，我们使用 ACPI 来访问电池状态。一般来说，我建议你使用 <code>ACPIBatteryManager.kext</code>，可在这里找到: <a href="https://github.com/RehabMan/OS-X-ACPI-Battery-Driver" target="_blank" rel="noopener">https://github.com/RehabMan/OS-X-ACPI-Battery-Driver</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/11/通过打DSDT补丁让黑苹果显示电池状态信息/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1306,20 +1296,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">195</span>
+        <span class="site-state-item-count">196</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
