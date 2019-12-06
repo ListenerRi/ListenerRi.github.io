@@ -271,8 +271,8 @@
         <category>qt</category>
       </categories>
       <tags>
-        <tag>qt</tag>
         <tag>static</tag>
+        <tag>qt</tag>
         <tag>tr</tag>
         <tag>翻译</tag>
       </tags>
@@ -618,9 +618,9 @@
         <category>c</category>
       </categories>
       <tags>
+        <tag>c</tag>
         <tag>strlen</tag>
         <tag>sizeof</tag>
-        <tag>c</tag>
       </tags>
   </entry>
   <entry>
