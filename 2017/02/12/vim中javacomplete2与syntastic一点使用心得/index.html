@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="插件简介javacomplete2 提供java语言的补全 便捷的import,extends,implement等 快速插入setter,getter方法,等等 插件地址: https://github.com/artur-shaik/vim-javacomplete2 syntastic 支持大量语言的语义检测 插件地址: https://github.com/vim-syntastic/sy">
+  <meta name="description" content="插件简介javacomplete2 提供java语言的补全 便捷的import,extends,implement等 快速插入setter,getter方法,等等 插件地址: https://github.com/artur-shaik/vim-javacomplete2  syntastic 支持大量语言的语义检测 插件地址: https://github.com/vim-syntastic/s">
 <meta name="keywords" content="java,vim,javacomplete2,syntastic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim中javacomplete2与syntastic一点使用心得">
 <meta property="og:url" content="http://listenerri.com/2017/02/12/vim中javacomplete2与syntastic一点使用心得/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="插件简介javacomplete2 提供java语言的补全 便捷的import,extends,implement等 快速插入setter,getter方法,等等 插件地址: https://github.com/artur-shaik/vim-javacomplete2 syntastic 支持大量语言的语义检测 插件地址: https://github.com/vim-syntastic/sy">
+<meta property="og:description" content="插件简介javacomplete2 提供java语言的补全 便捷的import,extends,implement等 快速插入setter,getter方法,等等 插件地址: https://github.com/artur-shaik/vim-javacomplete2  syntastic 支持大量语言的语义检测 插件地址: https://github.com/vim-syntastic/s">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim中javacomplete2与syntastic一点使用心得">
-<meta name="twitter:description" content="插件简介javacomplete2 提供java语言的补全 便捷的import,extends,implement等 快速插入setter,getter方法,等等 插件地址: https://github.com/artur-shaik/vim-javacomplete2 syntastic 支持大量语言的语义检测 插件地址: https://github.com/vim-syntastic/sy">
+<meta name="twitter:description" content="插件简介javacomplete2 提供java语言的补全 便捷的import,extends,implement等 快速插入setter,getter方法,等等 插件地址: https://github.com/artur-shaik/vim-javacomplete2  syntastic 支持大量语言的语义检测 插件地址: https://github.com/vim-syntastic/s">
 
 <link rel="canonical" href="http://listenerri.com/2017/02/12/vim中javacomplete2与syntastic一点使用心得/">
 
@@ -304,11 +304,11 @@
 <li>便捷的import,extends,implement等</li>
 <li>快速插入setter,getter方法,等等</li>
 <li>插件地址: <a href="https://github.com/artur-shaik/vim-javacomplete2" target="_blank" rel="noopener">https://github.com/artur-shaik/vim-javacomplete2</a></li>
-</ul><h2 id="syntastic"><a href="#syntastic" class="headerlink" title="syntastic"></a>syntastic</h2><ul>
+</ul>
+<h2 id="syntastic"><a href="#syntastic" class="headerlink" title="syntastic"></a>syntastic</h2><ul>
 <li>支持大量语言的语义检测</li>
 <li>插件地址: <a href="https://github.com/vim-syntastic/syntastic" target="_blank" rel="noopener">https://github.com/vim-syntastic/syntastic</a></li>
-</ul><a id="more"></a>
-
+</ul>
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p>当使用javacomplete2(以下简称jc2)补全非项目java文件时,<br>也就是说编辑的文件不是eclipse,gradle,maven等管理的项目中的文件,<br>这时如果是单个文件还没有什么问题,但如果是两个或两个以上,<br>相互关联的文件(如:A文件中new到了B文件中定义的类),jc2就会力不从心,<br>因为jc2不知道所有源文件的位置,以及CLASSPATH应该如何设置,<br>如果是项目文件jc2可以利用项目的配置文件来处理上述问题.</p>
 <h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><blockquote>
 <p><strong><em>这个问题已经在最新版本中解决了!</em></strong></p>
@@ -344,21 +344,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/12/02/linux下使用drcom登录认证/" rel="next" title="linux下使用drcom登录认证">
-                  <i class="fa fa-chevron-left"></i> linux下使用drcom登录认证
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2017/02/25/miui-正在通过usb安装/" rel="prev" title="miui 正在通过usb安装">
-                  miui 正在通过usb安装 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/12/02/linux下使用drcom登录认证/" rel="prev" title="linux下使用drcom登录认证">
+      <i class="fa fa-chevron-left"></i> linux下使用drcom登录认证
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/02/25/miui-正在通过usb安装/" rel="next" title="miui 正在通过usb安装">
+      miui 正在通过usb安装 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -488,14 +485,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -562,7 +555,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

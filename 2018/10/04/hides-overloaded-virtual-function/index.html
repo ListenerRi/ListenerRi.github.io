@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。三个关键点： 重载 虚函数 隐藏 这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的函数，">
+  <meta name="description" content="在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。 三个关键点：  重载 虚函数 隐藏  这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的">
 <meta name="keywords" content="cpp,virtual">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hides overloaded virtual function">
 <meta property="og:url" content="http://listenerri.com/2018/10/04/hides-overloaded-virtual-function/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。三个关键点： 重载 虚函数 隐藏 这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的函数，">
+<meta property="og:description" content="在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。 三个关键点：  重载 虚函数 隐藏  这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hides overloaded virtual function">
-<meta name="twitter:description" content="在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。三个关键点： 重载 虚函数 隐藏 这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的函数，">
+<meta name="twitter:description" content="在重载父类的同名虚函数时会出现hides overloaded virtual function编译警告。从字面上的意思其实就可以理解：重载的虚函数被隐藏了。 三个关键点：  重载 虚函数 隐藏  这个编译警告之所以出现，是因为上面三个关键点，首先是发生了重载，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的">
 
 <link rel="canonical" href="http://listenerri.com/2018/10/04/hides-overloaded-virtual-function/">
 
@@ -299,14 +299,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在<code>重载</code>父类的同名虚函数时会出现<code>hides overloaded virtual function</code>编译警告。<br>从字面上的意思其实就可以理解：重载的虚函数被隐藏了。</p><p>三个关键点：</p><ul>
+        <p>在<code>重载</code>父类的同名虚函数时会出现<code>hides overloaded virtual function</code>编译警告。<br>从字面上的意思其实就可以理解：重载的虚函数被隐藏了。</p>
+<p>三个关键点：</p>
+<ul>
 <li>重载</li>
 <li>虚函数</li>
 <li>隐藏</li>
-</ul><p>这个编译警告之所以出现，是因为上面三个关键点，首先是发生了<code>重载</code>，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。<br>何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的函数，调用时必须指定父类命名空间，往深了说也就是编译器如果在子类中发现了要使用的函数的名字，注意，是名字不包含函数签名，只要名字匹配上，就不会再去父类中去寻找这个名字的函数，即便子类中的函数参数不匹配，也不会再去父类中寻找。</p><a id="more"></a>
-
-
-
+</ul>
+<p>这个编译警告之所以出现，是因为上面三个关键点，首先是发生了<code>重载</code>，子类重载了父类的函数，其次被重载的是虚函数，这时这个被重载的父类的虚函数将会被隐藏。<br>何为隐藏呢，应该是不能使用子类实例直接调用父类被隐藏的函数，调用时必须指定父类命名空间，往深了说也就是编译器如果在子类中发现了要使用的函数的名字，注意，是名字不包含函数签名，只要名字匹配上，就不会再去父类中去寻找这个名字的函数，即便子类中的函数参数不匹配，也不会再去父类中寻找。</p>
 <p>其实去掉<code>虚函数</code>这个关键点，在c++中当重载了父类的函数时，隐藏同样会发生，举个例子：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"foo of A"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"foo of B"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    B *b = <span class="keyword">new</span> B();</span><br><span class="line">    b-&gt;foo(); <span class="comment">//编译报错</span></span><br><span class="line">    b-&gt;A::foo(); <span class="comment">//应该指定命名空间A::</span></span><br><span class="line">    b-&gt;foo(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当重载的父类函数为虚函数时，代码如下：</p>
@@ -335,21 +335,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2018/10/04/git-找回已删除的分支/" rel="next" title="git-找回已删除的分支">
-                  <i class="fa fa-chevron-left"></i> git-找回已删除的分支
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2018/10/23/gdb调试qt程序时打印qt特有的类型数据/" rel="prev" title="gdb调试qt程序时打印qt特有的类型数据">
-                  gdb调试qt程序时打印qt特有的类型数据 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/04/git-找回已删除的分支/" rel="prev" title="git-找回已删除的分支">
+      <i class="fa fa-chevron-left"></i> git-找回已删除的分支
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/10/23/gdb调试qt程序时打印qt特有的类型数据/" rel="next" title="gdb调试qt程序时打印qt特有的类型数据">
+      gdb调试qt程序时打印qt特有的类型数据 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -478,14 +475,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -552,7 +545,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

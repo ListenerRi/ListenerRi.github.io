@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,8 +41,7 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
@@ -303,7 +303,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打印正三角</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloworld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String cell=<span class="string">"*"</span>;</span><br><span class="line">        String space=<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> lines=<span class="number">1</span>; lines&lt;=<span class="number">9</span>; lines++) &#123;</span><br><span class="line">            <span class="comment">// 只有偶数时才打印</span></span><br><span class="line">            <span class="keyword">if</span> (lines%<span class="number">2</span>==<span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印三角</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> cells=<span class="number">1</span>; cells&lt;=lines; cells++) &#123;</span><br><span class="line">                    System.out.print(cell);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">""</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打印正三角</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloworld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String cell=<span class="string">"*"</span>;</span><br><span class="line">        String space=<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> lines=<span class="number">1</span>; lines&lt;=<span class="number">9</span>; lines++) &#123;</span><br><span class="line">            <span class="comment">// 只有偶数时才打印</span></span><br><span class="line">            <span class="keyword">if</span> (lines%<span class="number">2</span>==<span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印三角</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> cells=<span class="number">1</span>; cells&lt;=lines; cells++) &#123;</span><br><span class="line">                    System.out.print(cell);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">""</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打印倒三角</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloworld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String cell=<span class="string">"*"</span>;</span><br><span class="line">        String space=<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> lines=<span class="number">9</span>; lines&gt;=<span class="number">1</span>; lines--) &#123;</span><br><span class="line">            <span class="comment">// 只有偶数时才打印</span></span><br><span class="line">            <span class="keyword">if</span> (lines%<span class="number">2</span>==<span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印三角</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> cells=<span class="number">1</span>; cells&lt;=lines; cells++) &#123;</span><br><span class="line">                    System.out.print(cell);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 打印空格</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> spaces=<span class="number">1</span>; spaces&lt;=(<span class="number">9</span>-lines)/<span class="number">2</span>; spaces++) &#123;</span><br><span class="line">                    System.out.print(space);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">""</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打印乘法口诀</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloworld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> lines=<span class="number">1</span>; lines&lt;=<span class="number">9</span>; lines++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> columns=<span class="number">1</span>; columns&lt;=lines; columns++) &#123;</span><br><span class="line">                System.out.print(columns+<span class="string">"*"</span>+lines+<span class="string">"="</span>+columns*lines+<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>附上图片:<br><img src="zsanjiao.png" alt="正三角"><br><img src="dsanjiao.png" alt="倒三角"><br><img src="koujue.png" alt="乘法口诀"></p>
@@ -324,21 +324,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/自定义bash终端提示符/" rel="next" title="自定义bash终端提示符">
-                  <i class="fa fa-chevron-left"></i> 自定义bash终端提示符
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" rel="prev" title="vim+ycm+eclim+javacomplete解决冲突">
-                  vim+ycm+eclim+javacomplete解决冲突 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/自定义bash终端提示符/" rel="prev" title="自定义bash终端提示符">
+      <i class="fa fa-chevron-left"></i> 自定义bash终端提示符
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" rel="next" title="vim+ycm+eclim+javacomplete解决冲突">
+      vim+ycm+eclim+javacomplete解决冲突 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -467,14 +464,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -541,7 +534,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

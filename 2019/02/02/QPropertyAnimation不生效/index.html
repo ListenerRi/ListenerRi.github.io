@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了.常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 wid">
+  <meta name="description" content="在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了. 常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 wi">
 <meta name="keywords" content="Qt,QPropertyAnimation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QPropertyAnimation不生效">
 <meta property="og:url" content="http://listenerri.com/2019/02/02/QPropertyAnimation不生效/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了.常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 wid">
+<meta property="og:description" content="在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了. 常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 wi">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QPropertyAnimation不生效">
-<meta name="twitter:description" content="在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了.常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 wid">
+<meta name="twitter:description" content="在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了. 常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 wi">
 
 <link rel="canonical" href="http://listenerri.com/2019/02/02/QPropertyAnimation不生效/">
 
@@ -299,8 +299,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了.</p><p>常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 widget 的位置和大小动画.</p><a id="more"></a>
-
+        <p>在 Qt 中实现动画的一种方便的做法就是使用 QPropertyAnimation 类, 构造 QPropertyAnimation 时设置目标 widget 和 property, 然后设置一下初始和结束的 property 值剩下的 Qt 就会帮我们做了.</p>
+<p>常用的一个动画属性就是 “geometry”, 这个属性包含了 widget 的位置以及形状(矩形), 所以通过设置这个属性可以实现 widget 的位置和大小动画.</p>
 <p>只是使用这个属性实现大小动画时要留意, widget 不能被设置固定的大小, 即下面这类函数不能调用, 否则 QPropertyAnimation 将无法调整目标 widget 的大小, 其中缘由细细想一下便可知道:</p>
 <ul>
 <li>setFixedSize</li>
@@ -328,21 +328,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/" rel="next" title="qt中的QPointer QSharedPointer等智能指针">
-                  <i class="fa fa-chevron-left"></i> qt中的QPointer QSharedPointer等智能指针
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2019/02/24/源码构建qtcreator记录/" rel="prev" title="源码构建qtcreator记录">
-                  源码构建qtcreator记录 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/" rel="prev" title="qt中的QPointer QSharedPointer等智能指针">
+      <i class="fa fa-chevron-left"></i> qt中的QPointer QSharedPointer等智能指针
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/24/源码构建qtcreator记录/" rel="next" title="源码构建qtcreator记录">
+      源码构建qtcreator记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -471,14 +468,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -545,7 +538,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

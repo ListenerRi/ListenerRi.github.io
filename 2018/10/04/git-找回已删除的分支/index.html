@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，执行git reflog命令后就可以找到分支B的痕迹: “commit">
+  <meta name="description" content="手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。 这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，执行git reflog命令后就可以找到分支B的痕迹: “commit">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git-找回已删除的分支">
 <meta property="og:url" content="http://listenerri.com/2018/10/04/git-找回已删除的分支/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，执行git reflog命令后就可以找到分支B的痕迹: “commit">
+<meta property="og:description" content="手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。 这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，执行git reflog命令后就可以找到分支B的痕迹: “commit">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git-找回已删除的分支">
-<meta name="twitter:description" content="手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，执行git reflog命令后就可以找到分支B的痕迹: “commit">
+<meta name="twitter:description" content="手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。 这时git reflog命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，从git reflog命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，执行git reflog命令后就可以找到分支B的痕迹: “commit">
 
 <link rel="canonical" href="http://listenerri.com/2018/10/04/git-找回已删除的分支/">
 
@@ -299,7 +299,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。</p><p>这时<code>git reflog</code>命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，<br>从<code>git reflog</code>命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，<br>执行<code>git reflog</code>命令后就可以找到分支B的痕迹: “commit id”，不管是从其他分支切换到分支B，还是分支B的一个提交记录，<br>都会看到其”commit id”，复制这个”commit id”然后切换过去，此时仓库处于分离头指针状态，其实现在已经是在分支B了，<br>只需要从当前状态创建一个分支，那么分支B也就复活了： <code>git checkout -b B-reborn</code><br>这个分支<code>B-reborn</code>就是先前删除的分支B。</p>
+        <p>手残总是难免的，有时候不小心删掉了一个还没有合并或者push的分支，等反应过来似乎已经找不到这个分支在仓库中存在的痕迹了。</p>
+<p>这时<code>git reflog</code>命令就体现出了它的价值，其实git会把我们在仓库里的所有操作都记录下来，<br>从<code>git reflog</code>命令的输出就可以看到，就算是从分支A切换到分支B也会被记录下来，那么假设，分支B被误删，<br>执行<code>git reflog</code>命令后就可以找到分支B的痕迹: “commit id”，不管是从其他分支切换到分支B，还是分支B的一个提交记录，<br>都会看到其”commit id”，复制这个”commit id”然后切换过去，此时仓库处于分离头指针状态，其实现在已经是在分支B了，<br>只需要从当前状态创建一个分支，那么分支B也就复活了： <code>git checkout -b B-reborn</code><br>这个分支<code>B-reborn</code>就是先前删除的分支B。</p>
+
     </div>
 
     
@@ -313,21 +315,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2018/09/24/qprocess参数设置/" rel="next" title="qprocess参数设置">
-                  <i class="fa fa-chevron-left"></i> qprocess参数设置
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2018/10/04/hides-overloaded-virtual-function/" rel="prev" title="hides overloaded virtual function">
-                  hides overloaded virtual function <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/24/qprocess参数设置/" rel="prev" title="qprocess参数设置">
+      <i class="fa fa-chevron-left"></i> qprocess参数设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/10/04/hides-overloaded-virtual-function/" rel="next" title="hides overloaded virtual function">
+      hides overloaded virtual function <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -456,14 +455,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -530,7 +525,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

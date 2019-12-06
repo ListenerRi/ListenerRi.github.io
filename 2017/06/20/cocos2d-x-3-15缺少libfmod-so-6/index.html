@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:123$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object file: No such file or directory">
+  <meta name="description" content="cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:123$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object file: No such file or directory 从报错可以看出缺少libfmod">
 <meta name="keywords" content="linux,deepin,cocos2d,libfmod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cocos2d-x-3.15缺少libfmod.so.6">
 <meta property="og:url" content="http://listenerri.com/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:123$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object file: No such file or directory">
+<meta property="og:description" content="cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:123$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object file: No such file or directory 从报错可以看出缺少libfmod">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d-x-3.15缺少libfmod.so.6">
-<meta name="twitter:description" content="cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:123$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object file: No such file or directory">
+<meta name="twitter:description" content="cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:123$ ./cpp-tests ./cpp-tests: error while loading shared libraries: libfmod.so.6:cannot open shared object file: No such file or directory 从报错可以看出缺少libfmod">
 
 <link rel="canonical" href="http://listenerri.com/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/">
 
@@ -299,7 +299,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./cpp-tests </span><br><span class="line">./cpp-tests: error while loading shared libraries: libfmod.so.6:</span><br><span class="line">cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p><a id="more"></a>
+        <p>cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./cpp-tests </span><br><span class="line">./cpp-tests: error while loading shared libraries: libfmod.so.6:</span><br><span class="line">cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p>
 <p>从报错可以看出缺少<code>libfmod.so.6</code>这个库文件, 网上搜索后得知这个文件在:<br><code>$COCOS2D_HOME/external/linux-specific/fmod/prebuilt/64-bit</code>目录下,<br>而且是在执行<code>$COCOS2D_HOME/build/install-deps-linux.sh</code>时发生报错的,</p>
 <p>他们的解决办法是将上述目录下的两个库文件<code>libfmod.so</code>和<code>libfmodL.so</code>,<br>复制到<code>/usr/local/lib/</code>目录下, 并创建链接文件, 然后接着执行<code>install-deps-linux.sh</code>,<br>但是这个方法对我没有作用, 可能是因为我是用的系统的缘故<code>(deepin linux)</code>.</p>
 <p><font color="red">如果上述方法对你也没用就试试下面的方法:</font><br>复制两个库文件到<code>/usr/lib/</code>目录下, 然后创建链接文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#在cocos2d目录下执行</span><br><span class="line">cp external/linux-specific/fmod/prebuilt/64-bit/* /usr/lib/</span><br><span class="line">cd /usr/lib</span><br><span class="line">ln -s libfmod.so libfmod.so.6</span><br></pre></td></tr></table></figure></p>
@@ -321,21 +321,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2017/02/25/miui-正在通过usb安装/" rel="next" title="miui 正在通过usb安装">
-                  <i class="fa fa-chevron-left"></i> miui 正在通过usb安装
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2017/07/20/python的库文件在哪儿/" rel="prev" title="python的库文件在哪儿">
-                  python的库文件在哪儿 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/02/25/miui-正在通过usb安装/" rel="prev" title="miui 正在通过usb安装">
+      <i class="fa fa-chevron-left"></i> miui 正在通过usb安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/20/python的库文件在哪儿/" rel="next" title="python的库文件在哪儿">
+      python的库文件在哪儿 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -464,14 +461,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -538,7 +531,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：12345678imageSwitc">
+  <meta name="description" content="只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样 1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：12345678imageSwit">
 <meta name="keywords" content="ImageSwitcher,TextSwitcher">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ImageSwitcher和TextSwitcher使用笔记">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/ImageSwitcher和TextSwitcher使用笔记/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：12345678imageSwitc">
+<meta property="og:description" content="只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样 1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：12345678imageSwit">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ImageSwitcher和TextSwitcher使用笔记">
-<meta name="twitter:description" content="只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：12345678imageSwitc">
+<meta name="twitter:description" content="只有步骤，记录，备忘只举ImageSwitcher的例子，TextSwitcher基本一样 1、布局文件中添加ImageSwitcher控件2、activity中findViewById()获取到ImageSwitcher对象3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：12345678imageSwit">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/ImageSwitcher和TextSwitcher使用笔记/">
 
@@ -299,8 +299,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p><p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="comment">//1、new一个ImageView</span></span><br><span class="line">			<span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">			<span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p><a id="more"></a>
-
+        <p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
+<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="comment">//1、new一个ImageView</span></span><br><span class="line">			<span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">			<span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
 <p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
 <p>结束</p>
 <blockquote>
@@ -321,21 +321,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/一些关于Fragment的笔记/" rel="next" title="一些关于Fragment的笔记">
-                  <i class="fa fa-chevron-left"></i> 一些关于Fragment的笔记
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/ViewPager相关笔记/" rel="prev" title="ViewPager相关笔记">
-                  ViewPager相关笔记 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/一些关于Fragment的笔记/" rel="prev" title="一些关于Fragment的笔记">
+      <i class="fa fa-chevron-left"></i> 一些关于Fragment的笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/ViewPager相关笔记/" rel="next" title="ViewPager相关笔记">
+      ViewPager相关笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -464,14 +461,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -538,7 +531,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

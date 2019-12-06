@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&amp;#39;\0&amp;#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1. strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数然而获取到的这个字符数并不包含尾部被自动追加的&amp;#39;\0&amp;#39;空字符">
+  <meta name="description" content="c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&amp;#39;\0&amp;#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1.  strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数然而获取到的这个字符数并不包含尾部被自动追加的&amp;#39;\0&amp;#39;空字符 sizeofsiz">
 <meta name="keywords" content="strlen,sizeof,c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c语言strlen()与sizeof">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/c语言strlen-与sizeof/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&amp;#39;\0&amp;#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1. strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数然而获取到的这个字符数并不包含尾部被自动追加的&amp;#39;\0&amp;#39;空字符">
+<meta property="og:description" content="c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&amp;#39;\0&amp;#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1.  strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数然而获取到的这个字符数并不包含尾部被自动追加的&amp;#39;\0&amp;#39;空字符 sizeofsiz">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言strlen()与sizeof">
-<meta name="twitter:description" content="c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&amp;#39;\0&amp;#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1. strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数然而获取到的这个字符数并不包含尾部被自动追加的&amp;#39;\0&amp;#39;空字符">
+<meta name="twitter:description" content="c语言没有string类型,字符串的处理使用的是char数组c会默认在字符串的尾部增加一个&amp;#39;\0&amp;#39;,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1.  strlen()我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数然而获取到的这个字符数并不包含尾部被自动追加的&amp;#39;\0&amp;#39;空字符 sizeofsiz">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/c语言strlen-与sizeof/">
 
@@ -301,8 +301,8 @@
       
         <blockquote>
 <p>c语言没有string类型,字符串的处理使用的是char数组<br>c会默认在字符串的尾部增加一个<code>&#39;\0&#39;</code>,也叫空字符(用来标记字符串的结束),所以字符串真正在内存中占用的字节数会比字符串的字符数多1.</p>
-</blockquote><h1 id="strlen"><a href="#strlen" class="headerlink" title="strlen()"></a>strlen()</h1><p>我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数<br>然而获取到的这个字符数并不包含尾部被自动追加的<code>&#39;\0&#39;</code>空字符</p><a id="more"></a>
-
+</blockquote>
+<h1 id="strlen"><a href="#strlen" class="headerlink" title="strlen()"></a>strlen()</h1><p>我们使用strlen()方法可以获取字符串的长度,也就是包含多少个字符数<br>然而获取到的这个字符数并不包含尾部被自动追加的<code>&#39;\0&#39;</code>空字符</p>
 <h1 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h1><p>sizeof 这并不是一个方法,而是一个关键字,用来获得类型的大小,或某个量的大小,这里只讨论获取具体量的大小<br>sizeof获取的是c或者程序员为这个具体量分配了多大的空间(字节数)<br>以字符串,数组char举例:<br>声明了一个20大小的字符串:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">name = jack;</span><br></pre></td></tr></table></figure></p>
 <p>那么<code>sizeof name</code>获得的大小就是20,而不是<code>jack</code>的字符数4,也不是真是占用内存的字节数5<br>而<code>strlen(name)</code>,方法获得的大小则是4,而不是5或者20</p>
 <h1 id="测试源码"><a href="#测试源码" class="headerlink" title="测试源码"></a>测试源码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEST <span class="meta-string">"i am jack"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"type your name:\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"name is :%s\n"</span>, name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof name is : %ld\n"</span>, <span class="keyword">sizeof</span> name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"strlen name is : %ld\n"</span>, <span class="built_in">strlen</span>(name));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof TEST is : %ld\n"</span>, <span class="keyword">sizeof</span> TEST);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"strlen TEST is : %ld\n"</span>, <span class="built_in">strlen</span>(TEST));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -323,21 +323,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/" rel="next" title="hybrid-sleep和sleep以及hibernate的区别">
-                  <i class="fa fa-chevron-left"></i> hybrid-sleep和sleep以及hibernate的区别
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/c语言打印乘法口诀和三角/" rel="prev" title="c语言打印乘法口诀和三角">
-                  c语言打印乘法口诀和三角 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/" rel="prev" title="hybrid-sleep和sleep以及hibernate的区别">
+      <i class="fa fa-chevron-left"></i> hybrid-sleep和sleep以及hibernate的区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/c语言打印乘法口诀和三角/" rel="next" title="c语言打印乘法口诀和三角">
+      c语言打印乘法口诀和三角 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -467,14 +464,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -541,7 +534,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

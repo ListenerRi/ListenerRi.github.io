@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="注意实体按键和虚拟按键的区别使用的是android4.2版本，硬件：mt6589以下操作都需要root权限！关闭实体按键功能包括:菜单,返回,home,最近使用root文件管理器，如RE文件管理器在/system/usr/keylayout/Generic.kl文件中搜索menu，注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词">
+  <meta name="description" content="注意实体按键和虚拟按键的区别使用的是android4.2版本，硬件：mt6589 以下操作都需要root权限！  关闭实体按键功能包括:菜单,返回,home,最近 使用root文件管理器，如RE文件管理器在/system/usr/keylayout/Generic.kl文件中搜索menu，注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词 搜索到后在这一行的开头，添加上一个英文的符">
 <meta name="keywords" content="android,实体按键,虚拟按键">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android关闭手机实体按键开启虚拟按键">
 <meta property="og:url" content="http://listenerri.com/2016/04/23/android关闭手机实体按键开启虚拟按键/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="注意实体按键和虚拟按键的区别使用的是android4.2版本，硬件：mt6589以下操作都需要root权限！关闭实体按键功能包括:菜单,返回,home,最近使用root文件管理器，如RE文件管理器在/system/usr/keylayout/Generic.kl文件中搜索menu，注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词">
+<meta property="og:description" content="注意实体按键和虚拟按键的区别使用的是android4.2版本，硬件：mt6589 以下操作都需要root权限！  关闭实体按键功能包括:菜单,返回,home,最近 使用root文件管理器，如RE文件管理器在/system/usr/keylayout/Generic.kl文件中搜索menu，注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词 搜索到后在这一行的开头，添加上一个英文的符">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android关闭手机实体按键开启虚拟按键">
-<meta name="twitter:description" content="注意实体按键和虚拟按键的区别使用的是android4.2版本，硬件：mt6589以下操作都需要root权限！关闭实体按键功能包括:菜单,返回,home,最近使用root文件管理器，如RE文件管理器在/system/usr/keylayout/Generic.kl文件中搜索menu，注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词">
+<meta name="twitter:description" content="注意实体按键和虚拟按键的区别使用的是android4.2版本，硬件：mt6589 以下操作都需要root权限！  关闭实体按键功能包括:菜单,返回,home,最近 使用root文件管理器，如RE文件管理器在/system/usr/keylayout/Generic.kl文件中搜索menu，注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词 搜索到后在这一行的开头，添加上一个英文的符">
 
 <link rel="canonical" href="http://listenerri.com/2016/04/23/android关闭手机实体按键开启虚拟按键/">
 
@@ -299,11 +299,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>注意实体按键和虚拟按键的区别<br>使用的是android4.2版本，硬件：mt6589</p><font color="red"><strong>以下操作都需要root权限！</strong></font><h1 id="关闭实体按键功能"><a href="#关闭实体按键功能" class="headerlink" title="关闭实体按键功能"></a>关闭实体按键功能</h1><p>包括:菜单,返回,home,最近</p><p>使用root文件管理器，如RE文件管理器<br>在<code>/system/usr/keylayout/Generic.kl</code>文件中搜索menu，<br>注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词</p><a id="more"></a>
+        <p>注意实体按键和虚拟按键的区别<br>使用的是android4.2版本，硬件：mt6589</p>
+<font color="red"><strong>以下操作都需要root权限！</strong></font>
 
-
-
-
+<h1 id="关闭实体按键功能"><a href="#关闭实体按键功能" class="headerlink" title="关闭实体按键功能"></a>关闭实体按键功能</h1><p>包括:菜单,返回,home,最近</p>
+<p>使用root文件管理器，如RE文件管理器<br>在<code>/system/usr/keylayout/Generic.kl</code>文件中搜索menu，<br>注意搜索结果应该是只有menu这一个单词，而不是包含menu的单词</p>
 <p>搜索到后在这一行的开头，添加上一个英文的符号：‘#’<br>也就是把这一行注释掉的意思！</p>
 <p>返回键：back<br>同理、同上</p>
 <p>我的手机菜单，home，返回键所对应的键值为(仅供参考)：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">139</span>    MENU</span><br><span class="line"><span class="number">158</span>    BACK</span><br><span class="line"><span class="number">172</span>    HOME</span><br></pre></td></tr></table></figure></p>
@@ -334,21 +334,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/04/23/linux中oracle数据库的监听和EM的开启和关闭shell脚本/" rel="next" title="linux中oracle数据库的监听和EM的开启和关闭shell脚本">
-                  <i class="fa fa-chevron-left"></i> linux中oracle数据库的监听和EM的开启和关闭shell脚本
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/01/tilda开机启动不透明/" rel="prev" title="tilda开机启动不透明">
-                  tilda开机启动不透明 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/04/23/linux中oracle数据库的监听和EM的开启和关闭shell脚本/" rel="prev" title="linux中oracle数据库的监听和EM的开启和关闭shell脚本">
+      <i class="fa fa-chevron-left"></i> linux中oracle数据库的监听和EM的开启和关闭shell脚本
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/01/tilda开机启动不透明/" rel="next" title="tilda开机启动不透明">
+      tilda开机启动不透明 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -478,14 +475,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -552,7 +545,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

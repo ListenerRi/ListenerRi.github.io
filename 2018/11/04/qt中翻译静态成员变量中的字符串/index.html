@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。">
+  <meta name="description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。 经过一番搜索和阅读 qt 文档，找到了解决方法，原来 qt 早已有应对之策：QT_TR_NOO">
 <meta name="keywords" content="qt,static,tr,翻译">
 <meta property="og:type" content="article">
 <meta property="og:title" content="qt中翻译静态成员变量中的字符串">
 <meta property="og:url" content="http://listenerri.com/2018/11/04/qt中翻译静态成员变量中的字符串/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。">
+<meta property="og:description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。 经过一番搜索和阅读 qt 文档，找到了解决方法，原来 qt 早已有应对之策：QT_TR_NOO">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="qt中翻译静态成员变量中的字符串">
-<meta name="twitter:description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。">
+<meta name="twitter:description" content="在 qt 中要翻译一个字符串很简单，只需要使用 tr 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。 经过一番搜索和阅读 qt 文档，找到了解决方法，原来 qt 早已有应对之策：QT_TR_NOO">
 
 <link rel="canonical" href="http://listenerri.com/2018/11/04/qt中翻译静态成员变量中的字符串/">
 
@@ -299,7 +299,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在 qt 中要翻译一个字符串很简单，只需要使用 <code>tr</code> 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。</p><a id="more"></a>
+        <p>在 qt 中要翻译一个字符串很简单，只需要使用 <code>tr</code> 函数包裹住字符串即可。后来发现这一方法对于静态变量无效，经同事提醒原来静态数据初始化时，程序还没有加载翻译数据，也就是一般写在 main 函数中的 QTranslator::load() / app.installTranslator() 类似代码。</p>
 <p>经过一番搜索和阅读 qt 文档，找到了解决方法，原来 qt 早已有应对之策：<code>QT_TR_NOOP</code> 这个宏，或者说这类宏，因为类似的还有 <code>QT_TR_NOOP_UTF8</code> <code>QT_TRANSLATE_NOOP</code>，这里只是简要说一下其大概用法，想要了解更多可以查阅 qt 相关文档。下面只介绍 <code>QT_TR_NOOP</code> 这个宏的用法：</p>
 <p>这个宏跟 <code>tr</code> 函数的原理不同，<code>tr</code> 函数中的字符串会在程序加载时被替换为翻译后的文本，可以理解为这是一种类似宏展开的过程，因此这是一种静态的翻译，而 <code>QT_TR_NOOP</code> 这个宏则是动态翻译，传给这个宏的字符串将会被标记为需要动态翻译的内容，何为动态翻译，也就是说在程序加载时不会被修改/替换字符串( tr() 函数的过程)，而是在真正使用时再进行翻译，拿 qt 文档中的例子来看：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">QString FriendlyConversation::greeting(<span class="keyword">int</span> type)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *greeting_strings[] = &#123;</span><br><span class="line">  QT_TR_NOOP(<span class="string">"Hello"</span>),</span><br><span class="line">  QT_TR_NOOP(<span class="string">"Goodbye"</span>)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> tr(greeting_strings[type]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -323,21 +323,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2018/11/04/qtcreator-fakevim-小企鹅输入法自动切换到英文/" rel="next" title="qtcreator-fakevim-小企鹅输入法自动切换到英文">
-                  <i class="fa fa-chevron-left"></i> qtcreator-fakevim-小企鹅输入法自动切换到英文
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/" rel="prev" title="qt中的QPointer QSharedPointer等智能指针">
-                  qt中的QPointer QSharedPointer等智能指针 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/04/qtcreator-fakevim-小企鹅输入法自动切换到英文/" rel="prev" title="qtcreator-fakevim-小企鹅输入法自动切换到英文">
+      <i class="fa fa-chevron-left"></i> qtcreator-fakevim-小企鹅输入法自动切换到英文
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/24/qt中的QPointer-QSharedPointer等智能指针/" rel="next" title="qt中的QPointer QSharedPointer等智能指针">
+      qt中的QPointer QSharedPointer等智能指针 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -466,14 +463,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -540,7 +533,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

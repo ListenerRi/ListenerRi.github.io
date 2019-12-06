@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso最后使用如下命令:1mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/b">
+  <meta name="description" content="在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接 使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso 最后使用如下命令:1mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux">
 <meta name="keywords" content="linux,iso,可启动,u盘启动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux制作可启动iso">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/linux制作可启动iso/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso最后使用如下命令:1mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/b">
+<meta property="og:description" content="在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接 使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso 最后使用如下命令:1mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux制作可启动iso">
-<meta name="twitter:description" content="在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso最后使用如下命令:1mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/b">
+<meta name="twitter:description" content="在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接 使用isolinux作为引导,需自行下载并放到iso根目录下,需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso 最后使用如下命令:1mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/linux制作可启动iso/">
 
@@ -299,9 +299,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接</p><p>使用isolinux作为引导,需自行下载并放到iso根目录下,<br>需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso</p><p>最后使用如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table myiso</span><br></pre></td></tr></table></figure></p><a id="more"></a>
-
-
+        <p>在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接</p>
+<p>使用isolinux作为引导,需自行下载并放到iso根目录下,<br>需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso</p>
+<p>最后使用如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table myiso</span><br></pre></td></tr></table></figure></p>
 <p>参数:</p>
 <p>-o 将生成的iso文件</p>
 <p>-b 引导程序<font color="red">(这里的路径是指iso的根目录,也就是相对于myiso这个目录)</font></p>
@@ -325,21 +325,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/c语言打印乘法口诀和三角/" rel="next" title="c语言打印乘法口诀和三角">
-                  <i class="fa fa-chevron-left"></i> c语言打印乘法口诀和三角
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/06/30/解决安卓屏幕旋转所带来的问题/" rel="prev" title="解决安卓屏幕旋转所带来的问题">
-                  解决安卓屏幕旋转所带来的问题 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/c语言打印乘法口诀和三角/" rel="prev" title="c语言打印乘法口诀和三角">
+      <i class="fa fa-chevron-left"></i> c语言打印乘法口诀和三角
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/06/30/解决安卓屏幕旋转所带来的问题/" rel="next" title="解决安卓屏幕旋转所带来的问题">
+      解决安卓屏幕旋转所带来的问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -468,14 +465,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -542,7 +535,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

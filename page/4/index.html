@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,8 +41,7 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
@@ -298,15 +298,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本文不一定适用于所有电脑，需要自己找到对应的设备文件</p><p>我的电脑中，风扇对应到linux下的设备文件的路径是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sys/class/hwmon/hwmon2/pwm1</span><br></pre></td></tr></table></figure></p><p>其他电脑即便不是这个文件，也在类似的目录下，这个文件的内容是”0-255“的数值，<br>相应的数值大小对应相应的风扇转速，向这个文件中写入不同的数据风扇就控制风扇的转速了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/10/26/linux下控制风扇转速/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>本文不一定适用于所有电脑，需要自己找到对应的设备文件</p>
+<p>我的电脑中，风扇对应到linux下的设备文件的路径是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sys/class/hwmon/hwmon2/pwm1</span><br></pre></td></tr></table></figure></p>
+<p>其他电脑即便不是这个文件，也在类似的目录下，这个文件的内容是”0-255“的数值，<br>相应的数值大小对应相应的风扇转速，向这个文件中写入不同的数据风扇就控制风扇的转速了。</p>
+<p>我的电脑中这个文件的默认值是”85“。</p>
+<p>下面附上我写的一个shell脚本，放到PATH里就可以方便的控制风扇转速了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">read -p &quot;input speed(0-255) and ENTER: &quot; SPEED</span><br><span class="line">[[ -z $SPEED ]] &amp;&amp; SPEED=85</span><br><span class="line">echo $SPEED | sudo tee /sys/class/hwmon/hwmon2/pwm1</span><br></pre></td></tr></table></figure></p>
+<p>注意如果上述提到的设备文件不同，需要修改脚本中的路径。<br>将上述代码保存为一个shell文件，如<code>fancontrol.sh</code>，并为其增加可执行权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x fancontrol.sh</span><br></pre></td></tr></table></figure></p>
+<p>然后复制到PATH下，如<code>/bin</code>下。</p>
+<p>使用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//最大转速</span><br><span class="line">fancontrol.sh 255</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -404,7 +404,19 @@
       
           <blockquote>
 <p>本文是学习这篇博客所得的收获:<br><a href="http://mobile.51cto.com/abased-375428.htm" target="_blank" rel="noopener"> Android：Layout_weight的深刻理解</a></p>
-</blockquote><p>当子控件有<code>layout_weight</code>属性时, 系统将先按照<code>layout_width</code>或<code>layout_hight</code>属性<br>先把子控件放到父控件中, 之后才解析<code>layout_weight</code>属性, 然后计算父控件中的剩余空间,<br>最后按比例分配剩余空间给子控件.</p>
+</blockquote>
+<p>当子控件有<code>layout_weight</code>属性时, 系统将先按照<code>layout_width</code>或<code>layout_hight</code>属性<br>先把子控件放到父控件中, 之后才解析<code>layout_weight</code>属性, 然后计算父控件中的剩余空间,<br>最后按比例分配剩余空间给子控件.</p>
+<p>看一下处理<code>layout_weight</code>时所用到的公式:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 实际尺寸: 子控件最终展示出来的尺寸</span><br><span class="line"># 当前尺寸: 子控件刚被放到布局中, 系统还没有解析其weight属性时的尺寸</span><br><span class="line"># weight比例: 子控件在所有有`layout_weight`属性的控件中所占的比例</span><br><span class="line">#             (例: 三个子控件, 第一个比重为1, 第二个为2, 第三个为2,</span><br><span class="line">#              那么第一个所占比例为1/5, 第二个为2/5, 第三个为2/5)</span><br><span class="line"># 剩余空间: 子控件刚被放到父控件中, 系统还没有解析其weight属性时父控件还有多少剩余空间</span><br><span class="line"></span><br><span class="line">剩余空间 = 父控件尺寸 - 子控件1尺寸 - 子控件2尺寸 - 子控件3尺寸...</span><br><span class="line">实际尺寸 = 当前尺寸 + weight比例 * 剩余空间尺寸</span><br></pre></td></tr></table></figure></p>
+<p>当控件的<code>layout_width</code>以及<code>layout_hight</code>的值为<code>0</code>或者<code>wrap_content</code>时,<br><code>layout_weight</code>属性很容易预测最终效果, 它们会按照自己的<code>weight比例</code>去<br>分配<code>剩余空间尺寸</code>.</p>
+<p>需要留意的是当控件的<code>layout_width</code>或<code>layout_hight</code>的值为<code>fill_parent</code>的时候,<br>此时每个子控件在刚被放到父控件中, 且系统还没有解析子控件的<code>layout_weight</code>时,<br>父控件就已经没有剩余空间了, </p>
+<font color="red"><br>因为此时所有子控件的当前尺寸都等于父控件的尺寸, 且第一个子控件就已经占满了父控件!<br></font>
+
+<p>那么套用上述公式, 计算子控件最终实际尺寸的过程如下:</p>
+<blockquote>
+<p>下面假设一个父控件中有三个子控件, 其比重为1 : 2 : 3,<br>则子控件的<code>weight比例</code>依次为<code>1/6</code>, <code>2/6</code>, <code>3/6</code></p>
+</blockquote>
+<p>剩余空间的计算如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">剩余空间 = 父控件尺寸 - 子控件1当前尺寸 - 子控件2当前尺寸 - 子控件3当前尺寸</span><br><span class="line"># 上述等同于:</span><br><span class="line">剩余空间 = 父控件尺寸 - 父控件尺寸 - 父控件尺寸 - 父控件尺寸</span><br><span class="line"># 则(注意是负2):</span><br><span class="line">剩余空间 = -2 * 父控件尺寸</span><br></pre></td></tr></table></figure></p>
+<p>子控件最终实际尺寸的计算如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">实际尺寸 = 当前尺寸 + weight比例 * 剩余空间尺寸</span><br><span class="line"># 子控件1:</span><br><span class="line">实际尺寸 = 父控件尺寸 + 1/6 * (-2 * 父控件尺寸)</span><br><span class="line">        = 父控件尺寸 - 2/6 * 父控件尺寸</span><br><span class="line">        = 4/6 * 父控件尺寸</span><br><span class="line">        = 2/3 * 父控件尺寸</span><br><span class="line"></span><br><span class="line"># 子控件2:</span><br><span class="line">实际尺寸 = 父控件尺寸 + 2/6 * (-2 * 父控件尺寸)</span><br><span class="line">        = 父控件尺寸 - 4/6 * 父控件尺寸</span><br><span class="line">        = 2/6 * 父控件尺寸</span><br><span class="line">        = 1/3 * 父控件尺寸</span><br><span class="line"></span><br><span class="line"># 子控件3:</span><br><span class="line">实际尺寸 = 父控件尺寸 + 3/6 * (-2 * 父控件尺寸)</span><br><span class="line">        = 父控件尺寸 - 6/6 * 父控件尺寸</span><br><span class="line">        = 父控件尺寸 - 父控件尺寸</span><br><span class="line">        = 0</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/15/搞明白android中layout-weight的用法/#more" rel="contents">
@@ -509,6 +521,7 @@
 
       
           <p>一张图解释Dockerfile中CMD和ENTRYPOINT的关系,<br>另外使用’docker run’新建容器时, 镜像后面跟的命令会覆盖Dockerfile中的CMD.<br><img src="docker.png" alt="docker"></p>
+
       
     </div>
 
@@ -604,15 +617,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>使用如下命令启动一个php容器, 并将php项目的目录映射到容器内的apache容器下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --name php_app -v "/project/directory":/var/www/html -d php</span><br></pre></td></tr></table></figure></p><p>然后访问<code>127.0.0.1</code>, 结果网站无法运行, 提示:<code>Permission denied</code>,</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/09/12/docker运行php容器网站无法运行/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>使用如下命令启动一个php容器, 并将php项目的目录映射到容器内的apache容器下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --name php_app -v "/project/directory":/var/www/html -d php</span><br></pre></td></tr></table></figure></p>
+<p>然后访问<code>127.0.0.1</code>, 结果网站无法运行, 提示:<code>Permission denied</code>,</p>
+<p>进入正在运行的php容器, 去看看项目目录在容器里的权限是什么:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it php_app bash</span><br><span class="line">cd /var/www/html</span><br><span class="line">ls -l</span><br></pre></td></tr></table></figure></p>
+<p>发现文件的拥有者和属组都无法识别, 直接显示的UID和GID, 都是1000,<br>这是因为项目文件在容器外, 也就是主机本地的拥有者和属组是都是我的用户,<br>而我的用户的UID和GID在主机中是1000,<br>但是php容器里却没有我这个账户, 所以也就无法正常识别所有者了,<br>自然网站无法正常运行. 要想解决这个问题就得知道php这个容器<br>使用的是哪个用户来启动apache和php服务, 经过搜索得知是”www-data”用户,<br>那么修改这个用户的UID和GID为我的就行了(这里都是1000):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod -g 1000 www-data &amp;&amp; usermod -u 1000 -g 1000 www-data</span><br></pre></td></tr></table></figure></p>
+<p>然后重启php容器即可:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart php_app</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -710,7 +720,12 @@
       
           <blockquote>
 <p>当前操作系统: deepin基于debian</p>
-</blockquote><h1 id="模块管理器pip"><a href="#模块管理器pip" class="headerlink" title="模块管理器pip"></a>模块管理器pip</h1><p>默认的命令pip可能是来自pip2也可能是pip3, 这取决于安装pip2和pip3的顺序,<br>安装pip2或pip3时会覆盖原有pip可执行文件, 所以在使用pip安装python模块时,<br>最好明确指出使用pip2还是pip3, 而不是直接使用pip命令, 这样可以避免明明要安装python3的模块库, 下载安装的却是python2的模块库.</p>
+</blockquote>
+<h1 id="模块管理器pip"><a href="#模块管理器pip" class="headerlink" title="模块管理器pip"></a>模块管理器pip</h1><p>默认的命令pip可能是来自pip2也可能是pip3, 这取决于安装pip2和pip3的顺序,<br>安装pip2或pip3时会覆盖原有pip可执行文件, 所以在使用pip安装python模块时,<br>最好明确指出使用pip2还是pip3, 而不是直接使用pip命令, 这样可以避免明明要安装python3的模块库, 下载安装的却是python2的模块库.</p>
+<h1 id="安装模块-库"><a href="#安装模块-库" class="headerlink" title="安装模块(库)"></a>安装模块(库)</h1><p>使用pip命令安装模块时, 是否使用sudo提权会影响安装路径.</p>
+<h2 id="使用sudo提权"><a href="#使用sudo提权" class="headerlink" title="使用sudo提权"></a>使用sudo提权</h2><p>会安装模块到以下路径:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/lib/python*(版本不同,具体目录不同)</span><br><span class="line"><span class="comment"># python自带的一些模块文件在这个路径下.</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/lib/python*(版本不同,具体目录不同)</span><br><span class="line"><span class="comment"># 用户自行安装的模块一般在这个路径下.</span></span><br></pre></td></tr></table></figure>
+<h2 id="没有使用sudo提权"><a href="#没有使用sudo提权" class="headerlink" title="没有使用sudo提权"></a>没有使用sudo提权</h2><p>会安装模块到以下路径:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.local/lib/python*(版本不同,具体目录不同)</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/07/20/python的库文件在哪儿/#more" rel="contents">
@@ -815,14 +830,11 @@
 
       
           <p>cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./cpp-tests </span><br><span class="line">./cpp-tests: error while loading shared libraries: libfmod.so.6:</span><br><span class="line">cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/06/20/cocos2d-x-3-15缺少libfmod-so-6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>从报错可以看出缺少<code>libfmod.so.6</code>这个库文件, 网上搜索后得知这个文件在:<br><code>$COCOS2D_HOME/external/linux-specific/fmod/prebuilt/64-bit</code>目录下,<br>而且是在执行<code>$COCOS2D_HOME/build/install-deps-linux.sh</code>时发生报错的,</p>
+<p>他们的解决办法是将上述目录下的两个库文件<code>libfmod.so</code>和<code>libfmodL.so</code>,<br>复制到<code>/usr/local/lib/</code>目录下, 并创建链接文件, 然后接着执行<code>install-deps-linux.sh</code>,<br>但是这个方法对我没有作用, 可能是因为我是用的系统的缘故<code>(deepin linux)</code>.</p>
+<p><font color="red">如果上述方法对你也没用就试试下面的方法:</font><br>复制两个库文件到<code>/usr/lib/</code>目录下, 然后创建链接文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#在cocos2d目录下执行</span><br><span class="line">cp external/linux-specific/fmod/prebuilt/64-bit/* /usr/lib/</span><br><span class="line">cd /usr/lib</span><br><span class="line">ln -s libfmod.so libfmod.so.6</span><br></pre></td></tr></table></figure></p>
+<p>然后就可以直接测试demo了, 不用重新编译</p>
+
       
     </div>
 
@@ -918,15 +930,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p><h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p><h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/data/data/com.miui.securitycenter/shared_prefs</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/02/25/miui-正在通过usb安装/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p>
+<h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p>
+<h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/data/data/com.miui.securitycenter/shared_prefs</span><br></pre></td></tr></table></figure></p>
+<p>用RE管理器的编辑模式(默认是查看模式)打开这个文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">remote_provider_preferences.xml</span><br></pre></td></tr></table></figure></p>
+<p>找到下面这句:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;boolean name=&quot;perm_adb_install_notify&quot; value=&quot;true&quot; /&gt;</span><br><span class="line"># 将其中的&quot;true&quot;修改为&quot;false&quot;</span><br><span class="line"># 修改后为:</span><br><span class="line">&lt;boolean name=&quot;perm_adb_install_notify&quot; value=&quot;false&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>还有找到这句:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 要确保这句中的值为&quot;true&quot;</span><br><span class="line"># 这个选项对应的时开发者选项里的&quot;USB安装&quot;</span><br><span class="line"># 只有这个值为&quot;true&quot;的时候这个选项才是打开的</span><br><span class="line">&lt;boolean name=&quot;security_adb_install_enable&quot; value=&quot;true&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>OK了, 不过这个方法好像重启手机后会重置, 需要再次设置, 不过也是不错的了</p>
+
       
     </div>
 
@@ -1027,10 +1038,15 @@
 <li>便捷的import,extends,implement等</li>
 <li>快速插入setter,getter方法,等等</li>
 <li>插件地址: <a href="https://github.com/artur-shaik/vim-javacomplete2" target="_blank" rel="noopener">https://github.com/artur-shaik/vim-javacomplete2</a></li>
-</ul><h2 id="syntastic"><a href="#syntastic" class="headerlink" title="syntastic"></a>syntastic</h2><ul>
+</ul>
+<h2 id="syntastic"><a href="#syntastic" class="headerlink" title="syntastic"></a>syntastic</h2><ul>
 <li>支持大量语言的语义检测</li>
 <li>插件地址: <a href="https://github.com/vim-syntastic/syntastic" target="_blank" rel="noopener">https://github.com/vim-syntastic/syntastic</a></li>
 </ul>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p>当使用javacomplete2(以下简称jc2)补全非项目java文件时,<br>也就是说编辑的文件不是eclipse,gradle,maven等管理的项目中的文件,<br>这时如果是单个文件还没有什么问题,但如果是两个或两个以上,<br>相互关联的文件(如:A文件中new到了B文件中定义的类),jc2就会力不从心,<br>因为jc2不知道所有源文件的位置,以及CLASSPATH应该如何设置,<br>如果是项目文件jc2可以利用项目的配置文件来处理上述问题.</p>
+<h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><blockquote>
+<p><strong><em>这个问题已经在最新版本中解决了!</em></strong></p>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/02/12/vim中javacomplete2与syntastic一点使用心得/#more" rel="contents">
@@ -1134,7 +1150,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>首先感谢开发者:<br><a href="https://github.com/drcoms/drcom-generic" target="_blank" rel="noopener">https://github.com/drcoms/drcom-generic</a><br>这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,<br>项目的wiki简单介绍了各版本的使用方法.</p><p>首先下载上面的<code>drcom-generic</code>,我将其下载到了家目录<code>~/</code>下,完整目录:<code>~/drcom-generic</code></p>
+          <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>首先感谢开发者:<br><a href="https://github.com/drcoms/drcom-generic" target="_blank" rel="noopener">https://github.com/drcoms/drcom-generic</a><br>这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,<br>项目的wiki简单介绍了各版本的使用方法.</p>
+<p>首先下载上面的<code>drcom-generic</code>,我将其下载到了家目录<code>~/</code>下,完整目录:<code>~/drcom-generic</code></p>
+<h1 id="取得必要信息"><a href="#取得必要信息" class="headerlink" title="取得必要信息"></a>取得必要信息</h1><p>下面启动到windows,或者找一个有windows系统的电脑,因为需要知道官方的drcom客户端是连接的哪个服务器,<br>以及其他信息,用来配置drcom-generic</p>
+<p>在windows下安装上一个软件: wireshark<br>这个软件很好找,就不说怎么安装了,安装好之后,如果你现在使用drcom上网的,<br>那么就<font color="red">退出drcom客户端,也就是注销登录(这一步是必须的)</font></p>
+<p>然后打开wireshark, 软件会列出有所有的网络适配器,我用的是无线网,适配器名称时:”无线网络连接”,<br>只有已连接网络的适配器会有数据波动,如图所示:<br><img src="1.png" alt="list"></p>
+<p>双击已连接网络的适配器,本例中是第二项”无线网络连接”,然后wireshark就开始记录这个适配器的数据了,</p>
+<p>现在打开drcom客户端,输入账户密码点击登录,如图所示:<br><img src="2.png" alt="drcom"></p>
+<p>等登录成功后,点击drcom客户端里的注销,注销之后点击wireshark软件里的”停止”按钮,如图:<br><img src="3.png" alt="stop"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/12/02/linux下使用drcom登录认证/#more" rel="contents">
@@ -1238,7 +1261,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>继续学习c语言中…</p><h1 id="引入话题"><a href="#引入话题" class="headerlink" title="引入话题"></a>引入话题</h1><p>请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值<br>修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,<br>然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    *a = *a + 1; //使用取值运算符让指针a指向的值+1</span><br><span class="line">    printf(&quot;a: %d&quot;, *a);</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    test(&amp;a);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <p>继续学习c语言中…</p>
+<h1 id="引入话题"><a href="#引入话题" class="headerlink" title="引入话题"></a>引入话题</h1><p>请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值<br>修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,<br>然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    *a = *a + 1; //使用取值运算符让指针a指向的值+1</span><br><span class="line">    printf(&quot;a: %d&quot;, *a);</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    test(&amp;a);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: 1</span><br></pre></td></tr></table></figure></p>
+<p>但本文所要说的是如何修改指针的值, 看下面的例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    a = a + 1; //让指针a的值+1</span><br><span class="line">    if (a != NULL) &#123;</span><br><span class="line">	printf(&quot;test: a不为空\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int *a = NULL;</span><br><span class="line">    if (a == NULL) &#123;</span><br><span class="line">	printf(&quot;main: a为空\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    test(a);</span><br><span class="line">    if (a == NULL) &#123;</span><br><span class="line">	printf(&quot;main: a为空\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">main: a为空</span><br><span class="line">test: a不为空</span><br><span class="line">main: a为空</span><br></pre></td></tr></table></figure></p>
+<p>可以看到虽然在test()方法里修改了指针的值(不是其指向的值),<br>但main()方法中的指针的值并没有改变, 其实这很容易理解,<code>因为指针也是一种变量</code><br>而且在c语言中方法之间传参都是按值传递, 第一个例子之所以成功修改变量a的值,<br>是因为相对于变量a来说是传递了a的地址(按地址传递),<br>但如果相对于指针而言, 则依然是按值传递(传递的a的地址就是指针的值)</p>
+<h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p>所以如果要通过函数修改传递过去的指针的值, 就得使用指向指针的指针,<br>可以如下声明:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//声明test方法</span><br><span class="line">void test(int **b);</span><br><span class="line"></span><br><span class="line">//在main中声明指向指针a的指针b</span><br><span class="line">int *a = NULL;</span><br><span class="line">int **b = NULL;</span><br><span class="line">b = &amp;a;</span><br></pre></td></tr></table></figure></p>
+<p>这样调用test方法时将b传过去就行了, 在test()方法中修改b<code>所指向的值</code>,<br>也就是修改了指针a的值</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/11/06/c语言在函数中修改指针的值/#more" rel="contents">
@@ -1387,14 +1417,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -1461,7 +1487,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

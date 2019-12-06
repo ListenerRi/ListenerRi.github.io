@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法 (一)1234Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480)(二)12345678DisplayMetrics metrics=new DisplayMetri">
+  <meta name="description" content="用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法  (一)1234Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480) (二)12345678DisplayMetrics metrics=new DisplayMet">
 <meta name="keywords" content="像素,密度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android获取屏幕像素和密度">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/android获取屏幕像素和密度/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法 (一)1234Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480)(二)12345678DisplayMetrics metrics=new DisplayMetri">
+<meta property="og:description" content="用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法  (一)1234Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480) (二)12345678DisplayMetrics metrics=new DisplayMet">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android获取屏幕像素和密度">
-<meta name="twitter:description" content="用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法 (一)1234Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480)(二)12345678DisplayMetrics metrics=new DisplayMetri">
+<meta name="twitter:description" content="用来测试的虚拟机是320*480像素mdpi的总结了以下三种方法  (一)1234Point point =new Point();getWindowManager().getDefaultDisplay().getSize(point);point.x;//(320)point.y;//(480) (二)12345678DisplayMetrics metrics=new DisplayMet">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/android获取屏幕像素和密度/">
 
@@ -301,9 +301,9 @@
       
         <blockquote>
 <p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
-</blockquote><p>(一)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure></p><p>(二)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure></p><a id="more"></a>
-
-
+</blockquote>
+<p>(一)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure></p>
+<p>(二)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure></p>
 <p>(三)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics2=getResources().getDisplayMetrics();</span><br><span class="line">metrics2.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics2.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics2.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics2.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>当不是在activity中时，就不能直接用getWindowManager()等方法了，这时可以用Context.getSystemService(Context.WINDOW_SERVICE)方法，其他的类似</p>
@@ -323,21 +323,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/ViewPager相关笔记/" rel="next" title="ViewPager相关笔记">
-                  <i class="fa fa-chevron-left"></i> ViewPager相关笔记
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/getDuration-获取媒体总长度值为-1/" rel="prev" title="getDuration()获取媒体总长度值为-1">
-                  getDuration()获取媒体总长度值为-1 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/ViewPager相关笔记/" rel="prev" title="ViewPager相关笔记">
+      <i class="fa fa-chevron-left"></i> ViewPager相关笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/getDuration-获取媒体总长度值为-1/" rel="next" title="getDuration()获取媒体总长度值为-1">
+      getDuration()获取媒体总长度值为-1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -466,14 +463,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -540,7 +533,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

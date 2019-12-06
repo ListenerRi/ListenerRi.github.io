@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="继续学习c语言中…引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:12345678910#include &amp;lt;stdio.h&amp;gt;void test(int *a) &amp;#123;    *a = *a + 1; //使用取值运算符让指针a指向的">
+  <meta name="description" content="继续学习c语言中… 引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:12345678910#include &amp;lt;stdio.h&amp;gt;void test(int *a) &amp;#123;    *a = *a + 1; //使用取值运算符让指针a指向">
 <meta name="keywords" content="c,指针,函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c语言在函数中修改指针的值">
 <meta property="og:url" content="http://listenerri.com/2016/11/06/c语言在函数中修改指针的值/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="继续学习c语言中…引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:12345678910#include &amp;lt;stdio.h&amp;gt;void test(int *a) &amp;#123;    *a = *a + 1; //使用取值运算符让指针a指向的">
+<meta property="og:description" content="继续学习c语言中… 引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:12345678910#include &amp;lt;stdio.h&amp;gt;void test(int *a) &amp;#123;    *a = *a + 1; //使用取值运算符让指针a指向">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言在函数中修改指针的值">
-<meta name="twitter:description" content="继续学习c语言中…引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:12345678910#include &amp;lt;stdio.h&amp;gt;void test(int *a) &amp;#123;    *a = *a + 1; //使用取值运算符让指针a指向的">
+<meta name="twitter:description" content="继续学习c语言中… 引入话题请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:12345678910#include &amp;lt;stdio.h&amp;gt;void test(int *a) &amp;#123;    *a = *a + 1; //使用取值运算符让指针a指向">
 
 <link rel="canonical" href="http://listenerri.com/2016/11/06/c语言在函数中修改指针的值/">
 
@@ -299,8 +299,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>继续学习c语言中…</p><h1 id="引入话题"><a href="#引入话题" class="headerlink" title="引入话题"></a>引入话题</h1><p>请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值<br>修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,<br>然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    *a = *a + 1; //使用取值运算符让指针a指向的值+1</span><br><span class="line">    printf(&quot;a: %d&quot;, *a);</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    test(&amp;a);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><a id="more"></a>
-
+        <p>继续学习c语言中…</p>
+<h1 id="引入话题"><a href="#引入话题" class="headerlink" title="引入话题"></a>引入话题</h1><p>请注意文章标题: 在函数中修改指针的值, 而不是修改指针指向的值<br>修改指针指向的值很容易理解, 在函数参数中声明一个指针类型,<br>然后调用方法的时候把需要修改的值的指针传递过去就行了, 大体如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    *a = *a + 1; //使用取值运算符让指针a指向的值+1</span><br><span class="line">    printf(&quot;a: %d&quot;, *a);</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    test(&amp;a);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>运行结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: 1</span><br></pre></td></tr></table></figure></p>
 <p>但本文所要说的是如何修改指针的值, 看下面的例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void test(int *a) &#123;</span><br><span class="line">    a = a + 1; //让指针a的值+1</span><br><span class="line">    if (a != NULL) &#123;</span><br><span class="line">	printf(&quot;test: a不为空\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int *a = NULL;</span><br><span class="line">    if (a == NULL) &#123;</span><br><span class="line">	printf(&quot;main: a为空\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    test(a);</span><br><span class="line">    if (a == NULL) &#123;</span><br><span class="line">	printf(&quot;main: a为空\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>运行结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">main: a为空</span><br><span class="line">test: a不为空</span><br><span class="line">main: a为空</span><br></pre></td></tr></table></figure></p>
@@ -326,21 +326,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/11/02/chrome-adobe-flash不是最新版本/" rel="next" title="chrome adobe flash不是最新版本">
-                  <i class="fa fa-chevron-left"></i> chrome adobe flash不是最新版本
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/12/02/linux下使用drcom登录认证/" rel="prev" title="linux下使用drcom登录认证">
-                  linux下使用drcom登录认证 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/11/02/chrome-adobe-flash不是最新版本/" rel="prev" title="chrome adobe flash不是最新版本">
+      <i class="fa fa-chevron-left"></i> chrome adobe flash不是最新版本
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/12/02/linux下使用drcom登录认证/" rel="next" title="linux下使用drcom登录认证">
+      linux下使用drcom登录认证 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -470,14 +467,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -544,7 +537,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="参考此贴解决此问题。退出eclipse,打开下面的文件~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs粘贴下面的东西到打开的文件12345678910ddms.logcat.auotmonitor.level=error  ddms.logcat.">
+  <meta name="description" content="参考此贴解决此问题。 退出eclipse,打开下面的文件 ~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs 粘贴下面的东西到打开的文件12345678910ddms.logcat.auotmonitor.level=error  ddms.logc">
 <meta name="keywords" content="android,eclipse,ddms,logcat,不显示">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eclipse中DDMS的LOGcat只有一列level">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/eclipse中DDMS的LOGcat只有一列level/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="参考此贴解决此问题。退出eclipse,打开下面的文件~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs粘贴下面的东西到打开的文件12345678910ddms.logcat.auotmonitor.level=error  ddms.logcat.">
+<meta property="og:description" content="参考此贴解决此问题。 退出eclipse,打开下面的文件 ~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs 粘贴下面的东西到打开的文件12345678910ddms.logcat.auotmonitor.level=error  ddms.logc">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eclipse中DDMS的LOGcat只有一列level">
-<meta name="twitter:description" content="参考此贴解决此问题。退出eclipse,打开下面的文件~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs粘贴下面的东西到打开的文件12345678910ddms.logcat.auotmonitor.level=error  ddms.logcat.">
+<meta name="twitter:description" content="参考此贴解决此问题。 退出eclipse,打开下面的文件 ~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs 粘贴下面的东西到打开的文件12345678910ddms.logcat.auotmonitor.level=error  ddms.logc">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/eclipse中DDMS的LOGcat只有一列level/">
 
@@ -299,7 +299,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>参考<a href="http://stackoverflow.com/questions/25010393/eclipse-logcat-shows-only-the-first-letter-from-each-message" target="_blank" rel="noopener">此贴</a>解决此问题。</p><p>退出eclipse,打开下面的文件</p><p>~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs</p><p>粘贴下面的东西到打开的文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ddms.logcat.auotmonitor.level=error  </span><br><span class="line">ddms.logcat.automonitor=<span class="keyword">false</span>  </span><br><span class="line">ddms.logcat.automonitor.userprompt=<span class="keyword">true</span>  </span><br><span class="line">eclipse.preferences.version=<span class="number">1</span></span><br><span class="line">logcat.view.colsize.Application=<span class="number">169</span></span><br><span class="line">logcat.view.colsize.Level=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.PID=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.Tag=<span class="number">198</span></span><br><span class="line">logcat.view.colsize.Text=<span class="number">619</span></span><br><span class="line">logcat.view.colsize.Time=<span class="number">182</span></span><br></pre></td></tr></table></figure></p>
+        <p>参考<a href="http://stackoverflow.com/questions/25010393/eclipse-logcat-shows-only-the-first-letter-from-each-message" target="_blank" rel="noopener">此贴</a>解决此问题。</p>
+<p>退出eclipse,打开下面的文件</p>
+<p>~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs</p>
+<p>粘贴下面的东西到打开的文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ddms.logcat.auotmonitor.level=error  </span><br><span class="line">ddms.logcat.automonitor=<span class="keyword">false</span>  </span><br><span class="line">ddms.logcat.automonitor.userprompt=<span class="keyword">true</span>  </span><br><span class="line">eclipse.preferences.version=<span class="number">1</span></span><br><span class="line">logcat.view.colsize.Application=<span class="number">169</span></span><br><span class="line">logcat.view.colsize.Level=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.PID=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.Tag=<span class="number">198</span></span><br><span class="line">logcat.view.colsize.Text=<span class="number">619</span></span><br><span class="line">logcat.view.colsize.Time=<span class="number">182</span></span><br></pre></td></tr></table></figure></p>
+
     </div>
 
     
@@ -317,21 +321,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" rel="next" title="vim+ycm+eclim+javacomplete解决冲突">
-                  <i class="fa fa-chevron-left"></i> vim+ycm+eclim+javacomplete解决冲突
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/" rel="prev" title="hybrid-sleep和sleep以及hibernate的区别">
-                  hybrid-sleep和sleep以及hibernate的区别 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" rel="prev" title="vim+ycm+eclim+javacomplete解决冲突">
+      <i class="fa fa-chevron-left"></i> vim+ycm+eclim+javacomplete解决冲突
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/hybrid-sleep和sleep以及hibernate的区别/" rel="next" title="hybrid-sleep和sleep以及hibernate的区别">
+      hybrid-sleep和sleep以及hibernate的区别 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -460,14 +461,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -534,7 +531,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。本方法基于X图形框架，也就是要实现按键映射必须启动X">
+  <meta name="description" content="首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。 本方法基于X图形框架，也就是要实现按键映射必须启动X 请留意文章标题，说的是修饰键(modified">
 <meta name="keywords" content="linux,map,key,modified,映射,按键">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux映射修饰键">
 <meta property="og:url" content="http://listenerri.com/2016/10/24/linux映射修饰键/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。本方法基于X图形框架，也就是要实现按键映射必须启动X">
+<meta property="og:description" content="首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。 本方法基于X图形框架，也就是要实现按键映射必须启动X 请留意文章标题，说的是修饰键(modified">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux映射修饰键">
-<meta name="twitter:description" content="首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。本方法基于X图形框架，也就是要实现按键映射必须启动X">
+<meta name="twitter:description" content="首先，先说一个并不好用的方法，请看链接：使用xmodmap命令映射按键之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。 本方法基于X图形框架，也就是要实现按键映射必须启动X 请留意文章标题，说的是修饰键(modified">
 
 <link rel="canonical" href="http://listenerri.com/2016/10/24/linux映射修饰键/">
 
@@ -299,8 +299,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>首先，先说一个并不好用的方法，请看链接：<a href="https://wiki.archlinux.org/index.php/Xmodmap" target="_blank" rel="noopener">使用xmodmap命令映射按键</a><br>之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，<br>只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，<br>也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。</p><p>本方法基于X图形框架，也就是要实现按键映射必须启动X</p><a id="more"></a>
-
+        <p>首先，先说一个并不好用的方法，请看链接：<a href="https://wiki.archlinux.org/index.php/Xmodmap" target="_blank" rel="noopener">使用xmodmap命令映射按键</a><br>之所以说这是一个不好用的方法是因为它在大多数桌面环境下没法实现开机自动映射，<br>只能进入系统后手动执行命令才能实现映射，而且即便手动执行映射命令生效了，<br>也会由于未知原因，过一段时间后失效，所以要想安稳的实现映射还是看下面的方法吧。</p>
+<p>本方法基于X图形框架，也就是要实现按键映射必须启动X</p>
 <p>请留意文章标题，说的是修饰键(modified key)，也就是Ctrl,Alt,Shift,Esc,Super(windows)等键，<br>而是不键盘上的任意键，应该也可以实现任意键，但就需要深入学习X框架了，<br>推荐从这里入门： <a href="https://wiki.archlinux.org/index.php/X_KeyBoard_extension" target="_blank" rel="noopener">Arch WiKi: X KeyBoard extension</a></p>
 <p>下面说简单的修饰键映射方法：<br>首先在X图形框架的配置文件夹<code>/etc/X11/xorg.conf.d/</code>下新建<code>90-custom-kbd.conf</code>文件，<br>然后将下面的代码粘贴到上面新建的文件中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Section &quot;InputClass&quot;</span><br><span class="line">    Identifier &quot;keyboard defaults&quot;</span><br><span class="line">    MatchIsKeyboard &quot;on&quot;</span><br><span class="line"></span><br><span class="line">    Option &quot;XKbOptions&quot; &quot;caps:escape&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure>
@@ -341,21 +341,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/08/08/抽象类与接口是否可以实例化/" rel="next" title="抽象类与接口是否可以实例化">
-                  <i class="fa fa-chevron-left"></i> 抽象类与接口是否可以实例化
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/11/02/chrome-adobe-flash不是最新版本/" rel="prev" title="chrome adobe flash不是最新版本">
-                  chrome adobe flash不是最新版本 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/08/08/抽象类与接口是否可以实例化/" rel="prev" title="抽象类与接口是否可以实例化">
+      <i class="fa fa-chevron-left"></i> 抽象类与接口是否可以实例化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/11/02/chrome-adobe-flash不是最新版本/" rel="next" title="chrome adobe flash不是最新版本">
+      chrome adobe flash不是最新版本 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -484,14 +481,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -558,7 +551,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

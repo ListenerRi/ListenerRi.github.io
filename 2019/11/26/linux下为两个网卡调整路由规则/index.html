@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案： 192.168.1.0/24 网段走有线网，其他走无线网 只在访问境外服务器的时候走无线网">
+  <meta name="description" content="公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。 但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案：  192.168.1.0/24 网段走有线网，其他走无线网 只在访问境外服务器的时候走无线网  经过测试确定这两个方案都能满足我的需求，但是由">
 <meta name="keywords" content="网卡,路由">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux下为两个网卡调整路由规则">
 <meta property="og:url" content="http://listenerri.com/2019/11/26/linux下为两个网卡调整路由规则/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案： 192.168.1.0/24 网段走有线网，其他走无线网 只在访问境外服务器的时候走无线网">
+<meta property="og:description" content="公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。 但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案：  192.168.1.0/24 网段走有线网，其他走无线网 只在访问境外服务器的时候走无线网  经过测试确定这两个方案都能满足我的需求，但是由">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-26T01:29:50.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下为两个网卡调整路由规则">
-<meta name="twitter:description" content="公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案： 192.168.1.0/24 网段走有线网，其他走无线网 只在访问境外服务器的时候走无线网">
+<meta name="twitter:description" content="公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。 但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案：  192.168.1.0/24 网段走有线网，其他走无线网 只在访问境外服务器的时候走无线网  经过测试确定这两个方案都能满足我的需求，但是由">
 
 <link rel="canonical" href="http://listenerri.com/2019/11/26/linux下为两个网卡调整路由规则/">
 
@@ -293,12 +293,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。</p><p>但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案：</p><ul>
+        <p>公司有线网是电信的，访问境外的服务器会间歇性得无法访问，但有一个无线网是移动的，用手机测试发现一直没什么问题，所以搞了个无线网卡连无线网。</p>
+<p>但电脑的数据默认只走有线网，只有关了有线网才能用无线网，但是公司内部的服务只能通过有线网访问，所以就尝试了以下方案：</p>
+<ul>
 <li>192.168.1.0/24 网段走有线网，其他走无线网</li>
 <li>只在访问境外服务器的时候走无线网</li>
-</ul><a id="more"></a>
-
-
+</ul>
 <p>经过测试确定这两个方案都能满足我的需求，但是由于无线不如有限稳定，所以最后确定使用第二种方案。</p>
 <p>调整路由的工具使用 ip 命令的子命令 route，除了路由子命令还有很多其他网络相关的功能，具体可以查看 ip 命令的 man 手册。</p>
 <p>linux 下当连接无线网和有线网之后使用 <code>ip route</code>，可以简写为 <code>ip r</code> 可以列出当前所有的路由规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">default via 192.168.1.1 dev enp2s0 proto static metric 100</span><br><span class="line">default via 192.168.1.1 dev wlx200db012a6be proto dhcp metric 600</span><br><span class="line">172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown</span><br><span class="line">192.168.1.0/24 dev enp2s0 proto kernel scope link src 192.168.1.208 metric 100</span><br><span class="line">192.168.1.0/24 dev wlx200db012a6be proto kernel scope link src 192.168.1.74 metric 600</span><br><span class="line">192.168.252.0/24 dev xdroid0 proto kernel scope link src 192.168.252.1</span><br></pre></td></tr></table></figure></p>
@@ -325,21 +325,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/20/klib-khash-使用记录/" rel="next" title="klib-khash 使用记录">
-                  <i class="fa fa-chevron-left"></i> klib-khash 使用记录
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/27/caida-tools/" rel="prev" title="caida tools">
-                  caida tools <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/20/klib-khash-使用记录/" rel="prev" title="klib-khash 使用记录">
+      <i class="fa fa-chevron-left"></i> klib-khash 使用记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/27/caida-tools/" rel="next" title="caida tools">
+      caida tools <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -469,14 +466,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -543,7 +536,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

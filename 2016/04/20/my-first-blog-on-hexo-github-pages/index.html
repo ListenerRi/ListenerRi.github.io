@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统主题使用的是: next过一段时间就会把在csdn的一些文章迁移过来测试图片:">
+  <meta name="description" content="本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统主题使用的是: next 过一段时间就会把在csdn的一些文章迁移过来 测试图片:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="新博客的第一篇">
 <meta property="og:url" content="http://listenerri.com/2016/04/20/my-first-blog-on-hexo-github-pages/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统主题使用的是: next过一段时间就会把在csdn的一些文章迁移过来测试图片:">
+<meta property="og:description" content="本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统主题使用的是: next 过一段时间就会把在csdn的一些文章迁移过来 测试图片:">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://listenerri.com/2016/04/20/my-first-blog-on-hexo-github-pages/test.jpg">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新博客的第一篇">
-<meta name="twitter:description" content="本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统主题使用的是: next过一段时间就会把在csdn的一些文章迁移过来测试图片:">
+<meta name="twitter:description" content="本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统主题使用的是: next 过一段时间就会把在csdn的一些文章迁移过来 测试图片:">
 <meta name="twitter:image" content="http://listenerri.com/2016/04/20/my-first-blog-on-hexo-github-pages/test.jpg">
 
 <link rel="canonical" href="http://listenerri.com/2016/04/20/my-first-blog-on-hexo-github-pages/">
@@ -300,7 +300,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">next</a></p><p>过一段时间就会把在csdn的一些文章迁移过来</p><p>测试图片:<br><img src="test.jpg" alt="test"></p>
+        <p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">next</a></p>
+<p>过一段时间就会把在csdn的一些文章迁移过来</p>
+<p>测试图片:<br><img src="test.jpg" alt="test"></p>
+
     </div>
 
     
@@ -311,18 +314,15 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/04/22/java中this和-this/" rel="prev" title="java中this和.this">
-                  java中this和.this <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2016/04/22/java中this和-this/" rel="next" title="java中this和.this">
+      java中this和.this <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -451,14 +451,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -525,7 +521,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

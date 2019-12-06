@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b;而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个调">
+  <meta name="description" content="在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b; 而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个">
 <meta name="keywords" content="typedef,function,别名">
 <meta property="og:type" content="article">
 <meta property="og:title" content="typedef 函数别名">
 <meta property="og:url" content="http://listenerri.com/2019/10/22/typedef-函数别名/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b;而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个调">
+<meta property="og:description" content="在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b; 而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-22T03:57:36.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="typedef 函数别名">
-<meta name="twitter:description" content="在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b;而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个调">
+<meta name="twitter:description" content="在 c/cpp 中可以使用 typedef 来给一个类型搞个别名：12345typedef int myint;// 下面 a 和 b 的类型都可以说是 intint a;myint b; 而函数别名的语法有些不同：12345678int max(int, int);typedef int (* max_func_t)(int, int);max_func_t max_alias;// 下面的两个">
 
 <link rel="canonical" href="http://listenerri.com/2019/10/22/typedef-函数别名/">
 
@@ -299,8 +299,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在 c/cpp 中可以使用 <code>typedef</code> 来给一个类型搞个别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef int myint;</span><br><span class="line"></span><br><span class="line">// 下面 a 和 b 的类型都可以说是 int</span><br><span class="line">int a;</span><br><span class="line">myint b;</span><br></pre></td></tr></table></figure></p><p>而函数别名的语法有些不同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">max_func_t max_alias;</span><br><span class="line"></span><br><span class="line">// 下面的两个调用是等价的</span><br><span class="line">max(1, 2);</span><br><span class="line">max_alias(1, 2);</span><br></pre></td></tr></table></figure></p><a id="more"></a>
-
+        <p>在 c/cpp 中可以使用 <code>typedef</code> 来给一个类型搞个别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef int myint;</span><br><span class="line"></span><br><span class="line">// 下面 a 和 b 的类型都可以说是 int</span><br><span class="line">int a;</span><br><span class="line">myint b;</span><br></pre></td></tr></table></figure></p>
+<p>而函数别名的语法有些不同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">max_func_t max_alias;</span><br><span class="line"></span><br><span class="line">// 下面的两个调用是等价的</span><br><span class="line">max(1, 2);</span><br><span class="line">max_alias(1, 2);</span><br></pre></td></tr></table></figure></p>
 <p>将函数指针作为参数时，使用函数别名可以大大提高代码的可读性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line"></span><br><span class="line">// 不使用别名，接收一个函数指针并调用</span><br><span class="line">void test(int (* max_func)(int, int)) &#123;</span><br><span class="line">    max_func(1, 2);</span><br><span class="line">&#125;</span><br><span class="line">test(max);</span><br><span class="line"></span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">// 使用别名，接收一个函数指针并调用</span><br><span class="line">void test(max_func_t max_func) &#123;</span><br><span class="line">    max_func(1, 2);</span><br><span class="line">&#125;</span><br><span class="line">test(max);</span><br></pre></td></tr></table></figure></p>
 <p>函数别名的语法一直让我很奇怪写着也很难受，今天又碰到要将函数作为参数传递的情况，于是谷歌了一下，其实可以这样理解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 正确语法</span><br><span class="line">typedef int (*max_func_t)(int, int);</span><br><span class="line">//       ^        ^          ^</span><br><span class="line">//    返回类型   别名        参数</span><br><span class="line"></span><br><span class="line">// 错误语法，但有助于理解（强行理解）</span><br><span class="line">typedef int (*) (int, int) max_func_t;</span><br></pre></td></tr></table></figure></p>
 
@@ -319,21 +319,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/21/终于发现了素数的一种用途/" rel="next" title="终于发现了素数的一种用途">
-                  <i class="fa fa-chevron-left"></i> 终于发现了素数的一种用途
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/24/vscode-vim-在-mac-osx-和-linux-下输入法自动切换/" rel="prev" title="vscode vim 在 mac osx 和 linux 下输入法自动切换">
-                  vscode vim 在 mac osx 和 linux 下输入法自动切换 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/21/终于发现了素数的一种用途/" rel="prev" title="终于发现了素数的一种用途">
+      <i class="fa fa-chevron-left"></i> 终于发现了素数的一种用途
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/24/vscode-vim-在-mac-osx-和-linux-下输入法自动切换/" rel="next" title="vscode vim 在 mac osx 和 linux 下输入法自动切换">
+      vscode vim 在 mac osx 和 linux 下输入法自动切换 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -462,14 +459,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -536,7 +529,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

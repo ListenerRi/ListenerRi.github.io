@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)  2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;amp;为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)">
+  <meta name="description" content="1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)   2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;amp;为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)   3、指针也有数据类型   4、假设">
 <meta name="keywords" content="指针">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c语言中的指针">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/c语言中的指针/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)  2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;amp;为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)">
+<meta property="og:description" content="1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)   2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;amp;为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)   3、指针也有数据类型   4、假设">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言中的指针">
-<meta name="twitter:description" content="1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)  2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;amp;为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)">
+<meta name="twitter:description" content="1、直接使用指针的表达式，表示使用指针代表的内存地址. (指针存放的数据为内存地址,如同int型变量存放的数据为整数)   2、在指针表达式前加上符号:*，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. (*也叫取值运算符或间接运算符,与之对应&amp;amp;为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)   3、指针也有数据类型   4、假设">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/c语言中的指针/">
 
@@ -301,10 +301,10 @@
       
         <blockquote>
 <p>1、直接使用指针的表达式，表示使用指针代表的内存地址. <font color="red">(指针存放的数据为内存地址,如同int型变量存放的数据为整数)</font></p>
-</blockquote><blockquote>
+</blockquote>
+<blockquote>
 <p>2、在指针表达式前加上符号:<code>*</code>，表示使用指针指向的值，也就是指针所代表的内存地址中存储的值. <font color="red">(<code>*</code>也叫取值运算符或间接运算符,与之对应<code>&amp;</code>为地址运算符,放于正常变量之前可获得变量在内存中的地址,也就是获得一个指向这个变量的指针)</font></p>
-</blockquote><a id="more"></a>
-
+</blockquote>
 <blockquote>
 <p>3、指针也有数据类型</p>
 </blockquote>
@@ -332,21 +332,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/c语言修饰符static-extern-define-const/" rel="next" title="c语言修饰符static,extern,#define,const">
-                  <i class="fa fa-chevron-left"></i> c语言修饰符static,extern,#define,const
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/ListView的Iterm无法点击/" rel="prev" title="ListView的Iterm无法点击">
-                  ListView的Iterm无法点击 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/c语言修饰符static-extern-define-const/" rel="prev" title="c语言修饰符static,extern,#define,const">
+      <i class="fa fa-chevron-left"></i> c语言修饰符static,extern,#define,const
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/ListView的Iterm无法点击/" rel="next" title="ListView的Iterm无法点击">
+      ListView的Iterm无法点击 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -475,14 +472,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -549,7 +542,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,24 +41,23 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中  前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤 折腾日期为:2015-4-28到2015-5-??">
+  <meta name="description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中    前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤  折腾日期为:2015-4-28到2015-5-??arch更新迅速，如果要参考本文，自行留意日期，">
 <meta name="keywords" content="linux,uefi,安装,archlinux,xfce4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="archlinux+xfce4+lightdm+uefi个人安装记录">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中  前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤 折腾日期为:2015-4-28到2015-5-??">
+<meta property="og:description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中    前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤  折腾日期为:2015-4-28到2015-5-??arch更新迅速，如果要参考本文，自行留意日期，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.blog.csdn.net/20150504150348283">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="archlinux+xfce4+lightdm+uefi个人安装记录">
-<meta name="twitter:description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中  前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤 折腾日期为:2015-4-28到2015-5-??">
+<meta name="twitter:description" content="本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中    前言：在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，不说废话了，开始安装步骤  折腾日期为:2015-4-28到2015-5-??arch更新迅速，如果要参考本文，自行留意日期，">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20150504150348283">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/">
@@ -303,12 +303,12 @@
       
         <blockquote>
 <p><strong><font color="red">本文篇幅较长，最好通过文章内容上面的目录进行查看，否则很容易迷失在一个又一个的步骤中</font></strong></p>
-</blockquote><hr><blockquote>
+</blockquote>
+<hr>
+<blockquote>
 <p><strong>前言：</strong><br>在中文+英文arch-wiki的指导下，大概经过了将近十次的格式化+重装，终于满意了，这个过程中也了解了linux新的系统服务管理机制:systemd(systemclt)，<br>不说废话了，开始安装步骤</p>
-</blockquote><font color="red">折腾日期为:2015-4-28到2015-5-??</font><a id="more"></a>
-
-
-<br>arch更新迅速，如果要参考本文，自行留意日期，也可以自己去arch-wiki去看官方教程：<a href="https://wiki.archlinux.org/index.php/Beginners%27_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E9.85.8D.E7.BD.AE.E7.BD.91.E7.BB.9C" target="_blank" rel="noopener">arch-wiki-Beginners’guide</a><br><br>&gt;<font color="red">本文将简略的说一下步骤，主要说我在安装过程中出现的问题！<br>所以如果你是对大概的linux命令都不熟悉的新手，本文也许不适合你，<br>你应该先去看arch-wiki，然后再来这里看</font>
+</blockquote>
+<font color="red">折腾日期为:2015-4-28到2015-5-??</font><br>arch更新迅速，如果要参考本文，自行留意日期，也可以自己去arch-wiki去看官方教程：<a href="https://wiki.archlinux.org/index.php/Beginners%27_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E9.85.8D.E7.BD.AE.E7.BD.91.E7.BB.9C" target="_blank" rel="noopener">arch-wiki-Beginners’guide</a><br><br>&gt;<font color="red">本文将简略的说一下步骤，主要说我在安装过程中出现的问题！<br>所以如果你是对大概的linux命令都不熟悉的新手，本文也许不适合你，<br>你应该先去看arch-wiki，然后再来这里看</font>
 
 <h1 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h1><blockquote>
 <p>安装arch，是不能没有网络的，毕竟官方提供的是最小化安装镜像，只有核心linux和官方修改配置的脚本，其他的都要靠联网下载安装<br>网络配置这一步骤<strong>需要进行两次！</strong><br><strong>第一次</strong>是刚刚启动安装镜像时，这一次的网络配置生效区域是安装镜像所在的系统，而非你安装到硬盘上的系统，这个配置将会随着安装镜像系统的退出而清除！<br><strong>第二次</strong>是使用arch-chroot命令后切换到到真实的，安装在了硬盘上的系统！这第二次的网络配置，将会写到你将来要用的系统所在的硬盘分区上的配置文件中，所以只要你以后不再修改，那么它的生效区域是永久的！<br><strong>自行理解上文所提到的安装镜像所在的系统和真实系统的区别！这个不好说，说不清</strong></p>
@@ -477,21 +477,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/01/tilda开机启动不透明/" rel="next" title="tilda开机启动不透明">
-                  <i class="fa fa-chevron-left"></i> tilda开机启动不透明
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" rel="prev" title="U盘+GRUB2引导PE或linux镜像">
-                  U盘+GRUB2引导PE或linux镜像 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/01/tilda开机启动不透明/" rel="prev" title="tilda开机启动不透明">
+      <i class="fa fa-chevron-left"></i> tilda开机启动不透明
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" rel="next" title="U盘+GRUB2引导PE或linux镜像">
+      U盘+GRUB2引导PE或linux镜像 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -621,14 +618,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -695,7 +688,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

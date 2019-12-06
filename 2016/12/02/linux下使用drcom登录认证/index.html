@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,18 +41,17 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法.首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整目录:~/drcom-generic">
+  <meta name="description" content="下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法. 首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整目录:~/drcom-generic 取得必要信息下面启动到windows,或者找一个有window">
 <meta name="keywords" content="linux,drcom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux下使用drcom登录认证">
 <meta property="og:url" content="http://listenerri.com/2016/12/02/linux下使用drcom登录认证/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法.首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整目录:~/drcom-generic">
+<meta property="og:description" content="下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法. 首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整目录:~/drcom-generic 取得必要信息下面启动到windows,或者找一个有window">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://listenerri.com/2016/12/02/linux下使用drcom登录认证/1.png">
 <meta property="og:image" content="http://listenerri.com/2016/12/02/linux下使用drcom登录认证/2.png">
@@ -60,7 +60,7 @@
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下使用drcom登录认证">
-<meta name="twitter:description" content="下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法.首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整目录:~/drcom-generic">
+<meta name="twitter:description" content="下载首先感谢开发者:https://github.com/drcoms/drcom-generic这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,项目的wiki简单介绍了各版本的使用方法. 首先下载上面的drcom-generic,我将其下载到了家目录~/下,完整目录:~/drcom-generic 取得必要信息下面启动到windows,或者找一个有window">
 <meta name="twitter:image" content="http://listenerri.com/2016/12/02/linux下使用drcom登录认证/1.png">
 
 <link rel="canonical" href="http://listenerri.com/2016/12/02/linux下使用drcom登录认证/">
@@ -304,8 +304,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>首先感谢开发者:<br><a href="https://github.com/drcoms/drcom-generic" target="_blank" rel="noopener">https://github.com/drcoms/drcom-generic</a><br>这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,<br>项目的wiki简单介绍了各版本的使用方法.</p><p>首先下载上面的<code>drcom-generic</code>,我将其下载到了家目录<code>~/</code>下,完整目录:<code>~/drcom-generic</code></p><a id="more"></a>
-
+        <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>首先感谢开发者:<br><a href="https://github.com/drcoms/drcom-generic" target="_blank" rel="noopener">https://github.com/drcoms/drcom-generic</a><br>这个项目基于python实现了d,p,x版drcom认证,请到上述链接查看相关信息,<br>项目的wiki简单介绍了各版本的使用方法.</p>
+<p>首先下载上面的<code>drcom-generic</code>,我将其下载到了家目录<code>~/</code>下,完整目录:<code>~/drcom-generic</code></p>
 <h1 id="取得必要信息"><a href="#取得必要信息" class="headerlink" title="取得必要信息"></a>取得必要信息</h1><p>下面启动到windows,或者找一个有windows系统的电脑,因为需要知道官方的drcom客户端是连接的哪个服务器,<br>以及其他信息,用来配置drcom-generic</p>
 <p>在windows下安装上一个软件: wireshark<br>这个软件很好找,就不说怎么安装了,安装好之后,如果你现在使用drcom上网的,<br>那么就<font color="red">退出drcom客户端,也就是注销登录(这一步是必须的)</font></p>
 <p>然后打开wireshark, 软件会列出有所有的网络适配器,我用的是无线网,适配器名称时:”无线网络连接”,<br>只有已连接网络的适配器会有数据波动,如图所示:<br><img src="1.png" alt="list"></p>
@@ -338,21 +338,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/11/06/c语言在函数中修改指针的值/" rel="next" title="c语言在函数中修改指针的值">
-                  <i class="fa fa-chevron-left"></i> c语言在函数中修改指针的值
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2017/02/12/vim中javacomplete2与syntastic一点使用心得/" rel="prev" title="vim中javacomplete2与syntastic一点使用心得">
-                  vim中javacomplete2与syntastic一点使用心得 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/11/06/c语言在函数中修改指针的值/" rel="prev" title="c语言在函数中修改指针的值">
+      <i class="fa fa-chevron-left"></i> c语言在函数中修改指针的值
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/02/12/vim中javacomplete2与syntastic一点使用心得/" rel="next" title="vim中javacomplete2与syntastic一点使用心得">
+      vim中javacomplete2与syntastic一点使用心得 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -482,14 +479,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -556,7 +549,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

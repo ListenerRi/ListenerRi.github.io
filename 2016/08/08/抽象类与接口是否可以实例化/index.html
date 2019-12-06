@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别:相同点: 都是抽象的(不能正常实例化的) 都可以有抽象方法 都可以有成员变量 区别: 抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同 抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法 抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化">
+  <meta name="description" content="抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别: 相同点:  都是抽象的(不能正常实例化的) 都可以有抽象方法 都可以有成员变量  区别:  抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同 抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法 抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化  不能实例化以前我一直认为抽象类和接口是">
 <meta name="keywords" content="java,abstract,iterface,抽象类,接口,实例化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象类与接口是否可以实例化">
 <meta property="og:url" content="http://listenerri.com/2016/08/08/抽象类与接口是否可以实例化/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别:相同点: 都是抽象的(不能正常实例化的) 都可以有抽象方法 都可以有成员变量 区别: 抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同 抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法 抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化">
+<meta property="og:description" content="抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别: 相同点:  都是抽象的(不能正常实例化的) 都可以有抽象方法 都可以有成员变量  区别:  抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同 抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法 抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化  不能实例化以前我一直认为抽象类和接口是">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象类与接口是否可以实例化">
-<meta name="twitter:description" content="抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别:相同点: 都是抽象的(不能正常实例化的) 都可以有抽象方法 都可以有成员变量 区别: 抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同 抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法 抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化">
+<meta name="twitter:description" content="抽象类与接口简介具体的就不说了,直说一下二者的重要的相同点和区别: 相同点:  都是抽象的(不能正常实例化的) 都可以有抽象方法 都可以有成员变量  区别:  抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同 抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法 抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化  不能实例化以前我一直认为抽象类和接口是">
 
 <link rel="canonical" href="http://listenerri.com/2016/08/08/抽象类与接口是否可以实例化/">
 
@@ -299,19 +299,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="抽象类与接口简介"><a href="#抽象类与接口简介" class="headerlink" title="抽象类与接口简介"></a>抽象类与接口简介</h1><p>具体的就不说了,直说一下二者的重要的相同点和区别:</p><p>相同点:</p><ul>
+        <h1 id="抽象类与接口简介"><a href="#抽象类与接口简介" class="headerlink" title="抽象类与接口简介"></a>抽象类与接口简介</h1><p>具体的就不说了,直说一下二者的重要的相同点和区别:</p>
+<p>相同点:</p>
+<ul>
 <li>都是抽象的(不能正常实例化的)</li>
 <li>都可以有抽象方法</li>
 <li>都可以有成员变量</li>
-</ul><p>区别:</p><ul>
+</ul>
+<p>区别:</p>
+<ul>
 <li>抽象类除了不能正常实例化和可以含有抽象方法外其他特性与普通类相同</li>
 <li>抽象类既可以有抽象方法也可以有普通的方法,而接口只能包含抽象方法</li>
 <li>抽象类可以只声明成员变量而不初始化,接口必须在声明成员方法时初始化</li>
-</ul><a id="more"></a>
-
-
-
-
+</ul>
 <h1 id="不能实例化"><a href="#不能实例化" class="headerlink" title="不能实例化"></a>不能实例化</h1><p>以前我一直认为抽象类和接口是不能被初始化的, 意思就是不能使用<code>new</code>关键字来获取类的实例(接口也算是一个类),如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TestInterface inter = <span class="keyword">new</span> TestInterface();</span><br></pre></td></tr></table></figure></p>
 <p>当TestInterface是一个抽象类或者接口时,上述代码将会产生编译时错误.</p>
 <p>但是当我在学习鸿洋的一篇关于Android中RecyclerView的博客时发现他对一个接口使用了<code>new</code>关键字<br>原文链接请点击:<a href="http://blog.csdn.net/lmj623565791/article/details/45059587" target="_blank" rel="noopener">Android中RecyclerView</a><br>这让我不得不重新思考接口和抽象类到底能否实例化,还是仅仅不能用上述的普通方法来实例化,<br>于是有了下面的一段测试:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123; </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		TestInterface inter = <span class="keyword">new</span> TestInterface() &#123;</span><br><span class="line">		    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myTestInterface</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		    	System.out.println(<span class="string">"run method myTestInterface"</span>);</span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	</span><br><span class="line">		TestAbstract abs = <span class="keyword">new</span> TestAbstract() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myTestAbstract</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		        System.out.println(<span class="string">"run method myTestAbstract"</span>);</span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;;</span><br><span class="line">		inter.myTestInterface();</span><br><span class="line">		abs.myTestAbstract();</span><br><span class="line">		abs.print();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       test t = <span class="keyword">new</span> test(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">TestInterface</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myTestInterface</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAbstract</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">myTestAbstract</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    System.out.println(<span class="string">"run method print"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -338,21 +338,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/07/25/linux下添加UEFI启动项/" rel="next" title="linux下添加UEFI启动项">
-                  <i class="fa fa-chevron-left"></i> linux下添加UEFI启动项
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/10/24/linux映射修饰键/" rel="prev" title="linux映射修饰键">
-                  linux映射修饰键 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/07/25/linux下添加UEFI启动项/" rel="prev" title="linux下添加UEFI启动项">
+      <i class="fa fa-chevron-left"></i> linux下添加UEFI启动项
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/10/24/linux映射修饰键/" rel="next" title="linux映射修饰键">
+      linux映射修饰键 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -482,14 +479,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -556,7 +549,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

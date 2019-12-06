@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,24 +41,23 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.有了梯子之后, 设置好代理启动chrome, 在地址栏输入: chrome://components">
+  <meta name="description" content="google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本 解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.有了梯子之后, 设置好代理启动chrome, 在地址栏输入: chrome://component">
 <meta name="keywords" content="chrome,flash,版本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chrome adobe flash不是最新版本">
 <meta property="og:url" content="http://listenerri.com/2016/11/02/chrome-adobe-flash不是最新版本/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.有了梯子之后, 设置好代理启动chrome, 在地址栏输入: chrome://components">
+<meta property="og:description" content="google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本 解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.有了梯子之后, 设置好代理启动chrome, 在地址栏输入: chrome://component">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://listenerri.com/2016/11/02/chrome-adobe-flash不是最新版本/update-flash.png">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chrome adobe flash不是最新版本">
-<meta name="twitter:description" content="google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.有了梯子之后, 设置好代理启动chrome, 在地址栏输入: chrome://components">
+<meta name="twitter:description" content="google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,在看视频或者需要用到flash player的时候就会提示:adobe flash player 不是最新版本 解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.有了梯子之后, 设置好代理启动chrome, 在地址栏输入: chrome://component">
 <meta name="twitter:image" content="http://listenerri.com/2016/11/02/chrome-adobe-flash不是最新版本/update-flash.png">
 
 <link rel="canonical" href="http://listenerri.com/2016/11/02/chrome-adobe-flash不是最新版本/">
@@ -301,8 +301,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p><p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p><a id="more"></a>
-
+        <p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p>
+<p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p>
 <p>下面详细说说linux下和windows下怎么设置代理:</p>
 <p>linux下在<code>终端</code>中设置好代理变量, 然后接着在同一个终端下以命令的方式启动chrome就行了,下面是具体命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=127.0.0.1:8787</span><br><span class="line">export https_proxy=127.0.0.1:8787</span><br><span class="line">google-chrome</span><br></pre></td></tr></table></figure></p>
 <p>命令解释, 前两行主要是指定代理地址和端口, 因为我是在本机运行的代理软件, 所以地址是127.0.0.1<br>而8787则是代理软件监听的端口, 第三行则是启动chrome</p>
@@ -324,21 +324,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/10/24/linux映射修饰键/" rel="next" title="linux映射修饰键">
-                  <i class="fa fa-chevron-left"></i> linux映射修饰键
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/11/06/c语言在函数中修改指针的值/" rel="prev" title="c语言在函数中修改指针的值">
-                  c语言在函数中修改指针的值 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/10/24/linux映射修饰键/" rel="prev" title="linux映射修饰键">
+      <i class="fa fa-chevron-left"></i> linux映射修饰键
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/11/06/c语言在函数中修改指针的值/" rel="next" title="c语言在函数中修改指针的值">
+      c语言在函数中修改指针的值 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -467,14 +464,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -541,7 +534,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="如何获取XMLReader接口从JDK文档来看，有两种方法：使用SAXParserFactory+SAXParser[以下简称a方法]1XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();使用XMLReaderFactory[以下简称b方法]">
+  <meta name="description" content="如何获取XMLReader接口从JDK文档来看，有两种方法： 使用SAXParserFactory+SAXParser[以下简称a方法]1XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader(); 使用XMLReaderFactory[以下简称b方法]1XMLReader bbb=XMLReaderFact">
 <meta name="keywords" content="android,java,xmlReader,xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用XMLReader接口解析XML">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/使用XMLReader接口解析XML/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="如何获取XMLReader接口从JDK文档来看，有两种方法：使用SAXParserFactory+SAXParser[以下简称a方法]1XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();使用XMLReaderFactory[以下简称b方法]">
+<meta property="og:description" content="如何获取XMLReader接口从JDK文档来看，有两种方法： 使用SAXParserFactory+SAXParser[以下简称a方法]1XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader(); 使用XMLReaderFactory[以下简称b方法]1XMLReader bbb=XMLReaderFact">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用XMLReader接口解析XML">
-<meta name="twitter:description" content="如何获取XMLReader接口从JDK文档来看，有两种方法：使用SAXParserFactory+SAXParser[以下简称a方法]1XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();使用XMLReaderFactory[以下简称b方法]">
+<meta name="twitter:description" content="如何获取XMLReader接口从JDK文档来看，有两种方法： 使用SAXParserFactory+SAXParser[以下简称a方法]1XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader(); 使用XMLReaderFactory[以下简称b方法]1XMLReader bbb=XMLReaderFact">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/使用XMLReader接口解析XML/">
 
@@ -299,9 +299,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="如何获取XMLReader接口"><a href="#如何获取XMLReader接口" class="headerlink" title="如何获取XMLReader接口"></a>如何获取XMLReader接口</h1><p>从JDK文档来看，有两种方法：</p><h2 id="使用SAXParserFactory-SAXParser-以下简称a方法"><a href="#使用SAXParserFactory-SAXParser-以下简称a方法" class="headerlink" title="使用SAXParserFactory+SAXParser[以下简称a方法]"></a>使用SAXParserFactory+SAXParser<code>[以下简称a方法]</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();</span><br></pre></td></tr></table></figure><h2 id="使用XMLReaderFactory-以下简称b方法"><a href="#使用XMLReaderFactory-以下简称b方法" class="headerlink" title="使用XMLReaderFactory[以下简称b方法]"></a>使用XMLReaderFactory<code>[以下简称b方法]</code></h2><a id="more"></a>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLReader bbb=XMLReaderFactory.createXMLReader();</span><br></pre></td></tr></table></figure>
+        <h1 id="如何获取XMLReader接口"><a href="#如何获取XMLReader接口" class="headerlink" title="如何获取XMLReader接口"></a>如何获取XMLReader接口</h1><p>从JDK文档来看，有两种方法：</p>
+<h2 id="使用SAXParserFactory-SAXParser-以下简称a方法"><a href="#使用SAXParserFactory-SAXParser-以下简称a方法" class="headerlink" title="使用SAXParserFactory+SAXParser[以下简称a方法]"></a>使用SAXParserFactory+SAXParser<code>[以下简称a方法]</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLReader aaa=SAXParserFactory.newInstance().newSAXParser().getXMLReader();</span><br></pre></td></tr></table></figure>
+<h2 id="使用XMLReaderFactory-以下简称b方法"><a href="#使用XMLReaderFactory-以下简称b方法" class="headerlink" title="使用XMLReaderFactory[以下简称b方法]"></a>使用XMLReaderFactory<code>[以下简称b方法]</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLReader bbb=XMLReaderFactory.createXMLReader();</span><br></pre></td></tr></table></figure>
 <h1 id="两种方法不同之处"><a href="#两种方法不同之处" class="headerlink" title="两种方法不同之处"></a>两种方法不同之处</h1><p>在JDK文档a方法中SAXParser类的getXMLReader()方法的注释:</p>
 <blockquote>
 <p>返回由<font color="red"><strong>此类的实现封装</strong></font>的 XMLReader。</p>
@@ -346,21 +346,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" rel="next" title="U盘+GRUB2引导PE或linux镜像">
-                  <i class="fa fa-chevron-left"></i> U盘+GRUB2引导PE或linux镜像
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/通过ip地址连接virtualbox虚拟机android-x86/" rel="prev" title="通过ip地址连接virtualbox虚拟机android-x86">
-                  通过ip地址连接virtualbox虚拟机android-x86 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/U盘-GRUB2引导PE或linux镜像/" rel="prev" title="U盘+GRUB2引导PE或linux镜像">
+      <i class="fa fa-chevron-left"></i> U盘+GRUB2引导PE或linux镜像
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/通过ip地址连接virtualbox虚拟机android-x86/" rel="next" title="通过ip地址连接virtualbox虚拟机android-x86">
+      通过ip地址连接virtualbox虚拟机android-x86 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -490,14 +487,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -564,7 +557,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

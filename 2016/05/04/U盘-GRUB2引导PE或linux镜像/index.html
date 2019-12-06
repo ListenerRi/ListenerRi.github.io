@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="详细看原文：链接安装grub2到u盘：1sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb 注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值–boot-directory,此参数的含义自行查看grub-inst">
+  <meta name="description" content="详细看原文：链接 安装grub2到u盘：1sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb  注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值–boot-directory,此参数的含义自行查看grub-in">
 <meta name="keywords" content="linux,grub,u盘,iso,镜像,PE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="U盘+GRUB2引导PE或linux镜像">
 <meta property="og:url" content="http://listenerri.com/2016/05/04/U盘-GRUB2引导PE或linux镜像/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="详细看原文：链接安装grub2到u盘：1sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb 注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值–boot-directory,此参数的含义自行查看grub-inst">
+<meta property="og:description" content="详细看原文：链接 安装grub2到u盘：1sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb  注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值–boot-directory,此参数的含义自行查看grub-in">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="U盘+GRUB2引导PE或linux镜像">
-<meta name="twitter:description" content="详细看原文：链接安装grub2到u盘：1sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb 注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值–boot-directory,此参数的含义自行查看grub-inst">
+<meta name="twitter:description" content="详细看原文：链接 安装grub2到u盘：1sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb  注意上面的参数:–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值–boot-directory,此参数的含义自行查看grub-in">
 
 <link rel="canonical" href="http://listenerri.com/2016/05/04/U盘-GRUB2引导PE或linux镜像/">
 
@@ -299,11 +299,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>详细看原文：<a href="http://blog.chinaunix.net/uid-14735472-id-4210990.html" target="_blank" rel="noopener">链接</a></p><h1 id="安装grub2到u盘："><a href="#安装grub2到u盘：" class="headerlink" title="安装grub2到u盘："></a>安装grub2到u盘：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb</span><br></pre></td></tr></table></figure><blockquote>
+        <p>详细看原文：<a href="http://blog.chinaunix.net/uid-14735472-id-4210990.html" target="_blank" rel="noopener">链接</a></p>
+<h1 id="安装grub2到u盘："><a href="#安装grub2到u盘：" class="headerlink" title="安装grub2到u盘："></a>安装grub2到u盘：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-install -v --target=i386-pc --boot-directory=/run/media/root/EXT4 /dev/sdb</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>注意上面的参数:<br>–target,根据需要替换,参数值可以到/usr/lib/grub/下查看,每一个目录都可以作为参数值<br>–boot-directory,此参数的含义自行查看grub-install的help<br>具体看man grub-install使用方法</p>
-</blockquote><a id="more"></a>
-
-
+</blockquote>
 <h1 id="grub2间接引导WinPE"><a href="#grub2间接引导WinPE" class="headerlink" title="grub2间接引导WinPE"></a>grub2间接引导WinPE</h1><h2 id="U盘上建立WXPE目录，将WinPE文件放置入内："><a href="#U盘上建立WXPE目录，将WinPE文件放置入内：" class="headerlink" title="U盘上建立WXPE目录，将WinPE文件放置入内："></a>U盘上建立WXPE目录，将WinPE文件放置入内：</h2><p>目前网络上的WinPE到处都是，各种版本其实都差不多，主要需要如下5个文件：<br>LDRXPE  NTCOM  PE  SETUPLDR.BIN  WINPE.IS_</p>
 <p>大致过程是：LDRXPE调用NTCOM和SETUPLDR.BIN读取PE找到WINPE.IS_镜像，加载WinPE。</p>
 <h2 id="修改grub-cfg，加入winpe引导项："><a href="#修改grub-cfg，加入winpe引导项：" class="headerlink" title="修改grub.cfg，加入winpe引导项："></a>修改grub.cfg，加入winpe引导项：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">menuentry <span class="string">'LDRXPE for WinCE (on /usb/fairy)'</span>&#123;</span><br><span class="line">insmod part_msdos</span><br><span class="line">insmod fat</span><br><span class="line"><span class="built_in">set</span> root=<span class="string">'hd0,msdos1'</span></span><br><span class="line">search --no-floppy --fs-uuid --<span class="built_in">set</span>=root 696C-0B1C</span><br><span class="line">ntldr /WXPE/LDRXPE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -356,21 +356,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/" rel="next" title="archlinux+xfce4+lightdm+uefi个人安装记录">
-                  <i class="fa fa-chevron-left"></i> archlinux+xfce4+lightdm+uefi个人安装记录
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/05/04/使用XMLReader接口解析XML/" rel="prev" title="使用XMLReader接口解析XML">
-                  使用XMLReader接口解析XML <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/04/archlinux-xfce4-lightdm-uefi个人安装记录/" rel="prev" title="archlinux+xfce4+lightdm+uefi个人安装记录">
+      <i class="fa fa-chevron-left"></i> archlinux+xfce4+lightdm+uefi个人安装记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/04/使用XMLReader接口解析XML/" rel="next" title="使用XMLReader接口解析XML">
+      使用XMLReader接口解析XML <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -500,14 +497,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -574,7 +567,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

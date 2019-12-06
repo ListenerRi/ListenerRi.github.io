@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,23 +41,22 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="手动敲一遍、算是加强记忆吧~/：文件系统的入口，也是最高一级的目录/bin：最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等/boot：存放Linux的内核及引导系统所需要的文件，包括引导装载程序/etc：存放系统配置文件，一些服务器的配置文件也放在这里/dev：存放所有的设备文件，比如声卡、磁盘等">
+  <meta name="description" content="手动敲一遍、算是加强记忆吧~ /：文件系统的入口，也是最高一级的目录 /bin：最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等 /boot：存放Linux的内核及引导系统所需要的文件，包括引导装载程序 /etc：存放系统配置文件，一些服务器的配置文件也放在这里 /dev：存放所有的设备文件，比如声卡、磁盘等 /home：包含普通用户的个人主目录，如/home/lisi">
 <meta name="keywords" content="linux,目录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux主要目录的作用">
 <meta property="og:url" content="http://listenerri.com/2016/04/22/linux主要目录的作用/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="手动敲一遍、算是加强记忆吧~/：文件系统的入口，也是最高一级的目录/bin：最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等/boot：存放Linux的内核及引导系统所需要的文件，包括引导装载程序/etc：存放系统配置文件，一些服务器的配置文件也放在这里/dev：存放所有的设备文件，比如声卡、磁盘等">
+<meta property="og:description" content="手动敲一遍、算是加强记忆吧~ /：文件系统的入口，也是最高一级的目录 /bin：最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等 /boot：存放Linux的内核及引导系统所需要的文件，包括引导装载程序 /etc：存放系统配置文件，一些服务器的配置文件也放在这里 /dev：存放所有的设备文件，比如声卡、磁盘等 /home：包含普通用户的个人主目录，如/home/lisi">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T05:53:09.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux主要目录的作用">
-<meta name="twitter:description" content="手动敲一遍、算是加强记忆吧~/：文件系统的入口，也是最高一级的目录/bin：最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等/boot：存放Linux的内核及引导系统所需要的文件，包括引导装载程序/etc：存放系统配置文件，一些服务器的配置文件也放在这里/dev：存放所有的设备文件，比如声卡、磁盘等">
+<meta name="twitter:description" content="手动敲一遍、算是加强记忆吧~ /：文件系统的入口，也是最高一级的目录 /bin：最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等 /boot：存放Linux的内核及引导系统所需要的文件，包括引导装载程序 /etc：存放系统配置文件，一些服务器的配置文件也放在这里 /dev：存放所有的设备文件，比如声卡、磁盘等 /home：包含普通用户的个人主目录，如/home/lisi">
 
 <link rel="canonical" href="http://listenerri.com/2016/04/22/linux主要目录的作用/">
 
@@ -299,12 +299,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>手动敲一遍、算是加强记忆吧~</p><p><font color="red">/：</font>文件系统的入口，也是最高一级的目录</p><p><font color="red">/bin：</font>最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等</p><p><font color="red">/boot：</font>存放Linux的内核及引导系统所需要的文件，包括引导装载程序</p><p><font color="red">/etc：</font>存放系统配置文件，一些服务器的配置文件也放在这里</p><p><font color="red">/dev：</font>存放所有的设备文件，比如声卡、磁盘等</p><a id="more"></a>
-
-
-
-
-
+        <p>手动敲一遍、算是加强记忆吧~</p>
+<p><font color="red">/：</font>文件系统的入口，也是最高一级的目录</p>
+<p><font color="red">/bin：</font>最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等</p>
+<p><font color="red">/boot：</font>存放Linux的内核及引导系统所需要的文件，包括引导装载程序</p>
+<p><font color="red">/etc：</font>存放系统配置文件，一些服务器的配置文件也放在这里</p>
+<p><font color="red">/dev：</font>存放所有的设备文件，比如声卡、磁盘等</p>
 <p><font color="red">/home：</font>包含普通用户的个人主目录，如/home/lisi</p>
 <p><font color="red">/lib：</font>包含二进制文件的共享库</p>
 <p><font color="red">/media：</font>即插即用型存储设备如U盘、光盘等的自动挂载点在此目录下创建</p>
@@ -330,21 +330,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2016/04/22/android中使用intent来实现Activity带数据跳转/" rel="next" title="android中使用intent来实现Activity带数据跳转">
-                  <i class="fa fa-chevron-left"></i> android中使用intent来实现Activity带数据跳转
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2016/04/23/java字符输入输出流在输出结尾多一个乱码字符/" rel="prev" title="java字符输入输出流在输出结尾多一个乱码字符:'?'">
-                  java字符输入输出流在输出结尾多一个乱码字符:'?' <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/04/22/android中使用intent来实现Activity带数据跳转/" rel="prev" title="android中使用intent来实现Activity带数据跳转">
+      <i class="fa fa-chevron-left"></i> android中使用intent来实现Activity带数据跳转
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/04/23/java字符输入输出流在输出结尾多一个乱码字符/" rel="next" title="java字符输入输出流在输出结尾多一个乱码字符:'?'">
+      java字符输入输出流在输出结尾多一个乱码字符:'?' <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -473,14 +470,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -547,7 +540,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",

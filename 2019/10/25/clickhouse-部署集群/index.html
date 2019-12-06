@@ -19,11 +19,12 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://listenerri.com').hostname,
     root: '/',
     scheme: 'Gemini',
-    version: '7.5.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -40,24 +41,23 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="翻译自 clickhouse 官方入门教程第二节：https://clickhouse.yandex/tutorial.html 将 clickhouse 部署到集群ClickHouse 集群是一个 homogenous 集群. 设置步骤是:  在集群内所有机器上安装 ClickHouse 服务端 在配置文件中设置集群相关的配置 在集群内每台机器上创建本地表 创建分布式表（Distributed">
+  <meta name="description" content="翻译自 clickhouse 官方入门教程第二节：https://clickhouse.yandex/tutorial.html  将 clickhouse 部署到集群ClickHouse 集群是一个 homogenous 集群. 设置步骤是:   在集群内所有机器上安装 ClickHouse 服务端 在配置文件中设置集群相关的配置 在集群内每台机器上创建本地表 创建分布式表（Distribut">
 <meta name="keywords" content="clickhouse,cluster,集群">
 <meta property="og:type" content="article">
 <meta property="og:title" content="clickhouse 部署集群">
 <meta property="og:url" content="http://listenerri.com/2019/10/25/clickhouse-部署集群/index.html">
 <meta property="og:site_name" content="listenerri&#39;s blog">
-<meta property="og:description" content="翻译自 clickhouse 官方入门教程第二节：https://clickhouse.yandex/tutorial.html 将 clickhouse 部署到集群ClickHouse 集群是一个 homogenous 集群. 设置步骤是:  在集群内所有机器上安装 ClickHouse 服务端 在配置文件中设置集群相关的配置 在集群内每台机器上创建本地表 创建分布式表（Distributed">
+<meta property="og:description" content="翻译自 clickhouse 官方入门教程第二节：https://clickhouse.yandex/tutorial.html  将 clickhouse 部署到集群ClickHouse 集群是一个 homogenous 集群. 设置步骤是:   在集群内所有机器上安装 ClickHouse 服务端 在配置文件中设置集群相关的配置 在集群内每台机器上创建本地表 创建分布式表（Distribut">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://listenerri.com/2019/10/25/clickhouse-部署集群/cluster_test.png">
 <meta property="og:updated_time" content="2019-10-26T01:12:37.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="clickhouse 部署集群">
-<meta name="twitter:description" content="翻译自 clickhouse 官方入门教程第二节：https://clickhouse.yandex/tutorial.html 将 clickhouse 部署到集群ClickHouse 集群是一个 homogenous 集群. 设置步骤是:  在集群内所有机器上安装 ClickHouse 服务端 在配置文件中设置集群相关的配置 在集群内每台机器上创建本地表 创建分布式表（Distributed">
+<meta name="twitter:description" content="翻译自 clickhouse 官方入门教程第二节：https://clickhouse.yandex/tutorial.html  将 clickhouse 部署到集群ClickHouse 集群是一个 homogenous 集群. 设置步骤是:   在集群内所有机器上安装 ClickHouse 服务端 在配置文件中设置集群相关的配置 在集群内每台机器上创建本地表 创建分布式表（Distribut">
 <meta name="twitter:image" content="http://listenerri.com/2019/10/25/clickhouse-部署集群/cluster_test.png">
 
 <link rel="canonical" href="http://listenerri.com/2019/10/25/clickhouse-部署集群/">
@@ -303,14 +303,14 @@
       
         <blockquote>
 <p>翻译自 clickhouse 官方入门教程第二节：<a href="https://clickhouse.yandex/tutorial.html" target="_blank" rel="noopener">https://clickhouse.yandex/tutorial.html</a></p>
-</blockquote><h1 id="将-clickhouse-部署到集群"><a href="#将-clickhouse-部署到集群" class="headerlink" title="将 clickhouse 部署到集群"></a>将 clickhouse 部署到集群</h1><p>ClickHouse 集群是一个 homogenous 集群. 设置步骤是: </p><ol>
+</blockquote>
+<h1 id="将-clickhouse-部署到集群"><a href="#将-clickhouse-部署到集群" class="headerlink" title="将 clickhouse 部署到集群"></a>将 clickhouse 部署到集群</h1><p>ClickHouse 集群是一个 homogenous 集群. 设置步骤是: </p>
+<ol>
 <li>在集群内所有机器上安装 ClickHouse 服务端</li>
 <li>在配置文件中设置集群相关的配置</li>
 <li>在集群内每台机器上创建本地表</li>
 <li>创建分布式表（<a href="https://clickhouse.yandex/docs/en/table_engines/distributed/" target="_blank" rel="noopener">Distributed table</a>）</li>
-</ol><a id="more"></a>
-
-
+</ol>
 <p>在 ClickHouse 集群中分布式表事实上是一种关联到每台机器本地表的 <code>view</code>。对分布式表执行查询将使用集群中所有分片（译者注：一个分片即为集群中的一台机器）的资源。可以为多个集群指定配置，并创建多个分布式表以提供对不同集群的 <code>view</code>。</p>
 <p>下面的配置是一个有三个分片的集群，每个分片将数据保存到一个副本中（译者注：数据只有一份，没有副本）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;remote_servers&gt;</span><br><span class="line">    &lt;perftest_3shards_1replicas&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;example-perftest01j.yandex.ru&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;example-perftest02j.yandex.ru&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;example-perftest03j.yandex.ru&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">    &lt;/perftest_3shards_1replicas&gt;</span><br><span class="line">&lt;/remote_servers&gt;</span><br></pre></td></tr></table></figure></p>
 <p>创建本地表（译者注：待确定是否在所有分片上都创建本地表）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ontime_local (...) ENGINE = MergeTree(FlightDate, (Year, FlightDate), 8192);</span><br></pre></td></tr></table></figure></p>
@@ -349,21 +349,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/24/vscode-vim-在-mac-osx-和-linux-下输入法自动切换/" rel="next" title="vscode vim 在 mac osx 和 linux 下输入法自动切换">
-                  <i class="fa fa-chevron-left"></i> vscode vim 在 mac osx 和 linux 下输入法自动切换
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/28/为自己的网站启用-https/" rel="prev" title="为自己的网站启用 https">
-                  为自己的网站启用 https <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/24/vscode-vim-在-mac-osx-和-linux-下输入法自动切换/" rel="prev" title="vscode vim 在 mac osx 和 linux 下输入法自动切换">
+      <i class="fa fa-chevron-left"></i> vscode vim 在 mac osx 和 linux 下输入法自动切换
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/28/为自己的网站启用-https/" rel="next" title="为自己的网站启用 https">
+      为自己的网站启用 https <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -493,14 +490,10 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
   </div>
 
         
-
-
-
-
 
 
 
@@ -567,7 +560,7 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   new Valine({
     el: '#comments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'X0UkF88VBoXXbzI80WhmgIyF-gzGzoHsz',
     appKey: 'CLyVWqSO30mL4Hg34jCGTheF',
     placeholder: "I have something to say",
