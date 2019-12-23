@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[clickhouse materialized view 踩坑记录]]></title>
+    <url>%2F2019%2F12%2F23%2Fclickhouse-materialized-view-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[最近在使用 clickhouse（下面简称 CH） 的 materialized view（下面简称为 MV）功能，类似其他数据库的物化视图，触发器之类的功能，不过遇到了几点坑，有的通过升级 CH 版本解决了，有的可以在写 sql 的时候小心避免。 先列一下我个人总结出来的使用要点，不想继续看的可以尝试依据这些要点看能否解决自己的问题： 在创建 MV 表时，一定要使用 TO 关键字为 MV 表指定存储位置 在创建 MV 表时如果用到了多表联查，sql 中的 最终选择字段 不能使用连接表的别名，应该只使用字段名 在创建 MV 表时如果用到了多表联查，只有当第一个查询的表有数据插入时，这个 MV 才会被触发 在创建 MV 表时如果用到了子查询，且子查询会回查 SRC 表，那么这个子查询会回查整个 SRC 表，并不是只有新插入的那部分数据 在创建 MV 表时不要使用 POPULATE 关键字，而是在 MV 表建好之后将数据手动导入 MV 表 先看看官方的创建 MV 的语句： 1CREATE MATERIALIZED VIEW [IF NOT EXISTS] [db.]table_name [TO[db.]name] [ENGINE = engine] [POPULATE] AS SELECT ... 具体的介绍可以阅读官方文档：https://clickhouse.yandex/docs/en/query_language/create/#create-view 值得一提的虽然官方提供了中文文档，但中文文档内容更新不及时，较英文文档有缺失的部分，还是建议阅读英文的。 我使用 MV 的场景是： 1SRC -&gt; MV1 -&gt; MV2 MV1 基于 SRC 表，MV2 基于 MV1 表，且 MV2 中包含多表联查，即 MV2 中的查询语句使用了多个 JOIN 语句，来连接从 MV1 中查询出来的多个子表。 遇到的的第一个坑是： MV2 中的多表联查语句（建表语句中 SELECT 之后的语句）可以手动执行，并使用 INSERT INTO MV2 SELECT ... 语句将结果插入 MV2，但是当通过 MV 功能自动执行这一过程时会报部分列名找不到的错误，自动执行这一过程是指往 SRC 表插入数据，数据会送往 MV1，进而送往 MV2。 起初我使用的 CH 版本是 19.6.2.11，这个版本的 CH 不支持上述问题中的 MV 复杂查询，升级到目前的最新版：19.16.9.37 可以解决，确切的说 MV 的复杂查询是从 19.11.12.69 版本开始支持的，新版本虽然支持了 MV 复杂查询，但是 sql 语法上需要小心：SELECT 之后的列名，即查询语句的 最终选择字段 不能引用子表的别名，如果多个子查询中包含同名字段，可以在子查询的 SELECT 中使用 AS 为字段名起个别名，然后在 最终选择字段 中使用子表字段的别名。总之就是不能使用表的别名，但可以使用字段的别名。 说起来糊涂，举个例子，假设下面的 SELECT 是 MV2 的建表语句中的 SELECT 部分： 123456789101112131415161718SELECT A.user_id, A.user_name, B.user_age, C.user_genderFROM( SELECT user_id, user_name FROM MV1) AS AALL LEFT JOIN( SELECT user_id, user_age FROM MV1) AS BON A.user_id = B.user_idALL LEFT JOIN( SELECT user_id, user_gender FROM MV1) AS CON A.user_id = c.user_id 由于 MV2 是基于 MV1 的，上述 sql 在手动往 MV1 插入数据时，就会发生报错，但是数据依旧可以插入 MV1，正确的 sql 写法如下： 123456789101112131415161718SELECT user_id, user_name, user_age, user_genderFROM( SELECT user_id, user_name FROM MV1) AS AALL LEFT JOIN( SELECT user_id, user_age FROM MV1) AS BON A.user_id = B.user_idALL LEFT JOIN( SELECT user_id, user_gender FROM MV1) AS CON A.user_id = c.user_id 新版本虽然支持了 MV 复杂查询，但是引入了一个新的问题：第二层 MV 获取不到数据，在本例中即当数据插入 SRC 时，数据也可以插入到 MV1，但却无法插入到 MV2，也没有任何提示，看起来像是 MV2 完全不知道 MV1 通过 SRC 插入了新数据。这个功能在我使用的旧版 CH 时是支持的，只是那时候不支持 MV 复杂查询，这个问题相关的 issue 是：https://github.com/ClickHouse/ClickHouse/issues/7195，解决方案我已经在这个 issue 中回复了，在这里再说一下。 说到解决方案就得提一下创建 MV 的两种不同的语法： 12// 方法一CREATE MATERIALIZED VIEW IF NOT EXISTS test_view ENGINE = Memory AS SELECT ... 123// 方法二CREATE TABLE test (定义列) ENGINE Memory;CREATE MATERIALIZED VIEW IF NOT EXISTS test_view TO test AS SELECT ... 方法一会自动生成一个 CH 内部表，表名以 .inner. 开头，用来存储 MV 的数据。方法二是先创建一个用来存储 MV 数据的表，这个表跟普通的表一样，然后再创建 MV，但使用 TO 关键字为其指定数据存储的位置。 在目前最新版的 CH 19.16.9.37 中，方法一在只有一层 MV 时可以正常工作，当有两层乃至多层 MV 时，只有第一层 MV 会收到插入 SRC 中的数据，后面的 MV 不知道有新数据插入，方法二可以避免这个问题。 所以在开头我提到的我的使用场景下，可以正常工作的 MV 建表 sql 大致如下： 1234CREATE TABLE src (定义列) ENGINE Memory;CREATE TABLE foo (定义列) ENGINE Memory;CREATE MATERIALIZED VIEW IF NOT EXISTS MV1 TO foo AS SELECT ... FROM src WHERE ...CREATE MATERIALIZED VIEW IF NOT EXISTS MV2 AS SELECT ... FROM foo WHERE ... 但考虑到后期可能会基于 MV2 创建 MV3，所以最好为 MV2 也指定数据存储位置： 12345CREATE TABLE src (定义列) ENGINE Memory;CREATE TABLE foo (定义列) ENGINE Memory;CREATE MATERIALIZED VIEW IF NOT EXISTS MV1 TO foo AS SELECT ... FROM src WHERE ...CREATE TABLE bar (定义列) ENGINE Memory;CREATE MATERIALIZED VIEW IF NOT EXISTS MV2 TO bar AS SELECT ... FROM foo WHERE ...]]></content>
+      <categories>
+        <category>clickhouse</category>
+      </categories>
+      <tags>
+        <tag>clickhouse</tag>
+        <tag>materialized-view</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[zookeeper 小记]]></title>
     <url>%2F2019%2F12%2F04%2Fzookeeper-%E5%B0%8F%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[zookeeper 崩溃恢复过程中两个关键性问题Q1：leader 提交事务 A 后崩溃，follower 没有收到提交事务 A 的消息，再次选举 leader 时如何确保事务 A 被应用？ A1：既然 leader 已经在本地提交了事务 A，那么说明事务 A 肯定已经经过了多数 follower 的确认，即多数 follower 上都有事务 A 的记录，leader 崩溃后，重新选举出的新 leader 肯定包含未提交的事务 A，因为事务 A 的事务 ID 最大，新 leader 会继续提交事务 A。 Q2：leader 在还未将事务 B 广播到集群中时崩溃，在重新选举 leader 并在旧 leader 恢复正常后如何处理事务 B？ A2：事务 B 将会被删除，不会被提交。leader 在接收到一个请求，并将其转化为事务 B 后崩溃，此时还没有将事务 B 广播到集群中，即此事务只存在于 leader 机器上，经过新一轮的 leader 选举后，旧 leader 恢复正常并加入集群，此时会发现事务 B 的事务 ID 所使用的 epoch 号与新 leader 的对不上，那么事务 B 就会被删除。 应用场景把握好 zookeeper 的主要特性就可以将其应用在多种多样的场景下。主要特性如下： 节点 树结构 持久节点 持久顺序节点 临时节点 临时顺序节点 节点只能被注册一次 watcher 在《从 Paxos 到 Zookeeper》一书中提到的应用场景以及我认为场景所应用到的主要特性如下： 数据发布/订阅（配置中心） watcher DNS 服务负载均衡 树结构 watcher 命名服务 持久顺序节点 分布式协调/通知 临时节点 临时顺序节点 watcher 集群管理 临时节点 watcher Master 选举 节点只能被注册一次 watcher 分布式锁 节点只能被注册一次（排他锁/写锁/独占锁） 临时顺序节点（共享锁/读锁） watcher 分布式队列 临时顺序节点 watcher]]></content>
@@ -618,9 +630,9 @@
         <category>c</category>
       </categories>
       <tags>
-        <tag>c</tag>
         <tag>strlen</tag>
         <tag>sizeof</tag>
+        <tag>c</tag>
       </tags>
   </entry>
   <entry>
