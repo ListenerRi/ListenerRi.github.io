@@ -221,6 +221,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/android获取屏幕像素和密度/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="listenerri">
+      <meta itemprop="description" content="学的越多越发现会的越少 : )">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="listenerri's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/04/android获取屏幕像素和密度/" class="post-title-link" itemprop="url">android获取屏幕像素和密度</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-04 19:51:40" itemprop="dateCreated datePublished" datetime="2016-05-04T19:51:40+08:00">2016-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2016/05/04/android获取屏幕像素和密度/" class="post-meta-item leancloud_visitors" data-flag-title="android获取屏幕像素和密度" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2016/05/04/android获取屏幕像素和密度/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2016/05/04/android获取屏幕像素和密度/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
+</blockquote>
+<p>(一)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure></p>
+<p>(二)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure></p>
+<p>(三)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics2=getResources().getDisplayMetrics();</span><br><span class="line">metrics2.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics2.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics2.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics2.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>当不是在activity中时，就不能直接用getWindowManager()等方法了，这时可以用Context.getSystemService(Context.WINDOW_SERVICE)方法，其他的类似</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/ViewPager相关笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1179,105 +1284,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/从arraylist生成String-数组/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="listenerri">
-      <meta itemprop="description" content="学的越多越发现会的越少 : )">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="listenerri's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/04/从arraylist生成String-数组/" class="post-title-link" itemprop="url">从arraylist生成String[]数组</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-05-04 18:41:05" itemprop="dateCreated datePublished" datetime="2016-05-04T18:41:05+08:00">2016-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2016/05/04/从arraylist生成String-数组/" class="post-meta-item leancloud_visitors" data-flag-title="从arraylist生成String[]数组" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2016/05/04/从arraylist生成String-数组/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2016/05/04/从arraylist生成String-数组/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在使用数组的时候要留意,一定要先完整的创建好数组,再对其操作</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] commands=<span class="keyword">null</span>;</span><br><span class="line">commands = <span class="keyword">new</span> String[arrayListCommand.size()];</span><br><span class="line">commands = (String[]) arrayListCommand.toArray(commands);</span><br><span class="line"><span class="comment">//可以成功cast到String数组</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String[] commands=<span class="keyword">null</span>;</span><br><span class="line">commands = (String[]) arrayListCommand.toArray();</span><br><span class="line"><span class="comment">//不能cast到String数组</span></span><br><span class="line"><span class="comment">//这是因为第一句只是声明了commands变量,</span></span><br><span class="line"><span class="comment">//此时它并没有在内存获得存储数据的位置,</span></span><br><span class="line"><span class="comment">//因此无法直接为其赋值</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1328,20 +1334,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">201</span>
+        <span class="site-state-item-count">202</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
