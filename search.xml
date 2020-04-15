@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[k8s dashboard 无法登陆]]></title>
+    <url>%2F2020%2F04%2F15%2Fk8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86%2F</url>
+    <content type="text"><![CDATA[先说环境：两节点 k8s 集群，一台 master，k8s 版本为 1.18.1，所使用的 dashboard 版本为 v2.0.0-rc7 dashboard 安装方法直接按照官网所说的执行即可：12kubectl delete ns kubernetes-dashboardkubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc7/aio/deploy/recommended.yaml 现在 dashboard 已经部署好了，问题是如何访问 dashboard 服务，首先新版的 dashboard 将默认权限控制到了最小，只够 dashboard 部署，要想正常访问 dashboard 服务需要按照下面这个官方文档对其进行授权和创建管理员账户：https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md 如果不想细看，可以直接将如下代码保存至 dashboard-admin.yaml： 123456789101112131415161718apiVersion: v1kind: ServiceAccountmetadata: name: admin-user namespace: kubernetes-dashboard---apiVersion: rbac.authorization.k8s.io/v1kind: ClusterRoleBindingmetadata: name: admin-userroleRef: apiGroup: rbac.authorization.k8s.io kind: ClusterRole name: cluster-adminsubjects:- kind: ServiceAccount name: admin-user namespace: kubernetes-dashboard 然后执行： 1kubectl apply -f dashboard-admin.yaml 接着获取创建的 admin 账户的 token： 1kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &apos;&#123;print $1&#125;&apos;) 拿到 token 开始将 dashboard 服务暴露出来，有两种方式： 方式一 proxy 反向代理 需要注意的是使用这种方式只能是在本机访问（服务也必须在本机），因为目前 dashboard 不支持除 localhost 和 127.0.0.1 以外的主机名登录进入控制台（ https://github.com/kubernetes/dashboard/issues/4624 ），这意味着无法从集群外通过浏览器打开 dashboard，表示不懂这种设计，这样的 dashboard 还有什么用？如果是我理解不正确，请留言指正。 执行如下命令启动代理： 1kubectl proxy 然后在浏览器访问（注意必须是 http）： http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy 方式二 端口转发 执行如下命令进行端口转发： 1sudo kubectl port-forward --namespace kubernetes-dashboard --address 0.0.0.0 service/kubernetes-dashboard 443 然后在集群外的机器上访问进行端口转发的那台机器的 ip 即可（注意必须是 https）： https://YourNodeIP/ 打开 web 界面后用上面获取到的 token 登录即可]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>dashboard</tag>
+        <tag>登录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[判断是否是 vscode 内启动的终端]]></title>
     <url>%2F2020%2F04%2F10%2F%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF-vscode-%E5%86%85%E5%90%AF%E5%8A%A8%E7%9A%84%E7%BB%88%E7%AB%AF%2F</url>
     <content type="text"><![CDATA[由于在 bashrc 中配置了自动 run/attach tmux，因此在 vscode 内启动终端时也会找 tmux，如果想避免这种情况或者类似的情况可以通过修改 vscode 的配置文件，添加自定义环境变量，然后在 bashrc 里进行判断，比如在 vscode 的配置文件中添加如下内容： 1234567// NOTE: 在 deepin linux bash 下经过测试发现，不能使用 VSCODE_ 开头的名字作为变量，否则无效&quot;terminal.integrated.env.linux&quot;: &#123; &quot;IS_VSCODE_INTEGRATED_TERMINAL&quot;: &quot;1&quot;&#125;,&quot;terminal.integrated.env.osx&quot;: &#123; &quot;IS_VSCODE_INTEGRATED_TERMINAL&quot;: &quot;1&quot;&#125;, 表示在 linux/osx 下的 vscode 里，为终端设置值为 1 的环境变量： IS_VSCODE_INTEGRATED_TERMINAL 然后在 bashrc 文件中进行检测，如果存在此变量则不启动 tmux： 1234567if [[ -z $IS_VSCODE_INTEGRATED_TERMINAL ]]; then which tmux &gt; /dev/null 2&gt;&amp;1\ &amp;&amp; [[ -z &quot;$TMUX&quot; ]]\ &amp;&amp; &#123; if ! tmux a; then exec tmux; fi; &#125;else echo &quot;-&gt; disabled tmux &lt;-&quot;fi]]></content>
