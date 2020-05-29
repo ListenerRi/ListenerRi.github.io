@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python 中函数传参是值传递还是引用传递]]></title>
+    <url>%2F2020%2F05%2F29%2Fpython-%E4%B8%AD%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%E6%98%AF%E5%80%BC%E4%BC%A0%E9%80%92%E8%BF%98%E6%98%AF%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%2F</url>
+    <content type="text"><![CDATA[这个问题网上众说纷纭，有的答案不完全正确，有的答案没有解释清楚。 这里先说我认为正确的答案： 如果学习过 cpp 的话,说传值或者传引用都不准确，直接理解为传地址（指针）就好了，不管可变对象还是不可变对象都是传地址。 详细解释，在函数内： 对传入参数的赋值操作，是创建新的对象，可以理解为声明新的变量，自然不会影响到函数外变量 对传入参数所指对象的修改操作，如 list 的 append，由于是指针，因此修改了函数外变量，注意在 python 中不可变对象类型是不包含可以修改对象的接口的，即便有些接口看起来像修改了，也是返回了新的对象，而不是对原对象的修改，即不是原地修改 这也解释了当传递复杂类型参数：a = tuple(b = list(), 1, 2, 3) 这种数据时，虽然 a 是不可变类型，但通过 a[0].append() 依然可以成功修改 b，也意味着修改了 a，且函数外变量会也会被修改的原因 综上所述，也可以理解为传引用，但要注意，这里的“引用”二字是广义的，不要狭义得理解为是 cpp 中的引用，两者是不同的，在 cpp 中对函数内传入的引用参数执行赋值操作，将会影响到函数外的变量。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>传参</tag>
+        <tag>传值</tag>
+        <tag>传引用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[k8s dashboard 无法登陆]]></title>
     <url>%2F2020%2F04%2F15%2Fk8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86%2F</url>
     <content type="text"><![CDATA[先说环境：两节点 k8s 集群，一台 master，k8s 版本为 1.18.1，所使用的 dashboard 版本为 v2.0.0-rc7 dashboard 安装方法直接按照官网所说的执行即可：12kubectl delete ns kubernetes-dashboardkubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc7/aio/deploy/recommended.yaml 现在 dashboard 已经部署好了，问题是如何访问 dashboard 服务，首先新版的 dashboard 将默认权限控制到了最小，只够 dashboard 部署，要想正常访问 dashboard 服务需要按照下面这个官方文档对其进行授权和创建管理员账户：https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md 如果不想细看，可以直接将如下代码保存至 dashboard-admin.yaml： 123456789101112131415161718apiVersion: v1kind: ServiceAccountmetadata: name: admin-user namespace: kubernetes-dashboard---apiVersion: rbac.authorization.k8s.io/v1kind: ClusterRoleBindingmetadata: name: admin-userroleRef: apiGroup: rbac.authorization.k8s.io kind: ClusterRole name: cluster-adminsubjects:- kind: ServiceAccount name: admin-user namespace: kubernetes-dashboard 然后执行： 1kubectl apply -f dashboard-admin.yaml 接着获取创建的 admin 账户的 token： 1kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &apos;&#123;print $1&#125;&apos;) 拿到 token 开始将 dashboard 服务暴露出来，有两种方式： 方式一 proxy 反向代理 需要注意的是使用这种方式只能是在本机访问（服务也必须在本机），因为目前 dashboard 不支持除 localhost 和 127.0.0.1 以外的主机名登录进入控制台（ https://github.com/kubernetes/dashboard/issues/4624 ），这意味着无法从集群外通过浏览器打开 dashboard，表示不懂这种设计，这样的 dashboard 还有什么用？如果是我理解不正确，请留言指正。 执行如下命令启动代理： 1kubectl proxy 然后在浏览器访问（注意必须是 http）： http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy 方式二 端口转发 执行如下命令进行端口转发： 1sudo kubectl port-forward --namespace kubernetes-dashboard --address 0.0.0.0 service/kubernetes-dashboard 443 然后在集群外的机器上访问进行端口转发的那台机器的 ip 即可（注意必须是 https）： https://YourNodeIP/ 打开 web 界面后用上面获取到的 token 登录即可]]></content>
