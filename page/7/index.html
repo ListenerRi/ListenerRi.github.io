@@ -221,6 +221,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="listenerri">
+      <meta itemprop="description" content="学的越多越发现会的越少 : )">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="listenerri's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" class="post-title-link" itemprop="url">vim+ycm+eclim+javacomplete解决冲突</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-04 20:12:12" itemprop="dateCreated datePublished" datetime="2016-05-04T20:12:12+08:00">2016-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vim/" itemprop="url" rel="index">
+                    <span itemprop="name">vim</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" class="post-meta-item leancloud_visitors" data-flag-title="vim+ycm+eclim+javacomplete解决冲突" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2016/05/04/vim-ycm-eclim-javacomplete解决冲突/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>四个主角各自的作用:<br>vim:编辑器一枚<br>ycm:自动补全插件(也就是不用按ctrl+x ctrl+o来调用vim的omni全能补全)<br>eclim:让vim可以有部分eclipse的功能,也可以管理eclipse里的项目<br>javacomplete:一个java的补全插件(这里说的是增强版的)</p>
+<p>各自网址:<br><a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="noopener">ycm:https://github.com/Valloric/YouCompleteMe</a><br><a href="http://eclim.org/" target="_blank" rel="noopener">eclim:http://eclim.org/</a><br><a href="https://github.com/artur-shaik/vim-javacomplete2" target="_blank" rel="noopener">javacomplete:https://github.com/artur-shaik/vim-javacomplete2</a></p>
+<p>这篇文章的主要目的不是如何安装和使用这些插件,而是解决eclim和javacomplete之间的冲突</p>
+<p>在说冲突之前先说下eclim和javacomplete的生效条件:<br>eclim:编辑的java类型的文件必须是eclipse中的一个项目中的文件<br>javacomplete:只要是java类型的文件都可以补全</p>
+<p>什么冲突呢?<br>ycm可以使用vim的omnifunc提供的数据来完成java的自动补全,主要依据在当前打开的java文件的buffer中,<br>执行:<code>set omnifunc</code>返回的结果来确认到底用eclim还是javacomplete提供的补全数据<br>冲突就是如果同时使用这两个插件,那么只要打开java类型的文件,那么就会被自动命令设置成javacomplete的<br>补全,即便是打开eclipse项目中的文件也不会是eclim的补全</p>
+<p>解决方法:<br>判断打开的java文件是否是eclipse项目中的文件就行了,判断方法是调用eclim插件的一个方法,<br>当是项目文件时,就不设置javacomplete的补全,如果不是,就设置omnifunc为javacomplete的补全,<br>讲下面的东西粘贴到vimrc中,另外不要在其他地方设置java的omnifunc:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" vim-javacomplete2</span></span><br><span class="line"><span class="comment">" java的omni全能补全(insert模式下ctrl-x-ctrl-o调用),ycm将会自动调用</span></span><br><span class="line"><span class="comment">" 与eclim的自动补全冲突,所以先判断当前文件是否是项目文件</span></span><br><span class="line"><span class="comment">" 如果不是项目文件才使用vim-javacomplete2进行全能补全</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>! <span class="title">IsProjectFile</span><span class="params">()</span></span></span><br><span class="line">    <span class="keyword">let</span> projectName = eclim#project#util#GetCurrentProjectName()</span><br><span class="line">    <span class="keyword">if</span> projectName == <span class="string">''</span></span><br><span class="line">         <span class="keyword">setlocal</span> omnifunc=javacomplete#Complete</span><br><span class="line">    <span class="keyword">endif</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">autocmd</span> FileType java <span class="keyword">call</span> IsProjectFile()</span><br><span class="line"></span><br><span class="line"><span class="comment">" eclim/eclimd</span></span><br><span class="line"><span class="comment">" 需要自行安装,不在vim-plug插件管理器管理列表之中</span></span><br><span class="line"><span class="comment">" eclimd读取$ECLIPSE_HOME/configuration/config.ini</span></span><br><span class="line"><span class="comment">" 还读取~/eclimrc配置文件</span></span><br><span class="line"><span class="comment">" 日志级别,日志文件默认在workspace/eclimd.log</span></span><br><span class="line"><span class="comment">" 除了默认的info,还有trace,debug,warning,error,off</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:EclimLogLevel</span> = <span class="string">'info'</span></span><br><span class="line"><span class="comment">" 设置浏览器,firefox,mozilla,opera,iexplore</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:EclimBrowser</span> = <span class="string">'firefox'</span></span><br><span class="line"><span class="comment">" 让eclim配合ycm实现java等语言的自动补全</span></span><br><span class="line"><span class="comment">" 编辑的文件必须是eclipse的一个项目中的文件才会自动补全</span></span><br><span class="line"><span class="comment">" 这个变量的作用是(仅举例java文件):set omnifunc=eclim#java#complete#CodeComplete</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:EclimCompletionMethod</span> = <span class="string">'omnifunc'</span></span><br></pre></td></tr></table></figure></p>
+<p>javacomplete和eclim都需要自己安装具体如何安装可以去上面提供的网址去查看和下载,<br>不会因为添加了这几行配置就可以实现java的补全了,本文中使用的插件管理器是:<code>vim-plug</code></p>
+<p>另外推荐一份vim的配置,使用简单,配置文件结构清晰,注释明了,很适合不熟悉vim配置的人入手学习: <a href="https://github.com/wklken/k-vim" target="_blank" rel="noopener">k-vim</a></p>
+<p>再附上自己的一份配置,借鉴了上面的kvim,但后来觉得不舍和自己,就从零开始自己配置了: <a href="https://github.com/listenerri/ri-vim" target="_blank" rel="noopener">ri-vim</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/java打印三角和乘法口诀/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1173,118 +1278,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://listenerri.com/2016/05/04/c语言修饰符static-extern-define-const/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="listenerri">
-      <meta itemprop="description" content="学的越多越发现会的越少 : )">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="listenerri's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/04/c语言修饰符static-extern-define-const/" class="post-title-link" itemprop="url">c语言修饰符static,extern,#define,const</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-05-04 19:19:19" itemprop="dateCreated datePublished" datetime="2016-05-04T19:19:19+08:00">2016-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-08 13:53:09" itemprop="dateModified" datetime="2019-08-08T13:53:09+08:00">2019-08-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2016/05/04/c语言修饰符static-extern-define-const/" class="post-meta-item leancloud_visitors" data-flag-title="c语言修饰符static,extern,#define,const" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2016/05/04/c语言修饰符static-extern-define-const/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2016/05/04/c语言修饰符static-extern-define-const/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>写的比较乱，因为是刚开始学C，没有一个系统的概念，都是想到什么，测试到什么就添加什么，仅供参考<br>而且可能会有错误的地方，如果有请指出</p>
-</blockquote>
-<h1 id="static：静态"><a href="#static：静态" class="headerlink" title="static：静态"></a>static：静态</h1><h2 id="作用域以及声明方法："><a href="#作用域以及声明方法：" class="headerlink" title="作用域以及声明方法："></a>作用域以及声明方法：</h2><p>1、在函数中声明则仅作用于该函数<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、在函数外声明则作用于<font color="red">从声明开始到文件末尾</font><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#extern：引用(其他c文件)</p>
-<p>##作用域以及声明方法：<br>1、可以声明变量或函数，并且不必变量初始化或函数定义实现，即可使用，因为引用变量或函数声明时，会同时引用被引用文件内的初始化语句<br>2、被引用的变量或函数不能被static修饰<br>3、相当与引用(复制？)其他文件中的声明和定义/初始化语句到本文件的声明位置<br>4、在本文件使用extern声明变量或函数时，变量或函数名以及函数返回类型和函数参数列表应与要引用的变量或方法一致(经测试，变量不一致时好像类似声明的指针类型变量，方法暂未测试)<br>5、在函数内声明则类似局部变量，作用域仅在本函数，在函数外，作用域从声明处到文件末尾<br>6、如果你是学习C语言的新手，而且暂时只是在使用文本编辑器在写C程序，那么需要注意，在编译有extern语句的C文件时，应该与被引用的文件一起编译(笔者表示在开始时一直在单独编译一个文件所以一直编译报错)<br>比如下面例子的a1.c和b.c，或者a2.c和b.c，编译的时候应该这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gcc a1.c b.c</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">gcc a2.c b.c</span><br><span class="line"><span class="comment">#这样编译器才能找到被extern的变量或函数</span></span><br></pre></td></tr></table></figure></p>
-<p>不要将a1.c和a2.c以及b.c这三个一起编译，应该将a1.c和b.c一起编译，或者a2.c和b.c一起编译，这是两个例子<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* a1.c */</span></span><br><span class="line"><span class="comment">/* 在文件开始声明(将类似全局变量) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> test1;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">testFun1</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">testFun2</span><span class="params">(<span class="keyword">int</span> temp)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> temp=<span class="number">20</span>;</span><br><span class="line">	testFun1();</span><br><span class="line">	testFun2(temp);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*####################*/</span></span><br><span class="line"><span class="comment">/* a2.c */</span></span><br><span class="line"><span class="comment">/* 在函数内部声明(将类似局部变量) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myFun1</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	myFun1();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myFun1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">extern</span> <span class="keyword">int</span> test1;</span><br><span class="line">	<span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">testFun1</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">testFun2</span><span class="params">(<span class="keyword">int</span> temp)</span></span>;</span><br><span class="line">	<span class="keyword">int</span> temp=<span class="number">30</span>;</span><br><span class="line">	testFun1();</span><br><span class="line">	testFun2(temp);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*####################*/</span></span><br><span class="line"><span class="comment">/* b.c */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> test1=<span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">testFun1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test1 in testFun1():%d\n"</span>,test1);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">testFun2</span><span class="params">(<span class="keyword">int</span> temp)</span></span>&#123;</span><br><span class="line">	test1=temp;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test1 in testFun2():%d\n"</span>,test1);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="“-define”：常量"><a href="#“-define”：常量" class="headerlink" title="“#define”：常量"></a>“#define”：常量</h1><h2 id="作用域以及声明方法：-1"><a href="#作用域以及声明方法：-1" class="headerlink" title="作用域以及声明方法："></a>作用域以及声明方法：</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/05/04/c语言修饰符static-extern-define-const/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1335,20 +1328,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">210</span>
+        <span class="site-state-item-count">212</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
