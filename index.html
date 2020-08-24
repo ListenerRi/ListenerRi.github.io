@@ -245,7 +245,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-24 15:44:13 / 修改时间：15:50:25" itemprop="dateCreated datePublished" datetime="2020-08-24T15:44:13+08:00">2020-08-24</time>
+              <time title="创建时间：2020-08-24 15:44:13 / 修改时间：15:57:44" itemprop="dateCreated datePublished" datetime="2020-08-24T15:44:13+08:00">2020-08-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,9 +294,13 @@
           <h1 id="mysql-索引"><a href="#mysql-索引" class="headerlink" title="mysql 索引"></a>mysql 索引</h1><p>学习了《MySQL 是怎样运行的：从根儿上理解 MySQL》中的索引一节，收获颇丰，总结如下。</p>
 <h2 id="innodb-索引（组织结构-b-树）"><a href="#innodb-索引（组织结构-b-树）" class="headerlink" title="innodb 索引（组织结构 b+ 树）"></a>innodb 索引（组织结构 b+ 树）</h2><p>用户记录 -&gt; 用户记录数据页-&gt; 目录项记录 -&gt; 目录项记录数据页 -&gt; 更大范围目录项记录 -&gt; 更大范围目录项记录数据页 -&gt; 更大范围…</p>
 <ol>
-<li><code>用户记录数据页</code> 中包含针对 <code>用户记录</code> 的目录，称为 <code>页目录</code></li>
-<li><code>目录项记录数据页</code> 是针对 <code>用户记录数据页</code> 的目录</li>
-<li>一个 <code>用户记录数据页</code> 对应一个 <code>目录项记录</code>；</li>
+<li><code>用户记录数据页</code> 中包含针对 <code>用户记录</code> 的目录，称为 <code>页目录</code>，用来使用二分法快速查找 <code>用户记录</code></li>
+<li><code>目录项记录数据页</code> 是针对 <code>用户记录数据页</code> 的目录，也包含一个 <code>页目录</code>，但用来使用二分法快速查找 <code>目录项记录</code></li>
+<li>一个 <code>用户记录数据页</code> 对应多个 <code>用户记录</code></li>
+<li>一个 <code>用户记录数据页</code> 对应一个 <code>目录项记录</code></li>
+<li>一个 <code>目录项记录数据页</code> 对应多个 <code>目录项记录</code></li>
+<li>一个 <code>目录项记录数据页</code> 对应一个 <code>更大范围目录项记录</code></li>
+<li>…</li>
 </ol>
 <h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><p>以上述结构组织数据，且存储了所有 <code>完整</code> 用户记录的索引，一般是主键索引</p>
 <h2 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h2><p>以上述结构组织数据，但数据不存储完整用户记录，仅存储索引列 + 主键列的值，一般是用户自己建立的索引。这里存储主键的原因是用来使用这个主键进行 <code>回表</code>，去聚簇索引中取出该索引列对应的完整用户记录，因为会查询两次索引，所以二级索引命名由此而来，除聚簇索引外都是二级索引，联合（多列）索引也属于二级索引的一种</p>
