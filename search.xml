@@ -1315,6 +1315,26 @@
       </tags>
   </entry>
   <entry>
+    <title>eclipse中DDMS的LOGcat只有一列level</title>
+    <url>/2016/05/04/eclipse%E4%B8%ADDDMS%E7%9A%84LOGcat%E5%8F%AA%E6%9C%89%E4%B8%80%E5%88%97level/</url>
+    <content><![CDATA[<p>参考<a href="http://stackoverflow.com/questions/25010393/eclipse-logcat-shows-only-the-first-letter-from-each-message">此贴</a>解决此问题。</p>
+<p>退出eclipse,打开下面的文件</p>
+<p>~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs</p>
+<p>粘贴下面的东西到打开的文件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ddms.logcat.auotmonitor.level=error  </span><br><span class="line">ddms.logcat.automonitor=<span class="keyword">false</span>  </span><br><span class="line">ddms.logcat.automonitor.userprompt=<span class="keyword">true</span>  </span><br><span class="line">eclipse.preferences.version=<span class="number">1</span></span><br><span class="line">logcat.view.colsize.Application=<span class="number">169</span></span><br><span class="line">logcat.view.colsize.Level=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.PID=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.Tag=<span class="number">198</span></span><br><span class="line">logcat.view.colsize.Text=<span class="number">619</span></span><br><span class="line">logcat.view.colsize.Time=<span class="number">182</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>eclipse</tag>
+        <tag>ddms</tag>
+        <tag>logcat</tag>
+        <tag>不显示</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gdb调试qt程序时打印qt特有的类型数据</title>
     <url>/2018/10/23/gdb%E8%B0%83%E8%AF%95qt%E7%A8%8B%E5%BA%8F%E6%97%B6%E6%89%93%E5%8D%B0qt%E7%89%B9%E6%9C%89%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<p>如果没有使用 qtcreator 调试 qt 程序，而是手动或利用其他 IDE 使用 gdb 调试，会发现 qt 类型的数据如 QString QList QMap 等不能直接查看其值。其实 gdb 是提供了关于打印数据的接口的，叫做 <code>Pretty-Printer</code>，这是一种利用 python 代码更好的输出变量数据的机制，感兴趣的可以搜索下相关内容。qtcreator 之所以可以愉快的打印出 qt 相应的数据也是因为它使用了这种机制，下面的命令可以查看 qtcreator 的安装目录中的 python 文件，命令在 debian 系的 linux 系统上有效:</p>
@@ -1334,26 +1354,6 @@
       <tags>
         <tag>qt</tag>
         <tag>gdb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>eclipse中DDMS的LOGcat只有一列level</title>
-    <url>/2016/05/04/eclipse%E4%B8%ADDDMS%E7%9A%84LOGcat%E5%8F%AA%E6%9C%89%E4%B8%80%E5%88%97level/</url>
-    <content><![CDATA[<p>参考<a href="http://stackoverflow.com/questions/25010393/eclipse-logcat-shows-only-the-first-letter-from-each-message">此贴</a>解决此问题。</p>
-<p>退出eclipse,打开下面的文件</p>
-<p>~/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.android.ide.eclipse.ddms.prefs</p>
-<p>粘贴下面的东西到打开的文件</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ddms.logcat.auotmonitor.level=error  </span><br><span class="line">ddms.logcat.automonitor=<span class="keyword">false</span>  </span><br><span class="line">ddms.logcat.automonitor.userprompt=<span class="keyword">true</span>  </span><br><span class="line">eclipse.preferences.version=<span class="number">1</span></span><br><span class="line">logcat.view.colsize.Application=<span class="number">169</span></span><br><span class="line">logcat.view.colsize.Level=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.PID=<span class="number">54</span></span><br><span class="line">logcat.view.colsize.Tag=<span class="number">198</span></span><br><span class="line">logcat.view.colsize.Text=<span class="number">619</span></span><br><span class="line">logcat.view.colsize.Time=<span class="number">182</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>android</tag>
-        <tag>eclipse</tag>
-        <tag>ddms</tag>
-        <tag>logcat</tag>
-        <tag>不显示</tag>
       </tags>
   </entry>
   <entry>
@@ -1776,6 +1776,34 @@
       </tags>
   </entry>
   <entry>
+    <title>linux主要目录的作用</title>
+    <url>/2016/04/22/linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+    <content><![CDATA[<p>手动敲一遍、算是加强记忆吧~</p>
+<p><font color=red>/：</font>文件系统的入口，也是最高一级的目录</p>
+<p><font color=red>/bin：</font>最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等</p>
+<p><font color=red>/boot：</font>存放Linux的内核及引导系统所需要的文件，包括引导装载程序</p>
+<p><font color=red>/etc：</font>存放系统配置文件，一些服务器的配置文件也放在这里</p>
+<p><font color=red>/dev：</font>存放所有的设备文件，比如声卡、磁盘等</p>
+<p><font color=red>/home：</font>包含普通用户的个人主目录，如/home/lisi</p>
+<p><font color=red>/lib：</font>包含二进制文件的共享库</p>
+<p><font color=red>/media：</font>即插即用型存储设备如U盘、光盘等的自动挂载点在此目录下创建</p>
+<p><font color=red>/mnt：</font>用于存放临时性挂在存储设备，如光驱可挂载到/met/cdrom下</p>
+<p><font color=red>/proc：</font>存放进程信息以及内核信息，由内核在内存中产生</p>
+<p><font color=red>/root：</font>Linux超级用户的主目录</p>
+<p><font color=red>/sbin：</font>存放系统管理命令，一般只有超级用户才能执行</p>
+<p><font color=red>/tmp：</font>公用的临时文件目录。/var/tmp目录于此目录类似</p>
+<p><font color=red>/usr：</font>存放应用程序及相关文件，比如命令、帮助文件等</p>
+<p><font color=red>/var：</font>存放系统中经常变化（vary）的文件，如在/var/log目录中存放系统日志</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>目录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux创建wifi热点</title>
     <url>/2016/05/04/linux%E5%88%9B%E5%BB%BAwifi%E7%83%AD%E7%82%B9/</url>
     <content><![CDATA[<p><strong><font color=red>本文中使用的系统是archlinux,其他系统应该只有安装方法不同</font></strong></p>
@@ -1822,34 +1850,6 @@
         <tag>linux</tag>
         <tag>wifi</tag>
         <tag>热点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux主要目录的作用</title>
-    <url>/2016/04/22/linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
-    <content><![CDATA[<p>手动敲一遍、算是加强记忆吧~</p>
-<p><font color=red>/：</font>文件系统的入口，也是最高一级的目录</p>
-<p><font color=red>/bin：</font>最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等</p>
-<p><font color=red>/boot：</font>存放Linux的内核及引导系统所需要的文件，包括引导装载程序</p>
-<p><font color=red>/etc：</font>存放系统配置文件，一些服务器的配置文件也放在这里</p>
-<p><font color=red>/dev：</font>存放所有的设备文件，比如声卡、磁盘等</p>
-<p><font color=red>/home：</font>包含普通用户的个人主目录，如/home/lisi</p>
-<p><font color=red>/lib：</font>包含二进制文件的共享库</p>
-<p><font color=red>/media：</font>即插即用型存储设备如U盘、光盘等的自动挂载点在此目录下创建</p>
-<p><font color=red>/mnt：</font>用于存放临时性挂在存储设备，如光驱可挂载到/met/cdrom下</p>
-<p><font color=red>/proc：</font>存放进程信息以及内核信息，由内核在内存中产生</p>
-<p><font color=red>/root：</font>Linux超级用户的主目录</p>
-<p><font color=red>/sbin：</font>存放系统管理命令，一般只有超级用户才能执行</p>
-<p><font color=red>/tmp：</font>公用的临时文件目录。/var/tmp目录于此目录类似</p>
-<p><font color=red>/usr：</font>存放应用程序及相关文件，比如命令、帮助文件等</p>
-<p><font color=red>/var：</font>存放系统中经常变化（vary）的文件，如在/var/log目录中存放系统日志</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>目录</tag>
       </tags>
   </entry>
   <entry>
@@ -2019,17 +2019,6 @@
       </tags>
   </entry>
   <entry>
-    <title>新博客的第一篇</title>
-    <url>/2016/04/20/my-first-blog-on-hexo-github-pages/</url>
-    <content><![CDATA[<p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next">next</a></p>
-<p>过一段时间就会把在csdn的一些文章迁移过来</p>
-<p>测试图片:<br><img src="test.jpg" alt="test"></p>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
-  </entry>
-  <entry>
     <title>mysql 索引学习小结</title>
     <url>/2020/08/24/mysql-%E7%B4%A2%E5%BC%95%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h1 id="mysql-索引"><a href="#mysql-索引" class="headerlink" title="mysql 索引"></a>mysql 索引</h1><p>学习了《MySQL 是怎样运行的：从根儿上理解 MySQL》中的索引一节，收获颇丰，总结如下。</p>
@@ -2053,6 +2042,17 @@
       <tags>
         <tag>索引</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>新博客的第一篇</title>
+    <url>/2016/04/20/my-first-blog-on-hexo-github-pages/</url>
+    <content><![CDATA[<p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next">next</a></p>
+<p>过一段时间就会把在csdn的一些文章迁移过来</p>
+<p>测试图片:<br><img src="test.jpg" alt="test"></p>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
   </entry>
   <entry>
     <title>mysql 获取表结构</title>
@@ -2303,6 +2303,30 @@
       </tags>
   </entry>
   <entry>
+    <title>typedef 函数别名</title>
+    <url>/2019/10/22/typedef-%E5%87%BD%E6%95%B0%E5%88%AB%E5%90%8D/</url>
+    <content><![CDATA[<p>在 c/cpp 中可以使用 <code>typedef</code> 来给一个类型搞个别名：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef int myint;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 下面 a 和 b 的类型都可以说是 int</span><br><span class="line">int a;</span><br><span class="line">myint b;</span><br></pre></td></tr></table></figure>
+
+<p>而函数别名的语法有些不同：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">max_func_t max_alias;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 下面的两个调用是等价的</span><br><span class="line">max(1, 2);</span><br><span class="line">max_alias(1, 2);</span><br></pre></td></tr></table></figure>
+
+<p>将函数指针作为参数时，使用函数别名可以大大提高代码的可读性：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 不使用别名，接收一个函数指针并调用</span><br><span class="line">void test(int (* max_func)(int, int)) &#123;</span><br><span class="line">    max_func(1, 2);</span><br><span class="line">&#125;</span><br><span class="line">test(max);</span><br><span class="line"></span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 使用别名，接收一个函数指针并调用</span><br><span class="line">void test(max_func_t max_func) &#123;</span><br><span class="line">    max_func(1, 2);</span><br><span class="line">&#125;</span><br><span class="line">test(max);</span><br></pre></td></tr></table></figure>
+
+<p>函数别名的语法一直让我很奇怪写着也很难受，今天又碰到要将函数作为参数传递的情况，于是谷歌了一下，其实可以这样理解：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 正确语法</span><br><span class="line">typedef int (*max_func_t)(int, int);</span><br><span class="line">&#x2F;&#x2F;       ^        ^          ^</span><br><span class="line">&#x2F;&#x2F;    返回类型   别名        参数</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 错误语法，但有助于理解（强行理解）</span><br><span class="line">typedef int (*) (int, int) max_func_t;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>c</category>
+        <category>cpp</category>
+      </categories>
+      <tags>
+        <tag>typedef</tag>
+        <tag>function</tag>
+        <tag>别名</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>uefi-gpt-linux修复grub rescue</title>
     <url>/2016/04/23/uefi-gpt-linux%E4%BF%AE%E5%A4%8Dgrub-rescue/</url>
     <content><![CDATA[<p>搜了点网上的资料、发现都是修复MBR分区的、我的电脑是GPT分区+UEFI、虽然不同、但也大同小异、<br>出现grub rescue模式一般是硬盘分区出现变动、导致旧的grub找不到启动文件而出现的、</p>
@@ -2349,30 +2373,6 @@
         <tag>uefi</tag>
         <tag>rescue</tag>
         <tag>gpt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>typedef 函数别名</title>
-    <url>/2019/10/22/typedef-%E5%87%BD%E6%95%B0%E5%88%AB%E5%90%8D/</url>
-    <content><![CDATA[<p>在 c/cpp 中可以使用 <code>typedef</code> 来给一个类型搞个别名：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef int myint;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 下面 a 和 b 的类型都可以说是 int</span><br><span class="line">int a;</span><br><span class="line">myint b;</span><br></pre></td></tr></table></figure>
-
-<p>而函数别名的语法有些不同：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">max_func_t max_alias;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 下面的两个调用是等价的</span><br><span class="line">max(1, 2);</span><br><span class="line">max_alias(1, 2);</span><br></pre></td></tr></table></figure>
-
-<p>将函数指针作为参数时，使用函数别名可以大大提高代码的可读性：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int max(int, int);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 不使用别名，接收一个函数指针并调用</span><br><span class="line">void test(int (* max_func)(int, int)) &#123;</span><br><span class="line">    max_func(1, 2);</span><br><span class="line">&#125;</span><br><span class="line">test(max);</span><br><span class="line"></span><br><span class="line">typedef int (* max_func_t)(int, int);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 使用别名，接收一个函数指针并调用</span><br><span class="line">void test(max_func_t max_func) &#123;</span><br><span class="line">    max_func(1, 2);</span><br><span class="line">&#125;</span><br><span class="line">test(max);</span><br></pre></td></tr></table></figure>
-
-<p>函数别名的语法一直让我很奇怪写着也很难受，今天又碰到要将函数作为参数传递的情况，于是谷歌了一下，其实可以这样理解：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 正确语法</span><br><span class="line">typedef int (*max_func_t)(int, int);</span><br><span class="line">&#x2F;&#x2F;       ^        ^          ^</span><br><span class="line">&#x2F;&#x2F;    返回类型   别名        参数</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 错误语法，但有助于理解（强行理解）</span><br><span class="line">typedef int (*) (int, int) max_func_t;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>c</category>
-        <category>cpp</category>
-      </categories>
-      <tags>
-        <tag>typedef</tag>
-        <tag>function</tag>
-        <tag>别名</tag>
       </tags>
   </entry>
   <entry>
@@ -2625,20 +2625,6 @@
       </tags>
   </entry>
   <entry>
-    <title>不通过GooglePlay下载其中的app</title>
-    <url>/2016/05/04/%E4%B8%8D%E9%80%9A%E8%BF%87GooglePlay%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%B8%AD%E7%9A%84app/</url>
-    <content><![CDATA[<p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
-<p>转自：<a href="http://daxiaamu.com/">大侠阿木</a></p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>android</tag>
-        <tag>GooglePlay</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>为自己的网站启用 https</title>
     <url>/2019/10/28/%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BD%91%E7%AB%99%E5%90%AF%E7%94%A8-https/</url>
     <content><![CDATA[<p>使用 let’s encrypt 证书颁发机构的免费证书，如果想看官方的文档访问下面的链接，官方文档提供了各种方案来启用 https，我使用是推荐的 Certbot 方案。</p>
@@ -2668,6 +2654,20 @@
         <tag>https</tag>
         <tag>certbot</tag>
         <tag>lets-encrypt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>不通过GooglePlay下载其中的app</title>
+    <url>/2016/05/04/%E4%B8%8D%E9%80%9A%E8%BF%87GooglePlay%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%B8%AD%E7%9A%84app/</url>
+    <content><![CDATA[<p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
+<p>转自：<a href="http://daxiaamu.com/">大侠阿木</a></p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>GooglePlay</tag>
       </tags>
   </entry>
   <entry>
