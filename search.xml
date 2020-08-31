@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ImageSwitcher和TextSwitcher使用笔记</title>
+    <url>/2016/05/04/ImageSwitcher%E5%92%8CTextSwitcher%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
+<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//1、new一个ImageView</span></span><br><span class="line">            <span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">            <span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
+<p>结束</p>
+<blockquote>
+<p>TextSwitcher的方法和上面一样，都需要实现ViewFactory接口并重写makeView()方法，<br>在其中new出TextView对象并设置属性然后返回，最后切换视图的方法是setText()</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>ImageSwitcher</tag>
+        <tag>TextSwitcher</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ListView的Iterm无法点击</title>
     <url>/2016/05/04/ListView%E7%9A%84Iterm%E6%97%A0%E6%B3%95%E7%82%B9%E5%87%BB/</url>
     <content><![CDATA[<p>当listview中同时出现Button或者ImageButton时，只有item中的Button或ImageButton能够获取焦点(能点击)，<br>而整个item无法获取焦点(无法点击)</p>
@@ -21,26 +41,6 @@
         <tag>iterm</tag>
         <tag>无法点击</tag>
         <tag>控件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ImageSwitcher和TextSwitcher使用笔记</title>
-    <url>/2016/05/04/ImageSwitcher%E5%92%8CTextSwitcher%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
-<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//1、new一个ImageView</span></span><br><span class="line">            <span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">            <span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
-<p>结束</p>
-<blockquote>
-<p>TextSwitcher的方法和上面一样，都需要实现ViewFactory接口并重写makeView()方法，<br>在其中new出TextView对象并设置属性然后返回，最后切换视图的方法是setText()</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>ImageSwitcher</tag>
-        <tag>TextSwitcher</tag>
       </tags>
   </entry>
   <entry>
@@ -67,6 +67,33 @@
       <tags>
         <tag>Qt</tag>
         <tag>QPropertyAnimation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Manjaro Linux 识别不到声音设备</title>
+    <url>/2020/08/31/Manjaro-Linux-%E8%AF%86%E5%88%AB%E4%B8%8D%E5%88%B0%E5%A3%B0%E9%9F%B3%E8%AE%BE%E5%A4%87/</url>
+    <content><![CDATA[<p>前段时间给两台机器装了 Manjaro，公司台式主机和 Redmi G 笔记本，使用的桌面环境是 KDE 发现两台机器都不能正常识别声音设备，笔记本是因为直接识别不到声卡，这个问题下一篇文章说一下解决方法，这里先说台式主机的问题。</p>
+<p>使用的扬声器其实就是个 3.5 毫米的耳机，在给这台机器重装之前使用的是 deepin 系统，这个耳机是可以正常工作的（虽然不常用，但印象里是可以工作的），但是在 Manjaro 里 KDE 提示找不到声音设备，经过测试当把耳机插入主机后面的插口时是可以工作的，这也说明系统是可以识别到声卡的，谷歌了一圈发现可以给声卡驱动添加启动参数针对一些设备的兼容。这台机器的声卡是 <code>ALC887</code>，可以通过执行一下命令查看开机日志，并搜索 <code>audio</code> 来找出声卡型号：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo journalctl -xb</span><br></pre></td></tr></table></figure>
+
+<p>然后执行以下命令可以查看内核为这个声卡加载的驱动：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># lspci -v</span><br><span class="line">00:1b.0 Audio device: Intel Corporation 8 Series&#x2F;C220 Series Chipset High Definition Audio Controller (rev 05)</span><br><span class="line">        Subsystem: Gigabyte Technology Co., Ltd Device a182 </span><br><span class="line">        Flags: bus master, fast devsel, latency 0, IRQ 31</span><br><span class="line">        Memory at f7d10000 (64-bit, non-prefetchable) [size&#x3D;16K]</span><br><span class="line">        Capabilities: &lt;access denied&gt;</span><br><span class="line">        Kernel driver in use: snd_hda_intel                                                                                                                                                                                                 </span><br><span class="line">        Kernel modules: snd_hda_intel</span><br></pre></td></tr></table></figure>
+
+<p>可以发现使用的驱动是 snd_hda_intel，在内核 alsa 相关文档中可以找到有哪些选项：</p>
+<p><a href="https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html">https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html</a></p>
+<p>按照声卡型号搜索，找到对应的选项：</p>
+<p><a href="https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html#alc88x-898-1150-1220">https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html#alc88x-898-1150-1220</a></p>
+<p>之后编辑 <code>/etc/modprobe.d/alsa-base.conf</code> 文件（没有则创建），添加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">options snd-hda-intel model&#x3D;acer-aspire-4930g</span><br></pre></td></tr></table></figure>
+
+<p>注意替换 <code>model</code> 选项的值到对应声卡驱动的可选值。修改完成之后保存退出并重启系统，如果仍然识别不到声音设备可以继续修改选项的值。</p>
+<p>当终于找到一个合适的值让 alsa 可以识别播放设备了，但发现没有声音，可以执行命令 <code>sudo alsamixer</code> 命令手动取消对应设备的静音状态，处于静音状态的设备会标记为 <code>MM</code>，使用左右键切换到对应设备，按一下 <code>m</code> 键即可取消静音，取消静音之后 <code>MM</code> 会变成 <code>00</code></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>audio</tag>
       </tags>
   </entry>
   <entry>
@@ -2019,6 +2046,17 @@
       </tags>
   </entry>
   <entry>
+    <title>新博客的第一篇</title>
+    <url>/2016/04/20/my-first-blog-on-hexo-github-pages/</url>
+    <content><![CDATA[<p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next">next</a></p>
+<p>过一段时间就会把在csdn的一些文章迁移过来</p>
+<p>测试图片:<br><img src="test.jpg" alt="test"></p>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
+  </entry>
+  <entry>
     <title>mysql 索引学习小结</title>
     <url>/2020/08/24/mysql-%E7%B4%A2%E5%BC%95%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h1 id="mysql-索引"><a href="#mysql-索引" class="headerlink" title="mysql 索引"></a>mysql 索引</h1><p>学习了《MySQL 是怎样运行的：从根儿上理解 MySQL》中的索引一节，收获颇丰，总结如下。</p>
@@ -2042,17 +2080,6 @@
       <tags>
         <tag>索引</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>新博客的第一篇</title>
-    <url>/2016/04/20/my-first-blog-on-hexo-github-pages/</url>
-    <content><![CDATA[<p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next">next</a></p>
-<p>过一段时间就会把在csdn的一些文章迁移过来</p>
-<p>测试图片:<br><img src="test.jpg" alt="test"></p>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
   </entry>
   <entry>
     <title>mysql 获取表结构</title>
@@ -2096,6 +2123,29 @@
       </tags>
   </entry>
   <entry>
+    <title>python 中函数传参是值传递还是引用传递</title>
+    <url>/2020/05/29/python-%E4%B8%AD%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%E6%98%AF%E5%80%BC%E4%BC%A0%E9%80%92%E8%BF%98%E6%98%AF%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/</url>
+    <content><![CDATA[<p>这个问题网上众说纷纭，有的答案不完全正确，有的答案没有解释清楚。</p>
+<p>这里先说我认为正确的答案：</p>
+<p>如果学习过 cpp 的话,说传值或者传引用都不准确，直接理解为传地址（指针）就好了，不管可变对象还是不可变对象都是传地址。</p>
+<p>详细解释，在函数内：</p>
+<ul>
+<li>对传入参数的赋值操作，是创建新的对象，可以理解为声明新的变量，自然不会影响到函数外变量</li>
+<li>对传入参数所指对象的修改操作，如 list 的 append，由于是指针，因此修改了函数外变量，注意在 python 中不可变对象类型是不包含可以修改对象的接口的，即便有些接口看起来像修改了，也是返回了新的对象，而不是对原对象的修改，即不是原地修改</li>
+<li>这也解释了当传递复杂类型参数：a = tuple(b = list(), 1, 2, 3) 这种数据时，虽然 a 是不可变类型，但通过 a[0].append() 依然可以成功修改 b，也意味着修改了 a，且函数外变量会也会被修改的原因</li>
+</ul>
+<p>综上所述，也可以理解为传引用，但要注意，这里的“引用”二字是广义的，不要狭义得理解为是 cpp 中的引用，两者是不同的，在 cpp 中对函数内传入的引用参数执行赋值操作，将会影响到函数外的变量。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>传参</tag>
+        <tag>传值</tag>
+        <tag>传引用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>perl-学习小记</title>
     <url>/2020/03/30/perl-%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/</url>
     <content><![CDATA[<p>因工作需要，学习了原本十分抗拒的 perl 语言，不过整体看下来后发现 perl 也有其自身的特点与优势，看来每个语言都不可小觑。</p>
@@ -2125,29 +2175,6 @@
 
 <p><strong>原地修改 array</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pop, push, shift, unshift # 移除或新增 array 的开头或结尾</span><br><span class="line">splice # 修改 array 任意位置</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>python 中函数传参是值传递还是引用传递</title>
-    <url>/2020/05/29/python-%E4%B8%AD%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%E6%98%AF%E5%80%BC%E4%BC%A0%E9%80%92%E8%BF%98%E6%98%AF%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/</url>
-    <content><![CDATA[<p>这个问题网上众说纷纭，有的答案不完全正确，有的答案没有解释清楚。</p>
-<p>这里先说我认为正确的答案：</p>
-<p>如果学习过 cpp 的话,说传值或者传引用都不准确，直接理解为传地址（指针）就好了，不管可变对象还是不可变对象都是传地址。</p>
-<p>详细解释，在函数内：</p>
-<ul>
-<li>对传入参数的赋值操作，是创建新的对象，可以理解为声明新的变量，自然不会影响到函数外变量</li>
-<li>对传入参数所指对象的修改操作，如 list 的 append，由于是指针，因此修改了函数外变量，注意在 python 中不可变对象类型是不包含可以修改对象的接口的，即便有些接口看起来像修改了，也是返回了新的对象，而不是对原对象的修改，即不是原地修改</li>
-<li>这也解释了当传递复杂类型参数：a = tuple(b = list(), 1, 2, 3) 这种数据时，虽然 a 是不可变类型，但通过 a[0].append() 依然可以成功修改 b，也意味着修改了 a，且函数外变量会也会被修改的原因</li>
-</ul>
-<p>综上所述，也可以理解为传引用，但要注意，这里的“引用”二字是广义的，不要狭义得理解为是 cpp 中的引用，两者是不同的，在 cpp 中对函数内传入的引用参数执行赋值操作，将会影响到函数外的变量。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>传参</tag>
-        <tag>传值</tag>
-        <tag>传引用</tag>
-      </tags>
   </entry>
   <entry>
     <title>python的库文件在哪儿</title>
@@ -2625,6 +2652,20 @@
       </tags>
   </entry>
   <entry>
+    <title>不通过GooglePlay下载其中的app</title>
+    <url>/2016/05/04/%E4%B8%8D%E9%80%9A%E8%BF%87GooglePlay%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%B8%AD%E7%9A%84app/</url>
+    <content><![CDATA[<p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
+<p>转自：<a href="http://daxiaamu.com/">大侠阿木</a></p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>GooglePlay</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为自己的网站启用 https</title>
     <url>/2019/10/28/%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BD%91%E7%AB%99%E5%90%AF%E7%94%A8-https/</url>
     <content><![CDATA[<p>使用 let’s encrypt 证书颁发机构的免费证书，如果想看官方的文档访问下面的链接，官方文档提供了各种方案来启用 https，我使用是推荐的 Certbot 方案。</p>
@@ -2654,20 +2695,6 @@
         <tag>https</tag>
         <tag>certbot</tag>
         <tag>lets-encrypt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>不通过GooglePlay下载其中的app</title>
-    <url>/2016/05/04/%E4%B8%8D%E9%80%9A%E8%BF%87GooglePlay%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%B8%AD%E7%9A%84app/</url>
-    <content><![CDATA[<p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
-<p>转自：<a href="http://daxiaamu.com/">大侠阿木</a></p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>android</tag>
-        <tag>GooglePlay</tag>
       </tags>
   </entry>
   <entry>
@@ -3820,6 +3847,30 @@
       </tags>
   </entry>
   <entry>
+    <title>将数据从mysql导入到excel碰到的坑</title>
+    <url>/2019/10/10/%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%8Emysql%E5%AF%BC%E5%85%A5%E5%88%B0excel%E7%A2%B0%E5%88%B0%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>记录一些在 windows 下将数据从 mysql 导入到 excel 过程中遇到的坑。首先，这一操作有两种方案：</p>
+<ol>
+<li>在 navicat 中进行操作，将数据写入到 excel 文件中</li>
+<li>在 excel 中进行操作，将数据从 mysql 服务器写入文件</li>
+</ol>
+<p>第一种方案同事说在数据量很大的时候导出速度很慢，原因不明，我猜测是因为 navicat 使用的 POI 技术实现的功能，没有深究。第二种方案就我进行测试的方案，这种方案至少在速度方面有很明显的提升，下面列一下测试过程中遇到的坑：</p>
+<ol>
+<li>只能使用 windows 的 office excel，wps 的表格有奇怪的问题无法解决（后来发现是因为系统中没有安装 <code>Visual C++ Redistributable Packages for Visual Studio 2013</code>）</li>
+<li>安装 Mysql ODBC 驱动时要注意 excel 的软件位数，如果 excel 是 32 位的，那么 Mysql ODBC 驱动也必须是 32 位的</li>
+<li>64 位系统不显示 32 位的 ODBC 驱动，需要手动打开 <code>C:\\Windows\\sysWOW64\\odbcad32.exe</code> 程序添加连接</li>
+<li>导入数据时出现错误：<code>MySQL client ran out of memory</code>，调整系统中的数据源(ODBC)中的连接选项，找到并勾选”Do not cache result”之类的选项，应该可以解决</li>
+</ol>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>excel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>增大osx启动分区大小</title>
     <url>/2017/11/25/%E5%A2%9E%E5%A4%A7osx%E5%90%AF%E5%8A%A8%E5%88%86%E5%8C%BA%E5%A4%A7%E5%B0%8F/</url>
     <content><![CDATA[<p>场景：<br>osx，deepin linux, windows三系统, 需要扩大黑苹果的分区.</p>
@@ -3843,30 +3894,6 @@
         <tag>osx</tag>
         <tag>分区</tag>
         <tag>扩容</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>将数据从mysql导入到excel碰到的坑</title>
-    <url>/2019/10/10/%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%8Emysql%E5%AF%BC%E5%85%A5%E5%88%B0excel%E7%A2%B0%E5%88%B0%E7%9A%84%E5%9D%91/</url>
-    <content><![CDATA[<p>记录一些在 windows 下将数据从 mysql 导入到 excel 过程中遇到的坑。首先，这一操作有两种方案：</p>
-<ol>
-<li>在 navicat 中进行操作，将数据写入到 excel 文件中</li>
-<li>在 excel 中进行操作，将数据从 mysql 服务器写入文件</li>
-</ol>
-<p>第一种方案同事说在数据量很大的时候导出速度很慢，原因不明，我猜测是因为 navicat 使用的 POI 技术实现的功能，没有深究。第二种方案就我进行测试的方案，这种方案至少在速度方面有很明显的提升，下面列一下测试过程中遇到的坑：</p>
-<ol>
-<li>只能使用 windows 的 office excel，wps 的表格有奇怪的问题无法解决（后来发现是因为系统中没有安装 <code>Visual C++ Redistributable Packages for Visual Studio 2013</code>）</li>
-<li>安装 Mysql ODBC 驱动时要注意 excel 的软件位数，如果 excel 是 32 位的，那么 Mysql ODBC 驱动也必须是 32 位的</li>
-<li>64 位系统不显示 32 位的 ODBC 驱动，需要手动打开 <code>C:\\Windows\\sysWOW64\\odbcad32.exe</code> 程序添加连接</li>
-<li>导入数据时出现错误：<code>MySQL client ran out of memory</code>，调整系统中的数据源(ODBC)中的连接选项，找到并勾选”Do not cache result”之类的选项，应该可以解决</li>
-</ol>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-        <tag>excel</tag>
       </tags>
   </entry>
   <entry>
