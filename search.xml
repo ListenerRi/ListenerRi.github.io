@@ -1585,6 +1585,51 @@
       </tags>
   </entry>
   <entry>
+    <title>k8s dashboard 无法登陆</title>
+    <url>/2020/04/15/k8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86/</url>
+    <content><![CDATA[<p>先说环境：<br>两节点 k8s 集群，一台 master，k8s 版本为 <code>1.18.1</code>，所使用的 dashboard 版本为 <code>v2.0.0-rc7</code></p>
+<p>dashboard 安装方法直接按照官网所说的执行即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl delete ns kubernetes-dashboard</span><br><span class="line">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes&#x2F;dashboard&#x2F;v2.0.0-rc7&#x2F;aio&#x2F;deploy&#x2F;recommended.yaml</span><br></pre></td></tr></table></figure>
+
+<p>现在 dashboard 已经部署好了，问题是如何访问 dashboard 服务，首先新版的 dashboard 将默认权限控制到了最小，只够 dashboard 部署，要想正常访问 dashboard 服务需要按照下面这个官方文档对其进行授权和创建管理员账户：<br><a href="https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md">https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md</a></p>
+<p>如果不想细看，可以直接将如下代码保存至 <code>dashboard-admin.yaml</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">---</span><br><span class="line">apiVersion: rbac.authorization.k8s.io&#x2F;v1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: cluster-admin</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl apply -f dashboard-admin.yaml</span><br></pre></td></tr></table></figure>
+
+<p>接着获取创建的 admin 账户的 token：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;&#123;print $1&#125;&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>拿到 token 开始将 dashboard 服务暴露出来，有两种方式：</p>
+<ul>
+<li>方式一 proxy 反向代理</li>
+</ul>
+<p>需要注意的是使用这种方式只能是在本机访问（服务也必须在本机），因为目前 dashboard 不支持除 <code>localhost</code> 和 <code>127.0.0.1</code> 以外的主机名登录进入控制台（ <a href="https://github.com/kubernetes/dashboard/issues/4624">https://github.com/kubernetes/dashboard/issues/4624</a> ），这意味着无法从集群外通过浏览器打开 dashboard，表示不懂这种设计，这样的 dashboard 还有什么用？如果是我理解不正确，请留言指正。</p>
+<p>执行如下命令启动代理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl proxy</span><br></pre></td></tr></table></figure>
+
+<p>然后在浏览器访问（注意必须是 http）：</p>
+<p><a href="http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy">http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy</a></p>
+<ul>
+<li>方式二 端口转发</li>
+</ul>
+<p>执行如下命令进行端口转发：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo kubectl port-forward --namespace kubernetes-dashboard --address 0.0.0.0 service&#x2F;kubernetes-dashboard 443</span><br></pre></td></tr></table></figure>
+
+<p>然后在集群外的机器上访问进行端口转发的那台机器的 ip 即可（注意必须是 https）：</p>
+<p><a href="https://yournodeip/">https://YourNodeIP/</a></p>
+<p>打开 web 界面后用上面获取到的 token 登录即可</p>
+]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>dashboard</tag>
+        <tag>登录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>klib-khash 使用记录</title>
     <url>/2019/11/20/klib-khash-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>klib 的项目地址：<a href="https://github.com/attractivechaos/klib/">https://github.com/attractivechaos/klib/</a></p>
@@ -1639,51 +1684,6 @@
       <tags>
         <tag>网卡</tag>
         <tag>路由</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>k8s dashboard 无法登陆</title>
-    <url>/2020/04/15/k8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86/</url>
-    <content><![CDATA[<p>先说环境：<br>两节点 k8s 集群，一台 master，k8s 版本为 <code>1.18.1</code>，所使用的 dashboard 版本为 <code>v2.0.0-rc7</code></p>
-<p>dashboard 安装方法直接按照官网所说的执行即可：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl delete ns kubernetes-dashboard</span><br><span class="line">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes&#x2F;dashboard&#x2F;v2.0.0-rc7&#x2F;aio&#x2F;deploy&#x2F;recommended.yaml</span><br></pre></td></tr></table></figure>
-
-<p>现在 dashboard 已经部署好了，问题是如何访问 dashboard 服务，首先新版的 dashboard 将默认权限控制到了最小，只够 dashboard 部署，要想正常访问 dashboard 服务需要按照下面这个官方文档对其进行授权和创建管理员账户：<br><a href="https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md">https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md</a></p>
-<p>如果不想细看，可以直接将如下代码保存至 <code>dashboard-admin.yaml</code>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">---</span><br><span class="line">apiVersion: rbac.authorization.k8s.io&#x2F;v1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: cluster-admin</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl apply -f dashboard-admin.yaml</span><br></pre></td></tr></table></figure>
-
-<p>接着获取创建的 admin 账户的 token：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;&#123;print $1&#125;&#39;)</span><br></pre></td></tr></table></figure>
-
-<p>拿到 token 开始将 dashboard 服务暴露出来，有两种方式：</p>
-<ul>
-<li>方式一 proxy 反向代理</li>
-</ul>
-<p>需要注意的是使用这种方式只能是在本机访问（服务也必须在本机），因为目前 dashboard 不支持除 <code>localhost</code> 和 <code>127.0.0.1</code> 以外的主机名登录进入控制台（ <a href="https://github.com/kubernetes/dashboard/issues/4624">https://github.com/kubernetes/dashboard/issues/4624</a> ），这意味着无法从集群外通过浏览器打开 dashboard，表示不懂这种设计，这样的 dashboard 还有什么用？如果是我理解不正确，请留言指正。</p>
-<p>执行如下命令启动代理：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl proxy</span><br></pre></td></tr></table></figure>
-
-<p>然后在浏览器访问（注意必须是 http）：</p>
-<p><a href="http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy">http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy</a></p>
-<ul>
-<li>方式二 端口转发</li>
-</ul>
-<p>执行如下命令进行端口转发：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo kubectl port-forward --namespace kubernetes-dashboard --address 0.0.0.0 service&#x2F;kubernetes-dashboard 443</span><br></pre></td></tr></table></figure>
-
-<p>然后在集群外的机器上访问进行端口转发的那台机器的 ip 即可（注意必须是 https）：</p>
-<p><a href="https://yournodeip/">https://YourNodeIP/</a></p>
-<p>打开 web 界面后用上面获取到的 token 登录即可</p>
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>dashboard</tag>
-        <tag>登录</tag>
       </tags>
   </entry>
   <entry>
@@ -2102,6 +2102,25 @@
       </tags>
   </entry>
   <entry>
+    <title>osx bash completion 补全</title>
+    <url>/2019/10/31/osx-bash-completion-%E8%A1%A5%E5%85%A8/</url>
+    <content><![CDATA[<p>在 linux 下补全的配置一般发行版都给默认配了，原本以为在 OSX 下用 brew 装个 bash-completion 包，再在 bashrc 下贴两行配置也就搞定了，没想到不行，OSX 下 bash-completion 包有两个，另一个是 <code>bash-completion@2</code>，这两个包分别对应 bash 的两个版本，具体可以用 brew info <code>bash-completion@2</code> 来看。</p>
+<p>而且 <code>bash-completion@2</code> 跟 <code>bash-completion</code> 相比还要多一行配置，总之就是需要下面两行配置才行，原因是大多软件包都只提供了旧版本的 completion 文件，新版的没有提供支持，所以下面的第一行就是声明要兼容下旧的补全文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export BASH_COMPLETION_COMPAT_DIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&quot;</span><br><span class="line">[[ -r &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot; ]] &amp;&amp; . &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外还有个问题，我自己设置了很多别名 alias，但是这些自定义的别名默认是不支持参数补全的，想要如丝般顺滑就要用另一个项目：<a href="https://github.com/cykerway/complete-alias">https://github.com/cykerway/complete-alias</a>，具体的使用方法就不赘述了，可以去项目里看看怎么配置。</p>
+<p>经过实践发现这个项目也不支持旧版的 <code>bash-completion</code> 包，会提示 _completion_loader 找不到的错误，改装 <code>bash-completion@2</code> 就好了。</p>
+]]></content>
+      <categories>
+        <category>osx</category>
+      </categories>
+      <tags>
+        <tag>bash</tag>
+        <tag>completion</tag>
+        <tag>_completion_loader</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql 获取表结构</title>
     <url>/2020/06/11/mysql-%E8%8E%B7%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p>获取建表语句：</p>
@@ -2121,25 +2140,6 @@
       <tags>
         <tag>表结构</tag>
         <tag>字段</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>osx bash completion 补全</title>
-    <url>/2019/10/31/osx-bash-completion-%E8%A1%A5%E5%85%A8/</url>
-    <content><![CDATA[<p>在 linux 下补全的配置一般发行版都给默认配了，原本以为在 OSX 下用 brew 装个 bash-completion 包，再在 bashrc 下贴两行配置也就搞定了，没想到不行，OSX 下 bash-completion 包有两个，另一个是 <code>bash-completion@2</code>，这两个包分别对应 bash 的两个版本，具体可以用 brew info <code>bash-completion@2</code> 来看。</p>
-<p>而且 <code>bash-completion@2</code> 跟 <code>bash-completion</code> 相比还要多一行配置，总之就是需要下面两行配置才行，原因是大多软件包都只提供了旧版本的 completion 文件，新版的没有提供支持，所以下面的第一行就是声明要兼容下旧的补全文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export BASH_COMPLETION_COMPAT_DIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&quot;</span><br><span class="line">[[ -r &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot; ]] &amp;&amp; . &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;</span><br></pre></td></tr></table></figure>
-
-<p>除此之外还有个问题，我自己设置了很多别名 alias，但是这些自定义的别名默认是不支持参数补全的，想要如丝般顺滑就要用另一个项目：<a href="https://github.com/cykerway/complete-alias">https://github.com/cykerway/complete-alias</a>，具体的使用方法就不赘述了，可以去项目里看看怎么配置。</p>
-<p>经过实践发现这个项目也不支持旧版的 <code>bash-completion</code> 包，会提示 _completion_loader 找不到的错误，改装 <code>bash-completion@2</code> 就好了。</p>
-]]></content>
-      <categories>
-        <category>osx</category>
-      </categories>
-      <tags>
-        <tag>bash</tag>
-        <tag>completion</tag>
-        <tag>_completion_loader</tag>
       </tags>
   </entry>
   <entry>
@@ -2773,6 +2773,46 @@
       </tags>
   </entry>
   <entry>
+    <title>使用 quilt 给软件包打补丁</title>
+    <url>/2019/03/16/%E4%BD%BF%E7%94%A8-quilt-%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%8C%85%E6%89%93%E8%A1%A5%E4%B8%81/</url>
+    <content><![CDATA[<p>quilt 是一个管理补丁的工具，它使用了栈的概念来管理多个补丁，其管理的补丁一般被放在 <strong>patches</strong> 目录下，在这个目录下除了补丁文件还有一个 <strong>series</strong> 文件，这个文件中列出的补丁文件才是真正被打入项目的补丁文件，同时补丁文件在 series 文件中出现的顺序也是它们在栈中的顺序，没有包含在 series 文件中的补丁文件将不会被 quilt 管理，当新增或移除补丁时 quilt 会自动更新 series 文件不需要手动管理。</p>
+<p>接触到这个命令是因为要给一个 deb 软件包打上我自己的补丁，但是 quilt 命令的 man 手册比较混乱，没有将相关的子命令放在一起进行介绍，下面将根据子命令之间的相关性总结下用到的和与之相关的子命令。</p>
+<h2 id="applied-unapplied"><a href="#applied-unapplied" class="headerlink" title="applied-unapplied"></a>applied-unapplied</h2><ul>
+<li>applied：列出包含在 series 文件中且已经应用（生效）了的补丁</li>
+<li>unapplied：列出包含在 series 文件中但没有应用（生效）的补丁</li>
+</ul>
+<h2 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h2><p>指定一个被打过补丁的项目文件并根据其变动生成一个 diff 文件，如果指定了补丁则只把指定补丁对项目文件的改动生成到 diff 文件，当同一个项目文件被多个补丁改动过，这个参数就有用了，如果不指定补丁则默认使用最顶层的补丁，如果被打过补丁的项目文件也没有指定，则将包含指定补丁或最顶层的补丁导致的所有项目文件变动。</p>
+<h2 id="files"><a href="#files" class="headerlink" title="files"></a>files</h2><p>列出最顶层的一个或指定的补丁改动了的所有项目文件</p>
+<h2 id="patches"><a href="#patches" class="headerlink" title="patches"></a>patches</h2><p>列出所有改动了指定的项目文件的补丁</p>
+<h2 id="pop-push"><a href="#pop-push" class="headerlink" title="pop-push"></a>pop-push</h2><ul>
+<li>pop：从栈中移除一个或多个已经生效了的补丁，不会修改 series 文件（使补丁不生效）</li>
+<li>push：根据 series 文件应用一个或多个补丁，不会修改 series 文件（使补丁生效）</li>
+</ul>
+<h2 id="import-delete"><a href="#import-delete" class="headerlink" title="import-delete"></a>import-delete</h2><ul>
+<li>import：将指定的补丁文件导入到项目的补丁系统中，会修改 series 文件，同时将指定的补丁文件复制到 patches 目录下，但不会将这个补丁应用，因此还需要执行 push 命令来让这个补丁生效</li>
+<li>delete：从 series 文件中移除指定或最后一行的补丁文件，会修改 series 文件，也可一起将补丁文件从 patches 目录中删除（默认不会删除），在移除前将取消这个补丁的应用，类似执行 pop 命令</li>
+</ul>
+<h2 id="add-remove"><a href="#add-remove" class="headerlink" title="add-remove"></a>add-remove</h2><ul>
+<li>add：将指定的项目文件添加到指定的或顶层的补丁中，一般是为了要使用下面的 edit 命令修改这个文件</li>
+<li>remove：从指定的或最顶层的补丁中移除指定的项目文件，大概是当一个补丁修改了多个文件时，移除一个指定的文件不让这个补丁修改</li>
+</ul>
+<h2 id="fork-edit-refresh"><a href="#fork-edit-refresh" class="headerlink" title="fork-edit-refresh"></a>fork-edit-refresh</h2><ul>
+<li>fork：使用指定的名字复制一个补丁，并使用复制后的补丁覆盖 series 文件中旧的补丁</li>
+<li>edit：编辑指定的项目文件，这个项目文件应该先被使用 add 命令添加到当前补丁中</li>
+<li>refresh：更新指定的或顶层的补丁</li>
+</ul>
+<p>fork 通常用于一个补丁应用后又需要被修改，但这个补丁又需要保留这原始内容，这种情况下就可以先复制出来一个副本，然后修改这个副本</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>quilt</tag>
+        <tag>patch</tag>
+        <tag>deb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用XMLReader接口解析XML</title>
     <url>/2016/05/04/%E4%BD%BF%E7%94%A8XMLReader%E6%8E%A5%E5%8F%A3%E8%A7%A3%E6%9E%90XML/</url>
     <content><![CDATA[<h1 id="如何获取XMLReader接口"><a href="#如何获取XMLReader接口" class="headerlink" title="如何获取XMLReader接口"></a>如何获取XMLReader接口</h1><p>从JDK文档来看，有两种方法：</p>
@@ -2817,46 +2857,6 @@
         <tag>java</tag>
         <tag>xmlReader</tag>
         <tag>xml</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 quilt 给软件包打补丁</title>
-    <url>/2019/03/16/%E4%BD%BF%E7%94%A8-quilt-%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%8C%85%E6%89%93%E8%A1%A5%E4%B8%81/</url>
-    <content><![CDATA[<p>quilt 是一个管理补丁的工具，它使用了栈的概念来管理多个补丁，其管理的补丁一般被放在 <strong>patches</strong> 目录下，在这个目录下除了补丁文件还有一个 <strong>series</strong> 文件，这个文件中列出的补丁文件才是真正被打入项目的补丁文件，同时补丁文件在 series 文件中出现的顺序也是它们在栈中的顺序，没有包含在 series 文件中的补丁文件将不会被 quilt 管理，当新增或移除补丁时 quilt 会自动更新 series 文件不需要手动管理。</p>
-<p>接触到这个命令是因为要给一个 deb 软件包打上我自己的补丁，但是 quilt 命令的 man 手册比较混乱，没有将相关的子命令放在一起进行介绍，下面将根据子命令之间的相关性总结下用到的和与之相关的子命令。</p>
-<h2 id="applied-unapplied"><a href="#applied-unapplied" class="headerlink" title="applied-unapplied"></a>applied-unapplied</h2><ul>
-<li>applied：列出包含在 series 文件中且已经应用（生效）了的补丁</li>
-<li>unapplied：列出包含在 series 文件中但没有应用（生效）的补丁</li>
-</ul>
-<h2 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h2><p>指定一个被打过补丁的项目文件并根据其变动生成一个 diff 文件，如果指定了补丁则只把指定补丁对项目文件的改动生成到 diff 文件，当同一个项目文件被多个补丁改动过，这个参数就有用了，如果不指定补丁则默认使用最顶层的补丁，如果被打过补丁的项目文件也没有指定，则将包含指定补丁或最顶层的补丁导致的所有项目文件变动。</p>
-<h2 id="files"><a href="#files" class="headerlink" title="files"></a>files</h2><p>列出最顶层的一个或指定的补丁改动了的所有项目文件</p>
-<h2 id="patches"><a href="#patches" class="headerlink" title="patches"></a>patches</h2><p>列出所有改动了指定的项目文件的补丁</p>
-<h2 id="pop-push"><a href="#pop-push" class="headerlink" title="pop-push"></a>pop-push</h2><ul>
-<li>pop：从栈中移除一个或多个已经生效了的补丁，不会修改 series 文件（使补丁不生效）</li>
-<li>push：根据 series 文件应用一个或多个补丁，不会修改 series 文件（使补丁生效）</li>
-</ul>
-<h2 id="import-delete"><a href="#import-delete" class="headerlink" title="import-delete"></a>import-delete</h2><ul>
-<li>import：将指定的补丁文件导入到项目的补丁系统中，会修改 series 文件，同时将指定的补丁文件复制到 patches 目录下，但不会将这个补丁应用，因此还需要执行 push 命令来让这个补丁生效</li>
-<li>delete：从 series 文件中移除指定或最后一行的补丁文件，会修改 series 文件，也可一起将补丁文件从 patches 目录中删除（默认不会删除），在移除前将取消这个补丁的应用，类似执行 pop 命令</li>
-</ul>
-<h2 id="add-remove"><a href="#add-remove" class="headerlink" title="add-remove"></a>add-remove</h2><ul>
-<li>add：将指定的项目文件添加到指定的或顶层的补丁中，一般是为了要使用下面的 edit 命令修改这个文件</li>
-<li>remove：从指定的或最顶层的补丁中移除指定的项目文件，大概是当一个补丁修改了多个文件时，移除一个指定的文件不让这个补丁修改</li>
-</ul>
-<h2 id="fork-edit-refresh"><a href="#fork-edit-refresh" class="headerlink" title="fork-edit-refresh"></a>fork-edit-refresh</h2><ul>
-<li>fork：使用指定的名字复制一个补丁，并使用复制后的补丁覆盖 series 文件中旧的补丁</li>
-<li>edit：编辑指定的项目文件，这个项目文件应该先被使用 add 命令添加到当前补丁中</li>
-<li>refresh：更新指定的或顶层的补丁</li>
-</ul>
-<p>fork 通常用于一个补丁应用后又需要被修改，但这个补丁又需要保留这原始内容，这种情况下就可以先复制出来一个副本，然后修改这个副本</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>quilt</tag>
-        <tag>patch</tag>
-        <tag>deb</tag>
       </tags>
   </entry>
   <entry>
@@ -4072,6 +4072,20 @@
       </tags>
   </entry>
   <entry>
+    <title>水平与垂直 拆分与扩展 数据库与分布式</title>
+    <url>/2020/09/24/%E6%B0%B4%E5%B9%B3%E4%B8%8E%E5%9E%82%E7%9B%B4-%E6%8B%86%E5%88%86%E4%B8%8E%E6%89%A9%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/</url>
+    <content><![CDATA[<p>标题写出来后发现覆盖面有点大，其实要说的只是字面意义上的一点学习小结：</p>
+<p>数据库优化：<br>水平分库，水平分表，使各个库/表的<strong>结构相同，但内容不同</strong><br>垂直分库，垂直分表，使各个库/表的<strong>结构不同，且内容不同</strong><br>库的结构可以理解为包含了哪些表<br>表的结构可以理解为包含了哪些字段<br>在垂直拆分的基础上，可以进一步水平拆分</p>
+<p>分布式优化：<br>水平扩展，增加更多节点以达到整体性能增强<br>垂直扩展，增强单机配置以达到单点性能增强，进而达到整体性能增强<br>水平扩展优点更多，使用得当的话，对整个系统的可用性，负载均衡都有益处</p>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
+      <tags>
+        <tag>others</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>测试网站是否能被百度蜘蛛抓取</title>
     <url>/2016/07/01/%E6%B5%8B%E8%AF%95%E7%BD%91%E7%AB%99%E6%98%AF%E5%90%A6%E8%83%BD%E8%A2%AB%E7%99%BE%E5%BA%A6%E8%9C%98%E8%9B%9B%E6%8A%93%E5%8F%96/</url>
     <content><![CDATA[<p>只需要使用curl命令配合一些参数就可以测试了,看返回内容就知道能否抓取了</p>
@@ -4136,6 +4150,43 @@
       </tags>
   </entry>
   <entry>
+    <title>线段树-区间树-范围树-二叉索引树</title>
+    <url>/2020/04/02/%E7%BA%BF%E6%AE%B5%E6%A0%91-%E5%8C%BA%E9%97%B4%E6%A0%91-%E8%8C%83%E5%9B%B4%E6%A0%91-%E4%BA%8C%E5%8F%89%E7%B4%A2%E5%BC%95%E6%A0%91/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<a href="https://stackoverflow.com/a/17504505">https://stackoverflow.com/a/17504505</a></p>
+</blockquote>
+<p>中英对照：</p>
+<ul>
+<li>Segment tree 线段树</li>
+<li>Interval tree 区间树</li>
+<li>Range tree 范围树</li>
+<li>Binary indexed tree 二叉索引树</li>
+</ul>
+<p>主要用于解决的问题：</p>
+<ul>
+<li>Segment tree 存储区间，查询哪些区间包含给定的点</li>
+<li>Interval tree 存储区间，查询哪些区间与给定区间相交，也支持点查询（Segment tree）</li>
+<li>Range tree 存储点，查询哪些点落在了给定区间</li>
+<li>Binary indexed tree 存储每个索引的项目数，查询索引 m 和 n 之间有多少个项目</li>
+</ul>
+<p>性能（k 是结果数）：</p>
+<ul>
+<li>Segment tree O(n logn) 预处理时间，O(k+logn) 查询，O(n logn) 空间</li>
+<li>Interval tree O(n logn) 预处理时间，O(k+logn) 查询，O(n) 空间</li>
+<li>Range tree O(n logn) 预处理时间，O(k+logn) 查询，O(n) 空间</li>
+<li>Binary indexed tree O(n logn) 预处理时间，O(logn) 查询，O(n) 空间</li>
+</ul>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
+      <tags>
+        <tag>segment</tag>
+        <tag>interval</tag>
+        <tag>range</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>终于发现了素数的一种用途</title>
     <url>/2019/10/21/%E7%BB%88%E4%BA%8E%E5%8F%91%E7%8E%B0%E4%BA%86%E7%B4%A0%E6%95%B0%E7%9A%84%E4%B8%80%E7%A7%8D%E7%94%A8%E9%80%94/</url>
     <content><![CDATA[<p>以前只知道素数的定义：<code>质数又称素数。一个大于 1 的自然数，除了 1 和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数</code>。今天在学习<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/Readme.md">《编程之法》(github) </a>时，第一章第二节 <a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/01.02.md">“字符串包含”</a>，其提到的一种算法用到了素数，在此仅摘取原文部分内容作为记录。<strong>需要注意的是，这种算法并不是这个问题的最优解</strong>，具体请查看原文。</p>
@@ -4177,43 +4228,6 @@
       <tags>
         <tag>素数</tag>
         <tag>质数</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线段树-区间树-范围树-二叉索引树</title>
-    <url>/2020/04/02/%E7%BA%BF%E6%AE%B5%E6%A0%91-%E5%8C%BA%E9%97%B4%E6%A0%91-%E8%8C%83%E5%9B%B4%E6%A0%91-%E4%BA%8C%E5%8F%89%E7%B4%A2%E5%BC%95%E6%A0%91/</url>
-    <content><![CDATA[<blockquote>
-<p>原文：<a href="https://stackoverflow.com/a/17504505">https://stackoverflow.com/a/17504505</a></p>
-</blockquote>
-<p>中英对照：</p>
-<ul>
-<li>Segment tree 线段树</li>
-<li>Interval tree 区间树</li>
-<li>Range tree 范围树</li>
-<li>Binary indexed tree 二叉索引树</li>
-</ul>
-<p>主要用于解决的问题：</p>
-<ul>
-<li>Segment tree 存储区间，查询哪些区间包含给定的点</li>
-<li>Interval tree 存储区间，查询哪些区间与给定区间相交，也支持点查询（Segment tree）</li>
-<li>Range tree 存储点，查询哪些点落在了给定区间</li>
-<li>Binary indexed tree 存储每个索引的项目数，查询索引 m 和 n 之间有多少个项目</li>
-</ul>
-<p>性能（k 是结果数）：</p>
-<ul>
-<li>Segment tree O(n logn) 预处理时间，O(k+logn) 查询，O(n logn) 空间</li>
-<li>Interval tree O(n logn) 预处理时间，O(k+logn) 查询，O(n) 空间</li>
-<li>Range tree O(n logn) 预处理时间，O(k+logn) 查询，O(n) 空间</li>
-<li>Binary indexed tree O(n logn) 预处理时间，O(logn) 查询，O(n) 空间</li>
-</ul>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
-      <tags>
-        <tag>segment</tag>
-        <tag>interval</tag>
-        <tag>range</tag>
       </tags>
   </entry>
   <entry>
