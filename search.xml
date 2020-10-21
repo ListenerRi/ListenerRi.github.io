@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ImageSwitcher和TextSwitcher使用笔记</title>
-    <url>/2016/05/04/ImageSwitcher%E5%92%8CTextSwitcher%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
-<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//1、new一个ImageView</span></span><br><span class="line">            <span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">            <span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
-<p>结束</p>
-<blockquote>
-<p>TextSwitcher的方法和上面一样，都需要实现ViewFactory接口并重写makeView()方法，<br>在其中new出TextView对象并设置属性然后返回，最后切换视图的方法是setText()</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>ImageSwitcher</tag>
-        <tag>TextSwitcher</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ListView的Iterm无法点击</title>
     <url>/2016/05/04/ListView%E7%9A%84Iterm%E6%97%A0%E6%B3%95%E7%82%B9%E5%87%BB/</url>
     <content><![CDATA[<p>当listview中同时出现Button或者ImageButton时，只有item中的Button或ImageButton能够获取焦点(能点击)，<br>而整个item无法获取焦点(无法点击)</p>
@@ -41,6 +21,26 @@
         <tag>iterm</tag>
         <tag>无法点击</tag>
         <tag>控件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ImageSwitcher和TextSwitcher使用笔记</title>
+    <url>/2016/05/04/ImageSwitcher%E5%92%8CTextSwitcher%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
+<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//1、new一个ImageView</span></span><br><span class="line">            <span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">            <span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
+<p>结束</p>
+<blockquote>
+<p>TextSwitcher的方法和上面一样，都需要实现ViewFactory接口并重写makeView()方法，<br>在其中new出TextView对象并设置属性然后返回，最后切换视图的方法是setText()</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>ImageSwitcher</tag>
+        <tag>TextSwitcher</tag>
       </tags>
   </entry>
   <entry>
@@ -312,6 +312,31 @@
       </tags>
   </entry>
   <entry>
+    <title>android获取屏幕像素和密度</title>
+    <url>/2016/05/04/android%E8%8E%B7%E5%8F%96%E5%B1%8F%E5%B9%95%E5%83%8F%E7%B4%A0%E5%92%8C%E5%AF%86%E5%BA%A6/</url>
+    <content><![CDATA[<blockquote>
+<p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
+</blockquote>
+<p>(一)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure>
+<p>(二)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
+<p>(三)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics2=getResources().getDisplayMetrics();</span><br><span class="line">metrics2.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics2.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics2.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics2.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当不是在activity中时，就不能直接用getWindowManager()等方法了，这时可以用Context.getSystemService(Context.WINDOW_SERVICE)方法，其他的类似</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>像素</tag>
+        <tag>密度</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>android关闭手机实体按键开启虚拟按键</title>
     <url>/2016/04/23/android%E5%85%B3%E9%97%AD%E6%89%8B%E6%9C%BA%E5%AE%9E%E4%BD%93%E6%8C%89%E9%94%AE%E5%BC%80%E5%90%AF%E8%99%9A%E6%8B%9F%E6%8C%89%E9%94%AE/</url>
     <content><![CDATA[<p>注意实体按键和虚拟按键的区别<br>使用的是android4.2版本，硬件：mt6589<br><font color=red><strong>以下操作都需要root权限！</strong></font></p>
@@ -341,31 +366,6 @@
         <tag>android</tag>
         <tag>实体按键</tag>
         <tag>虚拟按键</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>android获取屏幕像素和密度</title>
-    <url>/2016/05/04/android%E8%8E%B7%E5%8F%96%E5%B1%8F%E5%B9%95%E5%83%8F%E7%B4%A0%E5%92%8C%E5%AF%86%E5%BA%A6/</url>
-    <content><![CDATA[<blockquote>
-<p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
-</blockquote>
-<p>(一)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure>
-<p>(二)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
-<p>(三)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics2=getResources().getDisplayMetrics();</span><br><span class="line">metrics2.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics2.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics2.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics2.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当不是在activity中时，就不能直接用getWindowManager()等方法了，这时可以用Context.getSystemService(Context.WINDOW_SERVICE)方法，其他的类似</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>像素</tag>
-        <tag>密度</tag>
       </tags>
   </entry>
   <entry>
@@ -1036,28 +1036,6 @@
       </tags>
   </entry>
   <entry>
-    <title>chrome adobe flash不是最新版本</title>
-    <url>/2016/11/02/chrome-adobe-flash%E4%B8%8D%E6%98%AF%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p>
-<p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p>
-<p>下面详细说说linux下和windows下怎么设置代理:</p>
-<p>linux下在<code>终端</code>中设置好代理变量, 然后接着在同一个终端下以命令的方式启动chrome就行了,下面是具体命令:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export http_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">export https_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">google-chrome</span><br></pre></td></tr></table></figure>
-
-<p>命令解释, 前两行主要是指定代理地址和端口, 因为我是在本机运行的代理软件, 所以地址是127.0.0.1<br>而8787则是代理软件监听的端口, 第三行则是启动chrome</p>
-<p>windows下就十分简单了, 启动代理软件, 一般代理软件都有系统代理的选项, 选择启动系统代理,<br>然后运行chrome就行了. </p>
-<p>下面附上linux下的过程:<br><img src="update-flash.png" alt="update-flash"></p>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
-      <tags>
-        <tag>chrome</tag>
-        <tag>flash</tag>
-        <tag>版本</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>clickhouse materialized view 踩坑记录</title>
     <url>/2019/12/23/clickhouse-materialized-view-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>最近在使用 clickhouse（下面简称 CH） 的 materialized view（下面简称为 MV）功能，类似其他数据库的物化视图，触发器之类的功能，不过遇到了几点坑，有的通过升级 CH 版本解决了，有的可以在写 sql 的时候小心避免。</p>
@@ -1110,24 +1088,25 @@
       </tags>
   </entry>
   <entry>
-    <title>cocos2d-x-3.15缺少libfmod.so.6</title>
-    <url>/2017/06/20/cocos2d-x-3-15%E7%BC%BA%E5%B0%91libfmod-so-6/</url>
-    <content><![CDATA[<p>cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ .&#x2F;cpp-tests </span><br><span class="line">.&#x2F;cpp-tests: error while loading shared libraries: libfmod.so.6:</span><br><span class="line">cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
-<p>从报错可以看出缺少<code>libfmod.so.6</code>这个库文件, 网上搜索后得知这个文件在:<br><code>$COCOS2D_HOME/external/linux-specific/fmod/prebuilt/64-bit</code>目录下,<br>而且是在执行<code>$COCOS2D_HOME/build/install-deps-linux.sh</code>时发生报错的,</p>
-<p>他们的解决办法是将上述目录下的两个库文件<code>libfmod.so</code>和<code>libfmodL.so</code>,<br>复制到<code>/usr/local/lib/</code>目录下, 并创建链接文件, 然后接着执行<code>install-deps-linux.sh</code>,<br>但是这个方法对我没有作用, 可能是因为我是用的系统的缘故<code>(deepin linux)</code>.</p>
-<p><font color=red>如果上述方法对你也没用就试试下面的方法:</font><br>复制两个库文件到<code>/usr/lib/</code>目录下, 然后创建链接文件:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#在cocos2d目录下执行</span><br><span class="line">cp external&#x2F;linux-specific&#x2F;fmod&#x2F;prebuilt&#x2F;64-bit&#x2F;* &#x2F;usr&#x2F;lib&#x2F;</span><br><span class="line">cd &#x2F;usr&#x2F;lib</span><br><span class="line">ln -s libfmod.so libfmod.so.6</span><br></pre></td></tr></table></figure>
-<p>然后就可以直接测试demo了, 不用重新编译</p>
+    <title>chrome adobe flash不是最新版本</title>
+    <url>/2016/11/02/chrome-adobe-flash%E4%B8%8D%E6%98%AF%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p>
+<p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p>
+<p>下面详细说说linux下和windows下怎么设置代理:</p>
+<p>linux下在<code>终端</code>中设置好代理变量, 然后接着在同一个终端下以命令的方式启动chrome就行了,下面是具体命令:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export http_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">export https_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">google-chrome</span><br></pre></td></tr></table></figure>
+
+<p>命令解释, 前两行主要是指定代理地址和端口, 因为我是在本机运行的代理软件, 所以地址是127.0.0.1<br>而8787则是代理软件监听的端口, 第三行则是启动chrome</p>
+<p>windows下就十分简单了, 启动代理软件, 一般代理软件都有系统代理的选项, 选择启动系统代理,<br>然后运行chrome就行了. </p>
+<p>下面附上linux下的过程:<br><img src="update-flash.png" alt="update-flash"></p>
 ]]></content>
       <categories>
-        <category>cocos2d</category>
+        <category>others</category>
       </categories>
       <tags>
-        <tag>linux</tag>
-        <tag>deepin</tag>
-        <tag>cocos2d</tag>
-        <tag>libfmod</tag>
+        <tag>chrome</tag>
+        <tag>flash</tag>
+        <tag>版本</tag>
       </tags>
   </entry>
   <entry>
@@ -1182,6 +1161,27 @@
         <tag>clickhouse</tag>
         <tag>cluster</tag>
         <tag>集群</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cocos2d-x-3.15缺少libfmod.so.6</title>
+    <url>/2017/06/20/cocos2d-x-3-15%E7%BC%BA%E5%B0%91libfmod-so-6/</url>
+    <content><![CDATA[<p>cocos2d-x v3.15版, 在linux下编译之后执行test里的demo时报错:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ .&#x2F;cpp-tests </span><br><span class="line">.&#x2F;cpp-tests: error while loading shared libraries: libfmod.so.6:</span><br><span class="line">cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>从报错可以看出缺少<code>libfmod.so.6</code>这个库文件, 网上搜索后得知这个文件在:<br><code>$COCOS2D_HOME/external/linux-specific/fmod/prebuilt/64-bit</code>目录下,<br>而且是在执行<code>$COCOS2D_HOME/build/install-deps-linux.sh</code>时发生报错的,</p>
+<p>他们的解决办法是将上述目录下的两个库文件<code>libfmod.so</code>和<code>libfmodL.so</code>,<br>复制到<code>/usr/local/lib/</code>目录下, 并创建链接文件, 然后接着执行<code>install-deps-linux.sh</code>,<br>但是这个方法对我没有作用, 可能是因为我是用的系统的缘故<code>(deepin linux)</code>.</p>
+<p><font color=red>如果上述方法对你也没用就试试下面的方法:</font><br>复制两个库文件到<code>/usr/lib/</code>目录下, 然后创建链接文件:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#在cocos2d目录下执行</span><br><span class="line">cp external&#x2F;linux-specific&#x2F;fmod&#x2F;prebuilt&#x2F;64-bit&#x2F;* &#x2F;usr&#x2F;lib&#x2F;</span><br><span class="line">cd &#x2F;usr&#x2F;lib</span><br><span class="line">ln -s libfmod.so libfmod.so.6</span><br></pre></td></tr></table></figure>
+<p>然后就可以直接测试demo了, 不用重新编译</p>
+]]></content>
+      <categories>
+        <category>cocos2d</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>deepin</tag>
+        <tag>cocos2d</tag>
+        <tag>libfmod</tag>
       </tags>
   </entry>
   <entry>
@@ -1273,24 +1273,6 @@
       </tags>
   </entry>
   <entry>
-    <title>c语言打印乘法口诀和三角</title>
-    <url>/2016/05/04/c%E8%AF%AD%E8%A8%80%E6%89%93%E5%8D%B0%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E5%92%8C%E4%B8%89%E8%A7%92/</url>
-    <content><![CDATA[<p>打印乘法口诀和三角所用的算法跟java一样,直接上代码</p>
-<h1 id="打印乘法口诀"><a href="#打印乘法口诀" class="headerlink" title="打印乘法口诀:"></a>打印乘法口诀:</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d*%d=%d\t&quot;</span>, j, i, i*j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行结果:</span></span><br><span class="line"><span class="number">1</span>*<span class="number">1</span>=<span class="number">1</span>   </span><br><span class="line"><span class="number">1</span>*<span class="number">2</span>=<span class="number">2</span>   <span class="number">2</span>*<span class="number">2</span>=<span class="number">4</span></span><br><span class="line"><span class="number">1</span>*<span class="number">3</span>=<span class="number">3</span>   <span class="number">2</span>*<span class="number">3</span>=<span class="number">6</span>   <span class="number">3</span>*<span class="number">3</span>=<span class="number">9</span></span><br><span class="line"><span class="number">1</span>*<span class="number">4</span>=<span class="number">4</span>   <span class="number">2</span>*<span class="number">4</span>=<span class="number">8</span>   <span class="number">3</span>*<span class="number">4</span>=<span class="number">12</span>  <span class="number">4</span>*<span class="number">4</span>=<span class="number">16</span></span><br><span class="line"><span class="number">1</span>*<span class="number">5</span>=<span class="number">5</span>   <span class="number">2</span>*<span class="number">5</span>=<span class="number">10</span>  <span class="number">3</span>*<span class="number">5</span>=<span class="number">15</span>  <span class="number">4</span>*<span class="number">5</span>=<span class="number">20</span>  <span class="number">5</span>*<span class="number">5</span>=<span class="number">25</span></span><br><span class="line"><span class="number">1</span>*<span class="number">6</span>=<span class="number">6</span>   <span class="number">2</span>*<span class="number">6</span>=<span class="number">12</span>  <span class="number">3</span>*<span class="number">6</span>=<span class="number">18</span>  <span class="number">4</span>*<span class="number">6</span>=<span class="number">24</span>  <span class="number">5</span>*<span class="number">6</span>=<span class="number">30</span>  <span class="number">6</span>*<span class="number">6</span>=<span class="number">36</span></span><br><span class="line"><span class="number">1</span>*<span class="number">7</span>=<span class="number">7</span>   <span class="number">2</span>*<span class="number">7</span>=<span class="number">14</span>  <span class="number">3</span>*<span class="number">7</span>=<span class="number">21</span>  <span class="number">4</span>*<span class="number">7</span>=<span class="number">28</span>  <span class="number">5</span>*<span class="number">7</span>=<span class="number">35</span>  <span class="number">6</span>*<span class="number">7</span>=<span class="number">42</span>  <span class="number">7</span>*<span class="number">7</span>=<span class="number">49</span></span><br><span class="line"><span class="number">1</span>*<span class="number">8</span>=<span class="number">8</span>   <span class="number">2</span>*<span class="number">8</span>=<span class="number">16</span>  <span class="number">3</span>*<span class="number">8</span>=<span class="number">24</span>  <span class="number">4</span>*<span class="number">8</span>=<span class="number">32</span>  <span class="number">5</span>*<span class="number">8</span>=<span class="number">40</span>  <span class="number">6</span>*<span class="number">8</span>=<span class="number">48</span>  <span class="number">7</span>*<span class="number">8</span>=<span class="number">56</span>  <span class="number">8</span>*<span class="number">8</span>=<span class="number">64</span></span><br><span class="line"><span class="number">1</span>*<span class="number">9</span>=<span class="number">9</span>   <span class="number">2</span>*<span class="number">9</span>=<span class="number">18</span>  <span class="number">3</span>*<span class="number">9</span>=<span class="number">27</span>  <span class="number">4</span>*<span class="number">9</span>=<span class="number">36</span>  <span class="number">5</span>*<span class="number">9</span>=<span class="number">45</span>  <span class="number">6</span>*<span class="number">9</span>=<span class="number">54</span>  <span class="number">7</span>*<span class="number">9</span>=<span class="number">63</span>  <span class="number">8</span>*<span class="number">9</span>=<span class="number">72</span>  <span class="number">9</span>*<span class="number">9</span>=<span class="number">81</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="三角-同时输出两个三角-一正一倒"><a href="#三角-同时输出两个三角-一正一倒" class="headerlink" title="三角,同时输出两个三角,一正一倒:"></a>三角,同时输出两个三角,一正一倒:</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 正-倒</span></span><br><span class="line"><span class="comment">     * 1-9</span></span><br><span class="line"><span class="comment">     * 3-7</span></span><br><span class="line"><span class="comment">     * 5-5</span></span><br><span class="line"><span class="comment">     * 7-3</span></span><br><span class="line"><span class="comment">     * 9-1 */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( i % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= (<span class="number">9</span>-i)/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j&lt;=(<span class="number">9</span>-i)/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;  j&lt;= (<span class="number">9</span>-(<span class="number">10</span>-i))/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;  j&lt;= (<span class="number">10</span>-i); ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;  j&lt;= (<span class="number">9</span>-(<span class="number">10</span>-i))/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行结果:</span></span><br><span class="line">    *           *********</span><br><span class="line">   ***           *******</span><br><span class="line">  *****           *****</span><br><span class="line"> *******           ***</span><br><span class="line">*********           *</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>c</category>
-      </categories>
-      <tags>
-        <tag>c</tag>
-        <tag>乘法口诀</tag>
-        <tag>三角</tag>
-        <tag>打印</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>c语言在函数中修改指针的值</title>
     <url>/2016/11/06/c%E8%AF%AD%E8%A8%80%E5%9C%A8%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E7%9A%84%E5%80%BC/</url>
     <content><![CDATA[<p>继续学习c语言中…</p>
@@ -1321,6 +1303,24 @@
         <tag>c</tag>
         <tag>指针</tag>
         <tag>函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>c语言打印乘法口诀和三角</title>
+    <url>/2016/05/04/c%E8%AF%AD%E8%A8%80%E6%89%93%E5%8D%B0%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E5%92%8C%E4%B8%89%E8%A7%92/</url>
+    <content><![CDATA[<p>打印乘法口诀和三角所用的算法跟java一样,直接上代码</p>
+<h1 id="打印乘法口诀"><a href="#打印乘法口诀" class="headerlink" title="打印乘法口诀:"></a>打印乘法口诀:</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d*%d=%d\t&quot;</span>, j, i, i*j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行结果:</span></span><br><span class="line"><span class="number">1</span>*<span class="number">1</span>=<span class="number">1</span>   </span><br><span class="line"><span class="number">1</span>*<span class="number">2</span>=<span class="number">2</span>   <span class="number">2</span>*<span class="number">2</span>=<span class="number">4</span></span><br><span class="line"><span class="number">1</span>*<span class="number">3</span>=<span class="number">3</span>   <span class="number">2</span>*<span class="number">3</span>=<span class="number">6</span>   <span class="number">3</span>*<span class="number">3</span>=<span class="number">9</span></span><br><span class="line"><span class="number">1</span>*<span class="number">4</span>=<span class="number">4</span>   <span class="number">2</span>*<span class="number">4</span>=<span class="number">8</span>   <span class="number">3</span>*<span class="number">4</span>=<span class="number">12</span>  <span class="number">4</span>*<span class="number">4</span>=<span class="number">16</span></span><br><span class="line"><span class="number">1</span>*<span class="number">5</span>=<span class="number">5</span>   <span class="number">2</span>*<span class="number">5</span>=<span class="number">10</span>  <span class="number">3</span>*<span class="number">5</span>=<span class="number">15</span>  <span class="number">4</span>*<span class="number">5</span>=<span class="number">20</span>  <span class="number">5</span>*<span class="number">5</span>=<span class="number">25</span></span><br><span class="line"><span class="number">1</span>*<span class="number">6</span>=<span class="number">6</span>   <span class="number">2</span>*<span class="number">6</span>=<span class="number">12</span>  <span class="number">3</span>*<span class="number">6</span>=<span class="number">18</span>  <span class="number">4</span>*<span class="number">6</span>=<span class="number">24</span>  <span class="number">5</span>*<span class="number">6</span>=<span class="number">30</span>  <span class="number">6</span>*<span class="number">6</span>=<span class="number">36</span></span><br><span class="line"><span class="number">1</span>*<span class="number">7</span>=<span class="number">7</span>   <span class="number">2</span>*<span class="number">7</span>=<span class="number">14</span>  <span class="number">3</span>*<span class="number">7</span>=<span class="number">21</span>  <span class="number">4</span>*<span class="number">7</span>=<span class="number">28</span>  <span class="number">5</span>*<span class="number">7</span>=<span class="number">35</span>  <span class="number">6</span>*<span class="number">7</span>=<span class="number">42</span>  <span class="number">7</span>*<span class="number">7</span>=<span class="number">49</span></span><br><span class="line"><span class="number">1</span>*<span class="number">8</span>=<span class="number">8</span>   <span class="number">2</span>*<span class="number">8</span>=<span class="number">16</span>  <span class="number">3</span>*<span class="number">8</span>=<span class="number">24</span>  <span class="number">4</span>*<span class="number">8</span>=<span class="number">32</span>  <span class="number">5</span>*<span class="number">8</span>=<span class="number">40</span>  <span class="number">6</span>*<span class="number">8</span>=<span class="number">48</span>  <span class="number">7</span>*<span class="number">8</span>=<span class="number">56</span>  <span class="number">8</span>*<span class="number">8</span>=<span class="number">64</span></span><br><span class="line"><span class="number">1</span>*<span class="number">9</span>=<span class="number">9</span>   <span class="number">2</span>*<span class="number">9</span>=<span class="number">18</span>  <span class="number">3</span>*<span class="number">9</span>=<span class="number">27</span>  <span class="number">4</span>*<span class="number">9</span>=<span class="number">36</span>  <span class="number">5</span>*<span class="number">9</span>=<span class="number">45</span>  <span class="number">6</span>*<span class="number">9</span>=<span class="number">54</span>  <span class="number">7</span>*<span class="number">9</span>=<span class="number">63</span>  <span class="number">8</span>*<span class="number">9</span>=<span class="number">72</span>  <span class="number">9</span>*<span class="number">9</span>=<span class="number">81</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="三角-同时输出两个三角-一正一倒"><a href="#三角-同时输出两个三角-一正一倒" class="headerlink" title="三角,同时输出两个三角,一正一倒:"></a>三角,同时输出两个三角,一正一倒:</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 正-倒</span></span><br><span class="line"><span class="comment">     * 1-9</span></span><br><span class="line"><span class="comment">     * 3-7</span></span><br><span class="line"><span class="comment">     * 5-5</span></span><br><span class="line"><span class="comment">     * 7-3</span></span><br><span class="line"><span class="comment">     * 9-1 */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( i % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= (<span class="number">9</span>-i)/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j&lt;=(<span class="number">9</span>-i)/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;  j&lt;= (<span class="number">9</span>-(<span class="number">10</span>-i))/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;  j&lt;= (<span class="number">10</span>-i); ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;  j&lt;= (<span class="number">9</span>-(<span class="number">10</span>-i))/<span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行结果:</span></span><br><span class="line">    *           *********</span><br><span class="line">   ***           *******</span><br><span class="line">  *****           *****</span><br><span class="line"> *******           ***</span><br><span class="line">*********           *</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>c</category>
+      </categories>
+      <tags>
+        <tag>c</tag>
+        <tag>乘法口诀</tag>
+        <tag>三角</tag>
+        <tag>打印</tag>
       </tags>
   </entry>
   <entry>
@@ -1382,22 +1382,6 @@
       </tags>
   </entry>
   <entry>
-    <title>getDuration()获取媒体总长度值为-1</title>
-    <url>/2016/05/04/getDuration-%E8%8E%B7%E5%8F%96%E5%AA%92%E4%BD%93%E6%80%BB%E9%95%BF%E5%BA%A6%E5%80%BC%E4%B8%BA-1/</url>
-    <content><![CDATA[<p>例如VideoView获取视频总长度：<br>在视频播放前获取到的视频总长度都为-1<br>想要在视频播放前获取到总长度的话:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">videoView.setOnPreparedListener(<span class="keyword">new</span> MyOnPreparedListener());</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyOnPreparedListener</span> <span class="keyword">implements</span> <span class="title">OnPreparedListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrepared</span><span class="params">(MediaPlayer mp)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"></span><br><span class="line">            video.getDuration();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>getDuration</tag>
-        <tag>视频总长度</tag>
-        <tag>videoview</tag>
-        <tag>mediaplayer</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>gdb调试qt程序时打印qt特有的类型数据</title>
     <url>/2018/10/23/gdb%E8%B0%83%E8%AF%95qt%E7%A8%8B%E5%BA%8F%E6%97%B6%E6%89%93%E5%8D%B0qt%E7%89%B9%E6%9C%89%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<p>如果没有使用 qtcreator 调试 qt 程序，而是手动或利用其他 IDE 使用 gdb 调试，会发现 qt 类型的数据如 QString QList QMap 等不能直接查看其值。其实 gdb 是提供了关于打印数据的接口的，叫做 <code>Pretty-Printer</code>，这是一种利用 python 代码更好的输出变量数据的机制，感兴趣的可以搜索下相关内容。qtcreator 之所以可以愉快的打印出 qt 相应的数据也是因为它使用了这种机制，下面的命令可以查看 qtcreator 的安装目录中的 python 文件，命令在 debian 系的 linux 系统上有效:</p>
@@ -1417,6 +1401,22 @@
       <tags>
         <tag>qt</tag>
         <tag>gdb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>getDuration()获取媒体总长度值为-1</title>
+    <url>/2016/05/04/getDuration-%E8%8E%B7%E5%8F%96%E5%AA%92%E4%BD%93%E6%80%BB%E9%95%BF%E5%BA%A6%E5%80%BC%E4%B8%BA-1/</url>
+    <content><![CDATA[<p>例如VideoView获取视频总长度：<br>在视频播放前获取到的视频总长度都为-1<br>想要在视频播放前获取到总长度的话:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">videoView.setOnPreparedListener(<span class="keyword">new</span> MyOnPreparedListener());</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyOnPreparedListener</span> <span class="keyword">implements</span> <span class="title">OnPreparedListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrepared</span><span class="params">(MediaPlayer mp)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"></span><br><span class="line">            video.getDuration();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>getDuration</tag>
+        <tag>视频总长度</tag>
+        <tag>videoview</tag>
+        <tag>mediaplayer</tag>
       </tags>
   </entry>
   <entry>
@@ -1555,6 +1555,36 @@
       </tags>
   </entry>
   <entry>
+    <title>jsp-android使用http</title>
+    <url>/2016/04/23/jsp-android%E4%BD%BF%E7%94%A8http/</url>
+    <content><![CDATA[<blockquote>
+<p>先说两种客户端发送http到服务端、然后再说服务端如何处理</p>
+</blockquote>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>首先客户端有两种方式可以发送http请求<br>当然还有其他方式，这里只讨论这两种方式:</p>
+<h2 id="doget方式"><a href="#doget方式" class="headerlink" title="doget方式"></a>doget方式</h2><p>客户端中先使用“url?name1=value1&amp;&amp;name2=value2&amp;&amp;….”来new出<font color=red><strong>HttpGet</strong></font>的对象<br>使用<font color=red><strong>HttpClient</strong></font>的对象：<font color=red><strong>deafultHttpClient</strong></font>来发送<font color=red><strong>HttpGet</strong></font>的对象到服务端、同时将会获得服务器返回的<font color=red><strong>HttpResponse</strong></font>对象、<br>接着<font color=red><strong>HttpResponse</strong></font>对象调用getEntity()来获取服务端发送过来的信息</p>
+<h2 id="dopost方式"><a href="#dopost方式" class="headerlink" title="dopost方式"></a>dopost方式</h2><p>客户端先使用URL来new出<font color=red><strong>HttpPost</strong></font>的对象<br>接着使用NameValuePair来保存要传递的Post的参数<br>可以使用集合框架、例如new一个<font color=red><strong>List<NameValuePair></strong></font>的对象<font color=red><strong>params</strong></font>、并使用其<code>add(new BasicNameValuePair(&quot;name&quot;,&quot;value&quot;))</code>方法来将数据保存起来、</p>
+<p>此时还不能直接发送、要将<font color=red><strong>params</strong></font>放到<font color=red><strong>HttpPost</strong></font>的对象中才行、然而<font color=red><strong>List<NameValuePair></strong></font>类型的<font color=red><strong>params</strong></font>并不能直接被放置到<font color=red><strong>HttpPost</strong></font>中</p>
+<p>需要转换成另一种类型的数据：<font color=red><strong>HttpEntity</strong></font>、在转换的同时还可以设置一下编码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HttpEntity httpEntity=<span class="keyword">new</span> UrlEncodedFormEntity(<span class="string">&quot;params&quot;</span>,<span class="string">&quot;GB2312&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>将数据参数放置到<font color=red><strong>HttpPost</strong></font>中：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">httpPost.setEntity(httpEntity);</span><br></pre></td></tr></table></figure>
+<p>使用<font color=red><strong>HttpClient</strong></font>的对象：<font color=red><strong>deafultHttpClient</strong></font>来发送<font color=red><strong>HttpPost</strong></font>的对象到服务端、同时将会获得<font color=red><strong>HttpResponse</strong></font>对象、</p>
+<p>接着<font color=red><strong>HttpResponse</strong></font>对象调用<font color=red><strong>getEntity()</strong></font>来获取服务端发送过来的信息</p>
+<h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>服务端接收数据比较简单<br>首先设置下请求编码防止中文乱码<br>然后使用request对象来获取参数就行了</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String username=request.getParameter(<span class="string">&quot;name&quot;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>jsp</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>jsp</tag>
+        <tag>http</tag>
+        <tag>httpget</tag>
+        <tag>httppost</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>k8s dashboard 无法登陆</title>
     <url>/2020/04/15/k8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86/</url>
     <content><![CDATA[<p>先说环境：<br>两节点 k8s 集群，一台 master，k8s 版本为 <code>1.18.1</code>，所使用的 dashboard 版本为 <code>v2.0.0-rc7</code></p>
@@ -1597,36 +1627,6 @@
       <tags>
         <tag>dashboard</tag>
         <tag>登录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jsp-android使用http</title>
-    <url>/2016/04/23/jsp-android%E4%BD%BF%E7%94%A8http/</url>
-    <content><![CDATA[<blockquote>
-<p>先说两种客户端发送http到服务端、然后再说服务端如何处理</p>
-</blockquote>
-<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>首先客户端有两种方式可以发送http请求<br>当然还有其他方式，这里只讨论这两种方式:</p>
-<h2 id="doget方式"><a href="#doget方式" class="headerlink" title="doget方式"></a>doget方式</h2><p>客户端中先使用“url?name1=value1&amp;&amp;name2=value2&amp;&amp;….”来new出<font color=red><strong>HttpGet</strong></font>的对象<br>使用<font color=red><strong>HttpClient</strong></font>的对象：<font color=red><strong>deafultHttpClient</strong></font>来发送<font color=red><strong>HttpGet</strong></font>的对象到服务端、同时将会获得服务器返回的<font color=red><strong>HttpResponse</strong></font>对象、<br>接着<font color=red><strong>HttpResponse</strong></font>对象调用getEntity()来获取服务端发送过来的信息</p>
-<h2 id="dopost方式"><a href="#dopost方式" class="headerlink" title="dopost方式"></a>dopost方式</h2><p>客户端先使用URL来new出<font color=red><strong>HttpPost</strong></font>的对象<br>接着使用NameValuePair来保存要传递的Post的参数<br>可以使用集合框架、例如new一个<font color=red><strong>List<NameValuePair></strong></font>的对象<font color=red><strong>params</strong></font>、并使用其<code>add(new BasicNameValuePair(&quot;name&quot;,&quot;value&quot;))</code>方法来将数据保存起来、</p>
-<p>此时还不能直接发送、要将<font color=red><strong>params</strong></font>放到<font color=red><strong>HttpPost</strong></font>的对象中才行、然而<font color=red><strong>List<NameValuePair></strong></font>类型的<font color=red><strong>params</strong></font>并不能直接被放置到<font color=red><strong>HttpPost</strong></font>中</p>
-<p>需要转换成另一种类型的数据：<font color=red><strong>HttpEntity</strong></font>、在转换的同时还可以设置一下编码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HttpEntity httpEntity=<span class="keyword">new</span> UrlEncodedFormEntity(<span class="string">&quot;params&quot;</span>,<span class="string">&quot;GB2312&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>将数据参数放置到<font color=red><strong>HttpPost</strong></font>中：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">httpPost.setEntity(httpEntity);</span><br></pre></td></tr></table></figure>
-<p>使用<font color=red><strong>HttpClient</strong></font>的对象：<font color=red><strong>deafultHttpClient</strong></font>来发送<font color=red><strong>HttpPost</strong></font>的对象到服务端、同时将会获得<font color=red><strong>HttpResponse</strong></font>对象、</p>
-<p>接着<font color=red><strong>HttpResponse</strong></font>对象调用<font color=red><strong>getEntity()</strong></font>来获取服务端发送过来的信息</p>
-<h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>服务端接收数据比较简单<br>首先设置下请求编码防止中文乱码<br>然后使用request对象来获取参数就行了</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String username=request.getParameter(<span class="string">&quot;name&quot;</span>)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>jsp</category>
-      </categories>
-      <tags>
-        <tag>android</tag>
-        <tag>jsp</tag>
-        <tag>http</tag>
-        <tag>httpget</tag>
-        <tag>httppost</tag>
       </tags>
   </entry>
   <entry>
@@ -1967,6 +1967,54 @@
       </tags>
   </entry>
   <entry>
+    <title>macvim 图形界面无法显示中文</title>
+    <url>/2020/02/17/macvim-%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87/</url>
+    <content><![CDATA[<p>使用 brew cask 安装的 macvim，版本为：<code>8.1.2234,161</code></p>
+<p>macvim 图形界面中文显示成问号，但在终端下面却可以正常显示，网上搜了很久都在说编码问题，其实不是，正解如下：</p>
+<ol>
+<li>打开 macvim GUI</li>
+<li>点击菜单栏-Preferences</li>
+<li>点击 Advanced</li>
+<li>取消选中 <code>Use Core Text renderer</code> 选项</li>
+<li>重启 macvim GUI</li>
+</ol>
+]]></content>
+      <categories>
+        <category>osx</category>
+      </categories>
+      <tags>
+        <tag>osx</tag>
+        <tag>macvim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>miui 正在通过usb安装</title>
+    <url>/2017/02/25/miui-%E6%AD%A3%E5%9C%A8%E9%80%9A%E8%BF%87usb%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p>
+<h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p>
+<h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;data&#x2F;data&#x2F;com.miui.securitycenter&#x2F;shared_prefs</span><br></pre></td></tr></table></figure>
+<p>用RE管理器的编辑模式(默认是查看模式)打开这个文件:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">remote_provider_preferences.xml</span><br></pre></td></tr></table></figure>
+
+<p>找到下面这句:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"># 将其中的&quot;true&quot;修改为&quot;false&quot;</span><br><span class="line"># 修改后为:</span><br><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>还有找到这句:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 要确保这句中的值为&quot;true&quot;</span><br><span class="line"># 这个选项对应的时开发者选项里的&quot;USB安装&quot;</span><br><span class="line"># 只有这个值为&quot;true&quot;的时候这个选项才是打开的</span><br><span class="line">&lt;boolean name&#x3D;&quot;security_adb_install_enable&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>OK了, 不过这个方法好像重启手机后会重置, 需要再次设置, 不过也是不错的了</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>miui</tag>
+        <tag>usb</tag>
+        <tag>安装</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>minikube 启动失败</title>
     <url>/2020/04/07/minikube-%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/</url>
     <content><![CDATA[<p>首先：</p>
@@ -2018,54 +2066,6 @@
       </tags>
   </entry>
   <entry>
-    <title>macvim 图形界面无法显示中文</title>
-    <url>/2020/02/17/macvim-%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87/</url>
-    <content><![CDATA[<p>使用 brew cask 安装的 macvim，版本为：<code>8.1.2234,161</code></p>
-<p>macvim 图形界面中文显示成问号，但在终端下面却可以正常显示，网上搜了很久都在说编码问题，其实不是，正解如下：</p>
-<ol>
-<li>打开 macvim GUI</li>
-<li>点击菜单栏-Preferences</li>
-<li>点击 Advanced</li>
-<li>取消选中 <code>Use Core Text renderer</code> 选项</li>
-<li>重启 macvim GUI</li>
-</ol>
-]]></content>
-      <categories>
-        <category>osx</category>
-      </categories>
-      <tags>
-        <tag>osx</tag>
-        <tag>macvim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>miui 正在通过usb安装</title>
-    <url>/2017/02/25/miui-%E6%AD%A3%E5%9C%A8%E9%80%9A%E8%BF%87usb%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p>
-<h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p>
-<h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;data&#x2F;data&#x2F;com.miui.securitycenter&#x2F;shared_prefs</span><br></pre></td></tr></table></figure>
-<p>用RE管理器的编辑模式(默认是查看模式)打开这个文件:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">remote_provider_preferences.xml</span><br></pre></td></tr></table></figure>
-
-<p>找到下面这句:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"># 将其中的&quot;true&quot;修改为&quot;false&quot;</span><br><span class="line"># 修改后为:</span><br><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>还有找到这句:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 要确保这句中的值为&quot;true&quot;</span><br><span class="line"># 这个选项对应的时开发者选项里的&quot;USB安装&quot;</span><br><span class="line"># 只有这个值为&quot;true&quot;的时候这个选项才是打开的</span><br><span class="line">&lt;boolean name&#x3D;&quot;security_adb_install_enable&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>OK了, 不过这个方法好像重启手机后会重置, 需要再次设置, 不过也是不错的了</p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>miui</tag>
-        <tag>usb</tag>
-        <tag>安装</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>新博客的第一篇</title>
     <url>/2016/04/20/my-first-blog-on-hexo-github-pages/</url>
     <content><![CDATA[<p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next">next</a></p>
@@ -2075,26 +2075,6 @@
       <categories>
         <category>others</category>
       </categories>
-  </entry>
-  <entry>
-    <title>mysql 杂记</title>
-    <url>/2020/10/21/mysql-%E6%9D%82%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="存储相关"><a href="#存储相关" class="headerlink" title="存储相关"></a>存储相关</h1><p>页，数据库管理数据的最小单元<br>区，预请求磁盘空间单元，确保读取时的效率，根据数据量延伸出四种状态，某些状态下的区直属于表<br>段，区的集合<br>表，表空间，管理段和部分区</p>
-<h1 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h1><p>在指定索引时尽量设置索引的 唯一 属性，这种唯一的二级索引，在 等值 查询时性能近乎与主键等价，等值查询不包括 IS NULL 查询</p>
-<p>在查询时尽量避免回表（再从聚簇索引拿数据），当查询列和查询条件都是索引时即可避免</p>
-<p>使用 OR 时要慎重：一个使用到 索引 A 的搜索条件和没有使用 A 的搜索条件使用 OR 连接起来后将无法使用 A<br>SELECT * FROM single_table WHERE key2 &gt; 100 OR common_field = ‘abc’;<br>其中 key2 和 common_field 都有各自的索引<br>那么上述查询语句将无法按照预期使用 key2 的索引，而是会拿所有 key2 的值去回表，在回表的时候使用 common_field 的索引</p>
-<p>对于联合索引，查询条件要注意索引列声明的顺序，且只有左边的查询条件是 等值 查询时右边的查询条件才能继续使用联合索引</p>
-<p>索引列必须和常数比较才会使用索引，两个列进行比较则不会使用到索引</p>
-<p>在执行连接查询时，驱动表被访问一次，被驱动表可能会被访问多次，次数与驱动表数据量有关（扇出）</p>
-<p>在创建索引时，如果可以尽量使用唯一索引</p>
-<h1 id="事务相关"><a href="#事务相关" class="headerlink" title="事务相关"></a>事务相关</h1><p>事务：脏读，脏写，不可重复读，幻读<br>脏读和脏写强调回滚：当前事务操作了另一个事务 B 的中间状态数据，而事务 B 即将执行回滚<br>不可重复读：当前事务多次读取同一组数据时，发现数据不同，类似于幻读，但覆盖到其他事务对数据的修改和删除操作<br>幻读强调读取到了新数据：当前事务以相同条件多次读取数据时，发现了之前没有见过的数据，因为其他事务插入了新数据</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
   </entry>
   <entry>
     <title>mysql 索引学习小结</title>
@@ -2122,22 +2102,23 @@
       </tags>
   </entry>
   <entry>
-    <title>osx bash completion 补全</title>
-    <url>/2019/10/31/osx-bash-completion-%E8%A1%A5%E5%85%A8/</url>
-    <content><![CDATA[<p>在 linux 下补全的配置一般发行版都给默认配了，原本以为在 OSX 下用 brew 装个 bash-completion 包，再在 bashrc 下贴两行配置也就搞定了，没想到不行，OSX 下 bash-completion 包有两个，另一个是 <code>bash-completion@2</code>，这两个包分别对应 bash 的两个版本，具体可以用 brew info <code>bash-completion@2</code> 来看。</p>
-<p>而且 <code>bash-completion@2</code> 跟 <code>bash-completion</code> 相比还要多一行配置，总之就是需要下面两行配置才行，原因是大多软件包都只提供了旧版本的 completion 文件，新版的没有提供支持，所以下面的第一行就是声明要兼容下旧的补全文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export BASH_COMPLETION_COMPAT_DIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&quot;</span><br><span class="line">[[ -r &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot; ]] &amp;&amp; . &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;</span><br></pre></td></tr></table></figure>
-
-<p>除此之外还有个问题，我自己设置了很多别名 alias，但是这些自定义的别名默认是不支持参数补全的，想要如丝般顺滑就要用另一个项目：<a href="https://github.com/cykerway/complete-alias">https://github.com/cykerway/complete-alias</a>，具体的使用方法就不赘述了，可以去项目里看看怎么配置。</p>
-<p>经过实践发现这个项目也不支持旧版的 <code>bash-completion</code> 包，会提示 _completion_loader 找不到的错误，改装 <code>bash-completion@2</code> 就好了。</p>
+    <title>mysql 杂记</title>
+    <url>/2020/10/21/mysql-%E6%9D%82%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="存储相关"><a href="#存储相关" class="headerlink" title="存储相关"></a>存储相关</h1><p>页，数据库管理数据的最小单元<br>区，预请求磁盘空间单元，确保读取时的效率，根据数据量延伸出四种状态，某些状态下的区直属于表<br>段，区的集合<br>表，表空间，管理段和部分区</p>
+<h1 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h1><p>在指定索引时尽量设置索引的 唯一 属性，这种唯一的二级索引，在 等值 查询时性能近乎与主键等价，等值查询不包括 IS NULL 查询</p>
+<p>在查询时尽量避免回表（再从聚簇索引拿数据），当查询列和查询条件都是索引时即可避免</p>
+<p>使用 OR 时要慎重：一个使用到 索引 A 的搜索条件和没有使用 A 的搜索条件使用 OR 连接起来后将无法使用 A<br>SELECT * FROM single_table WHERE key2 &gt; 100 OR common_field = ‘abc’;<br>其中 key2 和 common_field 都有各自的索引<br>那么上述查询语句将无法按照预期使用 key2 的索引，而是会拿所有 key2 的值去回表，在回表的时候使用 common_field 的索引</p>
+<p>对于联合索引，查询条件要注意索引列声明的顺序，且只有左边的查询条件是 等值 查询时右边的查询条件才能继续使用联合索引</p>
+<p>索引列必须和常数比较才会使用索引，两个列进行比较则不会使用到索引</p>
+<p>在执行连接查询时，驱动表被访问一次，被驱动表可能会被访问多次，次数与驱动表数据量有关（扇出）</p>
+<p>在创建索引时，如果可以尽量使用唯一索引</p>
+<h1 id="事务相关"><a href="#事务相关" class="headerlink" title="事务相关"></a>事务相关</h1><p>事务：脏读，脏写，不可重复读，幻读<br>脏读和脏写强调回滚：当前事务操作了另一个事务 B 的中间状态数据，而事务 B 即将执行回滚<br>不可重复读：当前事务多次读取同一组数据时，发现数据不同，类似于幻读，但覆盖到其他事务对数据的修改和删除操作<br>幻读强调读取到了新数据：当前事务以相同条件多次读取数据时，发现了之前没有见过的数据，因为其他事务插入了新数据</p>
 ]]></content>
       <categories>
-        <category>osx</category>
+        <category>mysql</category>
       </categories>
       <tags>
-        <tag>bash</tag>
-        <tag>completion</tag>
-        <tag>_completion_loader</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2160,6 +2141,25 @@
       <tags>
         <tag>表结构</tag>
         <tag>字段</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>osx bash completion 补全</title>
+    <url>/2019/10/31/osx-bash-completion-%E8%A1%A5%E5%85%A8/</url>
+    <content><![CDATA[<p>在 linux 下补全的配置一般发行版都给默认配了，原本以为在 OSX 下用 brew 装个 bash-completion 包，再在 bashrc 下贴两行配置也就搞定了，没想到不行，OSX 下 bash-completion 包有两个，另一个是 <code>bash-completion@2</code>，这两个包分别对应 bash 的两个版本，具体可以用 brew info <code>bash-completion@2</code> 来看。</p>
+<p>而且 <code>bash-completion@2</code> 跟 <code>bash-completion</code> 相比还要多一行配置，总之就是需要下面两行配置才行，原因是大多软件包都只提供了旧版本的 completion 文件，新版的没有提供支持，所以下面的第一行就是声明要兼容下旧的补全文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export BASH_COMPLETION_COMPAT_DIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&quot;</span><br><span class="line">[[ -r &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot; ]] &amp;&amp; . &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外还有个问题，我自己设置了很多别名 alias，但是这些自定义的别名默认是不支持参数补全的，想要如丝般顺滑就要用另一个项目：<a href="https://github.com/cykerway/complete-alias">https://github.com/cykerway/complete-alias</a>，具体的使用方法就不赘述了，可以去项目里看看怎么配置。</p>
+<p>经过实践发现这个项目也不支持旧版的 <code>bash-completion</code> 包，会提示 _completion_loader 找不到的错误，改装 <code>bash-completion@2</code> 就好了。</p>
+]]></content>
+      <categories>
+        <category>osx</category>
+      </categories>
+      <tags>
+        <tag>bash</tag>
+        <tag>completion</tag>
+        <tag>_completion_loader</tag>
       </tags>
   </entry>
   <entry>
@@ -3861,6 +3861,71 @@
       </categories>
   </entry>
   <entry>
+    <title>在自己的服务器上搭建静态博客</title>
+    <url>/2019/03/31/%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>最近 coding 的 pages 服务越来越没法用了，不是自动部署失败就是博客无法访问，而且访问速度很慢，估计再过段时间 coding 就不再提供免费的 pages 服务了。但是如果将域名解析到 github 上，百度又无法抓取(github 不允许)，思来想去还是放在自己的服务器上吧。</p>
+<p>不过放在自己的服务器上有两个问题：</p>
+<ul>
+<li>没有备案不能使用 dnspod 的 301 重定向把 www 的域名重定向到顶级域名</li>
+<li>博客更新后不能自动部署</li>
+</ul>
+<p>我的博客是个基于 hexo 的静态博客，可以使用 nginx 来提供 web 服务，同时 nginx 可以配置根据域名来重定向，这样就解决了第一个问题，博客内容就使用 git 仓库，注意这个仓库不是 markdown 的原始文件，而是经过 hexo 根据生成后的 html 站点，如果之前在 github 上部署过，在 github 上的仓库的名字应该会是 <code>&lt;UserName&gt;.github.io</code> 或者在 coding 上部署过那仓库名则是 coding 下跟用户名相同的仓库。以后更新了博客依然推送到 github 或者 coding 上，在自己的服务器上 clone 下仓库，然后使用 github 或者 coding 的 webhooks 功能更新自己服务器上的仓库，这样就解决了自己服务器上的博客不能自动部署更新的问题。</p>
+<p>下面的例子是基于 github 的，coding 的操作类似，不过鉴于 coding 提供的服务不太稳定的问题，建议博客仓库托管也不要放在 coding 上了。</p>
+<h1 id="克隆博客仓库到服务器上"><a href="#克隆博客仓库到服务器上" class="headerlink" title="克隆博客仓库到服务器上"></a>克隆博客仓库到服务器上</h1><p>这一步很简单，跟克隆普通 git 仓库一样，我把仓库放在了 <code>/opt/hexo-blog</code> 下，如果不放在这个路径下，那后面的内容中的相应路径也要修改。</p>
+<p>以我在 github 下的博客仓库为例，注意执行命令的用户权限，后面的命令都假设服务器上的账户是 root：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:listenerri&#x2F;listenerri.github.io.git &#x2F;opt&#x2F;hexo-blog</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了 ssh 协议的仓库地址，这需要将服务器的 ssh public key 部署在自己的 github 账户中，如果不想部署使用 https 协议的地址也可以，不过可能会需要输入用户名和密码，这会影响到后面 python 脚本中的功能，建议还是用 ssh 协议的地址，部署个 key 又不麻烦。</p>
+<h1 id="安装配置-nginx"><a href="#安装配置-nginx" class="headerlink" title="安装配置 nginx"></a>安装配置 nginx</h1><p>在服务器上安装配置 nginx，debian 系的 linux 系统中使用下面的命令就可以安装，其他系统可以在网上找找 ：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
+
+<p>安装之后不要急着启动 nginx 服务，要先配置下网站路径和域名相关的东西。</p>
+<p>编辑 <code>/etc/nginx/nginx.conf</code> 文件，在 http 块中添加两个 server 块配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        server_name  listenerri.com;</span><br><span class="line">        root         &#x2F;opt&#x2F;hexo-blog;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.listenerri.com;</span><br><span class="line">        return       301 http:&#x2F;&#x2F;listenerri.com$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个 server 块定义了主域名下的网站，也就是博客使用的域名和博客在服务器上的路径(上面克隆仓库时指定的地址)，第二个 server 块则是定义了将 www 的域名 301 重定向的顶级域名的网站下，我比较喜欢不带 www 的地址 :)</p>
+<p>接下来启动 nginx 服务：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service nginx start</span><br><span class="line"># 或者如果系统是 systemd 的：</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改域名解析地址"><a href="#修改域名解析地址" class="headerlink" title="修改域名解析地址"></a>修改域名解析地址</h1><p>上面 nginx 服务启动后就可以使用服务器的 ip 地址(这时还不能使用域名)进行访问了，如果测试没问题就可以修改域名的解析到这个服务器 ip 上了，这一步没什么好说的，就是把自己域名的 A 记录改成服务器的 ip 地址。</p>
+<p>改完之后过一会儿使用 dig 命令查看域名是否已经解析到服务器的地址了，如果解析已经生效了就可以访问域名来测试博客是否可以正常访问了。</p>
+<p>注意把 www 的域名也解析到服务器 ip 地址上。</p>
+<h1 id="启动-github-webhooks"><a href="#启动-github-webhooks" class="headerlink" title="启动 github webhooks"></a>启动 github webhooks</h1><p>在服务器上把下面的代码保存到一个 py 文件中，假设文件路径为 <code>/opt/webhooks.py</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from http.server import BaseHTTPRequestHandler</span><br><span class="line">from http.server import HTTPServer</span><br><span class="line">import os</span><br><span class="line">import subprocess</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">class MyBaseHTTPRequestHandler(BaseHTTPRequestHandler):</span><br><span class="line"></span><br><span class="line">    def do_GET(self):</span><br><span class="line">        self.send_response(200)</span><br><span class="line">        self.send_header(&#39;Content-type&#39;, &#39;text&#x2F;html&#39;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(b&#39;Only handle POST requests.\n&#39;)</span><br><span class="line">        flushLog()</span><br><span class="line"></span><br><span class="line">    def do_POST(self):</span><br><span class="line">        statusCode &#x3D; 403</span><br><span class="line">        responseData &#x3D; b&quot;Reject the request&quot;</span><br><span class="line">        if self.path &#x3D;&#x3D; &quot;&#x2F;pushed&quot;:</span><br><span class="line">            statusCode, responseData &#x3D; self.updateBlog()</span><br><span class="line">        self.send_response(statusCode)</span><br><span class="line">        self.send_header(&#39;Content-type&#39;, &#39;text&#x2F;html&#39;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(bytes(responseData, &quot;utf-8&quot;))</span><br><span class="line">        flushLog()</span><br><span class="line"></span><br><span class="line">    def updateBlog(self):</span><br><span class="line">        os.chdir(&quot;&#x2F;opt&#x2F;hexo-blog&quot;)</span><br><span class="line">        code, result &#x3D; subprocess.getstatusoutput(&quot;git pull origin master&quot;)</span><br><span class="line">        if code &#x3D;&#x3D; 0:</span><br><span class="line">            code &#x3D; 200</span><br><span class="line">            result &#x3D; &quot;blog updated :)&quot;</span><br><span class="line">        else:</span><br><span class="line">            code &#x3D; 500</span><br><span class="line">            print(result)</span><br><span class="line">            result &#x3D; &quot;blog update failed :(&quot;</span><br><span class="line">        return code, result</span><br><span class="line"></span><br><span class="line">def flushLog():</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    sys.stderr.flush()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    port &#x3D; 2345</span><br><span class="line">    httpd &#x3D; HTTPServer((&quot;&quot;, port), MyBaseHTTPRequestHandler)</span><br><span class="line">    print(&quot;Running on port: %d&quot;%(port))</span><br><span class="line">    flushLog()</span><br><span class="line">    httpd.serve_forever()</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>脚本的内容就是启动了一个监听 2345 端口的 http 服务，只接受 <code>/pushed</code> 资源路径的 POST 访问，其他资源路径的 POST 访问全都返回 403，每次接收到正确的 POST 访问后就去 <code>/opt/hexo-blog</code> 路径下更新仓库，也就是从 github 远程仓库下拉取更新，如果更新成功返回 200 状态码，否则返回 500，如果更新失败则打印下命令的输出，以便以后根据日志文件定位问题。</p>
+<p>接下来给这个脚本增加可执行权限：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod a+x &#x2F;opt&#x2F;webhooks.py</span><br></pre></td></tr></table></figure>
+
+<p>启动脚本同时把脚本的输出追加到 <code>/var/log/blog-github-webhooks.log</code> 文件中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nohup &#x2F;opt&#x2F;webhooks.py &gt;&gt; &#x2F;var&#x2F;log&#x2F;blog-github-webhooks.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>然后配置下这个脚本开机自启动，如果是 systemd 的系统就写一个 service 文件，将上述命令稍微修改下写入 service 文件中的 <code>EXEC</code> 字段后面，具体的 service 文件怎么写和怎么用可以在网上搜索下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;opt&#x2F;webhooks.py &gt;&gt; &#x2F;var&#x2F;log&#x2F;blog-github-webhooks.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>如果不是 systemd 的系统就把上面的命令复制到 <code>/etc/rc.local</code> 文件中的最后一行，不过 systemd 好像也兼容 <code>/etc/rc.local</code> 文件，直接用第二种方法配置开机自启估计也行。</p>
+<h1 id="设置-github-webhooks"><a href="#设置-github-webhooks" class="headerlink" title="设置 github webhooks"></a>设置 github webhooks</h1><p>去 github 网站博客对应的项目页面下，点击 <code>Settings</code> 按钮，再点击新页面左侧导航栏的 <code>Webhooks</code> 按钮：</p>
+<p><img src="webhooks.png"></p>
+<p>再点击上图右上角的 <code>Add Webhook</code> 按钮：</p>
+<p><img src="add-webhooks.png"></p>
+<p>在上图 <code>Payload URL</code> 的输入框中填入自己的服务器 ip 或者域名并加上端口 <code>2345</code> 和资源路径 <code>/pushed</code>，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;listenerri.com:2345&#x2F;pushed</span><br></pre></td></tr></table></figure>
+
+<p>然后直接点击下面绿色的 <code>Add webhook</code> 按钮就行了。</p>
+<p>github 会发送一个测试的 POST 请求到设置的地址中，点击刚刚添加的 webhook 可以进入这个 webhook 的设置界面，这个界面最下面会后这个 webhook 的最近活动，如果没有意外会有如下图中的带有绿色对勾的一条记录：</p>
+<p><img src="recent-activity.png"></p>
+<p>当然可以写一遍新博客测试下。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>nginx</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>增大osx启动分区大小</title>
     <url>/2017/11/25/%E5%A2%9E%E5%A4%A7osx%E5%90%AF%E5%8A%A8%E5%88%86%E5%8C%BA%E5%A4%A7%E5%B0%8F/</url>
     <content><![CDATA[<p>场景：<br>osx，deepin linux, windows三系统, 需要扩大黑苹果的分区.</p>
@@ -3950,101 +4015,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在自己的服务器上搭建静态博客</title>
-    <url>/2019/03/31/%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>最近 coding 的 pages 服务越来越没法用了，不是自动部署失败就是博客无法访问，而且访问速度很慢，估计再过段时间 coding 就不再提供免费的 pages 服务了。但是如果将域名解析到 github 上，百度又无法抓取(github 不允许)，思来想去还是放在自己的服务器上吧。</p>
-<p>不过放在自己的服务器上有两个问题：</p>
-<ul>
-<li>没有备案不能使用 dnspod 的 301 重定向把 www 的域名重定向到顶级域名</li>
-<li>博客更新后不能自动部署</li>
-</ul>
-<p>我的博客是个基于 hexo 的静态博客，可以使用 nginx 来提供 web 服务，同时 nginx 可以配置根据域名来重定向，这样就解决了第一个问题，博客内容就使用 git 仓库，注意这个仓库不是 markdown 的原始文件，而是经过 hexo 根据生成后的 html 站点，如果之前在 github 上部署过，在 github 上的仓库的名字应该会是 <code>&lt;UserName&gt;.github.io</code> 或者在 coding 上部署过那仓库名则是 coding 下跟用户名相同的仓库。以后更新了博客依然推送到 github 或者 coding 上，在自己的服务器上 clone 下仓库，然后使用 github 或者 coding 的 webhooks 功能更新自己服务器上的仓库，这样就解决了自己服务器上的博客不能自动部署更新的问题。</p>
-<p>下面的例子是基于 github 的，coding 的操作类似，不过鉴于 coding 提供的服务不太稳定的问题，建议博客仓库托管也不要放在 coding 上了。</p>
-<h1 id="克隆博客仓库到服务器上"><a href="#克隆博客仓库到服务器上" class="headerlink" title="克隆博客仓库到服务器上"></a>克隆博客仓库到服务器上</h1><p>这一步很简单，跟克隆普通 git 仓库一样，我把仓库放在了 <code>/opt/hexo-blog</code> 下，如果不放在这个路径下，那后面的内容中的相应路径也要修改。</p>
-<p>以我在 github 下的博客仓库为例，注意执行命令的用户权限，后面的命令都假设服务器上的账户是 root：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:listenerri&#x2F;listenerri.github.io.git &#x2F;opt&#x2F;hexo-blog</span><br></pre></td></tr></table></figure>
-
-<p>这里使用了 ssh 协议的仓库地址，这需要将服务器的 ssh public key 部署在自己的 github 账户中，如果不想部署使用 https 协议的地址也可以，不过可能会需要输入用户名和密码，这会影响到后面 python 脚本中的功能，建议还是用 ssh 协议的地址，部署个 key 又不麻烦。</p>
-<h1 id="安装配置-nginx"><a href="#安装配置-nginx" class="headerlink" title="安装配置 nginx"></a>安装配置 nginx</h1><p>在服务器上安装配置 nginx，debian 系的 linux 系统中使用下面的命令就可以安装，其他系统可以在网上找找 ：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
-
-<p>安装之后不要急着启动 nginx 服务，要先配置下网站路径和域名相关的东西。</p>
-<p>编辑 <code>/etc/nginx/nginx.conf</code> 文件，在 http 块中添加两个 server 块配置：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        server_name  listenerri.com;</span><br><span class="line">        root         &#x2F;opt&#x2F;hexo-blog;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.listenerri.com;</span><br><span class="line">        return       301 http:&#x2F;&#x2F;listenerri.com$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第一个 server 块定义了主域名下的网站，也就是博客使用的域名和博客在服务器上的路径(上面克隆仓库时指定的地址)，第二个 server 块则是定义了将 www 的域名 301 重定向的顶级域名的网站下，我比较喜欢不带 www 的地址 :)</p>
-<p>接下来启动 nginx 服务：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service nginx start</span><br><span class="line"># 或者如果系统是 systemd 的：</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
-
-<h1 id="修改域名解析地址"><a href="#修改域名解析地址" class="headerlink" title="修改域名解析地址"></a>修改域名解析地址</h1><p>上面 nginx 服务启动后就可以使用服务器的 ip 地址(这时还不能使用域名)进行访问了，如果测试没问题就可以修改域名的解析到这个服务器 ip 上了，这一步没什么好说的，就是把自己域名的 A 记录改成服务器的 ip 地址。</p>
-<p>改完之后过一会儿使用 dig 命令查看域名是否已经解析到服务器的地址了，如果解析已经生效了就可以访问域名来测试博客是否可以正常访问了。</p>
-<p>注意把 www 的域名也解析到服务器 ip 地址上。</p>
-<h1 id="启动-github-webhooks"><a href="#启动-github-webhooks" class="headerlink" title="启动 github webhooks"></a>启动 github webhooks</h1><p>在服务器上把下面的代码保存到一个 py 文件中，假设文件路径为 <code>/opt/webhooks.py</code>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from http.server import BaseHTTPRequestHandler</span><br><span class="line">from http.server import HTTPServer</span><br><span class="line">import os</span><br><span class="line">import subprocess</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">class MyBaseHTTPRequestHandler(BaseHTTPRequestHandler):</span><br><span class="line"></span><br><span class="line">    def do_GET(self):</span><br><span class="line">        self.send_response(200)</span><br><span class="line">        self.send_header(&#39;Content-type&#39;, &#39;text&#x2F;html&#39;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(b&#39;Only handle POST requests.\n&#39;)</span><br><span class="line">        flushLog()</span><br><span class="line"></span><br><span class="line">    def do_POST(self):</span><br><span class="line">        statusCode &#x3D; 403</span><br><span class="line">        responseData &#x3D; b&quot;Reject the request&quot;</span><br><span class="line">        if self.path &#x3D;&#x3D; &quot;&#x2F;pushed&quot;:</span><br><span class="line">            statusCode, responseData &#x3D; self.updateBlog()</span><br><span class="line">        self.send_response(statusCode)</span><br><span class="line">        self.send_header(&#39;Content-type&#39;, &#39;text&#x2F;html&#39;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(bytes(responseData, &quot;utf-8&quot;))</span><br><span class="line">        flushLog()</span><br><span class="line"></span><br><span class="line">    def updateBlog(self):</span><br><span class="line">        os.chdir(&quot;&#x2F;opt&#x2F;hexo-blog&quot;)</span><br><span class="line">        code, result &#x3D; subprocess.getstatusoutput(&quot;git pull origin master&quot;)</span><br><span class="line">        if code &#x3D;&#x3D; 0:</span><br><span class="line">            code &#x3D; 200</span><br><span class="line">            result &#x3D; &quot;blog updated :)&quot;</span><br><span class="line">        else:</span><br><span class="line">            code &#x3D; 500</span><br><span class="line">            print(result)</span><br><span class="line">            result &#x3D; &quot;blog update failed :(&quot;</span><br><span class="line">        return code, result</span><br><span class="line"></span><br><span class="line">def flushLog():</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    sys.stderr.flush()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    port &#x3D; 2345</span><br><span class="line">    httpd &#x3D; HTTPServer((&quot;&quot;, port), MyBaseHTTPRequestHandler)</span><br><span class="line">    print(&quot;Running on port: %d&quot;%(port))</span><br><span class="line">    flushLog()</span><br><span class="line">    httpd.serve_forever()</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-
-<p>脚本的内容就是启动了一个监听 2345 端口的 http 服务，只接受 <code>/pushed</code> 资源路径的 POST 访问，其他资源路径的 POST 访问全都返回 403，每次接收到正确的 POST 访问后就去 <code>/opt/hexo-blog</code> 路径下更新仓库，也就是从 github 远程仓库下拉取更新，如果更新成功返回 200 状态码，否则返回 500，如果更新失败则打印下命令的输出，以便以后根据日志文件定位问题。</p>
-<p>接下来给这个脚本增加可执行权限：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod a+x &#x2F;opt&#x2F;webhooks.py</span><br></pre></td></tr></table></figure>
-
-<p>启动脚本同时把脚本的输出追加到 <code>/var/log/blog-github-webhooks.log</code> 文件中：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nohup &#x2F;opt&#x2F;webhooks.py &gt;&gt; &#x2F;var&#x2F;log&#x2F;blog-github-webhooks.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-
-<p>然后配置下这个脚本开机自启动，如果是 systemd 的系统就写一个 service 文件，将上述命令稍微修改下写入 service 文件中的 <code>EXEC</code> 字段后面，具体的 service 文件怎么写和怎么用可以在网上搜索下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;opt&#x2F;webhooks.py &gt;&gt; &#x2F;var&#x2F;log&#x2F;blog-github-webhooks.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>如果不是 systemd 的系统就把上面的命令复制到 <code>/etc/rc.local</code> 文件中的最后一行，不过 systemd 好像也兼容 <code>/etc/rc.local</code> 文件，直接用第二种方法配置开机自启估计也行。</p>
-<h1 id="设置-github-webhooks"><a href="#设置-github-webhooks" class="headerlink" title="设置 github webhooks"></a>设置 github webhooks</h1><p>去 github 网站博客对应的项目页面下，点击 <code>Settings</code> 按钮，再点击新页面左侧导航栏的 <code>Webhooks</code> 按钮：</p>
-<p><img src="webhooks.png"></p>
-<p>再点击上图右上角的 <code>Add Webhook</code> 按钮：</p>
-<p><img src="add-webhooks.png"></p>
-<p>在上图 <code>Payload URL</code> 的输入框中填入自己的服务器 ip 或者域名并加上端口 <code>2345</code> 和资源路径 <code>/pushed</code>，例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;listenerri.com:2345&#x2F;pushed</span><br></pre></td></tr></table></figure>
-
-<p>然后直接点击下面绿色的 <code>Add webhook</code> 按钮就行了。</p>
-<p>github 会发送一个测试的 POST 请求到设置的地址中，点击刚刚添加的 webhook 可以进入这个 webhook 的设置界面，这个界面最下面会后这个 webhook 的最近活动，如果没有意外会有如下图中的带有绿色对勾的一条记录：</p>
-<p><img src="recent-activity.png"></p>
-<p>当然可以写一遍新博客测试下。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>nginx</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搞明白android中layout_weight的用法</title>
-    <url>/2017/09/15/%E6%90%9E%E6%98%8E%E7%99%BDandroid%E4%B8%ADlayout-weight%E7%9A%84%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<blockquote>
-<p>本文是学习这篇博客所得的收获:<br><a href="http://mobile.51cto.com/abased-375428.htm"> Android：Layout_weight的深刻理解</a></p>
-</blockquote>
-<p>当子控件有<code>layout_weight</code>属性时, 系统将先按照<code>layout_width</code>或<code>layout_hight</code>属性<br>先把子控件放到父控件中, 之后才解析<code>layout_weight</code>属性, 然后计算父控件中的剩余空间,<br>最后按比例分配剩余空间给子控件.</p>
-<p>看一下处理<code>layout_weight</code>时所用到的公式:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 实际尺寸: 子控件最终展示出来的尺寸</span><br><span class="line"># 当前尺寸: 子控件刚被放到布局中, 系统还没有解析其weight属性时的尺寸</span><br><span class="line"># weight比例: 子控件在所有有&#96;layout_weight&#96;属性的控件中所占的比例</span><br><span class="line">#             (例: 三个子控件, 第一个比重为1, 第二个为2, 第三个为2,</span><br><span class="line">#              那么第一个所占比例为1&#x2F;5, 第二个为2&#x2F;5, 第三个为2&#x2F;5)</span><br><span class="line"># 剩余空间: 子控件刚被放到父控件中, 系统还没有解析其weight属性时父控件还有多少剩余空间</span><br><span class="line"></span><br><span class="line">剩余空间 &#x3D; 父控件尺寸 - 子控件1尺寸 - 子控件2尺寸 - 子控件3尺寸...</span><br><span class="line">实际尺寸 &#x3D; 当前尺寸 + weight比例 * 剩余空间尺寸</span><br></pre></td></tr></table></figure>
-<p>当控件的<code>layout_width</code>以及<code>layout_hight</code>的值为<code>0</code>或者<code>wrap_content</code>时,<br><code>layout_weight</code>属性很容易预测最终效果, 它们会按照自己的<code>weight比例</code>去<br>分配<code>剩余空间尺寸</code>.</p>
-<p>需要留意的是当控件的<code>layout_width</code>或<code>layout_hight</code>的值为<code>fill_parent</code>的时候,<br>此时每个子控件在刚被放到父控件中, 且系统还没有解析子控件的<code>layout_weight</code>时,<br>父控件就已经没有剩余空间了,<br><font color=red><br>因为此时所有子控件的当前尺寸都等于父控件的尺寸, 且第一个子控件就已经占满了父控件!<br></font></p>
-<p>那么套用上述公式, 计算子控件最终实际尺寸的过程如下:</p>
-<blockquote>
-<p>下面假设一个父控件中有三个子控件, 其比重为1 : 2 : 3,<br>则子控件的<code>weight比例</code>依次为<code>1/6</code>, <code>2/6</code>, <code>3/6</code></p>
-</blockquote>
-<p>剩余空间的计算如下:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">剩余空间 &#x3D; 父控件尺寸 - 子控件1当前尺寸 - 子控件2当前尺寸 - 子控件3当前尺寸</span><br><span class="line"># 上述等同于:</span><br><span class="line">剩余空间 &#x3D; 父控件尺寸 - 父控件尺寸 - 父控件尺寸 - 父控件尺寸</span><br><span class="line"># 则(注意是负2):</span><br><span class="line">剩余空间 &#x3D; -2 * 父控件尺寸</span><br></pre></td></tr></table></figure>
-
-<p>子控件最终实际尺寸的计算如下:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">实际尺寸 &#x3D; 当前尺寸 + weight比例 * 剩余空间尺寸</span><br><span class="line"># 子控件1:</span><br><span class="line">实际尺寸 &#x3D; 父控件尺寸 + 1&#x2F;6 * (-2 * 父控件尺寸)</span><br><span class="line">        &#x3D; 父控件尺寸 - 2&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 4&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 2&#x2F;3 * 父控件尺寸</span><br><span class="line"></span><br><span class="line"># 子控件2:</span><br><span class="line">实际尺寸 &#x3D; 父控件尺寸 + 2&#x2F;6 * (-2 * 父控件尺寸)</span><br><span class="line">        &#x3D; 父控件尺寸 - 4&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 2&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 1&#x2F;3 * 父控件尺寸</span><br><span class="line"></span><br><span class="line"># 子控件3:</span><br><span class="line">实际尺寸 &#x3D; 父控件尺寸 + 3&#x2F;6 * (-2 * 父控件尺寸)</span><br><span class="line">        &#x3D; 父控件尺寸 - 6&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 父控件尺寸 - 父控件尺寸</span><br><span class="line">        &#x3D; 0</span><br></pre></td></tr></table></figure>
-<p><strong><em>所以此时子控件3将会消失, 不会显示在屏幕上.</em></strong></p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>layout_weight</tag>
-        <tag>linearlayout</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>指定 git 使用的 ssh 秘钥</title>
     <url>/2019/03/23/%E6%8C%87%E5%AE%9A-git-%E4%BD%BF%E7%94%A8%E7%9A%84-ssh-%E7%A7%98%E9%92%A5/</url>
     <content><![CDATA[<p>目前我遇到的两种需要指定 git 使用的 ssh 秘钥的场景是：</p>
@@ -4092,6 +4062,36 @@
       </tags>
   </entry>
   <entry>
+    <title>搞明白android中layout_weight的用法</title>
+    <url>/2017/09/15/%E6%90%9E%E6%98%8E%E7%99%BDandroid%E4%B8%ADlayout-weight%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<blockquote>
+<p>本文是学习这篇博客所得的收获:<br><a href="http://mobile.51cto.com/abased-375428.htm"> Android：Layout_weight的深刻理解</a></p>
+</blockquote>
+<p>当子控件有<code>layout_weight</code>属性时, 系统将先按照<code>layout_width</code>或<code>layout_hight</code>属性<br>先把子控件放到父控件中, 之后才解析<code>layout_weight</code>属性, 然后计算父控件中的剩余空间,<br>最后按比例分配剩余空间给子控件.</p>
+<p>看一下处理<code>layout_weight</code>时所用到的公式:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 实际尺寸: 子控件最终展示出来的尺寸</span><br><span class="line"># 当前尺寸: 子控件刚被放到布局中, 系统还没有解析其weight属性时的尺寸</span><br><span class="line"># weight比例: 子控件在所有有&#96;layout_weight&#96;属性的控件中所占的比例</span><br><span class="line">#             (例: 三个子控件, 第一个比重为1, 第二个为2, 第三个为2,</span><br><span class="line">#              那么第一个所占比例为1&#x2F;5, 第二个为2&#x2F;5, 第三个为2&#x2F;5)</span><br><span class="line"># 剩余空间: 子控件刚被放到父控件中, 系统还没有解析其weight属性时父控件还有多少剩余空间</span><br><span class="line"></span><br><span class="line">剩余空间 &#x3D; 父控件尺寸 - 子控件1尺寸 - 子控件2尺寸 - 子控件3尺寸...</span><br><span class="line">实际尺寸 &#x3D; 当前尺寸 + weight比例 * 剩余空间尺寸</span><br></pre></td></tr></table></figure>
+<p>当控件的<code>layout_width</code>以及<code>layout_hight</code>的值为<code>0</code>或者<code>wrap_content</code>时,<br><code>layout_weight</code>属性很容易预测最终效果, 它们会按照自己的<code>weight比例</code>去<br>分配<code>剩余空间尺寸</code>.</p>
+<p>需要留意的是当控件的<code>layout_width</code>或<code>layout_hight</code>的值为<code>fill_parent</code>的时候,<br>此时每个子控件在刚被放到父控件中, 且系统还没有解析子控件的<code>layout_weight</code>时,<br>父控件就已经没有剩余空间了,<br><font color=red><br>因为此时所有子控件的当前尺寸都等于父控件的尺寸, 且第一个子控件就已经占满了父控件!<br></font></p>
+<p>那么套用上述公式, 计算子控件最终实际尺寸的过程如下:</p>
+<blockquote>
+<p>下面假设一个父控件中有三个子控件, 其比重为1 : 2 : 3,<br>则子控件的<code>weight比例</code>依次为<code>1/6</code>, <code>2/6</code>, <code>3/6</code></p>
+</blockquote>
+<p>剩余空间的计算如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">剩余空间 &#x3D; 父控件尺寸 - 子控件1当前尺寸 - 子控件2当前尺寸 - 子控件3当前尺寸</span><br><span class="line"># 上述等同于:</span><br><span class="line">剩余空间 &#x3D; 父控件尺寸 - 父控件尺寸 - 父控件尺寸 - 父控件尺寸</span><br><span class="line"># 则(注意是负2):</span><br><span class="line">剩余空间 &#x3D; -2 * 父控件尺寸</span><br></pre></td></tr></table></figure>
+
+<p>子控件最终实际尺寸的计算如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">实际尺寸 &#x3D; 当前尺寸 + weight比例 * 剩余空间尺寸</span><br><span class="line"># 子控件1:</span><br><span class="line">实际尺寸 &#x3D; 父控件尺寸 + 1&#x2F;6 * (-2 * 父控件尺寸)</span><br><span class="line">        &#x3D; 父控件尺寸 - 2&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 4&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 2&#x2F;3 * 父控件尺寸</span><br><span class="line"></span><br><span class="line"># 子控件2:</span><br><span class="line">实际尺寸 &#x3D; 父控件尺寸 + 2&#x2F;6 * (-2 * 父控件尺寸)</span><br><span class="line">        &#x3D; 父控件尺寸 - 4&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 2&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 1&#x2F;3 * 父控件尺寸</span><br><span class="line"></span><br><span class="line"># 子控件3:</span><br><span class="line">实际尺寸 &#x3D; 父控件尺寸 + 3&#x2F;6 * (-2 * 父控件尺寸)</span><br><span class="line">        &#x3D; 父控件尺寸 - 6&#x2F;6 * 父控件尺寸</span><br><span class="line">        &#x3D; 父控件尺寸 - 父控件尺寸</span><br><span class="line">        &#x3D; 0</span><br></pre></td></tr></table></figure>
+<p><strong><em>所以此时子控件3将会消失, 不会显示在屏幕上.</em></strong></p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>layout_weight</tag>
+        <tag>linearlayout</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>水平与垂直 拆分与扩展 数据库与分布式</title>
     <url>/2020/09/24/%E6%B0%B4%E5%B9%B3%E4%B8%8E%E5%9E%82%E7%9B%B4-%E6%8B%86%E5%88%86%E4%B8%8E%E6%89%A9%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/</url>
     <content><![CDATA[<p>标题写出来后发现覆盖面有点大，其实要说的只是字面意义上的一点学习小结：</p>
@@ -4119,6 +4119,54 @@
         <tag>seo</tag>
         <tag>蜘蛛</tag>
         <tag>百度</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>源码构建qtcreator记录</title>
+    <url>/2019/02/24/%E6%BA%90%E7%A0%81%E6%9E%84%E5%BB%BAqtcreator%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>在 deepin linux 系统下编译 qtcreator 4.8.0 版本，可是按照官方 README 却始终编译不通过，遇到了以下几个问题，并列出了相关解决方案。当然官方的 README 上所说的编译依赖还是要装上的。</p>
+<h1 id="问题0"><a href="#问题0" class="headerlink" title="问题0"></a>问题0</h1><blockquote>
+<p>这个可能不是必须的</p>
+</blockquote>
+<p><strong>不要在源码目录下建立 build/build-debug/build-release 之类的构建目录, 否则会出现一些奇奇怪怪的问题, 导致编译失败</strong></p>
+<p>只需要直接在源码根目录下执行:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 仅供参考</span><br><span class="line">qmake</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">g++ -Wl,-z,origin &#39;-Wl,-rpath,$ORIGIN:$ORIGIN&#x2F;..:$ORIGIN&#x2F;..&#x2F;lib&#x2F;qtcreator&#39; -Wl,--no-undefined -Wl,-z,origin -Wl,-rpath,&#x2F;usr&#x2F;lib&#x2F;llvm-7&#x2F;lib -Wl,--exclude-libs,ALL -Wl,-O1 -shared -Wl,-soname,libClangFormat.so -o libClangFormat.so .obj&#x2F;release-shared&#x2F;clangformatconfigwidget.o .obj&#x2F;release-shared&#x2F;clangformatindenter.o .obj&#x2F;release-shared&#x2F;clangformatplugin.o .obj&#x2F;release-shared&#x2F;clangformatutils.o .obj&#x2F;release-shared&#x2F;moc_clangformatconfigwidget.o .obj&#x2F;release-shared&#x2F;moc_clangformatplugin.o  -L&#x2F;home&#x2F;ri&#x2F;coding&#x2F;qt-creator&#x2F;lib&#x2F;qtcreator -L&#x2F;home&#x2F;ri&#x2F;coding&#x2F;qt-creator&#x2F;lib&#x2F;qtcreator&#x2F;plugins -lCppTools -lProjectExplorer -lTextEditor -lCore -lCPlusPlus -lQtcSsh -lAggregation -lExtensionSystem -lUtils -L&#x2F;usr&#x2F;lib&#x2F;llvm-7&#x2F;lib -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangLex -lclangBasic -lLLVM-7 -lQt5Widgets -lQt5Gui -lQt5Concurrent -lQt5Network -lQt5Core -lGL -lpthread  </span><br><span class="line">&#x2F;usr&#x2F;bin&#x2F;ld: 找不到 -lclangToolingInclusions</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[3]: *** [Makefile:286：..&#x2F;..&#x2F;..&#x2F;lib&#x2F;qtcreator&#x2F;plugins&#x2F;libClangFormat.so] 错误 1</span><br></pre></td></tr></table></figure>
+
+<p>报错里提到找不到 <code>clangToolingInclusions</code> 这个库文件, 根据 <code>-L/usr/lib/llvm-7/lib</code> 可知构建系统要在这个目录下找, 尝试了以下三个方法:</p>
+<ol>
+<li>手动进入此目录搜索的确没有找到</li>
+<li>故而又在 <code>/usr/lib</code> 目录搜索依然没有</li>
+<li>接着使用 <code>apt-file search clangToolingInclusions</code> 命令搜索看是不是因为某个包没装, 结果依然没有</li>
+</ol>
+<p>这就奇怪了, 难道是 debian 系的系统中没有这个库文件吗? 被改名了?</p>
+<p>ag clangToolingInclusions</p>
+<p>src/shared/clang/clang_installation.pri 文件中:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!isEmpty(LLVM_VERSION) &#123;</span><br><span class="line">    versionIsAtLeast($$LLVM_VERSION, 7, 0, 0): &#123;</span><br><span class="line">        CLANGFORMAT_LIBS&#x3D;-lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangLex -lclangBasic</span><br><span class="line">        win32:CLANGFORMAT_LIBS +&#x3D; -lversion</span><br><span class="line">    &#125; else:versionIsAtLeast($$LLVM_VERSION, 6, 0, 0): &#123;</span><br><span class="line">        CLANGFORMAT_LIBS&#x3D;-lclangFormat -lclangToolingCore -lclangRewrite -lclangLex -lclangBasic</span><br><span class="line">        win32:CLANGFORMAT_LIBS +&#x3D; -lversion</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>移除7.0 clang llvm</p>
+<p>创建6.0链接</p>
+<p>  Reading /home/ri/coding/qt-creator/src/plugins/clangformat/clangformat.pro<br>sh: 1: llvm-config: not found<br>Project WARNING: Cannot determine clang version. Set LLVM_INSTALL_DIR to build the Clang Code Model<br>Project file(clangformat.pro) not recursed because all requirements not met:<br>    !isEmpty(CLANGFORMAT_LIBS)</p>
+<p>搞完才发现:</p>
+<blockquote>
+<h3 id="Get-LLVM-Clang-for-the-Clang-Code-Model"><a href="#Get-LLVM-Clang-for-the-Clang-Code-Model" class="headerlink" title="Get LLVM/Clang for the Clang Code Model"></a>Get LLVM/Clang for the Clang Code Model</h3><p>The Clang Code Model depends on the LLVM/Clang libraries. The currently supported LLVM/Clang version is 6.0.</p>
+</blockquote>
+<h1 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">In file included from source&#x2F;collectbuilddependencyaction.h:28:0,</span><br><span class="line">                 from source&#x2F;collectbuilddependencytoolaction.h:28,</span><br><span class="line">                 from source&#x2F;builddependencycollector.cpp:28:</span><br><span class="line">source&#x2F;collectbuilddependencypreprocessorcallbacks.h:88:10: error: ‘void ClangBackEnd::CollectBuildDependencyPreprocessorCallbacks::InclusionDirective(clang::SourceLocation, const clang::Token&amp;, llvm::StringRef, bool, clang::CharSourceRange, const clang::FileEntry*, llvm::StringRef, llvm::StringRef, const clang::Module*, clang::SrcMgr::CharacteristicKind)’ marked ‘override’, but does not override</span><br><span class="line">     void InclusionDirective(clang::SourceLocation hashLocation,</span><br></pre></td></tr></table></figure>
+
+<p>目录: qt-creator/src/tools/clangpchmanagerbackend</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void InclusionDirective(clang::SourceLocation hashLocation,</span><br><span class="line">                        const clang::Token &amp; &#x2F;*includeToken*&#x2F;,</span><br><span class="line">                        llvm::StringRef &#x2F;*fileName*&#x2F;,</span><br><span class="line">                        bool &#x2F;*isAngled*&#x2F;,</span><br><span class="line">                        clang::CharSourceRange &#x2F;*fileNameRange*&#x2F;,</span><br><span class="line">                        const clang::FileEntry *file,</span><br><span class="line">                        llvm::StringRef &#x2F;*searchPath*&#x2F;,</span><br><span class="line">                        llvm::StringRef &#x2F;*relativePath*&#x2F;,</span><br><span class="line">                        const clang::Module * &#x2F;*imported*&#x2F;,</span><br><span class="line">                        clang::SrcMgr::CharacteristicKind fileType) override</span><br></pre></td></tr></table></figure>
+
+<p>移除 override</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>qtcreator</tag>
+        <tag>build</tag>
+        <tag>编译</tag>
       </tags>
   </entry>
   <entry>
@@ -4200,54 +4248,6 @@
       <tags>
         <tag>素数</tag>
         <tag>质数</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>源码构建qtcreator记录</title>
-    <url>/2019/02/24/%E6%BA%90%E7%A0%81%E6%9E%84%E5%BB%BAqtcreator%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>在 deepin linux 系统下编译 qtcreator 4.8.0 版本，可是按照官方 README 却始终编译不通过，遇到了以下几个问题，并列出了相关解决方案。当然官方的 README 上所说的编译依赖还是要装上的。</p>
-<h1 id="问题0"><a href="#问题0" class="headerlink" title="问题0"></a>问题0</h1><blockquote>
-<p>这个可能不是必须的</p>
-</blockquote>
-<p><strong>不要在源码目录下建立 build/build-debug/build-release 之类的构建目录, 否则会出现一些奇奇怪怪的问题, 导致编译失败</strong></p>
-<p>只需要直接在源码根目录下执行:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 仅供参考</span><br><span class="line">qmake</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">g++ -Wl,-z,origin &#39;-Wl,-rpath,$ORIGIN:$ORIGIN&#x2F;..:$ORIGIN&#x2F;..&#x2F;lib&#x2F;qtcreator&#39; -Wl,--no-undefined -Wl,-z,origin -Wl,-rpath,&#x2F;usr&#x2F;lib&#x2F;llvm-7&#x2F;lib -Wl,--exclude-libs,ALL -Wl,-O1 -shared -Wl,-soname,libClangFormat.so -o libClangFormat.so .obj&#x2F;release-shared&#x2F;clangformatconfigwidget.o .obj&#x2F;release-shared&#x2F;clangformatindenter.o .obj&#x2F;release-shared&#x2F;clangformatplugin.o .obj&#x2F;release-shared&#x2F;clangformatutils.o .obj&#x2F;release-shared&#x2F;moc_clangformatconfigwidget.o .obj&#x2F;release-shared&#x2F;moc_clangformatplugin.o  -L&#x2F;home&#x2F;ri&#x2F;coding&#x2F;qt-creator&#x2F;lib&#x2F;qtcreator -L&#x2F;home&#x2F;ri&#x2F;coding&#x2F;qt-creator&#x2F;lib&#x2F;qtcreator&#x2F;plugins -lCppTools -lProjectExplorer -lTextEditor -lCore -lCPlusPlus -lQtcSsh -lAggregation -lExtensionSystem -lUtils -L&#x2F;usr&#x2F;lib&#x2F;llvm-7&#x2F;lib -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangLex -lclangBasic -lLLVM-7 -lQt5Widgets -lQt5Gui -lQt5Concurrent -lQt5Network -lQt5Core -lGL -lpthread  </span><br><span class="line">&#x2F;usr&#x2F;bin&#x2F;ld: 找不到 -lclangToolingInclusions</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[3]: *** [Makefile:286：..&#x2F;..&#x2F;..&#x2F;lib&#x2F;qtcreator&#x2F;plugins&#x2F;libClangFormat.so] 错误 1</span><br></pre></td></tr></table></figure>
-
-<p>报错里提到找不到 <code>clangToolingInclusions</code> 这个库文件, 根据 <code>-L/usr/lib/llvm-7/lib</code> 可知构建系统要在这个目录下找, 尝试了以下三个方法:</p>
-<ol>
-<li>手动进入此目录搜索的确没有找到</li>
-<li>故而又在 <code>/usr/lib</code> 目录搜索依然没有</li>
-<li>接着使用 <code>apt-file search clangToolingInclusions</code> 命令搜索看是不是因为某个包没装, 结果依然没有</li>
-</ol>
-<p>这就奇怪了, 难道是 debian 系的系统中没有这个库文件吗? 被改名了?</p>
-<p>ag clangToolingInclusions</p>
-<p>src/shared/clang/clang_installation.pri 文件中:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!isEmpty(LLVM_VERSION) &#123;</span><br><span class="line">    versionIsAtLeast($$LLVM_VERSION, 7, 0, 0): &#123;</span><br><span class="line">        CLANGFORMAT_LIBS&#x3D;-lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangLex -lclangBasic</span><br><span class="line">        win32:CLANGFORMAT_LIBS +&#x3D; -lversion</span><br><span class="line">    &#125; else:versionIsAtLeast($$LLVM_VERSION, 6, 0, 0): &#123;</span><br><span class="line">        CLANGFORMAT_LIBS&#x3D;-lclangFormat -lclangToolingCore -lclangRewrite -lclangLex -lclangBasic</span><br><span class="line">        win32:CLANGFORMAT_LIBS +&#x3D; -lversion</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>移除7.0 clang llvm</p>
-<p>创建6.0链接</p>
-<p>  Reading /home/ri/coding/qt-creator/src/plugins/clangformat/clangformat.pro<br>sh: 1: llvm-config: not found<br>Project WARNING: Cannot determine clang version. Set LLVM_INSTALL_DIR to build the Clang Code Model<br>Project file(clangformat.pro) not recursed because all requirements not met:<br>    !isEmpty(CLANGFORMAT_LIBS)</p>
-<p>搞完才发现:</p>
-<blockquote>
-<h3 id="Get-LLVM-Clang-for-the-Clang-Code-Model"><a href="#Get-LLVM-Clang-for-the-Clang-Code-Model" class="headerlink" title="Get LLVM/Clang for the Clang Code Model"></a>Get LLVM/Clang for the Clang Code Model</h3><p>The Clang Code Model depends on the LLVM/Clang libraries. The currently supported LLVM/Clang version is 6.0.</p>
-</blockquote>
-<h1 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">In file included from source&#x2F;collectbuilddependencyaction.h:28:0,</span><br><span class="line">                 from source&#x2F;collectbuilddependencytoolaction.h:28,</span><br><span class="line">                 from source&#x2F;builddependencycollector.cpp:28:</span><br><span class="line">source&#x2F;collectbuilddependencypreprocessorcallbacks.h:88:10: error: ‘void ClangBackEnd::CollectBuildDependencyPreprocessorCallbacks::InclusionDirective(clang::SourceLocation, const clang::Token&amp;, llvm::StringRef, bool, clang::CharSourceRange, const clang::FileEntry*, llvm::StringRef, llvm::StringRef, const clang::Module*, clang::SrcMgr::CharacteristicKind)’ marked ‘override’, but does not override</span><br><span class="line">     void InclusionDirective(clang::SourceLocation hashLocation,</span><br></pre></td></tr></table></figure>
-
-<p>目录: qt-creator/src/tools/clangpchmanagerbackend</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void InclusionDirective(clang::SourceLocation hashLocation,</span><br><span class="line">                        const clang::Token &amp; &#x2F;*includeToken*&#x2F;,</span><br><span class="line">                        llvm::StringRef &#x2F;*fileName*&#x2F;,</span><br><span class="line">                        bool &#x2F;*isAngled*&#x2F;,</span><br><span class="line">                        clang::CharSourceRange &#x2F;*fileNameRange*&#x2F;,</span><br><span class="line">                        const clang::FileEntry *file,</span><br><span class="line">                        llvm::StringRef &#x2F;*searchPath*&#x2F;,</span><br><span class="line">                        llvm::StringRef &#x2F;*relativePath*&#x2F;,</span><br><span class="line">                        const clang::Module * &#x2F;*imported*&#x2F;,</span><br><span class="line">                        clang::SrcMgr::CharacteristicKind fileType) override</span><br></pre></td></tr></table></figure>
-
-<p>移除 override</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>qtcreator</tag>
-        <tag>build</tag>
-        <tag>编译</tag>
       </tags>
   </entry>
   <entry>
