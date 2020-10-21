@@ -2077,6 +2077,26 @@
       </categories>
   </entry>
   <entry>
+    <title>mysql 杂记</title>
+    <url>/2020/10/21/mysql-%E6%9D%82%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="存储相关"><a href="#存储相关" class="headerlink" title="存储相关"></a>存储相关</h1><p>页，数据库管理数据的最小单元<br>区，预请求磁盘空间单元，确保读取时的效率，根据数据量延伸出四种状态，某些状态下的区直属于表<br>段，区的集合<br>表，表空间，管理段和部分区</p>
+<h1 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h1><p>在指定索引时尽量设置索引的 唯一 属性，这种唯一的二级索引，在 等值 查询时性能近乎与主键等价，等值查询不包括 IS NULL 查询</p>
+<p>在查询时尽量避免回表（再从聚簇索引拿数据），当查询列和查询条件都是索引时即可避免</p>
+<p>使用 OR 时要慎重：一个使用到 索引 A 的搜索条件和没有使用 A 的搜索条件使用 OR 连接起来后将无法使用 A<br>SELECT * FROM single_table WHERE key2 &gt; 100 OR common_field = ‘abc’;<br>其中 key2 和 common_field 都有各自的索引<br>那么上述查询语句将无法按照预期使用 key2 的索引，而是会拿所有 key2 的值去回表，在回表的时候使用 common_field 的索引</p>
+<p>对于联合索引，查询条件要注意索引列声明的顺序，且只有左边的查询条件是 等值 查询时右边的查询条件才能继续使用联合索引</p>
+<p>索引列必须和常数比较才会使用索引，两个列进行比较则不会使用到索引</p>
+<p>在执行连接查询时，驱动表被访问一次，被驱动表可能会被访问多次，次数与驱动表数据量有关（扇出）</p>
+<p>在创建索引时，如果可以尽量使用唯一索引</p>
+<h1 id="事务相关"><a href="#事务相关" class="headerlink" title="事务相关"></a>事务相关</h1><p>事务：脏读，脏写，不可重复读，幻读<br>脏读和脏写强调回滚：当前事务操作了另一个事务 B 的中间状态数据，而事务 B 即将执行回滚<br>不可重复读：当前事务多次读取同一组数据时，发现数据不同，类似于幻读，但覆盖到其他事务对数据的修改和删除操作<br>幻读强调读取到了新数据：当前事务以相同条件多次读取数据时，发现了之前没有见过的数据，因为其他事务插入了新数据</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql 索引学习小结</title>
     <url>/2020/08/24/mysql-%E7%B4%A2%E5%BC%95%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h1 id="mysql-索引"><a href="#mysql-索引" class="headerlink" title="mysql 索引"></a>mysql 索引</h1><p>学习了《MySQL 是怎样运行的：从根儿上理解 MySQL》中的索引一节，收获颇丰，总结如下。</p>
@@ -2102,25 +2122,6 @@
       </tags>
   </entry>
   <entry>
-    <title>osx bash completion 补全</title>
-    <url>/2019/10/31/osx-bash-completion-%E8%A1%A5%E5%85%A8/</url>
-    <content><![CDATA[<p>在 linux 下补全的配置一般发行版都给默认配了，原本以为在 OSX 下用 brew 装个 bash-completion 包，再在 bashrc 下贴两行配置也就搞定了，没想到不行，OSX 下 bash-completion 包有两个，另一个是 <code>bash-completion@2</code>，这两个包分别对应 bash 的两个版本，具体可以用 brew info <code>bash-completion@2</code> 来看。</p>
-<p>而且 <code>bash-completion@2</code> 跟 <code>bash-completion</code> 相比还要多一行配置，总之就是需要下面两行配置才行，原因是大多软件包都只提供了旧版本的 completion 文件，新版的没有提供支持，所以下面的第一行就是声明要兼容下旧的补全文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export BASH_COMPLETION_COMPAT_DIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&quot;</span><br><span class="line">[[ -r &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot; ]] &amp;&amp; . &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;</span><br></pre></td></tr></table></figure>
-
-<p>除此之外还有个问题，我自己设置了很多别名 alias，但是这些自定义的别名默认是不支持参数补全的，想要如丝般顺滑就要用另一个项目：<a href="https://github.com/cykerway/complete-alias">https://github.com/cykerway/complete-alias</a>，具体的使用方法就不赘述了，可以去项目里看看怎么配置。</p>
-<p>经过实践发现这个项目也不支持旧版的 <code>bash-completion</code> 包，会提示 _completion_loader 找不到的错误，改装 <code>bash-completion@2</code> 就好了。</p>
-]]></content>
-      <categories>
-        <category>osx</category>
-      </categories>
-      <tags>
-        <tag>bash</tag>
-        <tag>completion</tag>
-        <tag>_completion_loader</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql 获取表结构</title>
     <url>/2020/06/11/mysql-%E8%8E%B7%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p>获取建表语句：</p>
@@ -2140,6 +2141,25 @@
       <tags>
         <tag>表结构</tag>
         <tag>字段</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>osx bash completion 补全</title>
+    <url>/2019/10/31/osx-bash-completion-%E8%A1%A5%E5%85%A8/</url>
+    <content><![CDATA[<p>在 linux 下补全的配置一般发行版都给默认配了，原本以为在 OSX 下用 brew 装个 bash-completion 包，再在 bashrc 下贴两行配置也就搞定了，没想到不行，OSX 下 bash-completion 包有两个，另一个是 <code>bash-completion@2</code>，这两个包分别对应 bash 的两个版本，具体可以用 brew info <code>bash-completion@2</code> 来看。</p>
+<p>而且 <code>bash-completion@2</code> 跟 <code>bash-completion</code> 相比还要多一行配置，总之就是需要下面两行配置才行，原因是大多软件包都只提供了旧版本的 completion 文件，新版的没有提供支持，所以下面的第一行就是声明要兼容下旧的补全文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export BASH_COMPLETION_COMPAT_DIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&quot;</span><br><span class="line">[[ -r &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot; ]] &amp;&amp; . &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外还有个问题，我自己设置了很多别名 alias，但是这些自定义的别名默认是不支持参数补全的，想要如丝般顺滑就要用另一个项目：<a href="https://github.com/cykerway/complete-alias">https://github.com/cykerway/complete-alias</a>，具体的使用方法就不赘述了，可以去项目里看看怎么配置。</p>
+<p>经过实践发现这个项目也不支持旧版的 <code>bash-completion</code> 包，会提示 _completion_loader 找不到的错误，改装 <code>bash-completion@2</code> 就好了。</p>
+]]></content>
+      <categories>
+        <category>osx</category>
+      </categories>
+      <tags>
+        <tag>bash</tag>
+        <tag>completion</tag>
+        <tag>_completion_loader</tag>
       </tags>
   </entry>
   <entry>
@@ -2512,6 +2532,34 @@
       </tags>
   </entry>
   <entry>
+    <title>vscode vim 在 mac osx 和 linux 下输入法自动切换</title>
+    <url>/2019/10/24/vscode-vim-%E5%9C%A8-mac-osx-%E5%92%8C-linux-%E4%B8%8B%E8%BE%93%E5%85%A5%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<p>目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统， 所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。</p>
+<p>关于 vscode vim 插件输入法相关的配置可以到下面的链接中查看：</p>
+<p><a href="https://github.com/VSCodeVim/Vim#input-method">https://github.com/VSCodeVim/Vim#input-method</a></p>
+<p>按照上面的链接在 mac osx 下安装 im-select 并在 vscode 中进行如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;vim.autoSwitchInputMethod.enable&quot;: true,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;com.apple.keylayout.ABC&quot;,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;im-select&quot;,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;im-select &#123;im&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p>关于 <code>vim.autoSwitchInputMethod.defaultIM</code>，我在 mac osx 下用的英文输入法是 <code>com.apple.keylayout.ABC</code>，也可能是其他选项如：<code>com.apple.keylayout.US</code>，这个要根据具体情况来设置。</p>
+<p><strong>需要注意的是这个选项的值关系到下面脚本的内容，需要保持一致。</strong></p>
+<p>上面的配置在 linux 下会报错，因为上面在 mac osx 下安装的 im-select 没有提供对 linux 的支持，im-select 项目里建议直接使用 fcitx-remote 命令，链接如下：</p>
+<p><a href="https://github.com/daipeihust/im-select#fcitx">https://github.com/daipeihust/im-select#fcitx</a></p>
+<p>鉴于不想维护两份 vscode 配置文件的原因，分析了一下 vscode 调用 im-select 的情况，在 linux 使用 shell 实现了一个仿冒 mac osx 下 im-select 的脚本，脚本内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env bash</span><br><span class="line"></span><br><span class="line"># this script in order to fake the im-select in mac osx for fcitx in linux</span><br><span class="line"></span><br><span class="line">IM_EN&#x3D;&quot;com.apple.keylayout.ABC&quot;</span><br><span class="line">IM_CN&#x3D;&quot;2&quot;</span><br><span class="line"></span><br><span class="line">FCITX_CMD&#x3D;&#x2F;usr&#x2F;bin&#x2F;fcitx-remote</span><br><span class="line"></span><br><span class="line"># there is no arguments that means query the current im</span><br><span class="line">if [[ -z $@ ]]; then</span><br><span class="line">    if [[ &quot;1&quot; &#x3D;&#x3D; $($FCITX_CMD) ]]; then</span><br><span class="line">        echo &quot;$IM_EN&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;$IM_CN&quot;</span><br><span class="line">    fi</span><br><span class="line">else</span><br><span class="line">    if [[ &quot;$@&quot; &#x3D;&#x3D; &quot;$IM_EN&quot; ]]; then</span><br><span class="line">        $FCITX_CMD -c</span><br><span class="line">    elif [[ &quot;$@&quot; &#x3D;&#x3D; &quot;$IM_CN&quot; ]]; then</span><br><span class="line">        $FCITX_CMD -o</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>注意根据实际情况修正脚本中 <code>IM_EN</code> 变量的值，将脚本内容复制并保存到 <code>/usr/local/bin/im-select</code> 文件中即可，记得给文件增加可执行权限。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+        <category>hackintosh</category>
+      </categories>
+      <tags>
+        <tag>osx</tag>
+        <tag>vim</tag>
+        <tag>fctix</tag>
+        <tag>vscode</tag>
+        <tag>im-select</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vim中javacomplete2与syntastic一点使用心得</title>
     <url>/2017/02/12/vim%E4%B8%ADjavacomplete2%E4%B8%8Esyntastic%E4%B8%80%E7%82%B9%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</url>
     <content><![CDATA[<h1 id="插件简介"><a href="#插件简介" class="headerlink" title="插件简介"></a>插件简介</h1><h2 id="javacomplete2"><a href="#javacomplete2" class="headerlink" title="javacomplete2"></a>javacomplete2</h2><ul>
@@ -2559,34 +2607,6 @@
         <tag>vim</tag>
         <tag>javacomplete2</tag>
         <tag>syntastic</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vscode vim 在 mac osx 和 linux 下输入法自动切换</title>
-    <url>/2019/10/24/vscode-vim-%E5%9C%A8-mac-osx-%E5%92%8C-linux-%E4%B8%8B%E8%BE%93%E5%85%A5%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2/</url>
-    <content><![CDATA[<p>目前 vscode 的 vim 插件支持在不同输入模式下自动切换输入法，可是 vscode 的配置目前不支持判断操作系统， 所以关于输入法切换的相关配置不能在 mac osx 和 linux 下通用，但是又不想因为这个问题维护两份 vscode 的配置文件，所以就想办法在 linux 使用 shell 脚本模仿了一个 im-select 的命令。</p>
-<p>关于 vscode vim 插件输入法相关的配置可以到下面的链接中查看：</p>
-<p><a href="https://github.com/VSCodeVim/Vim#input-method">https://github.com/VSCodeVim/Vim#input-method</a></p>
-<p>按照上面的链接在 mac osx 下安装 im-select 并在 vscode 中进行如下配置：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;vim.autoSwitchInputMethod.enable&quot;: true,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;com.apple.keylayout.ABC&quot;,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;im-select&quot;,</span><br><span class="line">&quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;im-select &#123;im&#125;&quot;</span><br></pre></td></tr></table></figure>
-<p>关于 <code>vim.autoSwitchInputMethod.defaultIM</code>，我在 mac osx 下用的英文输入法是 <code>com.apple.keylayout.ABC</code>，也可能是其他选项如：<code>com.apple.keylayout.US</code>，这个要根据具体情况来设置。</p>
-<p><strong>需要注意的是这个选项的值关系到下面脚本的内容，需要保持一致。</strong></p>
-<p>上面的配置在 linux 下会报错，因为上面在 mac osx 下安装的 im-select 没有提供对 linux 的支持，im-select 项目里建议直接使用 fcitx-remote 命令，链接如下：</p>
-<p><a href="https://github.com/daipeihust/im-select#fcitx">https://github.com/daipeihust/im-select#fcitx</a></p>
-<p>鉴于不想维护两份 vscode 配置文件的原因，分析了一下 vscode 调用 im-select 的情况，在 linux 使用 shell 实现了一个仿冒 mac osx 下 im-select 的脚本，脚本内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env bash</span><br><span class="line"></span><br><span class="line"># this script in order to fake the im-select in mac osx for fcitx in linux</span><br><span class="line"></span><br><span class="line">IM_EN&#x3D;&quot;com.apple.keylayout.ABC&quot;</span><br><span class="line">IM_CN&#x3D;&quot;2&quot;</span><br><span class="line"></span><br><span class="line">FCITX_CMD&#x3D;&#x2F;usr&#x2F;bin&#x2F;fcitx-remote</span><br><span class="line"></span><br><span class="line"># there is no arguments that means query the current im</span><br><span class="line">if [[ -z $@ ]]; then</span><br><span class="line">    if [[ &quot;1&quot; &#x3D;&#x3D; $($FCITX_CMD) ]]; then</span><br><span class="line">        echo &quot;$IM_EN&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;$IM_CN&quot;</span><br><span class="line">    fi</span><br><span class="line">else</span><br><span class="line">    if [[ &quot;$@&quot; &#x3D;&#x3D; &quot;$IM_EN&quot; ]]; then</span><br><span class="line">        $FCITX_CMD -c</span><br><span class="line">    elif [[ &quot;$@&quot; &#x3D;&#x3D; &quot;$IM_CN&quot; ]]; then</span><br><span class="line">        $FCITX_CMD -o</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>注意根据实际情况修正脚本中 <code>IM_EN</code> 变量的值，将脚本内容复制并保存到 <code>/usr/local/bin/im-select</code> 文件中即可，记得给文件增加可执行权限。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-        <category>hackintosh</category>
-      </categories>
-      <tags>
-        <tag>osx</tag>
-        <tag>vim</tag>
-        <tag>fctix</tag>
-        <tag>vscode</tag>
-        <tag>im-select</tag>
       </tags>
   </entry>
   <entry>
