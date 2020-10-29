@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ImageSwitcher和TextSwitcher使用笔记</title>
+    <url>/2016/05/04/ImageSwitcher%E5%92%8CTextSwitcher%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
+<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//1、new一个ImageView</span></span><br><span class="line">            <span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">            <span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
+<p>结束</p>
+<blockquote>
+<p>TextSwitcher的方法和上面一样，都需要实现ViewFactory接口并重写makeView()方法，<br>在其中new出TextView对象并设置属性然后返回，最后切换视图的方法是setText()</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>ImageSwitcher</tag>
+        <tag>TextSwitcher</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ListView的Iterm无法点击</title>
     <url>/2016/05/04/ListView%E7%9A%84Iterm%E6%97%A0%E6%B3%95%E7%82%B9%E5%87%BB/</url>
     <content><![CDATA[<p>当listview中同时出现Button或者ImageButton时，只有item中的Button或ImageButton能够获取焦点(能点击)，<br>而整个item无法获取焦点(无法点击)</p>
@@ -21,26 +41,6 @@
         <tag>iterm</tag>
         <tag>无法点击</tag>
         <tag>控件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ImageSwitcher和TextSwitcher使用笔记</title>
-    <url>/2016/05/04/ImageSwitcher%E5%92%8CTextSwitcher%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>只有步骤，记录，备忘<br>只举ImageSwitcher的例子，TextSwitcher基本一样</p>
-<p>1、布局文件中添加ImageSwitcher控件<br>2、activity中findViewById()获取到ImageSwitcher对象<br>3、需要一个工厂来制造需要显示的ImageView，需要实现ViewFactory接口，并重写接口的makeView()方法，这里使用隐式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">imageSwitcher.setFactory(<span class="keyword">new</span> ViewFactory()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> View <span class="title">makeView</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//1、new一个ImageView</span></span><br><span class="line">            <span class="comment">//2、为ImageView设置一系列属性</span></span><br><span class="line">            <span class="comment">//3、return加工好的ImageView对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>4、使用ImageSwitcher对象的setInAnimation()和setOutAnimation()设置动画效果(可选)<br>5、使用ImageSwitcher对象setImageResource()切换要显示的图片</p>
-<p>结束</p>
-<blockquote>
-<p>TextSwitcher的方法和上面一样，都需要实现ViewFactory接口并重写makeView()方法，<br>在其中new出TextView对象并设置属性然后返回，最后切换视图的方法是setText()</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>ImageSwitcher</tag>
-        <tag>TextSwitcher</tag>
       </tags>
   </entry>
   <entry>
@@ -312,31 +312,6 @@
       </tags>
   </entry>
   <entry>
-    <title>android获取屏幕像素和密度</title>
-    <url>/2016/05/04/android%E8%8E%B7%E5%8F%96%E5%B1%8F%E5%B9%95%E5%83%8F%E7%B4%A0%E5%92%8C%E5%AF%86%E5%BA%A6/</url>
-    <content><![CDATA[<blockquote>
-<p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
-</blockquote>
-<p>(一)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure>
-<p>(二)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
-<p>(三)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics2=getResources().getDisplayMetrics();</span><br><span class="line">metrics2.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics2.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics2.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics2.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当不是在activity中时，就不能直接用getWindowManager()等方法了，这时可以用Context.getSystemService(Context.WINDOW_SERVICE)方法，其他的类似</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>像素</tag>
-        <tag>密度</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>android关闭手机实体按键开启虚拟按键</title>
     <url>/2016/04/23/android%E5%85%B3%E9%97%AD%E6%89%8B%E6%9C%BA%E5%AE%9E%E4%BD%93%E6%8C%89%E9%94%AE%E5%BC%80%E5%90%AF%E8%99%9A%E6%8B%9F%E6%8C%89%E9%94%AE/</url>
     <content><![CDATA[<p>注意实体按键和虚拟按键的区别<br>使用的是android4.2版本，硬件：mt6589<br><font color=red><strong>以下操作都需要root权限！</strong></font></p>
@@ -366,6 +341,31 @@
         <tag>android</tag>
         <tag>实体按键</tag>
         <tag>虚拟按键</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>android获取屏幕像素和密度</title>
+    <url>/2016/05/04/android%E8%8E%B7%E5%8F%96%E5%B1%8F%E5%B9%95%E5%83%8F%E7%B4%A0%E5%92%8C%E5%AF%86%E5%BA%A6/</url>
+    <content><![CDATA[<blockquote>
+<p>用来测试的虚拟机是320*480像素mdpi的<br>总结了以下三种方法</p>
+</blockquote>
+<p>(一)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Point point =<span class="keyword">new</span> Point();</span><br><span class="line">getWindowManager().getDefaultDisplay().getSize(point);</span><br><span class="line">point.x;<span class="comment">//(320)</span></span><br><span class="line">point.y;<span class="comment">//(480)</span></span><br></pre></td></tr></table></figure>
+<p>(二)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics=<span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">metrics.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
+<p>(三)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DisplayMetrics metrics2=getResources().getDisplayMetrics();</span><br><span class="line">metrics2.widthPixels;<span class="comment">//(320)</span></span><br><span class="line">metrics2.heightPixels;<span class="comment">//(480)</span></span><br><span class="line">metrics2.xdpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.ydpi;<span class="comment">//(160.0)</span></span><br><span class="line">metrics2.density;<span class="comment">//(1.0)</span></span><br><span class="line">metrics2.densityDpi;<span class="comment">//(160)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当不是在activity中时，就不能直接用getWindowManager()等方法了，这时可以用Context.getSystemService(Context.WINDOW_SERVICE)方法，其他的类似</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>像素</tag>
+        <tag>密度</tag>
       </tags>
   </entry>
   <entry>
@@ -1036,6 +1036,28 @@
       </tags>
   </entry>
   <entry>
+    <title>chrome adobe flash不是最新版本</title>
+    <url>/2016/11/02/chrome-adobe-flash%E4%B8%8D%E6%98%AF%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p>
+<p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p>
+<p>下面详细说说linux下和windows下怎么设置代理:</p>
+<p>linux下在<code>终端</code>中设置好代理变量, 然后接着在同一个终端下以命令的方式启动chrome就行了,下面是具体命令:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export http_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">export https_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">google-chrome</span><br></pre></td></tr></table></figure>
+
+<p>命令解释, 前两行主要是指定代理地址和端口, 因为我是在本机运行的代理软件, 所以地址是127.0.0.1<br>而8787则是代理软件监听的端口, 第三行则是启动chrome</p>
+<p>windows下就十分简单了, 启动代理软件, 一般代理软件都有系统代理的选项, 选择启动系统代理,<br>然后运行chrome就行了. </p>
+<p>下面附上linux下的过程:<br><img src="update-flash.png" alt="update-flash"></p>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
+      <tags>
+        <tag>chrome</tag>
+        <tag>flash</tag>
+        <tag>版本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>clickhouse materialized view 踩坑记录</title>
     <url>/2019/12/23/clickhouse-materialized-view-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>最近在使用 clickhouse（下面简称 CH） 的 materialized view（下面简称为 MV）功能，类似其他数据库的物化视图，触发器之类的功能，不过遇到了几点坑，有的通过升级 CH 版本解决了，有的可以在写 sql 的时候小心避免。</p>
@@ -1085,28 +1107,6 @@
       <tags>
         <tag>clickhouse</tag>
         <tag>materialized-view</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>chrome adobe flash不是最新版本</title>
-    <url>/2016/11/02/chrome-adobe-flash%E4%B8%8D%E6%98%AF%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<p>google-chrome最近更新后flash不能正常运行了, 好象是不再包含flash player了,<br>在看视频或者需要用到flash player的时候就会提示:<br><code>adobe flash player 不是最新版本</code></p>
-<p>解决方法也简单, 只是需要梯(fan)子(qiang), 如何找梯子本文就不提及了.<br>有了梯子之后, 设置好代理启动chrome, 在地址栏输入: <code>chrome://components/</code>, 回车,<br>然后找到flash player那一项, 点击更新就行了. </p>
-<p>下面详细说说linux下和windows下怎么设置代理:</p>
-<p>linux下在<code>终端</code>中设置好代理变量, 然后接着在同一个终端下以命令的方式启动chrome就行了,下面是具体命令:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export http_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">export https_proxy&#x3D;127.0.0.1:8787</span><br><span class="line">google-chrome</span><br></pre></td></tr></table></figure>
-
-<p>命令解释, 前两行主要是指定代理地址和端口, 因为我是在本机运行的代理软件, 所以地址是127.0.0.1<br>而8787则是代理软件监听的端口, 第三行则是启动chrome</p>
-<p>windows下就十分简单了, 启动代理软件, 一般代理软件都有系统代理的选项, 选择启动系统代理,<br>然后运行chrome就行了. </p>
-<p>下面附上linux下的过程:<br><img src="update-flash.png" alt="update-flash"></p>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
-      <tags>
-        <tag>chrome</tag>
-        <tag>flash</tag>
-        <tag>版本</tag>
       </tags>
   </entry>
   <entry>
@@ -1988,33 +1988,6 @@
       </tags>
   </entry>
   <entry>
-    <title>miui 正在通过usb安装</title>
-    <url>/2017/02/25/miui-%E6%AD%A3%E5%9C%A8%E9%80%9A%E8%BF%87usb%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p>
-<h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p>
-<h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;data&#x2F;data&#x2F;com.miui.securitycenter&#x2F;shared_prefs</span><br></pre></td></tr></table></figure>
-<p>用RE管理器的编辑模式(默认是查看模式)打开这个文件:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">remote_provider_preferences.xml</span><br></pre></td></tr></table></figure>
-
-<p>找到下面这句:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"># 将其中的&quot;true&quot;修改为&quot;false&quot;</span><br><span class="line"># 修改后为:</span><br><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>还有找到这句:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 要确保这句中的值为&quot;true&quot;</span><br><span class="line"># 这个选项对应的时开发者选项里的&quot;USB安装&quot;</span><br><span class="line"># 只有这个值为&quot;true&quot;的时候这个选项才是打开的</span><br><span class="line">&lt;boolean name&#x3D;&quot;security_adb_install_enable&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>OK了, 不过这个方法好像重启手机后会重置, 需要再次设置, 不过也是不错的了</p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>miui</tag>
-        <tag>usb</tag>
-        <tag>安装</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>minikube 启动失败</title>
     <url>/2020/04/07/minikube-%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/</url>
     <content><![CDATA[<p>首先：</p>
@@ -2066,6 +2039,33 @@
       </tags>
   </entry>
   <entry>
+    <title>miui 正在通过usb安装</title>
+    <url>/2017/02/25/miui-%E6%AD%A3%E5%9C%A8%E9%80%9A%E8%BF%87usb%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>最近miui有个坑爹的设计, 就是使用adb从电脑端安装应用的时候会弹出一个提示,<br>询问是否同意安装, 之所以坑爹是最近的版本把关闭这个功能的选项取消了,<br>导致每次调试应用都要手动点击同意安装, 解决方法:</p>
+<h1 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h1><p>root<br>任何可以管理手机根目录下文件的文件管理器, 比如RE文件管理器</p>
+<h1 id="位置以及修改"><a href="#位置以及修改" class="headerlink" title="位置以及修改"></a>位置以及修改</h1><p>用RE管理器进入以下目录:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;data&#x2F;data&#x2F;com.miui.securitycenter&#x2F;shared_prefs</span><br></pre></td></tr></table></figure>
+<p>用RE管理器的编辑模式(默认是查看模式)打开这个文件:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">remote_provider_preferences.xml</span><br></pre></td></tr></table></figure>
+
+<p>找到下面这句:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"># 将其中的&quot;true&quot;修改为&quot;false&quot;</span><br><span class="line"># 修改后为:</span><br><span class="line">&lt;boolean name&#x3D;&quot;perm_adb_install_notify&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>还有找到这句:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 要确保这句中的值为&quot;true&quot;</span><br><span class="line"># 这个选项对应的时开发者选项里的&quot;USB安装&quot;</span><br><span class="line"># 只有这个值为&quot;true&quot;的时候这个选项才是打开的</span><br><span class="line">&lt;boolean name&#x3D;&quot;security_adb_install_enable&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>OK了, 不过这个方法好像重启手机后会重置, 需要再次设置, 不过也是不错的了</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>miui</tag>
+        <tag>usb</tag>
+        <tag>安装</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>新博客的第一篇</title>
     <url>/2016/04/20/my-first-blog-on-hexo-github-pages/</url>
     <content><![CDATA[<p>本博客是使用hexo(一个静态网站生成框架)和github pages搭建的一个博客系统<br>主题使用的是: <a href="https://github.com/iissnan/hexo-theme-next">next</a></p>
@@ -2075,6 +2075,26 @@
       <categories>
         <category>others</category>
       </categories>
+  </entry>
+  <entry>
+    <title>mysql 杂记</title>
+    <url>/2020/10/21/mysql-%E6%9D%82%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="存储相关"><a href="#存储相关" class="headerlink" title="存储相关"></a>存储相关</h1><p>页，数据库管理数据的最小单元<br>区，预请求磁盘空间单元，确保读取时的效率，根据数据量延伸出四种状态，某些状态下的区直属于表<br>段，区的集合<br>表，表空间，管理段和部分区</p>
+<h1 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h1><p>在指定索引时尽量设置索引的 唯一 属性，这种唯一的二级索引，在 等值 查询时性能近乎与主键等价，等值查询不包括 IS NULL 查询</p>
+<p>在查询时尽量避免回表（再从聚簇索引拿数据），当查询列和查询条件都是索引时即可避免</p>
+<p>使用 OR 时要慎重：一个使用到 索引 A 的搜索条件和没有使用 A 的搜索条件使用 OR 连接起来后将无法使用 A<br>SELECT * FROM single_table WHERE key2 &gt; 100 OR common_field = ‘abc’;<br>其中 key2 和 common_field 都有各自的索引<br>那么上述查询语句将无法按照预期使用 key2 的索引，而是会拿所有 key2 的值去回表，在回表的时候使用 common_field 的索引</p>
+<p>对于联合索引，查询条件要注意索引列声明的顺序，且只有左边的查询条件是 等值 查询时右边的查询条件才能继续使用联合索引</p>
+<p>索引列必须和常数比较才会使用索引，两个列进行比较则不会使用到索引</p>
+<p>在执行连接查询时，驱动表被访问一次，被驱动表可能会被访问多次，次数与驱动表数据量有关（扇出）</p>
+<p>在创建索引时，如果可以尽量使用唯一索引</p>
+<h1 id="事务相关"><a href="#事务相关" class="headerlink" title="事务相关"></a>事务相关</h1><p>事务：脏读，脏写，不可重复读，幻读<br>脏读和脏写强调回滚：当前事务操作了另一个事务 B 的中间状态数据，而事务 B 即将执行回滚<br>不可重复读：当前事务多次读取同一组数据时，发现数据不同，类似于幻读，但覆盖到其他事务对数据的修改和删除操作<br>幻读强调读取到了新数据：当前事务以相同条件多次读取数据时，发现了之前没有见过的数据，因为其他事务插入了新数据</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
   </entry>
   <entry>
     <title>mysql 索引学习小结</title>
@@ -2099,26 +2119,6 @@
       </categories>
       <tags>
         <tag>索引</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 杂记</title>
-    <url>/2020/10/21/mysql-%E6%9D%82%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="存储相关"><a href="#存储相关" class="headerlink" title="存储相关"></a>存储相关</h1><p>页，数据库管理数据的最小单元<br>区，预请求磁盘空间单元，确保读取时的效率，根据数据量延伸出四种状态，某些状态下的区直属于表<br>段，区的集合<br>表，表空间，管理段和部分区</p>
-<h1 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h1><p>在指定索引时尽量设置索引的 唯一 属性，这种唯一的二级索引，在 等值 查询时性能近乎与主键等价，等值查询不包括 IS NULL 查询</p>
-<p>在查询时尽量避免回表（再从聚簇索引拿数据），当查询列和查询条件都是索引时即可避免</p>
-<p>使用 OR 时要慎重：一个使用到 索引 A 的搜索条件和没有使用 A 的搜索条件使用 OR 连接起来后将无法使用 A<br>SELECT * FROM single_table WHERE key2 &gt; 100 OR common_field = ‘abc’;<br>其中 key2 和 common_field 都有各自的索引<br>那么上述查询语句将无法按照预期使用 key2 的索引，而是会拿所有 key2 的值去回表，在回表的时候使用 common_field 的索引</p>
-<p>对于联合索引，查询条件要注意索引列声明的顺序，且只有左边的查询条件是 等值 查询时右边的查询条件才能继续使用联合索引</p>
-<p>索引列必须和常数比较才会使用索引，两个列进行比较则不会使用到索引</p>
-<p>在执行连接查询时，驱动表被访问一次，被驱动表可能会被访问多次，次数与驱动表数据量有关（扇出）</p>
-<p>在创建索引时，如果可以尽量使用唯一索引</p>
-<h1 id="事务相关"><a href="#事务相关" class="headerlink" title="事务相关"></a>事务相关</h1><p>事务：脏读，脏写，不可重复读，幻读<br>脏读和脏写强调回滚：当前事务操作了另一个事务 B 的中间状态数据，而事务 B 即将执行回滚<br>不可重复读：当前事务多次读取同一组数据时，发现数据不同，类似于幻读，但覆盖到其他事务对数据的修改和删除操作<br>幻读强调读取到了新数据：当前事务以相同条件多次读取数据时，发现了之前没有见过的数据，因为其他事务插入了新数据</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2878,6 +2878,36 @@
         <tag>xmlReader</tag>
         <tag>xml</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>列表初始化 vs 成员初始化器列表</title>
+    <url>/2020/10/29/%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96-vs-%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%99%A8%E5%88%97%E8%A1%A8/</url>
+    <content><![CDATA[<p>列表初始化，成员初始化器列表，初始化列表，傻傻搞不清楚</p>
+<p>唉，为什么总有刁民乱起名</p>
+<h2 id="std-initializer-list"><a href="#std-initializer-list" class="headerlink" title="std::initializer_list"></a>std::initializer_list</h2><p>(无中文翻译)</p>
+<p>简介：<br>(无)</p>
+<p>备注：<br>这表示一种花括号数据类型{*,….}<br>当然，这也是一种普通的数据类型，其他类型怎么用，它就可以怎么用，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">std::initializer_list&lt;int&gt; foo &#x3D; &#123;1, 2, 3, 4&#125;</span><br><span class="line">auto foo &#x3D; &#123;1, 2, 3, 4&#125;</span><br><span class="line">void func_bar(std::initializer_list&lt;int&gt; arg_var) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>中英文链接：<br><a href="https://zh.cppreference.com/w/cpp/utility/initializer_list">https://zh.cppreference.com/w/cpp/utility/initializer_list</a><br><a href="https://en.cppreference.com/w/cpp/utility/initializer_list">https://en.cppreference.com/w/cpp/utility/initializer_list</a></p>
+<h2 id="List-initialization"><a href="#List-initialization" class="headerlink" title="List initialization"></a>List initialization</h2><p>(译：列表初始化)</p>
+<p>简介：<br>Initializes an object from braced-init-list<br>(译：从花括号数据初始化对象)</p>
+<p>备注：<br>一种初始化<code>变量</code>的写法，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">std::vector&lt;int&gt; mem &#x3D; &#123;1,2,3&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>中英文链接：<br><a href="https://zh.cppreference.com/w/cpp/language/list_initialization">https://zh.cppreference.com/w/cpp/language/list_initialization</a><br><a href="https://en.cppreference.com/w/cpp/language/list_initialization">https://en.cppreference.com/w/cpp/language/list_initialization</a></p>
+<h2 id="member-initializer-lists"><a href="#member-initializer-lists" class="headerlink" title="member initializer lists"></a>member initializer lists</h2><p>(译：成员初始化器列表)</p>
+<p>简介：<br>In the definition of a constructor of a class, member initializer list specifies the initializers for direct and virtual bases and non-static data members<br>(译：在类的构造函数定义中，成员初始化器列表指定各个直接和虚基类和各个非静态数据成员的初始化器)</p>
+<p>备注：<br>一种初始化<code>成员变量</code>的写法，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Foo</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    &#x2F;&#x2F; 也可以将 列表初始化 应用到 成员初始化器列表中</span><br><span class="line">    &#x2F;&#x2F;Foo(int i, int j) : m_data_i&#123;i&#125;, m_data_j&#123;j&#125;</span><br><span class="line">    Foo(int i, int j) : m_data_i(i), m_data_j(j)</span><br><span class="line">    &#123;</span><br><span class="line">        m_data_k &#x3D; m_data_i + m_data_j;</span><br><span class="line">    &#125;</span><br><span class="line">    int m_data_i;</span><br><span class="line">    int m_data_j;</span><br><span class="line">    int m_data_k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>似乎很多人都称其为：<code>初始化列表</code>，这很容易与上面提到的<code>列表初始化</code>搞混，我在中文网站 <a href="">https://zh.cppreference.com</a> 翻了很久也没有找到<code>初始化列表</code>这个名词，所以我认为这是对<code>成员初始化器列表</code>的无脑简写</p>
+<p>中英文链接：<br><a href="https://zh.cppreference.com/w/cpp/language/constructor">https://zh.cppreference.com/w/cpp/language/constructor</a><br><a href="https://en.cppreference.com/w/cpp/language/constructor">https://en.cppreference.com/w/cpp/language/constructor</a></p>
+<h2 id="小记"><a href="#小记" class="headerlink" title="小记"></a>小记</h2><p>成员初始化器列表 &gt; 列表初始化 &gt; std::initializer_list</p>
+]]></content>
+      <categories>
+        <category>cpp</category>
+      </categories>
   </entry>
   <entry>
     <title>判断是否是 vscode 内启动的终端</title>
