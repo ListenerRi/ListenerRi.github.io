@@ -21,6 +21,33 @@
       </tags>
   </entry>
   <entry>
+    <title>Manjaro Linux 识别不到声音设备</title>
+    <url>/2020/08/31/Manjaro-Linux-%E8%AF%86%E5%88%AB%E4%B8%8D%E5%88%B0%E5%A3%B0%E9%9F%B3%E8%AE%BE%E5%A4%87/</url>
+    <content><![CDATA[<p>前段时间给两台机器装了 Manjaro，公司台式主机和 Redmi G 笔记本，使用的桌面环境是 KDE 发现两台机器都不能正常识别声音设备，笔记本是因为直接识别不到声卡，这个问题下一篇文章说一下解决方法，这里先说台式主机的问题。</p>
+<p>使用的扬声器其实就是个 3.5 毫米的耳机，在给这台机器重装之前使用的是 deepin 系统，这个耳机是可以正常工作的（虽然不常用，但印象里是可以工作的），但是在 Manjaro 里 KDE 提示找不到声音设备，经过测试当把耳机插入主机后面的插口时是可以工作的，这也说明系统是可以识别到声卡的，谷歌了一圈发现可以给声卡驱动添加启动参数针对一些设备的兼容。这台机器的声卡是 <code>ALC887</code>，可以通过执行一下命令查看开机日志，并搜索 <code>audio</code> 来找出声卡型号：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo journalctl -xb</span><br></pre></td></tr></table></figure>
+
+<p>然后执行以下命令可以查看内核为这个声卡加载的驱动：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># lspci -v</span><br><span class="line">00:1b.0 Audio device: Intel Corporation 8 Series&#x2F;C220 Series Chipset High Definition Audio Controller (rev 05)</span><br><span class="line">        Subsystem: Gigabyte Technology Co., Ltd Device a182 </span><br><span class="line">        Flags: bus master, fast devsel, latency 0, IRQ 31</span><br><span class="line">        Memory at f7d10000 (64-bit, non-prefetchable) [size&#x3D;16K]</span><br><span class="line">        Capabilities: &lt;access denied&gt;</span><br><span class="line">        Kernel driver in use: snd_hda_intel                                                                                                                                                                                                 </span><br><span class="line">        Kernel modules: snd_hda_intel</span><br></pre></td></tr></table></figure>
+
+<p>可以发现使用的驱动是 snd_hda_intel，在内核 alsa 相关文档中可以找到有哪些选项：</p>
+<p><a href="https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html">https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html</a></p>
+<p>按照声卡型号搜索，找到对应的选项：</p>
+<p><a href="https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html#alc88x-898-1150-1220">https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html#alc88x-898-1150-1220</a></p>
+<p>之后编辑 <code>/etc/modprobe.d/alsa-base.conf</code> 文件（没有则创建），添加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">options snd-hda-intel model&#x3D;acer-aspire-4930g</span><br></pre></td></tr></table></figure>
+
+<p>注意替换 <code>model</code> 选项的值到对应声卡驱动的可选值。修改完成之后保存退出并重启系统，如果仍然识别不到声音设备可以继续修改选项的值。</p>
+<p>当终于找到一个合适的值让 alsa 可以识别播放设备了，但发现没有声音，可以执行命令 <code>sudo alsamixer</code> 命令手动取消对应设备的静音状态，处于静音状态的设备会标记为 <code>MM</code>，使用左右键切换到对应设备，按一下 <code>m</code> 键即可取消静音，取消静音之后 <code>MM</code> 会变成 <code>00</code></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>audio</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ListView的Iterm无法点击</title>
     <url>/2016/05/04/ListView%E7%9A%84Iterm%E6%97%A0%E6%B3%95%E7%82%B9%E5%87%BB/</url>
     <content><![CDATA[<p>当listview中同时出现Button或者ImageButton时，只有item中的Button或ImageButton能够获取焦点(能点击)，<br>而整个item无法获取焦点(无法点击)</p>
@@ -67,33 +94,6 @@
       <tags>
         <tag>Qt</tag>
         <tag>QPropertyAnimation</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Manjaro Linux 识别不到声音设备</title>
-    <url>/2020/08/31/Manjaro-Linux-%E8%AF%86%E5%88%AB%E4%B8%8D%E5%88%B0%E5%A3%B0%E9%9F%B3%E8%AE%BE%E5%A4%87/</url>
-    <content><![CDATA[<p>前段时间给两台机器装了 Manjaro，公司台式主机和 Redmi G 笔记本，使用的桌面环境是 KDE 发现两台机器都不能正常识别声音设备，笔记本是因为直接识别不到声卡，这个问题下一篇文章说一下解决方法，这里先说台式主机的问题。</p>
-<p>使用的扬声器其实就是个 3.5 毫米的耳机，在给这台机器重装之前使用的是 deepin 系统，这个耳机是可以正常工作的（虽然不常用，但印象里是可以工作的），但是在 Manjaro 里 KDE 提示找不到声音设备，经过测试当把耳机插入主机后面的插口时是可以工作的，这也说明系统是可以识别到声卡的，谷歌了一圈发现可以给声卡驱动添加启动参数针对一些设备的兼容。这台机器的声卡是 <code>ALC887</code>，可以通过执行一下命令查看开机日志，并搜索 <code>audio</code> 来找出声卡型号：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo journalctl -xb</span><br></pre></td></tr></table></figure>
-
-<p>然后执行以下命令可以查看内核为这个声卡加载的驱动：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># lspci -v</span><br><span class="line">00:1b.0 Audio device: Intel Corporation 8 Series&#x2F;C220 Series Chipset High Definition Audio Controller (rev 05)</span><br><span class="line">        Subsystem: Gigabyte Technology Co., Ltd Device a182 </span><br><span class="line">        Flags: bus master, fast devsel, latency 0, IRQ 31</span><br><span class="line">        Memory at f7d10000 (64-bit, non-prefetchable) [size&#x3D;16K]</span><br><span class="line">        Capabilities: &lt;access denied&gt;</span><br><span class="line">        Kernel driver in use: snd_hda_intel                                                                                                                                                                                                 </span><br><span class="line">        Kernel modules: snd_hda_intel</span><br></pre></td></tr></table></figure>
-
-<p>可以发现使用的驱动是 snd_hda_intel，在内核 alsa 相关文档中可以找到有哪些选项：</p>
-<p><a href="https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html">https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html</a></p>
-<p>按照声卡型号搜索，找到对应的选项：</p>
-<p><a href="https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html#alc88x-898-1150-1220">https://www.kernel.org/doc/html/v5.7/sound/hd-audio/models.html#alc88x-898-1150-1220</a></p>
-<p>之后编辑 <code>/etc/modprobe.d/alsa-base.conf</code> 文件（没有则创建），添加以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">options snd-hda-intel model&#x3D;acer-aspire-4930g</span><br></pre></td></tr></table></figure>
-
-<p>注意替换 <code>model</code> 选项的值到对应声卡驱动的可选值。修改完成之后保存退出并重启系统，如果仍然识别不到声音设备可以继续修改选项的值。</p>
-<p>当终于找到一个合适的值让 alsa 可以识别播放设备了，但发现没有声音，可以执行命令 <code>sudo alsamixer</code> 命令手动取消对应设备的静音状态，处于静音状态的设备会标记为 <code>MM</code>，使用左右键切换到对应设备，按一下 <code>m</code> 键即可取消静音，取消静音之后 <code>MM</code> 会变成 <code>00</code></p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>audio</tag>
       </tags>
   </entry>
   <entry>
@@ -151,6 +151,44 @@
         <tag>linux</tag>
         <tag>redmi</tag>
         <tag>manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ViewPager相关笔记</title>
+    <url>/2016/05/04/ViewPager%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>只有步骤，备用</p>
+<h1 id="ViewPager-PagerAdapter"><a href="#ViewPager-PagerAdapter" class="headerlink" title="ViewPager-PagerAdapter"></a>ViewPager-PagerAdapter</h1><h2 id="布局控件"><a href="#布局控件" class="headerlink" title="布局控件"></a>布局控件</h2><p>在activity的布局文件中添加控件，控件标记名称为：<br>android.support.v4.view.ViewPager<br>有两个子控件：<br>android.support.v4.view.PagerTitleStrip（会在tab标题的上面，但是不知道怎么随着页面的左右滚动切换，所以暂时不知道如何使用这个控件）<br>android.support.v4.view.PagerTabStrip（每个tab页面的标题，会随着页面的左右滚动切换）</p>
+<p>另外还有各个页面的布局文件，和平时的页面写法一样，不说了</p>
+<h2 id="获取控件对象并操作"><a href="#获取控件对象并操作" class="headerlink" title="获取控件对象并操作"></a>获取控件对象并操作</h2><p>在activity中使用findViewById()获取到控件的对象<br>上面说了因为不知道PagerTitleStrip如何自动切换，所以暂时不使用这个控件，并且PagerTabStrip也足够了<br>获取到PagerTabStrip的对象，使用其方法可以设置tab标题指示器的样式<br>获取到ViewPager的对象，主要使用其setAdapter()方法</p>
+<h2 id="生成各个页面"><a href="#生成各个页面" class="headerlink" title="生成各个页面"></a>生成各个页面</h2><p>使用LayoutInflater对象的inflate()方法，加载各个页面的布局文件，获取到各个页面View类型的对象<br>然后把这些获取到的页面对象放到一个<code>ArrayList&lt;View&gt;</code>里面去，等下提供数据给适配器<br>另外，把每个页面的tab标题，放到一个<code>ArrayList&lt;String&gt;</code>里面去，也提供给适配器</p>
+<h2 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h2><p>写一个类继承PagerAdapter，主要重写PagerAdapter的以下方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取页面数量</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> myListViews.size();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个不清楚作用，但也必须重写，重写内容如下</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isViewFromObject</span><span class="params">(View arg0, Object arg1)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> arg0==arg1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化的作用吧，在这里添加页面到页面容器</span></span><br><span class="line"><span class="comment">//父类还有另一个重载的方法(参数不同)，重写任意一个应该都可以</span></span><br><span class="line"><span class="comment">//myListViews是上面提到的ArrayList&lt;View&gt;，里面存放View类型的页面的对象</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    container.addView(myListViews.get(position));</span><br><span class="line">    <span class="keyword">return</span> myListViews.get(position);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁、去掉页面</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    container.removeView(myListViews.get(position));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在这里添加标题数据到标题容器</span></span><br><span class="line"><span class="comment">//myListPagerTabs是上面提到的ArrayList&lt;String&gt;，里面存放的是String类型的页面标题</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListPagerTabs.get(position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写好适配器类之后就可以使用ViewPager对象的setAdapter()方法绑定上去了</p>
+<h1 id="ViewPager-FragmentPagerAdapter"><a href="#ViewPager-FragmentPagerAdapter" class="headerlink" title="ViewPager-FragmentPagerAdapter"></a>ViewPager-FragmentPagerAdapter</h1><p><strong>基本和ViewPager+PagerAdapter一样，只是需要写几个fragment类和对应的页面的布局文件，每一个页面都是一个fragment，这些学习过fragment相关的知识就会了</strong></p>
+<p><strong>不一样的地方：</strong><br>1、上面的<code>ArrayList&lt;Fragment&gt;</code>，里面存放的东西也就是你写的fragment的对象了<br>2、重写父类FragmentPagerAdapter的具体方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//只需要重写下面三个就行了</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListViews.get(arg0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListViews.size();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListTabs.get(position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>ViewPager</tag>
+        <tag>PagerAdapter</tag>
+        <tag>FragmentPagerAdapter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>adt-sdk-tools-eclipse-java版本关系</title>
+    <url>/2016/04/22/adt-sdk-tools-eclipse-java%E7%89%88%E6%9C%AC%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<p>图片、反正这东西只是查看、不需要复制粘贴<br><img src="version.png" alt="version"></p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>sdk</tag>
+        <tag>adt</tag>
       </tags>
   </entry>
   <entry>
@@ -213,44 +251,6 @@
         <tag>iso</tag>
         <tag>镜像</tag>
         <tag>PE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ViewPager相关笔记</title>
-    <url>/2016/05/04/ViewPager%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>只有步骤，备用</p>
-<h1 id="ViewPager-PagerAdapter"><a href="#ViewPager-PagerAdapter" class="headerlink" title="ViewPager-PagerAdapter"></a>ViewPager-PagerAdapter</h1><h2 id="布局控件"><a href="#布局控件" class="headerlink" title="布局控件"></a>布局控件</h2><p>在activity的布局文件中添加控件，控件标记名称为：<br>android.support.v4.view.ViewPager<br>有两个子控件：<br>android.support.v4.view.PagerTitleStrip（会在tab标题的上面，但是不知道怎么随着页面的左右滚动切换，所以暂时不知道如何使用这个控件）<br>android.support.v4.view.PagerTabStrip（每个tab页面的标题，会随着页面的左右滚动切换）</p>
-<p>另外还有各个页面的布局文件，和平时的页面写法一样，不说了</p>
-<h2 id="获取控件对象并操作"><a href="#获取控件对象并操作" class="headerlink" title="获取控件对象并操作"></a>获取控件对象并操作</h2><p>在activity中使用findViewById()获取到控件的对象<br>上面说了因为不知道PagerTitleStrip如何自动切换，所以暂时不使用这个控件，并且PagerTabStrip也足够了<br>获取到PagerTabStrip的对象，使用其方法可以设置tab标题指示器的样式<br>获取到ViewPager的对象，主要使用其setAdapter()方法</p>
-<h2 id="生成各个页面"><a href="#生成各个页面" class="headerlink" title="生成各个页面"></a>生成各个页面</h2><p>使用LayoutInflater对象的inflate()方法，加载各个页面的布局文件，获取到各个页面View类型的对象<br>然后把这些获取到的页面对象放到一个<code>ArrayList&lt;View&gt;</code>里面去，等下提供数据给适配器<br>另外，把每个页面的tab标题，放到一个<code>ArrayList&lt;String&gt;</code>里面去，也提供给适配器</p>
-<h2 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h2><p>写一个类继承PagerAdapter，主要重写PagerAdapter的以下方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取页面数量</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> myListViews.size();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个不清楚作用，但也必须重写，重写内容如下</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isViewFromObject</span><span class="params">(View arg0, Object arg1)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> arg0==arg1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化的作用吧，在这里添加页面到页面容器</span></span><br><span class="line"><span class="comment">//父类还有另一个重载的方法(参数不同)，重写任意一个应该都可以</span></span><br><span class="line"><span class="comment">//myListViews是上面提到的ArrayList&lt;View&gt;，里面存放View类型的页面的对象</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    container.addView(myListViews.get(position));</span><br><span class="line">    <span class="keyword">return</span> myListViews.get(position);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁、去掉页面</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    container.removeView(myListViews.get(position));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在这里添加标题数据到标题容器</span></span><br><span class="line"><span class="comment">//myListPagerTabs是上面提到的ArrayList&lt;String&gt;，里面存放的是String类型的页面标题</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListPagerTabs.get(position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>写好适配器类之后就可以使用ViewPager对象的setAdapter()方法绑定上去了</p>
-<h1 id="ViewPager-FragmentPagerAdapter"><a href="#ViewPager-FragmentPagerAdapter" class="headerlink" title="ViewPager-FragmentPagerAdapter"></a>ViewPager-FragmentPagerAdapter</h1><p><strong>基本和ViewPager+PagerAdapter一样，只是需要写几个fragment类和对应的页面的布局文件，每一个页面都是一个fragment，这些学习过fragment相关的知识就会了</strong></p>
-<p><strong>不一样的地方：</strong><br>1、上面的<code>ArrayList&lt;Fragment&gt;</code>，里面存放的东西也就是你写的fragment的对象了<br>2、重写父类FragmentPagerAdapter的具体方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//只需要重写下面三个就行了</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListViews.get(arg0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListViews.size();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> myListTabs.get(position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>ViewPager</tag>
-        <tag>PagerAdapter</tag>
-        <tag>FragmentPagerAdapter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>adt-sdk-tools-eclipse-java版本关系</title>
-    <url>/2016/04/22/adt-sdk-tools-eclipse-java%E7%89%88%E6%9C%AC%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[<p>图片、反正这东西只是查看、不需要复制粘贴<br><img src="version.png" alt="version"></p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>android</tag>
-        <tag>sdk</tag>
-        <tag>adt</tag>
       </tags>
   </entry>
   <entry>
@@ -369,6 +369,31 @@
       </tags>
   </entry>
   <entry>
+    <title>byte 字节 与 二进制 与 编码</title>
+    <url>/2020/11/05/byte-%E5%AD%97%E8%8A%82-%E4%B8%8E-%E4%BA%8C%E8%BF%9B%E5%88%B6-%E4%B8%8E-%E7%BC%96%E7%A0%81/</url>
+    <content><![CDATA[<p>先扯一堆：byte（字节），bytes（字节流），二进制，十六进制，编码<br>今天跟同事讨论起了上面一堆名词之间的定义和关系到底是什么，不啦不啦个把小时之后得出了以下结论。</p>
+<h1 id="byte-与-二进制"><a href="#byte-与-二进制" class="headerlink" title="byte 与 二进制"></a>byte 与 二进制</h1><p><strong>byte 是二进制的长度单位</strong>（位数，为了便于理解后面使用长度一词），一个 byte 表示长度为 8 的二进制，即通常所说的：一个 byte 是 八个 bit（位）</p>
+<p>既然 byte 是二进制的长度单位，那么编程语言里的其他类型呢？</p>
+<p>它们其实也是二进制的长度单位，但是表示的长度不同，比如 int 表示 4 个字节（通常）也就是说 int 其实表示长度为 4 * 8 = 32 的二进制，其他类型以此类推，注意，char 类型表示一个 byte，也表示长度为 8 的二进制。</p>
+<p><strong>byte 是长度单位为什么能表示数值大小？</strong></p>
+<p>一个二进制数既然确定了其长度，那么也就确定了其能表示的数值范围，因此一个 byte 也就能表示出长度为 8 的二进制数所能表示的任何数值。</p>
+<p>要注意，byte 是先确定了二进制长度，然后才确定了数值大小，具体的数值大小要看这固定长度的二进制每一位都是什么内容。</p>
+<h1 id="编码又是什么？"><a href="#编码又是什么？" class="headerlink" title="编码又是什么？"></a>编码又是什么？</h1><p>我们将编码分为狭义和广义两种。</p>
+<p>狭义上来说是数值到字符的一种转换方法，这种也叫字符编码，比如 ASCII，UTF-8，GB-2312，GBK，UNICODE 等都属于这种。</p>
+<p>如果从广义上来看，编码是一种动作：<strong>依照一定规则将一个东西转换成另一个东西，且还能转换回来。</strong><br>那么此时再来看编码，是不是应该包含 十六进制？十进制？和八进制？这几个进制都可以理解为是从二进制转换而来的，是二进制的另一种表示方式，所以网上也有很多人将十六进制转换叫做十六进制编码。</p>
+<h1 id="延伸一下"><a href="#延伸一下" class="headerlink" title="延伸一下"></a>延伸一下</h1><p>二进制，十六进制这些都是一种数值的表示方法，大家都知道硬盘上的文件其实是以一堆二进制的数存储在硬盘上的，那么这一堆二进制数自然也可以由十六进制表示出来，无非就是一个很大的十六进制数，所以也就有了以十六进制方式打开一个文件的说法。</p>
+]]></content>
+      <categories>
+        <category>others</category>
+      </categories>
+      <tags>
+        <tag>byte</tag>
+        <tag>binary</tag>
+        <tag>hex</tag>
+        <tag>encodings</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>bat批处理编译执行java</title>
     <url>/2016/04/22/bat%E6%89%B9%E5%A4%84%E7%90%86%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8Cjava/</url>
     <content><![CDATA[<p>虽然有eclipse等强大的IDE工具、但有时不可避免的需要用命令行来手动编译和执行java程序、<br>最近我就碰到的这样的问题、突然感觉编译和执行时都要敲一遍java或class文件的名字、这样好麻烦、</p>
@@ -393,31 +418,6 @@
         <tag>java</tag>
         <tag>批处理</tag>
         <tag>bat</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>byte 字节 与 二进制 与 编码</title>
-    <url>/2020/11/05/byte-%E5%AD%97%E8%8A%82-%E4%B8%8E-%E4%BA%8C%E8%BF%9B%E5%88%B6-%E4%B8%8E-%E7%BC%96%E7%A0%81/</url>
-    <content><![CDATA[<p>先扯一堆：byte（字节），bytes（字节流），二进制，十六进制，编码<br>今天跟同事讨论起了上面一堆名词之间的定义和关系到底是什么，不啦不啦个把小时之后得出了以下结论。</p>
-<h1 id="byte-与-二进制"><a href="#byte-与-二进制" class="headerlink" title="byte 与 二进制"></a>byte 与 二进制</h1><p><strong>byte 是二进制的长度单位</strong>（位数，为了便于理解后面使用长度一词），一个 byte 表示长度为 8 的二进制，即通常所说的：一个 byte 是 八个 bit（位）</p>
-<p>既然 byte 是二进制的长度单位，那么编程语言里的其他类型呢？</p>
-<p>它们其实也是二进制的长度单位，但是表示的长度不同，比如 int 表示 4 个字节（通常）也就是说 int 其实表示长度为 4 * 8 = 32 的二进制，其他类型以此类推，注意，char 类型表示一个 byte，也表示长度为 8 的二进制。</p>
-<p><strong>byte 是长度单位为什么能表示数值大小？</strong></p>
-<p>一个二进制数既然确定了其长度，那么也就确定了其能表示的数值范围，因此一个 byte 也就能表示出长度为 8 的二进制数所能表示的任何数值。</p>
-<p>要注意，byte 是先确定了二进制长度，然后才确定了数值大小，具体的数值大小要看这固定长度的二进制每一位都是什么内容。</p>
-<h1 id="编码又是什么？"><a href="#编码又是什么？" class="headerlink" title="编码又是什么？"></a>编码又是什么？</h1><p>我们将编码分为狭义和广义两种。</p>
-<p>狭义上来说是数值到字符的一种转换方法，这种也叫字符编码，比如 ASCII，UTF-8，GB-2312，GBK，UNICODE 等都属于这种。</p>
-<p>如果从广义上来看，编码是一种动作：<strong>依照一定规则将一个东西转换成另一个东西，且还能转换回来。</strong><br>那么此时再来看编码，是不是应该包含 十六进制？十进制？和八进制？这几个进制 <strong>转换</strong> 都可以理解为是从二进制转换而来的，是二进制的另一种表示方式，所以网上也有很多人将十六进制转换叫做十六进制编码。</p>
-<h1 id="延伸一下"><a href="#延伸一下" class="headerlink" title="延伸一下"></a>延伸一下</h1><p>二进制，十六进制这些都是一种数值的表示方法，大家都知道硬盘上的文件其实是以一堆二进制的数存储在硬盘上的，那么这一堆二进制数自然也可以由十六进制表示出来，无非就是一个很大的十六进制数，所以也就有了以十六进制方式打开一个文件的说法。</p>
-]]></content>
-      <categories>
-        <category>others</category>
-      </categories>
-      <tags>
-        <tag>byte</tag>
-        <tag>binary</tag>
-        <tag>hex</tag>
-        <tag>encodings</tag>
       </tags>
   </entry>
   <entry>
@@ -1496,6 +1496,21 @@
       </tags>
   </entry>
   <entry>
+    <title>java中this和.this</title>
+    <url>/2016/04/22/java%E4%B8%ADthis%E5%92%8C-this/</url>
+    <content><![CDATA[<p>“this”是指(或者说:所代表的是)当前这段代码所在的类的对象,<br>而”类名.this”是指”类名”的对象(一般在匿名类或内部类中使用来调用外部类的方法或属性)</p>
+<p>例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">void</span> method（）&#123;</span><br><span class="line">                A.<span class="keyword">this</span>  <span class="comment">//这里的&quot;A.this&quot;就是表示类&quot;A&quot;的对象,在这种情况下&quot;A.this&quot;和&quot;this&quot;是一样的</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">         <span class="class"><span class="keyword">class</span>  <span class="title">B</span> </span>&#123;  <span class="comment">//&quot;class A&quot;中的一个内部类&quot;B&quot;(内部类也可以是使用关键字&quot;new&quot; 所新实例出来的一个匿名类或者接口,比如&quot;new OnClickListener()&quot;)</span></span><br><span class="line">                  <span class="function"><span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                             A.<span class="keyword">this</span>  <span class="comment">//这里的&quot;A.this&quot;还是表示类&quot;A&quot;的对象。。但是这里是在内部类里面。。所以这里如果使用的是&quot;this&quot;那就是内部类B的对象了。。但是我们经常会在内部类里面调用外部的东西。。所以就用&quot;A.this&quot;这种方式就行了</span></span><br><span class="line">                   &#125;</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>this</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hybrid-sleep和sleep以及hibernate的区别</title>
     <url>/2016/05/04/hybrid-sleep%E5%92%8Csleep%E4%BB%A5%E5%8F%8Ahibernate%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<h1 id="bybrid-sleep"><a href="#bybrid-sleep" class="headerlink" title="bybrid-sleep"></a>bybrid-sleep</h1><p>混合休眠模式:<br>是指电脑sleep(睡眠模式)和hibernate(休眠模式)同时进行,即把信息保存到内存的同时也写入到系统主分区的hiberfil.sys文件中</p>
@@ -1510,21 +1525,6 @@
         <tag>hybrid-slep</tag>
         <tag>sleep</tag>
         <tag>hibernate</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中this和.this</title>
-    <url>/2016/04/22/java%E4%B8%ADthis%E5%92%8C-this/</url>
-    <content><![CDATA[<p>“this”是指(或者说:所代表的是)当前这段代码所在的类的对象,<br>而”类名.this”是指”类名”的对象(一般在匿名类或内部类中使用来调用外部类的方法或属性)</p>
-<p>例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">void</span> method（）&#123;</span><br><span class="line">                A.<span class="keyword">this</span>  <span class="comment">//这里的&quot;A.this&quot;就是表示类&quot;A&quot;的对象,在这种情况下&quot;A.this&quot;和&quot;this&quot;是一样的</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">         <span class="class"><span class="keyword">class</span>  <span class="title">B</span> </span>&#123;  <span class="comment">//&quot;class A&quot;中的一个内部类&quot;B&quot;(内部类也可以是使用关键字&quot;new&quot; 所新实例出来的一个匿名类或者接口,比如&quot;new OnClickListener()&quot;)</span></span><br><span class="line">                  <span class="function"><span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                             A.<span class="keyword">this</span>  <span class="comment">//这里的&quot;A.this&quot;还是表示类&quot;A&quot;的对象。。但是这里是在内部类里面。。所以这里如果使用的是&quot;this&quot;那就是内部类B的对象了。。但是我们经常会在内部类里面调用外部的东西。。所以就用&quot;A.this&quot;这种方式就行了</span></span><br><span class="line">                   &#125;</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>this</tag>
       </tags>
   </entry>
   <entry>
@@ -1610,51 +1610,6 @@
       </tags>
   </entry>
   <entry>
-    <title>k8s dashboard 无法登陆</title>
-    <url>/2020/04/15/k8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86/</url>
-    <content><![CDATA[<p>先说环境：<br>两节点 k8s 集群，一台 master，k8s 版本为 <code>1.18.1</code>，所使用的 dashboard 版本为 <code>v2.0.0-rc7</code></p>
-<p>dashboard 安装方法直接按照官网所说的执行即可：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl delete ns kubernetes-dashboard</span><br><span class="line">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes&#x2F;dashboard&#x2F;v2.0.0-rc7&#x2F;aio&#x2F;deploy&#x2F;recommended.yaml</span><br></pre></td></tr></table></figure>
-
-<p>现在 dashboard 已经部署好了，问题是如何访问 dashboard 服务，首先新版的 dashboard 将默认权限控制到了最小，只够 dashboard 部署，要想正常访问 dashboard 服务需要按照下面这个官方文档对其进行授权和创建管理员账户：<br><a href="https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md">https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md</a></p>
-<p>如果不想细看，可以直接将如下代码保存至 <code>dashboard-admin.yaml</code>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">---</span><br><span class="line">apiVersion: rbac.authorization.k8s.io&#x2F;v1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: cluster-admin</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl apply -f dashboard-admin.yaml</span><br></pre></td></tr></table></figure>
-
-<p>接着获取创建的 admin 账户的 token：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;&#123;print $1&#125;&#39;)</span><br></pre></td></tr></table></figure>
-
-<p>拿到 token 开始将 dashboard 服务暴露出来，有两种方式：</p>
-<ul>
-<li>方式一 proxy 反向代理</li>
-</ul>
-<p>需要注意的是使用这种方式只能是在本机访问（服务也必须在本机），因为目前 dashboard 不支持除 <code>localhost</code> 和 <code>127.0.0.1</code> 以外的主机名登录进入控制台（ <a href="https://github.com/kubernetes/dashboard/issues/4624">https://github.com/kubernetes/dashboard/issues/4624</a> ），这意味着无法从集群外通过浏览器打开 dashboard，表示不懂这种设计，这样的 dashboard 还有什么用？如果是我理解不正确，请留言指正。</p>
-<p>执行如下命令启动代理：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl proxy</span><br></pre></td></tr></table></figure>
-
-<p>然后在浏览器访问（注意必须是 http）：</p>
-<p><a href="http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy">http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy</a></p>
-<ul>
-<li>方式二 端口转发</li>
-</ul>
-<p>执行如下命令进行端口转发：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo kubectl port-forward --namespace kubernetes-dashboard --address 0.0.0.0 service&#x2F;kubernetes-dashboard 443</span><br></pre></td></tr></table></figure>
-
-<p>然后在集群外的机器上访问进行端口转发的那台机器的 ip 即可（注意必须是 https）：</p>
-<p><a href="https://yournodeip/">https://YourNodeIP/</a></p>
-<p>打开 web 界面后用上面获取到的 token 登录即可</p>
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>dashboard</tag>
-        <tag>登录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>klib-khash 使用记录</title>
     <url>/2019/11/20/klib-khash-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>klib 的项目地址：<a href="https://github.com/attractivechaos/klib/">https://github.com/attractivechaos/klib/</a></p>
@@ -1709,6 +1664,51 @@
       <tags>
         <tag>网卡</tag>
         <tag>路由</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>k8s dashboard 无法登陆</title>
+    <url>/2020/04/15/k8s-dashboard-%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86/</url>
+    <content><![CDATA[<p>先说环境：<br>两节点 k8s 集群，一台 master，k8s 版本为 <code>1.18.1</code>，所使用的 dashboard 版本为 <code>v2.0.0-rc7</code></p>
+<p>dashboard 安装方法直接按照官网所说的执行即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl delete ns kubernetes-dashboard</span><br><span class="line">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes&#x2F;dashboard&#x2F;v2.0.0-rc7&#x2F;aio&#x2F;deploy&#x2F;recommended.yaml</span><br></pre></td></tr></table></figure>
+
+<p>现在 dashboard 已经部署好了，问题是如何访问 dashboard 服务，首先新版的 dashboard 将默认权限控制到了最小，只够 dashboard 部署，要想正常访问 dashboard 服务需要按照下面这个官方文档对其进行授权和创建管理员账户：<br><a href="https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md">https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md</a></p>
+<p>如果不想细看，可以直接将如下代码保存至 <code>dashboard-admin.yaml</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">---</span><br><span class="line">apiVersion: rbac.authorization.k8s.io&#x2F;v1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: cluster-admin</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl apply -f dashboard-admin.yaml</span><br></pre></td></tr></table></figure>
+
+<p>接着获取创建的 admin 账户的 token：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;&#123;print $1&#125;&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>拿到 token 开始将 dashboard 服务暴露出来，有两种方式：</p>
+<ul>
+<li>方式一 proxy 反向代理</li>
+</ul>
+<p>需要注意的是使用这种方式只能是在本机访问（服务也必须在本机），因为目前 dashboard 不支持除 <code>localhost</code> 和 <code>127.0.0.1</code> 以外的主机名登录进入控制台（ <a href="https://github.com/kubernetes/dashboard/issues/4624">https://github.com/kubernetes/dashboard/issues/4624</a> ），这意味着无法从集群外通过浏览器打开 dashboard，表示不懂这种设计，这样的 dashboard 还有什么用？如果是我理解不正确，请留言指正。</p>
+<p>执行如下命令启动代理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl proxy</span><br></pre></td></tr></table></figure>
+
+<p>然后在浏览器访问（注意必须是 http）：</p>
+<p><a href="http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy">http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy</a></p>
+<ul>
+<li>方式二 端口转发</li>
+</ul>
+<p>执行如下命令进行端口转发：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo kubectl port-forward --namespace kubernetes-dashboard --address 0.0.0.0 service&#x2F;kubernetes-dashboard 443</span><br></pre></td></tr></table></figure>
+
+<p>然后在集群外的机器上访问进行端口转发的那台机器的 ip 即可（注意必须是 https）：</p>
+<p><a href="https://yournodeip/">https://YourNodeIP/</a></p>
+<p>打开 web 界面后用上面获取到的 token 登录即可</p>
+]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>dashboard</tag>
+        <tag>登录</tag>
       </tags>
   </entry>
   <entry>
@@ -1814,6 +1814,34 @@
       </tags>
   </entry>
   <entry>
+    <title>linux主要目录的作用</title>
+    <url>/2016/04/22/linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+    <content><![CDATA[<p>手动敲一遍、算是加强记忆吧~</p>
+<p><font color=red>/：</font>文件系统的入口，也是最高一级的目录</p>
+<p><font color=red>/bin：</font>最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等</p>
+<p><font color=red>/boot：</font>存放Linux的内核及引导系统所需要的文件，包括引导装载程序</p>
+<p><font color=red>/etc：</font>存放系统配置文件，一些服务器的配置文件也放在这里</p>
+<p><font color=red>/dev：</font>存放所有的设备文件，比如声卡、磁盘等</p>
+<p><font color=red>/home：</font>包含普通用户的个人主目录，如/home/lisi</p>
+<p><font color=red>/lib：</font>包含二进制文件的共享库</p>
+<p><font color=red>/media：</font>即插即用型存储设备如U盘、光盘等的自动挂载点在此目录下创建</p>
+<p><font color=red>/mnt：</font>用于存放临时性挂在存储设备，如光驱可挂载到/met/cdrom下</p>
+<p><font color=red>/proc：</font>存放进程信息以及内核信息，由内核在内存中产生</p>
+<p><font color=red>/root：</font>Linux超级用户的主目录</p>
+<p><font color=red>/sbin：</font>存放系统管理命令，一般只有超级用户才能执行</p>
+<p><font color=red>/tmp：</font>公用的临时文件目录。/var/tmp目录于此目录类似</p>
+<p><font color=red>/usr：</font>存放应用程序及相关文件，比如命令、帮助文件等</p>
+<p><font color=red>/var：</font>存放系统中经常变化（vary）的文件，如在/var/log目录中存放系统日志</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>目录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux中oracle数据库的监听和EM的开启和关闭shell脚本</title>
     <url>/2016/04/23/linux%E4%B8%ADoracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%9B%91%E5%90%AC%E5%92%8CEM%E7%9A%84%E5%BC%80%E5%90%AF%E5%92%8C%E5%85%B3%E9%97%ADshell%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<p>linux和win下的oracle不同、开机后不能直接使用<br>经过一段时间摸索、终于大体摸清了linux下oracle的数据库启动流程<br>所以自己动手写了几个shell脚本、省的每次都要输一堆命令来启动数据库、启动监听、启动em。。<br>不同的数据库安装和不同的系统可能有较大的差异、不能保证都能用</p>
@@ -1848,31 +1876,28 @@
       </tags>
   </entry>
   <entry>
-    <title>linux主要目录的作用</title>
-    <url>/2016/04/22/linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
-    <content><![CDATA[<p>手动敲一遍、算是加强记忆吧~</p>
-<p><font color=red>/：</font>文件系统的入口，也是最高一级的目录</p>
-<p><font color=red>/bin：</font>最基本的且着急用户和普通用户都可以使用的命令放在此目录下，如：ls、cp等</p>
-<p><font color=red>/boot：</font>存放Linux的内核及引导系统所需要的文件，包括引导装载程序</p>
-<p><font color=red>/etc：</font>存放系统配置文件，一些服务器的配置文件也放在这里</p>
-<p><font color=red>/dev：</font>存放所有的设备文件，比如声卡、磁盘等</p>
-<p><font color=red>/home：</font>包含普通用户的个人主目录，如/home/lisi</p>
-<p><font color=red>/lib：</font>包含二进制文件的共享库</p>
-<p><font color=red>/media：</font>即插即用型存储设备如U盘、光盘等的自动挂载点在此目录下创建</p>
-<p><font color=red>/mnt：</font>用于存放临时性挂在存储设备，如光驱可挂载到/met/cdrom下</p>
-<p><font color=red>/proc：</font>存放进程信息以及内核信息，由内核在内存中产生</p>
-<p><font color=red>/root：</font>Linux超级用户的主目录</p>
-<p><font color=red>/sbin：</font>存放系统管理命令，一般只有超级用户才能执行</p>
-<p><font color=red>/tmp：</font>公用的临时文件目录。/var/tmp目录于此目录类似</p>
-<p><font color=red>/usr：</font>存放应用程序及相关文件，比如命令、帮助文件等</p>
-<p><font color=red>/var：</font>存放系统中经常变化（vary）的文件，如在/var/log目录中存放系统日志</p>
+    <title>linux制作可启动iso</title>
+    <url>/2016/05/04/linux%E5%88%B6%E4%BD%9C%E5%8F%AF%E5%90%AF%E5%8A%A8iso/</url>
+    <content><![CDATA[<p>在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接</p>
+<p>使用isolinux作为引导,需自行下载并放到iso根目录下,<br>需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso</p>
+<p>最后使用如下命令:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table myiso</span><br></pre></td></tr></table></figure>
+
+<p>参数:</p>
+<p>-o 将生成的iso文件</p>
+<p>-b 引导程序<font color=red>(这里的路径是指iso的根目录,也就是相对于myiso这个目录)</font></p>
+<p>-c 将boot.cat生成到isolinux下<font color=red>(boot.cat是自动生成的)</font></p>
+<p>myiso 是要制作iso的目录,也是iso的根目录</p>
+<p>其他参数请man mkisofs</p>
 ]]></content>
       <categories>
         <category>linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
-        <tag>目录</tag>
+        <tag>iso</tag>
+        <tag>可启动</tag>
+        <tag>u盘启动</tag>
       </tags>
   </entry>
   <entry>
@@ -1922,31 +1947,6 @@
         <tag>linux</tag>
         <tag>wifi</tag>
         <tag>热点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux制作可启动iso</title>
-    <url>/2016/05/04/linux%E5%88%B6%E4%BD%9C%E5%8F%AF%E5%90%AF%E5%8A%A8iso/</url>
-    <content><![CDATA[<p>在arch下mkisofs命令和genisoimage命令是一样的,mkisofs是genisoimage的一个链接</p>
-<p>使用isolinux作为引导,需自行下载并放到iso根目录下,<br>需手动编写isolinux.cfg并放到isolinux下,具体参见其他可启动iso</p>
-<p>最后使用如下命令:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkisofs -o myiso.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table myiso</span><br></pre></td></tr></table></figure>
-
-<p>参数:</p>
-<p>-o 将生成的iso文件</p>
-<p>-b 引导程序<font color=red>(这里的路径是指iso的根目录,也就是相对于myiso这个目录)</font></p>
-<p>-c 将boot.cat生成到isolinux下<font color=red>(boot.cat是自动生成的)</font></p>
-<p>myiso 是要制作iso的目录,也是iso的根目录</p>
-<p>其他参数请man mkisofs</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>iso</tag>
-        <tag>可启动</tag>
-        <tag>u盘启动</tag>
       </tags>
   </entry>
   <entry>
@@ -2122,6 +2122,28 @@
       </tags>
   </entry>
   <entry>
+    <title>mysql 获取表结构</title>
+    <url>/2020/06/11/mysql-%E8%8E%B7%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>获取建表语句：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SHOW CREATE TABLE table_name</span><br></pre></td></tr></table></figure>
+
+<p>获取表结构：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># DESC 是 DESCRIBE 的缩写</span><br><span class="line">DESC table_name</span><br><span class="line">SHOW COLUMNS FROM table_name</span><br></pre></td></tr></table></figure>
+
+<p>筛选字段：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># field_name 可以包括通配符</span><br><span class="line">DESC table_name &quot;field_name&quot;</span><br><span class="line">SHOW COLUMNS FROM table_name LIKE &quot;field_name&quot;</span><br></pre></td></tr></table></figure>
+
+<p>另外，经过测试，<code>SHOW COLUMNS FROM</code> 语句除了可以使用 LIKE 关键字，还可以使用 WHERE 子句，但 <code>DESCRIBE</code> 语句不支持。</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>表结构</tag>
+        <tag>字段</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql 索引学习小结</title>
     <url>/2020/08/24/mysql-%E7%B4%A2%E5%BC%95%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h1 id="mysql-索引"><a href="#mysql-索引" class="headerlink" title="mysql 索引"></a>mysql 索引</h1><p>学习了《MySQL 是怎样运行的：从根儿上理解 MySQL》中的索引一节，收获颇丰，总结如下。</p>
@@ -2144,28 +2166,6 @@
       </categories>
       <tags>
         <tag>索引</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 获取表结构</title>
-    <url>/2020/06/11/mysql-%E8%8E%B7%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<p>获取建表语句：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SHOW CREATE TABLE table_name</span><br></pre></td></tr></table></figure>
-
-<p>获取表结构：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># DESC 是 DESCRIBE 的缩写</span><br><span class="line">DESC table_name</span><br><span class="line">SHOW COLUMNS FROM table_name</span><br></pre></td></tr></table></figure>
-
-<p>筛选字段：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># field_name 可以包括通配符</span><br><span class="line">DESC table_name &quot;field_name&quot;</span><br><span class="line">SHOW COLUMNS FROM table_name LIKE &quot;field_name&quot;</span><br></pre></td></tr></table></figure>
-
-<p>另外，经过测试，<code>SHOW COLUMNS FROM</code> 语句除了可以使用 LIKE 关键字，还可以使用 WHERE 子句，但 <code>DESCRIBE</code> 语句不支持。</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>表结构</tag>
-        <tag>字段</tag>
       </tags>
   </entry>
   <entry>
@@ -2242,45 +2242,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python 生成器与协程的关系和区别</title>
-    <url>/2020/09/22/python-%E7%94%9F%E6%88%90%E5%99%A8%E4%B8%8E%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>部分摘录自官方中文文档，python 版本 <code>3.7.4</code></p>
-<p>注意概念区分：生成器函数，生成器，协程函数，协程，异步生成器函数，异步生成器</p>
-<p>主要是学习笔记，没有进行过多整理</p>
-<ul>
-<li><p>使用 async def 语法定义的函数总是为协程函数，即使它们不包含 await 或 async 关键字，另外 await，async for 以及 async with 只能在协程函数体中使用（注：以普通函数调用方式调用协程函数时，将返回协程对象，而不是运行协程）</p>
-</li>
-<li><p>在一个函数体内使用 yield 表达式会使这个函数变成一个生成器，并且在一个 async def 定义的函数体（注：协程函数）内使用 yield 表达式会让协程函数变成异步的生成器（注：以普通函数调用方式调用生成器函数时，将返回生成器对象，而不是运行生成器；以普通函数调用方式调用异步生成器函数时，将返回异步生成器对象，而不是运行异步生成器）</p>
-</li>
-<li><p>生成器函数与协程（注：函数）非常相似，它们 yield 多次，它们具有多个入口点，并且它们的执行可以被挂起。唯一的区别是生成器函数不能控制在它在 yield 后交给哪里继续执行，控制权总是转移到生成器的调用者</p>
-</li>
-<li><p>当使用 yield from <expr> 时，它会将所提供的表达式视为一个子迭代器，这个子迭代器产生的所有值都直接被传递给当前生成器方法的调用者</p>
-</li>
-<li><p>启动一个生成器的方法有两种，注意，这两种调用都有返回值，返回的是生成器 yield 的值：</p>
-<ul>
-<li>使用内建的 next() 函数，继续使用 next() 函数将继续运行生成器</li>
-<li>使用生成器的 send() 方法，但启动时必须传参 None，继续调用 send() 方法将继续运行生成器，此时可以向生成器传入任意值</li>
-</ul>
-</li>
-<li><p>启动一个协程的方法：导入 asyncio 包，使用 asyncio.run() 函数执行一个协程，注意，需要传入协程对象作为参数，而不是协程函数</p>
-</li>
-<li><p>注意，await 语句返回指定协程 return 的值（与生成器的 yeild 有区别）</p>
-</li>
-<li><p>如果只有一个协程在运行的话，代码执行流程与普通函数一样，因为协程函数中的 await &lt;指定协程&gt; 语句将会挂起（阻塞）当前协程，去执行 await 语句指定的协程，直到指定协程执行结束返回后才恢复当前协程</p>
-</li>
-<li><p>可以使用 asyncio.gather() 函数并发执行多个协程</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>生成器</tag>
-        <tag>协程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python的库文件在哪儿</title>
     <url>/2017/07/20/python%E7%9A%84%E5%BA%93%E6%96%87%E4%BB%B6%E5%9C%A8%E5%93%AA%E5%84%BF/</url>
     <content><![CDATA[<blockquote>
@@ -2327,6 +2288,45 @@
         <tag>fakevim</tag>
         <tag>vim</tag>
         <tag>fcitx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python 生成器与协程的关系和区别</title>
+    <url>/2020/09/22/python-%E7%94%9F%E6%88%90%E5%99%A8%E4%B8%8E%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>部分摘录自官方中文文档，python 版本 <code>3.7.4</code></p>
+<p>注意概念区分：生成器函数，生成器，协程函数，协程，异步生成器函数，异步生成器</p>
+<p>主要是学习笔记，没有进行过多整理</p>
+<ul>
+<li><p>使用 async def 语法定义的函数总是为协程函数，即使它们不包含 await 或 async 关键字，另外 await，async for 以及 async with 只能在协程函数体中使用（注：以普通函数调用方式调用协程函数时，将返回协程对象，而不是运行协程）</p>
+</li>
+<li><p>在一个函数体内使用 yield 表达式会使这个函数变成一个生成器，并且在一个 async def 定义的函数体（注：协程函数）内使用 yield 表达式会让协程函数变成异步的生成器（注：以普通函数调用方式调用生成器函数时，将返回生成器对象，而不是运行生成器；以普通函数调用方式调用异步生成器函数时，将返回异步生成器对象，而不是运行异步生成器）</p>
+</li>
+<li><p>生成器函数与协程（注：函数）非常相似，它们 yield 多次，它们具有多个入口点，并且它们的执行可以被挂起。唯一的区别是生成器函数不能控制在它在 yield 后交给哪里继续执行，控制权总是转移到生成器的调用者</p>
+</li>
+<li><p>当使用 yield from <expr> 时，它会将所提供的表达式视为一个子迭代器，这个子迭代器产生的所有值都直接被传递给当前生成器方法的调用者</p>
+</li>
+<li><p>启动一个生成器的方法有两种，注意，这两种调用都有返回值，返回的是生成器 yield 的值：</p>
+<ul>
+<li>使用内建的 next() 函数，继续使用 next() 函数将继续运行生成器</li>
+<li>使用生成器的 send() 方法，但启动时必须传参 None，继续调用 send() 方法将继续运行生成器，此时可以向生成器传入任意值</li>
+</ul>
+</li>
+<li><p>启动一个协程的方法：导入 asyncio 包，使用 asyncio.run() 函数执行一个协程，注意，需要传入协程对象作为参数，而不是协程函数</p>
+</li>
+<li><p>注意，await 语句返回指定协程 return 的值（与生成器的 yeild 有区别）</p>
+</li>
+<li><p>如果只有一个协程在运行的话，代码执行流程与普通函数一样，因为协程函数中的 await &lt;指定协程&gt; 语句将会挂起（阻塞）当前协程，去执行 await 语句指定的协程，直到指定协程执行结束返回后才恢复当前协程</p>
+</li>
+<li><p>可以使用 asyncio.gather() 函数并发执行多个协程</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>生成器</tag>
+        <tag>协程</tag>
       </tags>
   </entry>
   <entry>
@@ -2707,6 +2707,20 @@
       </tags>
   </entry>
   <entry>
+    <title>不通过GooglePlay下载其中的app</title>
+    <url>/2016/05/04/%E4%B8%8D%E9%80%9A%E8%BF%87GooglePlay%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%B8%AD%E7%9A%84app/</url>
+    <content><![CDATA[<p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
+<p>转自：<a href="http://daxiaamu.com/">大侠阿木</a></p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>GooglePlay</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一些关于Fragment的笔记</title>
     <url>/2016/05/04/%E4%B8%80%E4%BA%9B%E5%85%B3%E4%BA%8EFragment%E7%9A%84%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<blockquote>
@@ -2753,20 +2767,6 @@
         <tag>ListFragment</tag>
         <tag>DialogFragment</tag>
         <tag>FragmentTabHost</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>不通过GooglePlay下载其中的app</title>
-    <url>/2016/05/04/%E4%B8%8D%E9%80%9A%E8%BF%87GooglePlay%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%B8%AD%E7%9A%84app/</url>
-    <content><![CDATA[<p>非常简单的一个方法：<a href="http://apps.evozi.com/apk-downloader/">飞机直达</a><br>进入上面的网址,如果你进不去,那就想想自己为什么进不了google,<br>里面就一个输入框,把Google play里你想下的apk的网页链接填进去<br>点下面的按钮,马上就出来一个绿色按钮,点击即可直接用浏览器下载这个apk</p>
-<p>转自：<a href="http://daxiaamu.com/">大侠阿木</a></p>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>android</tag>
-        <tag>GooglePlay</tag>
       </tags>
   </entry>
   <entry>
